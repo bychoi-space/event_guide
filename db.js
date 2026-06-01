@@ -35,7 +35,7 @@ window.ExhibitionWireframes = {
   "COUNT": {
     "moduleCode": "MD2",
     "name": "카운트 (COUNT)",
-    "wireframeHtml": "<div style='background: var(--near-black); color: var(--canvas-white); padding: 16px; border-radius: 8px; text-align: center;' class='mono-label'>⏳ TIME LIMIT &bull; 02일 14:24:59</div>"
+    "wireframeHtml": "<div class='lfmall-count-wf' style='background: var(--near-black); padding: 40px 24px; border-radius: 0px; text-align: center; color: var(--canvas-white); font-family: &quot;Space Grotesk&quot;, sans-serif;' id='lfmall-count-wf'><style>.lfmall-count-wf .title { font-size: 13px; font-weight: 500; letter-spacing: 2px; color: rgba(255,255,255,0.7); margin: 0 0 20px 0; text-transform: uppercase; font-family: &quot;Space Grotesk&quot;, sans-serif; }.lfmall-count-wf .timer-box-row { display: flex; justify-content: center; gap: 8px; align-items: center; }.lfmall-count-wf .time-unit { display: flex; flex-direction: column; align-items: center; }.lfmall-count-wf .number-box { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 4px; min-width: 50px; height: 54px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; font-family: &quot;Space Mono&quot;, monospace; color: var(--canvas-white); box-shadow: 0 4px 10px rgba(0,0,0,0.25); }.lfmall-count-wf .label { font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.5px; font-weight: 600; }.lfmall-count-wf .colon { font-size: 20px; font-weight: 700; color: rgba(255,255,255,0.5); padding-bottom: 20px; }</style><div class='title'>TIME LIMIT • 타임 세일 종료까지</div><div class='timer-box-row'><div class='time-unit'><div class='number-box' id='lfm-days'>02</div><div class='label'>DAYS</div></div><div class='colon'>:</div><div class='time-unit'><div class='number-box' id='lfm-hours'>14</div><div class='label'>HRS</div></div><div class='colon'>:</div><div class='time-unit'><div class='number-box' id='lfm-mins'>24</div><div class='label'>MINS</div></div><div class='colon'>:</div><div class='time-unit'><div class='number-box' id='lfm-secs'>59</div><div class='label'>SECS</div></div></div><img src='x' onerror='(function(){ if(window.__lfmallTimerActive) return; window.__lfmallTimerActive=true; let d=2, h=14, m=24, s=59; setInterval(function(){ s--; if(s&lt;0){ s=59; m--; if(m&lt;0){ m=59; h--; if(h&lt;0){ h=23; d--; if(d&lt;0){ d=0; h=0; m=0; s=0; } } } } const ed=document.getElementById(&quot;lfm-days&quot;); const eh=document.getElementById(&quot;lfm-hours&quot;); const em=document.getElementById(&quot;lfm-mins&quot;); const es=document.getElementById(&quot;lfm-secs&quot;); if(ed) ed.innerText=String(d).padStart(2,&quot;0&quot;); if(eh) eh.innerText=String(h).padStart(2,&quot;0&quot;); if(em) em.innerText=String(m).padStart(2,&quot;0&quot;); if(es) es.innerText=String(s).padStart(2,&quot;0&quot;); }, 1000); })()' style='display:none;'></div>"
   },
   "P_BENEFIT": {
     "moduleCode": "MD3",
@@ -327,15 +327,29 @@ window.ExhibitionGuides = {
     "cardKey": "COUNT",
     "name": "카운트",
     "category": "NAV",
-    "sourceFile": "frmPlanCardCountTime.xfdl",
+    "sourceFile": "frmPlanCardCountTime.xfdl (어드민) / CountTime.tsx (프론트)",
     "moduleCode": "MD2",
-    "desc": "실시간 타임아웃 타이머를 보여주며 긴박감을 제공하는 카운트다운 블록입니다.",
-    "layoutDescription": "타이머 UI가 작동합니다.",
+    "desc": "기획전 내에 실시간 디데이(D-Day) 및 시간/분/초 카운트다운 타이머를 구성하여, 타임특가 행사나 쿠폰 소진 임박 등의 마케팅적 긴박감을 조성하는 기능형 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 지정된 종료 일시까지 실시간으로 차감되는 숫자판 위젯입니다. 어드민 스타일 설정에 따라, 일/시/분/초 숫자가 개별 박스(Flipboard 형태) 안에 강조되어 표시되는 **'박스형 레이아웃'**과 심플하게 텍스트로만 흐르는 **'플랫형 레이아웃'**으로 자동 분기됩니다. 타이머 상단에는 기획자가 커스텀 기입한 소제목(TMR_TITL_TEXT)이 표시됩니다.",
     "backendSettings": [
-      { "field": "목표시각 입력", "id": "LIMIT_TIME", "type": "DateTime (필수)", "desc": "카운트 종료 타겟 시각을 연동합니다." }
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 Margin 여부" },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부 (기본값 Y)" },
+      { "field": "타이머 상단 문구", "id": "TMR_TITL_TEXT", "type": "String (50byte 한도)", "desc": "카운트다운 숫자 바로 위에 배치할 설명 레이블입니다. (예: '타임특가 종료까지')" },
+      { "field": "카운트 시작 일시", "id": "TMR_STRT_DT", "type": "DateTime (필수)", "desc": "카운트다운 노출이 시작되는 일시입니다. (YYYY-MM-DD HH:mm:ss 포맷)" },
+      { "field": "카운트 종료 일시", "id": "TMR_END_DT", "type": "DateTime (필수)", "desc": "카운트다운이 00:00:00으로 종료되는 최종 타겟 일시입니다." },
+      { "field": "타이머 스타일", "id": "TMR_STYL_DIV_VAL", "type": "Combo (1/2)", "desc": "1: 모던 플립 박스형 / 2: 플랫 텍스트 나열형" },
+      { "field": "배경 색상코드", "id": "BKGD_CLR_VAL", "type": "Color Hex", "desc": "컴포넌트 배경 영역의 Hex 컬러 코드 값 (예: #000000)" },
+      { "field": "숫자색상코드", "id": "TMR_CLR_VAL", "type": "Color Hex", "desc": "타이머 숫자 및 텍스트의 Hex 컬러 코드 값 (예: #ffffff)" }
     ],
-    "codeSnippet": "// 카운트다운 타이머 로직",
-    "warnings": "정밀 시각 연동 확인이 요구됩니다."
+    "codeSnippet": "// CountTime.tsx - Front-end React 정밀 서버시간 동기화 카운트다운 컴포넌트 일부\nexport const CountTime = ({ templateDetail }) => {\n  const [remainTime, setRemainTime] = useState({ d: 0, h: 0, m: 0, s: 0 });\n  const timerRef = useRef<NodeJS.Timeout>();\n\n  useEffect(() => {\n    // 1. 디바이스 로컬 조작 시간을 방어하기 위한 API 서버 타임 획득\n    fetchServerTime().then((serverTime) => {\n      const targetTime = new Date(templateDetail.tmrEndDt).getTime();\n      let diff = Math.max(0, targetTime - serverTime);\n\n      timerRef.current = setInterval(() => {\n        diff = Math.max(0, diff - 1000);\n        if (diff <= 0) {\n          clearInterval(timerRef.current);\n          // 타임아웃 이벤트 콜백 실행 (기획전 영역 비활성화/노출 제외)\n          if (templateDetail.onTimeout) templateDetail.onTimeout();\n        }\n\n        const d = Math.floor(diff / (1000 * 60 * 60 * 24));\n        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));\n        const s = Math.floor((diff % (1000 * 60)) / 1000);\n        setRemainTime({ d, h, m, s });\n      }, 1000);\n    });\n    return () => clearInterval(timerRef.current);\n  }, [templateDetail.tmrEndDt]);\n\n  return (\n    <div style={{ backgroundColor: templateDetail.bkgdClr }}>\n      <FlipTimer remain={remainTime} title={templateDetail.tmrTitlText} color={templateDetail.tmrClr} />\n    </div>\n  );\n};",
+    "warnings": "1. [정밀 시각 동기성] 기획전 특가 유혹을 위한 임의 시간 조작(로컬 PC 컴퓨터 시계 수정)을 원천 방어하기 위해, **로컬 `new Date()`를 배제하고 반드시 API 응답 헤더나 서버 타임 동기화 모듈(`fetchServerTime`)을 활용해 가상 틱을 구동**하도록 프론트 설계가 유지되어야 합니다.\n2. [논리 오류 예방] 시작 일시가 종료 일시보다 미래일 경우, 저장 유효성 검사 규칙에 의해 저장이 반려되며 프론트 렌더링 시 강제로 `00:00:00` 종료 템플릿이 렌더링되어 검은색 화면으로 노출되니 세팅에 각별히 유의해야 합니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 1자 이상 기입",
+      "prodMax": "최대 50byte (한글 약 25자 한도, 소제목 명칭에 적용)",
+      "adminValidation": "본 카드는 상품 전시나 직접적인 이미지 업로드를 요구하지 않는 **기능형 순수 정보 컴포넌트**입니다. 어드민(NBOS) 저장 시 시작 일시(TMR_STRT_DT)가 종료 일시(TMR_END_DT)보다 1초라도 미래인 논리적 오류가 감지되면 저장 유효성 검증 단에서 차단 메시지와 함께 저장이 거부됩니다."
+    }
   },
   "P_BENEFIT": {
     "cardKey": "P_BENEFIT",
