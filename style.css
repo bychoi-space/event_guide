@@ -1,0 +1,449 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Space+Mono&display=swap');
+
+:root {
+  --cohere-black: #000000;
+  --near-black: #17171c;
+  --enterprise-green: #003c33;
+  --dark-navy: #071829;
+  --action-blue: #1863dc;
+  --action-blue-light: #e8f0fd;
+  --coral: #ff7759;
+  --soft-coral: #ffad9b;
+  --canvas-white: #ffffff;
+  --soft-stone: #eeece7;
+  --pale-green: #edfce9;
+  --card-border: #f2f2f2;
+  --ink: #212121;
+  --muted-slate: #93939f;
+  --slate: #75758a;
+  --hairline: #d9d9dd;
+  --border-light: #e5e7eb;
+  --focus-blue: #4c6ee6;
+  --bg-subtle: #f8f8f6;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-subtle);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  color: var(--cohere-black);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.mono-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+}
+
+/* ================================================================
+   BASE LAYOUT
+   ================================================================ */
+.app-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ================================================================
+   NAV BAR
+   ================================================================ */
+header {
+  border-bottom: 1px solid var(--hairline);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--cohere-black);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: opacity var(--transition-base);
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--slate);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  transition: all var(--transition-base);
+}
+
+.nav-link:hover {
+  color: var(--ink);
+  background: var(--soft-stone);
+}
+
+.nav-link.active {
+  color: var(--action-blue);
+  background: var(--action-blue-light);
+}
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
+.btn-primary {
+  background: var(--near-black);
+  color: var(--canvas-white);
+  padding: 10px 22px;
+  border-radius: 32px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--cohere-black);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-base);
+}
+
+.btn-secondary:hover {
+  color: var(--action-blue);
+}
+
+.btn-pill-outline {
+  background: transparent;
+  border: 1px solid var(--hairline);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  color: var(--slate);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-pill-outline:hover, .btn-pill-outline.active {
+  background: var(--near-black);
+  color: var(--canvas-white);
+  border-color: var(--near-black);
+}
+
+/* ================================================================
+   TYPOGRAPHY SCALE
+   ================================================================ */
+.hero-display {
+  font-size: 56px;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.section-display {
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.card-heading {
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+/* ================================================================
+   DIVIDERS
+   ================================================================ */
+.divider {
+  height: 1px;
+  background-color: var(--hairline);
+  margin: 40px 0;
+  border: none;
+}
+
+/* ================================================================
+   GRIDS & CARDS
+   ================================================================ */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.card {
+  background: var(--canvas-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--action-blue), var(--coral));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  border-color: transparent;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--soft-stone);
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  letter-spacing: 0.03em;
+}
+
+.card-tag.coral-tag {
+  background: var(--pale-green);
+  color: var(--enterprise-green);
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+footer {
+  background: var(--near-black);
+  color: var(--canvas-white);
+  padding: 64px 0;
+  margin-top: 80px;
+}
+
+footer .mono-label {
+  color: var(--muted-slate);
+}
+
+footer a {
+  color: var(--muted-slate);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+footer a:hover {
+  color: var(--canvas-white);
+}
+
+/* ================================================================
+   DUAL PREVIEW CONSOLE (PC + MOBILE)
+   ================================================================ */
+.preview-console {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 28px;
+  margin-top: 20px;
+  margin-bottom: 48px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .preview-console {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================================
+   DESKTOP BROWSER FRAME MOCKUP
+   ================================================================ */
+.desktop-mockup {
+  width: 100%;
+  background: var(--canvas-white);
+  border: 1px solid #c8c8cc;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-header {
+  height: 40px;
+  background: linear-gradient(180deg, #f2f2f2, #e8e8e8);
+  border-bottom: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.browser-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.1);
+}
+
+.browser-dot.red { background: linear-gradient(180deg, #ff6058, #e14640); }
+.browser-dot.yellow { background: linear-gradient(180deg, #ffc02e, #dea123); }
+.browser-dot.green { background: linear-gradient(180deg, #2aca44, #1aab34); }
+
+.browser-address-bar {
+  flex-grow: 1;
+  height: 24px;
+  background: var(--canvas-white);
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  margin-left: 16px;
+  padding: 0 12px;
+  font-size: 10px;
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  font-family: 'Space Mono', monospace;
+}
+
+.browser-content {
+  padding: 20px;
+  background: #fafaf9;
+  flex-grow: 1;
+  min-height: 380px;
+  overflow-y: auto;
+}
+
+/* ================================================================
+   SMARTPHONE FRAME MOCKUP
+   ================================================================ */
+.phone-mockup {
+  width: 100%;
+  max-width: 360px;
+  border: 1px solid #c8c8cc;
+  border-radius: var(--radius-md);
+  background: #fafaf9;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.phone-screen {
+  padding: 12px;
+  flex-grow: 1;
+  background: #fafaf9;
+  overflow-y: auto;
+  max-height: 520px;
+}
+
+/* ================================================================
+   PREVIEW LABEL (above mockups)
+   ================================================================ */
+.preview-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+  padding: 4px 10px;
+  background: var(--soft-stone);
+  border-radius: 6px;
+}
+
+.preview-label .label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.preview-label .label-dot.pc { background: var(--action-blue); }
+.preview-label .label-dot.mo { background: var(--coral); }

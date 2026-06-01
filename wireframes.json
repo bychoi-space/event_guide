@@ -1,0 +1,192 @@
+{
+  "TAB_CONTAINER": {
+    "moduleCode": "MD13",
+    "name": "탭 컨테이너 (TAB_CONTAINER)",
+    "wireframeHtml": "<div class='tab-container-wf' style='border: 1px solid var(--hairline); background: var(--canvas-white); overflow: hidden; font-family: &quot;Inter&quot;, sans-serif; box-shadow: 0 12px 30px rgba(0,0,0,0.02);'><style>.tab-container-wf .tab-depth1 { display: flex; border-bottom: 1px solid var(--hairline); background: #fafafa; }.tab-container-wf .tab-depth1-item { flex: 1; padding: 14px 8px; text-align: center; font-size: 13px; font-weight: 400; color: var(--slate); cursor: pointer; }.tab-container-wf .tab-depth1-item.active { font-weight: 700; color: var(--near-black); border-bottom: 2px solid var(--near-black); }.tab-container-wf .tab-depth2 { display: flex; gap: 8px; padding: 12px 16px; background: var(--canvas-white); border-bottom: 1px solid #f3f4f6; overflow-x: auto; }.tab-container-wf .tab-depth2-item { padding: 6px 12px; font-size: 11px; font-weight: 500; border-radius: 20px; color: var(--slate); background: #f3f4f6; cursor: pointer; white-space: nowrap; }.tab-container-wf .tab-depth2-item.active { background: var(--near-black); color: var(--canvas-white); font-weight: 600; }.tab-container-wf .prod-grid { display: grid; gap: 12px; padding: 16px; }.desktop-mockup .prod-grid { grid-template-columns: repeat(4, 1fr) !important; }.phone-mockup .prod-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }.phone-mockup .prod-card:nth-child(4) { display: none !important; }</style><div style='text-align: center; padding: 24px 16px 12px 16px;'><span style='font-size: 11px; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;' class='mono-label'>SEASON EDITORIAL</span><h2 style='font-size: 24px; font-weight: 700; margin: 4px 0 0 0; color: var(--near-black); letter-spacing: -0.5px;'>SUMMER COLLECTION</h2></div><div class='tab-depth1'><div class='tab-depth1-item active'>아우터</div><div class='tab-depth1-item'>상의</div><div class='tab-depth1-item'>하의</div></div><div class='tab-depth2'><div class='tab-depth2-item active'>코트/자켓</div><div class='tab-depth2-item'>가디건</div><div class='tab-depth2-item'>점퍼/패딩</div></div><div style='padding: 16px 16px 0 16px;'><div style='width: 100%; height: 120px; background: url(&quot;https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80&quot;) center/cover no-repeat; border-radius: 8px; position: relative;'><div style='position: absolute; inset: 0; background: rgba(0,0,0,0.25); border-radius: 8px; display: flex; align-items: center; padding: 20px;'><span style='color: white; font-size: 16px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3);'>여름 아우터 30% 특가전</span></div></div></div><div class='prod-grid'><div class='prod-card' style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>HAZZYS</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>린넨 셔츠</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>35%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩89k</span></div></div></div><div class='prod-card' style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>DAKS</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>실크 머플러</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>20%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩120k</span></div></div></div><div class='prod-card' style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>ATHE</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>플라워 원피스</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>40%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩189k</span></div></div></div><div class='prod-card' style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>MAESTRO</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>캐시미어 니트</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>30%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩210k</span></div></div></div></div><div style='padding: 0 16px 24px 16px; text-align: center;'><span style='display: inline-block; width: 100%; max-width: 160px; padding: 10px 0; background: var(--near-black); color: var(--canvas-white); border-radius: 30px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; text-transform: uppercase;'>MORE PRODUCTS &rarr;</span></div></div>"
+  },
+  "TOP_BANNER": {
+    "moduleCode": "MD1",
+    "name": "탑배너 (TOP_BANNER)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; background: var(--near-black); padding: 48px; color: var(--canvas-white); position: relative; overflow: hidden; text-align: center;'><div style='position: relative; z-index: 2;'><span style='background: var(--coral); color: var(--canvas-white); font-size: 11px; padding: 4px 8px; border-radius: 20px;' class='mono-label'>SEASON OFF</span><h2 style='font-size: 32px; margin-top: 12px; font-weight: bold; color: var(--canvas-white);'>LFmall SUMMER BLACK FRIDAY</h2><p style='color: var(--muted-slate); font-size: 14px; margin-top: 8px;'>최대 70% 특가 및 카드사 즉시 할인 혜택</p><div style='margin-top: 20px;'><span style='display: inline-block; padding: 10px 20px; background: var(--canvas-white); color: var(--cohere-black); border-radius: 30px; font-size: 12px; font-weight: 500;'>쿠폰팩 받기</span></div></div><div style='position: absolute; right: 20px; bottom: 20px; font-size: 12px; color: var(--muted-slate);'>1 / 5 &rarr;</div></div>"
+  },
+  "T_DEAL": {
+    "moduleCode": "MD6",
+    "name": "타임특가 (T_DEAL)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; background: var(--canvas-white); padding: 24px;'><div style='display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--hairline); padding-bottom: 12px; margin-bottom: 20px;'><div style='display: flex; align-items: center; gap: 12px;'><h4 style='font-size: 18px; font-weight: bold; margin: 0;'>TODAY'S SPECIAL L-DEAL</h4><span style='background: var(--cohere-black); color: var(--canvas-white); padding: 4px 8px; border-radius: 4px; font-size: 11px;' class='mono-label'>02:45:12 남음</span></div><a href='#' style='font-size: 12px; color: var(--action-blue); text-decoration: none;'>전체보기</a></div><div style='display: grid; grid-template-columns: 150px 1fr; gap: 20px; border: 1px solid var(--border-light); padding: 16px; border-radius: 8px;'><div style='background: var(--soft-stone); height: 150px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--slate);'>DEAL IMAGE</div><div><span style='color: var(--slate); font-size: 12px;'>[스페셜 타임세일]</span><h5 style='font-size: 16px; font-weight: 500; margin-top: 4px;'>피아제 클래식 메탈 시계</h5><p style='font-size: 13px; color: var(--slate); margin-top: 4px;'>단 24시간 제공되는 단독 할인가 구좌</p><div style='margin-top: 16px; display: flex; align-items: baseline; gap: 8px;'><span style='font-size: 20px; font-weight: bold; color: var(--coral);'>45%</span><span style='font-size: 20px; font-weight: bold;'>₩ 380,000</span><span style='font-size: 13px; color: var(--muted-slate); text-decoration: line-through;'>₩ 690,000</span></div><div style='margin-top: 12px; background: #e5e7eb; height: 6px; border-radius: 3px; position: relative;'><div style='background: var(--coral); width: 82%; height: 6px; border-radius: 3px;'></div></div><div style='font-size: 11px; color: var(--slate); margin-top: 4px;'>현재 82% 판매 완료 (잔여 수량 소량!)</div></div></div></div>"
+  },
+  "FCFS_CPN": {
+    "moduleCode": "MD3",
+    "name": "선착순 쿠폰 (FCFS_CPN)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; background: var(--pale-green); padding: 32px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--enterprise-green);'><div style='max-width: 70%;'><span style='color: var(--enterprise-green); font-size: 11px;' class='mono-label'>DAILY BENEFITS</span><h4 style='font-size: 20px; font-weight: bold; margin-top: 4px; color: var(--enterprise-green);'>선착순 10,000원 앱 전용 장바구니 쿠폰</h4><p style='font-size: 13px; color: var(--slate); margin-top: 4px;'>매일 오전 10시 선착순 다운로드 (5만원 이상 결제 시 적용 가능)</p><div style='margin-top: 12px; font-size: 12px; color: var(--enterprise-green); font-weight: 500;'>잔여 수량: 3,452장 / 10,000장</div></div><div><button style='background: var(--near-black); color: var(--canvas-white); border: none; padding: 14px 28px; border-radius: 30px; font-size: 13px; font-weight: bold; cursor: pointer; transition: background 0.2s;'>쿠폰 받기</button></div></div>"
+  },
+  "BANNER": {
+    "moduleCode": "MD12",
+    "name": "배너 (BANNER)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 20px; background: var(--canvas-white); padding: 24px 16px; color: var(--ink); position: relative; overflow: hidden; display: flex; flex-direction: column; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.02);'><div style='text-align: center; margin-bottom: 24px;'><h2 style='margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; align-items: center;'><p style='font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 34px; font-weight: 500; line-height: 41px; letter-spacing: -1px; color: var(--cohere-black); margin: 0;'>TITLE</p><span style='font-family: &quot;Inter&quot;, sans-serif; font-size: 15px; font-weight: 200; letter-spacing: -0.1px; line-height: 19px; color: var(--slate);'>DESCRIPTION</span></h2></div><div style='width: 100%; height: 260px; background: url(&quot;https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80&quot;) center/cover no-repeat; position: relative; border-radius: 12px; overflow: hidden;'><div style='position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;'><span style='width: 8px; height: 8px; background: var(--near-black); border-radius: 50%;'></span><span style='width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);'></span><span style='width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);'></span><span style='width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);'></span></div></div><div style='margin-top: 20px; width: 100%; display: flex; justify-content: center;'><span style='display: inline-block; width: 100%; max-width: 180px; padding: 12px 0; background: var(--near-black); color: var(--canvas-white); border-radius: 30px; font-family: &quot;Inter&quot;, sans-serif; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>BUTTON</span></div></div>"
+  },
+  "ATTENTION": {
+    "moduleCode": "MD10",
+    "name": "유의사항 (ATTENTION)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; padding: 20px; background: var(--canvas-white);'><h4 style='font-size: 14px; font-weight: bold; margin-bottom: 8px;'>[이벤트 유의사항]</h4><ul style='font-size:12px; color: var(--slate); padding-left:16px; line-height: 1.6;'><li>본 이벤트는 선착순 한도 마감 시 조기 종료됩니다.</li><li>쿠폰은 ID당 1일 1회에 한해 지급 가능합니다.</li></ul></div>"
+  },
+  "COUNT": {
+    "moduleCode": "MD2",
+    "name": "카운트 (COUNT)",
+    "wireframeHtml": "<div style='background: var(--near-black); color: var(--canvas-white); padding: 16px; border-radius: 8px; text-align: center;' class='mono-label'>⏳ TIME LIMIT &bull; 02일 14:24:59</div>"
+  },
+  "P_BENEFIT": {
+    "moduleCode": "MD3",
+    "name": "결제혜택 (P_BENEFIT)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding: 16px; border-radius: 8px; background: #fafaf9;'><div style='font-weight: bold; font-size:14px; margin-bottom:4px;'>💳 KB국민카드 5% 즉시할인</div><div style='font-size:12px; color:var(--slate);'>최대 2만원 한도 / 5만원 이상 결제 시 적용</div></div>"
+  },
+  "B_BENEFIT": {
+    "moduleCode": "MD3",
+    "name": "구매혜택 (B_BENEFIT)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding: 16px; border-radius: 8px; background: var(--pale-green);'><div style='font-weight: bold; font-size:14px; color:var(--enterprise-green);'>🎁 10만원 이상 구매 시 LF 사은품 증정</div><div style='font-size:12px; color:var(--slate);'>선착순 사은 기프트 백 증정 마일리지 동시 적립</div></div>"
+  },
+  "NAVI": {
+    "moduleCode": "MD13",
+    "name": "네비게이션 (NAVI)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); background: var(--near-black); color:var(--canvas-white); display: flex; justify-content: space-around; padding: 12px; border-radius: 8px;' class='mono-label'><span style='color: var(--coral);'>BEST</span><span>NEW</span><span>HOTDEAL</span></div>"
+  },
+  "SEARCH": {
+    "moduleCode": "MD10",
+    "name": "검색창 (SEARCH)",
+    "wireframeHtml": "<div style='display: flex; gap: 8px;'><input type='text' placeholder='기획전 내 상품 검색...' style='flex-grow: 1; padding: 10px 16px; border: 1px solid var(--hairline); border-radius: 30px; font-size:13px;'><button style='background: var(--near-black); color: var(--canvas-white); border:none; padding:10px 20px; border-radius:30px; font-size:12px;'>검색</button></div>"
+  },
+  "BADGE": {
+    "moduleCode": "MD3",
+    "name": "행사뱃지 (BADGE)",
+    "wireframeHtml": "<div style='display: flex; gap: 8px;'><span style='background:var(--soft-stone); padding: 6px 12px; border-radius: 8px; font-size:12px; font-weight:600;' class='mono-label'>🔥 HOT</span><span style='background:var(--pale-green); padding: 6px 12px; border-radius: 8px; font-size:12px; font-weight:600; color:var(--enterprise-green);' class='mono-label'>☘️ ECO</span></div>"
+  },
+  "TILE_BANNER": {
+    "moduleCode": "MD12",
+    "name": "타일배너 (TILE_BANNER)",
+    "wireframeHtml": "<div style='display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px;'><div style='height:120px; background:var(--soft-stone); border-radius:8px; display:flex; align-items:center; justify-content:center;' class='mono-label'>TILE 1</div><div style='height:120px; background:var(--soft-stone); border-radius:8px; display:flex; align-items:center; justify-content:center;' class='mono-label'>TILE 2</div></div>"
+  },
+  "ATTENDANCE": {
+    "moduleCode": "MD3",
+    "name": "출석체크 (ATTENDANCE)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding: 16px; border-radius:8px; background:var(--canvas-white); text-align:center;'><h4 style='font-size:14px; font-weight:bold; margin-bottom:8px;'>매일 출석체크 스탬프</h4><div style='display:flex; justify-content:center; gap:8px;'><span style='width:32px; height:32px; background:var(--coral); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:white; font-size:11px;'>1일</span><span style='width:32px; height:32px; background:var(--soft-stone); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px;'>2일</span><span style='width:32px; height:32px; background:var(--soft-stone); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px;'>3일</span></div></div>"
+  },
+  "H_DEAL": {
+    "moduleCode": "MD6",
+    "name": "핫딜 (H_DEAL)",
+    "wireframeHtml": "<div style='border: 2px solid var(--coral); padding: 16px; border-radius:8px; background:var(--canvas-white);'><span style='background:var(--coral); color:white; font-size:10px; padding:2px 6px; border-radius:4px;'>LFMALL HOTDEAL</span><h4 style='font-size:15px; font-weight:bold; margin-top:4px;'>헤지스 옥스포드 셔츠 핫딜</h4><div style='font-size:18px; font-weight:bold; color:var(--coral); margin-top:8px;'>₩ 69,000</div></div>"
+  },
+  "REVIEW": {
+    "moduleCode": "MD7",
+    "name": "상품리뷰 (REVIEW)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding: 16px; border-radius:8px; background:#fafaf9;'><div style='color: #fbbf24; font-size:14px; margin-bottom:4px;'>★★★★★</div><p style='font-size:12px; color:var(--slate); italic'>\"실제 핏감도 너무 좋고 원단 재질이 시원하네요! 강추!\"</p><div style='font-size:11px; color:var(--muted-slate); margin-top:4px;'>홍*길님 &bull; 구매평</div></div>"
+  },
+  "ROULET": {
+    "moduleCode": "MD3",
+    "name": "룰렛 (ROULET)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; padding:24px; text-align:center; background:#fafaf9;'><div style='width:100px; height:100px; border-radius:50%; border:6px solid var(--near-black); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:bold;' class='mono-label'>SPIN WHEEL</div><button style='background:var(--coral); color:white; border:none; padding:8px 16px; border-radius:20px; font-size:12px;'>룰렛 돌리기</button></div>"
+  },
+  "G_PURCHASE": {
+    "moduleCode": "MD6",
+    "name": "공동구매 (G_PURCHASE)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding: 16px; border-radius:8px;'><div style='font-size:12px; color:var(--slate);'>[공동구매 목표달성 세일]</div><div style='display:flex; justify-content:space-between; margin-top:8px; font-size:13px; font-weight:bold;'><span>현재 모집률 85%</span><span>최종 50% 할인</span></div><div style='background:#e5e7eb; height:8px; border-radius:4px; margin-top:4px;'><div style='background:var(--action-blue); width:85%; height:8px; border-radius:4px;'></div></div></div>"
+  },
+  "M_BENEFIT": {
+    "moduleCode": "MD3",
+    "name": "마케팅혜택 (M_BENEFIT)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--pale-green);'><div style='font-weight:bold; font-size:13px; color:var(--enterprise-green);'>APP PUSH 야간 수신 동의 시</div><div style='font-size:12px; color:var(--slate); margin-top:2px;'>무료배송 스페셜 쿠폰 팩 자동 발급</div></div>"
+  },
+  "PAYBACK": {
+    "moduleCode": "MD3",
+    "name": "페이백 (PAYBACK)",
+    "wireframeHtml": "<div style='border: 1px dashed var(--coral); padding: 16px; border-radius:8px; background:#fffaf0; text-align:center;'><h4 style='font-size:14px; font-weight:bold; color:var(--coral);'>100% 페이백 찬스 이벤트</h4><p style='font-size:11px; color:var(--slate);'>결제 시 최대 1만원 적립금 백 포인트 환급</p></div>"
+  },
+  "ENTCODE": {
+    "moduleCode": "MD13",
+    "name": "입장코드 (ENTCODE)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--canvas-white); text-align:center;'><span style='font-size:11px;' class='mono-label'>ENTER PRIVATE CODE</span><div style='margin-top:8px; display:flex; justify-content:center; gap:8px;'><input type='password' placeholder='코드를 입력하세요' style='padding:6px 12px; border:1px solid var(--hairline); border-radius:4px; font-size:12px;'><button style='background:var(--near-black); color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px;'>입장</button></div></div>"
+  },
+  "APPLY": {
+    "moduleCode": "MD3",
+    "name": "응모하기 (APPLY)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:20px; border-radius:8px; text-align:center; background:#fafaf9;'><h4 style='font-size:14px; font-weight:bold; margin-bottom:8px;'>스페셜 럭키 드로우 응모</h4><button style='background:var(--near-black); color:white; border:none; padding:10px 20px; border-radius:30px; font-size:12px; font-weight:bold; width:100%;'>원클릭 응모 신청</button></div>"
+  },
+  "SHARE": {
+    "moduleCode": "MD13",
+    "name": "공유하기 (SHARE)",
+    "wireframeHtml": "<div style='display:flex; justify-content:center; gap:16px;'><span style='background:#fee500; padding: 8px 16px; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer;'>💬 카카오톡 공유</span><span style='background:#f2f2f2; padding: 8px 16px; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer;'>🔗 링크 복사</span></div>"
+  },
+  "BANNER_BLOCK": {
+    "moduleCode": "MD12",
+    "name": "배너블록 (BANNER_BLOCK)",
+    "wireframeHtml": "<div style='display:grid; grid-template-columns: repeat(3, 1fr); gap: 8px;'><div style='height:80px; background:var(--soft-stone); border-radius:4px; display:flex; align-items:center; justify-content:center;' class='mono-label'>BLOCK 1</div><div style='height:80px; background:var(--soft-stone); border-radius:4px; display:flex; align-items:center; justify-content:center;' class='mono-label'>BLOCK 2</div><div style='height:80px; background:var(--soft-stone); border-radius:4px; display:flex; align-items:center; justify-content:center;' class='mono-label'>BLOCK 3</div></div>"
+  },
+  "FLASH_SALE": {
+    "moduleCode": "MD6",
+    "name": "플래시 세일 (FLASH_SALE)",
+    "wireframeHtml": "<div style='background: var(--coral); color:white; padding:16px; border-radius:8px; text-align:center;'><h4 style='font-size:16px; font-weight:bold; margin:0;'>⚡ FLASH SALE LIMIT 2 HOURS</h4><p style='font-size:11px; margin-top:4px; opacity:0.8;'>오늘 단 하루 타임리밋 깜짝 할인가 적용</p></div>"
+  },
+  "BUY_KING": {
+    "moduleCode": "MD3",
+    "name": "구매왕 (BUY_KING)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--canvas-white);'><h4 style='font-size:13px; font-weight:bold; margin-bottom:8px;' class='mono-label'>👑 TOP BUYER LEADERBOARD</h4><div style='font-size:12px; line-height:1.6; color:var(--slate);'>1위 : abc*** (₩1,420,000)<br>2위 : lfm*** (₩980,000)</div></div>"
+  },
+  "RANDOM_NO": {
+    "moduleCode": "MD13",
+    "name": "난수입력 (RANDOM_NO)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px;'><span style='font-size:11px;' class='mono-label'>ENTER SERIAL NO</span><div style='display:flex; gap:8px; margin-top:8px;'><input type='text' placeholder='일회용 코드 입력' style='flex-grow:1; padding:6px; border:1px solid var(--hairline); border-radius:4px; font-size:12px;'><button style='background:var(--near-black); color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px;'>인증</button></div></div>"
+  },
+  "SALE_CODE": {
+    "moduleCode": "MD3",
+    "name": "할인코드 (SALE_CODE)",
+    "wireframeHtml": "<div style='border: 1px dashed var(--slate); padding:16px; border-radius:8px; background:#fafaf9;'><div style='font-size:12px; font-weight:bold;'>🎟️ 제휴 특화 할인 코드 발급</div><div style='font-size:11px; color:var(--slate); margin-top:2px;'>전용 시크릿 코드를 아래에 매핑하십시오.</div></div>"
+  },
+  "CNDT_BNFT": {
+    "moduleCode": "MD3",
+    "name": "조건혜택 (CNDT_BNFT)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:#fafaf9; text-align:center;'><h4 style='font-size:13px; font-weight:bold;'>🔒 VIP ONLY SPECIAL BENEFIT</h4><p style='font-size:11px; color:var(--slate); margin-top:4px;'>VIP 등급 이상의 우수 고객에게만 활성화되는 프라이빗 기프트</p></div>"
+  },
+  "RANGE": {
+    "moduleCode": "MD6",
+    "name": "레인지 (RANGE)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px;'><span style='font-size:11px;' class='mono-label'>PRICE RANGE SELECTOR</span><div style='display:flex; justify-content:space-between; margin-top:8px; font-size:12px;'><span style='font-weight:bold;'>₩ 50,000</span><span style='font-weight:bold;'>₩ 200,000</span></div><div style='background:#e5e7eb; height:4px; border-radius:2px; margin-top:6px; position:relative;'><div style='background:var(--near-black); left:20%; width:60%; height:4px; position:absolute;'></div></div></div>"
+  },
+  "COMMENT": {
+    "moduleCode": "MD3",
+    "name": "댓글 (COMMENT)",
+    "wireframeHtml": "<div style='border:1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--canvas-white);'><h4 style='font-size:12px; font-weight:bold; margin-bottom:8px;' class='mono-label'>REALTIME COMMENTS</h4><input type='text' placeholder='댓글을 작성해 주세요...' style='width:100%; padding:8px; border:1px solid var(--hairline); border-radius:4px; font-size:12px;'><div style='font-size:11px; color:var(--slate); margin-top:8px;'>lfm*** : 헤지스 옥스포드 셔츠 정말 이쁘네요! (1분 전)</div></div>"
+  },
+  "FCFS_CPN_P": {
+    "moduleCode": "MD6",
+    "name": "선착순쿠폰상품 (FCFS_CPN_P)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--canvas-white);'><span style='background:var(--enterprise-green); color:white; font-size:9px; padding:2px 4px; border-radius:4px;' class='mono-label'>COUPON SALE</span><h4 style='font-size:13px; font-weight:bold; margin-top:4px;'>[선착순 적용] 울 머플러 세트</h4><div style='font-size:14px; font-weight:bold; margin-top:4px; color:var(--coral);'>₩ 39,000</div></div>"
+  },
+  "OPT_CONTAINER": {
+    "moduleCode": "MD13",
+    "name": "옵션컨테이너 (OPT_CONTAINER)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--canvas-white);'><span style='font-size:11px;' class='mono-label'>CHOOSE COLOR OPTION</span><div style='display:flex; gap:8px; margin-top:8px;'><span style='width:24px; height:24px; border-radius:50%; background:#17171c; border:1px solid #ddd; cursor:pointer;'></span><span style='width:24px; height:24px; border-radius:50%; background:#003c33; border:1px solid #ddd; cursor:pointer;'></span><span style='width:24px; height:24px; border-radius:50%; background:#ff7759; border:1px solid #ddd; cursor:pointer;'></span></div></div>"
+  },
+  "GAME_CARD1": {
+    "moduleCode": "MD3",
+    "name": "게임카드1 (GAME_CARD1)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:20px; border-radius:8px; background:#fafaf9; text-align:center;'><h4 style='font-size:13px; font-weight:bold;' class='mono-label'>🎰 LUCKY SLOT MACHINE</h4><div style='font-size:24px; margin:8px 0;'>🎁 | 💎 | 🍒</div><button style='background:var(--near-black); color:white; border:none; padding:6px 12px; border-radius:20px; font-size:11px;'>SLOT START</button></div>"
+  },
+  "GAME_CARD2": {
+    "moduleCode": "MD3",
+    "name": "게임카드2 (GAME_CARD2)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:20px; border-radius:8px; background:#fafaf9; text-align:center;'><h4 style='font-size:13px; font-weight:bold;' class='mono-label'>🃏 CARD FLIP MATCH</h4><div style='display:flex; justify-content:center; gap:8px; margin:8px 0;'><span style='width:36px; height:48px; background:var(--near-black); border-radius:4px; display:inline-block;'></span><span style='width:36px; height:48px; background:var(--near-black); border-radius:4px; display:inline-block;'></span><span style='width:36px; height:48px; background:var(--near-black); border-radius:4px; display:inline-block;'></span></div></div>"
+  },
+  "TEXT": {
+    "moduleCode": "MD2",
+    "name": "텍스트 (TEXT)",
+    "wireframeHtml": "<div style='padding:16px; text-align:center;'><h3 style='font-size:22px; font-weight:bold; color:var(--cohere-black); font-family:\"Space Grotesk\", sans-serif; margin:0;'>DAILY SUMMER LUXURY FASHION</h3><p style='font-size:12px; color:var(--slate); margin-top:4px;'>가장 트렌디하고 아름다운 여름 룩북 제안</p></div>"
+  },
+  "PICTORIAL": {
+    "moduleCode": "MD8",
+    "name": "화보 (PICTORIAL)",
+    "wireframeHtml": "<div style='border:1px solid var(--hairline); border-radius:8px; overflow:hidden; position:relative;'><div style='height:200px; background:#e5e7eb; display:flex; align-items:center; justify-content:center;' class='mono-label'>[ EDITORIAL MAGAZINE PHOTO ]</div><div style='position:absolute; bottom:8px; left:8px; color:white; font-size:11px; background:rgba(0,0,0,0.5); padding:2px 6px; border-radius:4px;'>LOOKBOOK 1 / 4</div></div>"
+  },
+  "REVIEW_GUIDE": {
+    "moduleCode": "MD13",
+    "name": "리뷰 작성 (REVIEW_GUIDE)",
+    "wireframeHtml": "<div style='border: 1px solid var(--hairline); padding:16px; border-radius:8px; background:var(--canvas-white); display:flex; justify-content:space-between; align-items:center;'><div style='max-width:70%;'><h4 style='font-size:13px; font-weight:bold;'>✍️ 구매 상품 소중한 리뷰 남기기</h4><p style='font-size:11px; color:var(--slate); margin-top:2px;'>텍스트 리뷰 500M / 포토리뷰 1000M 지급</p></div><button style='background:var(--near-black); color:white; border:none; padding:6px 12px; border-radius:20px; font-size:11px;'>작성</button></div>"
+  }
+}
