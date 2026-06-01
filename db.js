@@ -30,7 +30,7 @@ window.ExhibitionWireframes = {
   "ATTENTION": {
     "moduleCode": "MD10",
     "name": "유의사항 (ATTENTION)",
-    "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; padding: 20px; background: var(--canvas-white);'><h4 style='font-size: 14px; font-weight: bold; margin-bottom: 8px;'>[이벤트 유의사항]</h4><ul style='font-size:12px; color: var(--slate); padding-left:16px; line-height: 1.6;'><li>본 이벤트는 선착순 한도 마감 시 조기 종료됩니다.</li><li>쿠폰은 ID당 1일 1회에 한해 지급 가능합니다.</li></ul></div>"
+    "wireframeHtml": "<div class='attention-wf' style='border: 1px solid var(--hairline); background: #fafafa; border-radius: 0px; padding: 32px 24px; font-family: &quot;Inter&quot;, sans-serif;'><style>.attention-wf .title { font-size: 15px; font-weight: 700; color: var(--near-black); margin: 0 0 16px 0; border-left: 3px solid var(--near-black); padding-left: 8px; line-height: 1.2; letter-spacing: -0.3px; }.attention-wf .list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }.attention-wf .item { position: relative; padding-left: 14px; font-size: 12px; line-height: 1.6; color: var(--slate); font-weight: 400; }.attention-wf .item::before { content: &quot;•&quot;; position: absolute; left: 0; top: 0; color: var(--muted-slate); font-weight: 700; }</style><h4 class='title'>이벤트 및 구매 유의사항</h4><ul class='list'><li class='item'>본 프로모션은 LFmall 멤버십 회원 대상으로 로그인 후 이벤트 참여 및 구매 혜택 적용이 가능합니다.</li><li class='item'>사은품 및 장바구니 할인 쿠폰은 ID당 1회에 한해 선착순 발급 및 자동 지급 처리됩니다.</li><li class='item'>반품 또는 구매 취소 시 지급된 마일리지 및 동봉 사은품은 전량 반환 조치하셔야 합니다.</li><li class='item'>비정상적이거나 대리 결제 등의 어뷰징 행위 적발 시 별도 안내 없이 혜택 지급 보류 및 취소 처리가 적용될 수 있습니다.</li></ul></div>"
   },
   "COUNT": {
     "moduleCode": "MD2",
@@ -304,15 +304,24 @@ window.ExhibitionGuides = {
     "cardKey": "ATTENTION",
     "name": "유의사항",
     "category": "NAV",
-    "sourceFile": "frmPlanCardNotice.xfdl",
+    "sourceFile": "frmPlanCardNotice.xfdl (어드민) / Notice.tsx (프론트)",
     "moduleCode": "MD10",
-    "desc": "기획전 하단 등에 배치되는 이벤트 참여 및 구매 관련 텍스트 유의사항 영역입니다.",
-    "layoutDescription": "하단 텍스트 구조로 깔끔하게 렌더링됩니다.",
+    "desc": "기획전 하단부에 안정적으로 배치하여, 프로모션 대상 조건, 할인/마일리지 적립 한도 및 유효기간, 구매 취소 및 반품 관련 법적/행정적 유의조항들을 일목요연하게 안내하는 표준 약관 정보 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 기획전 최하단에 배치되는 차분하고 정돈된 텍스트 목록입니다. 웅장한 타이포그래피 요소보다는 가독성을 저해하지 않는 미니멀한 규칙선을 바탕으로, 특수 기호(■, ●, *, -)가 목록의 최전단에 자동 정렬(Bullet padding)되도록 CSS flex-grid가 적용됩니다.",
     "backendSettings": [
-      { "field": "안내문구 작성", "id": "NOTICE_TEXT", "type": "String (필수)", "desc": "실질 유의사항 약관 리스트를 기입합니다." }
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 Margin 여부" },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부 (기본값 Y)" },
+      { "field": "안내문구 작성", "id": "NOTICE_TEXT", "type": "String (RichText)", "desc": "사용자에게 전달할 유의사항 텍스트 본문입니다. HTML 에디터 기능을 통해 볼드, 폰트 컬러, 링크 등의 서식을 부분 지정하여 저장 가능합니다." }
     ],
-    "codeSnippet": "// 유의사항 컴포넌트 로직",
-    "warnings": "폰트 크기가 너무 작아 시인성을 해치지 않게 조율하십시오."
+    "codeSnippet": "// Notice.tsx - Front-end React 유의사항 파서 및 dangerouslySetInnerHTML 매핑 소스\nexport const Notice = ({ templateDetail }) => {\n  if (!templateDetail?.noticeText) return <></>;\n  \n  // XSS 공격 방어용 html sanitize 처리 적용\n  const sanitizedHtml = useMemo(() => {\n    return DOMPurify.sanitize(templateDetail.noticeText, {\n      ALLOWED_TAGS: ['p', 'span', 'strong', 'br', 'ul', 'li', 'a', 'font'],\n      ALLOWED_ATTR: ['href', 'target', 'style', 'color']\n    });\n  }, [templateDetail.noticeText]);\n\n  return (\n    <div className={styles.noticeContainer}>\n      <div\n        className={styles.noticeContent}\n        dangerouslySetInnerHTML={{ __html: sanitizedHtml }}\n      />\n    </div>\n  );\n};",
+    "warnings": "1. [용량 및 바이트 검증] 어드민(NBOS) 저장 시 `NOTICE_TEXT` 필드는 **최대 4000byte (한글 2000자)** 제한 조건이 존재합니다. HTML 서식 태그의 길이도 바이트 수에 전부 합산되므로, 에디터 서식을 과도하게 많이 적용할 경우 글자 수가 충분히 남았음에도 저장이 반려될 수 있으니 텍스트 위주 구성을 권장합니다.\n2. [XSS 보안 규정] 사용자 브라우저에 임의의 악성 스크립트가 로드되는 공격을 방지하기 위해 프론트 React 단에서는 반드시 **DOMPurify 등을 경유한 HTML Sanitize 처리**가 필수 적용되어 있어야 합니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 10자 이상 기입",
+      "prodMax": "최대 4000byte (한글 약 2000자 한도, HTML 태그 포함)",
+      "adminValidation": "본 유의사항 카드는 기획전 내 상품 등록 및 이미지 업로드 제약을 요구하지 않는 **순수 텍스트 안내 영역**입니다. 어드민(NBOS) 저장 시 본문(`NOTICE_TEXT`) 바이트 길이가 4000byte를 단 1바이트라도 초과할 경우 넥사크로 UI 및 서버 데이터바인더 단에서 SQL 문자열 길이 초과 오류와 함께 저장이 거부됩니다."
+    }
   },
   "COUNT": {
     "cardKey": "COUNT",
