@@ -223,5 +223,31 @@
       "prodMax": "최대 50byte (한글 약 25자 한도, 소제목 명칭에 적용)",
       "adminValidation": "본 카드는 상품 전시나 직접적인 이미지 업로드를 요구하지 않는 기능형 순수 정보 컴포넌트입니다. 어드민(NBOS) 저장 시 시작 일시(TMR_STRT_DT)가 종료 일시(TMR_END_DT)보다 1초라도 미래인 논리적 오류가 감지되면 저장 유효성 검증 단에서 차단 메시지와 함께 저장이 거부됩니다."
     }
+  },
+  "P_BENEFIT": {
+    "cardKey": "P_BENEFIT",
+    "name": "결제혜택",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardBenefitP.xfdl (어드민) / PayBenefit.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "기획전 내에 제휴 신용카드사 및 간편결제사별 즉시할인, 청구할인, 무이자 할부 등의 실질 결제 단계 리워드 명세를 일목요연한 카드 그리드 형태로 제공하는 마케팅 특화용 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 깔끔하게 정돈된 제휴사별 전용 카드 디자인 그리드로 노출됩니다. 각 카드는 제휴사의 상징 로고 배지, 혜택 유형 배지(즉시할인/청구할인/무이자 등), 그리고 핵심 혜택 강조 텍스트(예: '7% 즉시할인')를 내포하며, 하단에는 최소 적용 금액 및 최대 할인 한도 요건이 럭셔리한 구조로 기입됩니다. 등록 슬롯이 4개 이상으로 늘어날 경우 프론트에서 자동으로 스와이프 가능한 회전 캐러셀로도 구동이 전환됩니다.",
+    "backendSettings": [
+      { "field": "제휴사 구분", "id": "CARD_CO_DIV_VAL", "type": "Combo (S402 공통코드)", "desc": "KB국민, 신한, 삼성, 현대, 비씨, 우리 등 제휴사 코드를 바인딩합니다." },
+      { "field": "혜택 적용 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (C/D/P/N)", "desc": "C: 청구할인 / D: 즉시할인 / P: 포인트적립 / N: 무이자할부 중 선택 매핑합니다." },
+      { "field": "최소 기준금액", "id": "MIN_APLI_PRC", "type": "Integer (필수)", "desc": "혜택을 받기 위한 최소 실 결제 금액을 입력합니다. (예: 50,000)" },
+      { "field": "최대 할인한도", "id": "MAX_LIMIT_PRC", "type": "Integer (필수)", "desc": "1회 결제 시 적용되는 최대 혜택 한도 액수입니다. (예: 30,000)" },
+      { "field": "할인율 또는 할인액", "id": "DISC_RATE / DISC_AMT", "type": "Float / Integer", "desc": "할인 적용될 비율(%) 혹은 할인 고정 금액(₩)을 지정합니다." },
+      { "field": "혜택 상세설명", "id": "BNFT_DSCR", "type": "String (200byte 한도)", "desc": "제외 상품군 및 추가 조건에 대해 적는 설명 문구입니다." }
+    ],
+    "codeSnippet": "// PayBenefit.tsx - Front-end React 결제혜택 카드사별 그라데이션 및 뱃지 분기 연동 일부\nexport const PayBenefit = ({ benefitList }) => {\n  return (\n    <div className={styles.payBenefitGrid}>\n      {benefitList.map((item) => (\n        <div key={item.benefitId} className={styles.benefitCard}>\n          <div className={styles.cardHeader}>\n            <span className={styles.coLogo}>{item.cardCoNm}</span>\n            <span className={styles.typeBadge}>{item.bnftType === 'C' ? '청구할인' : '즉시할인'}</span>\n          </div>\n          <h3 className={styles.discountText}>{item.discRate}% {item.bnftType === 'C' ? '청구할인' : '즉시할인'}</h3>\n          <p className={styles.limitInfo}>{item.minApliPrc.toLocaleString()}원 이상 결제 시 (최대 {item.maxLimitPrc.toLocaleString()}원)</p>\n          {item.bnftDscr && <p className={styles.descText}>{item.bnftDscr}</p>}\n        </div>\n      ))}\n    </div>\n  );\n};",
+    "warnings": "1. [자수 초과 경고] 혜택 상세설명(`BNFT_DSCR`)은 최대 200byte (한글 100자) 이내여야 하며, 초과 입력 후 어드민 저장 시 넥사크로 UI 및 트랜잭션 에러에 의해 저장이 자동으로 반려됩니다.\n2. [금액 검증 규정] 최소 기준금액(`MIN_APLI_PRC`)은 무조건 0원 이상이어야 하며, 최대 할인 한도 및 할인 적용률 중 하나도 비어 있으면 저장이 완료되지 않습니다.",
+    "qtyGuidelines": {
+      "tabMin": "최소 1개",
+      "tabMax": "최대 12개 (초과 등록 시 스와이프 회전 캐러셀 전환)",
+      "prodMin": "최소 1자 이상 기입",
+      "prodMax": "최대 200byte (한글 약 100자 한도, 상세설명 필드)",
+      "adminValidation": "본 카드는 상품의 직접적인 이미지 매핑을 요구하지 않는 순수 결제 혜택 메타정보 전시 컴포넌트입니다. 어드민(NBOS) 저장 시 최소 적용 금액(MIN_APLI_PRC)이 누락되었거나 할인 정보(DISC_RATE 또는 DISC_AMT)가 없는 경우 유효성 에러와 함께 트랜잭션 저장이 전면 반려됩니다. 한 구좌당 등록 가능한 카드 혜택 데이터는 최소 1개에서 최대 12개까지로 규정되어 있습니다."
+    }
   }
 }
