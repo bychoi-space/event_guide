@@ -64,7 +64,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted-slate);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       padding-left: 10px;
       display: flex;
       align-items: center;
@@ -79,15 +79,40 @@
       background: var(--action-blue);
     }
 
-    aside ul { list-style: none; }
+    .sidebar-category-block {
+      margin-bottom: 20px;
+    }
+    .sidebar-category-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted-slate);
+      padding: 6px 12px;
+      margin-bottom: 4px;
+      background: var(--bg-subtle);
+      border-radius: 6px;
+      letter-spacing: -0.01em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-category-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    aside ul { list-style: none; padding-left: 0; margin: 0; }
     aside li { margin-bottom: 2px; }
     aside a {
       text-decoration: none;
       color: var(--slate);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 450;
-      padding: 9px 12px;
-      display: block;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-radius: 8px;
       transition: all 0.18s ease;
       white-space: nowrap;
@@ -95,14 +120,30 @@
       text-overflow: ellipsis;
       position: relative;
     }
+    aside a .card-key-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      opacity: 0.5;
+      margin-left: 8px;
+      transition: all 0.18s ease;
+    }
     aside a:hover {
       background-color: var(--bg-subtle);
       color: var(--ink);
+    }
+    aside a:hover .card-key-badge {
+      opacity: 0.8;
+      color: var(--near-black);
     }
     aside a.active {
       background: var(--action-blue-light);
       color: var(--action-blue);
       font-weight: 600;
+    }
+    aside a.active .card-key-badge {
+      opacity: 0.9;
+      color: var(--action-blue);
     }
     aside a.active::before {
       content: '';
@@ -633,22 +674,23 @@
     </div>
   </footer>
 
-  <script src="db.js"></script>
+  <script src="db/db_guides.js"></script>
+  <script src="db/db_wireframes.js"></script>
   <script>
     let wireframes = {};
     let guides = {};
 
     function init() {
       // CORS & File protocol secure fallback: 로컬 file:/// 기동 시 fetch 보안 에러 원천 차단
-      // db.js 가 전역 window 객체에 로드한 데이터를 즉시 안전하게 참조합니다.
+      // db_guides.js 및 db_wireframes.js 가 전역 window 객체에 로드한 데이터를 즉시 안전하게 참조합니다.
       if (window.ExhibitionGuides && window.ExhibitionWireframes) {
         guides = window.ExhibitionGuides;
         wireframes = window.ExhibitionWireframes;
-        console.log("Successfully loaded offline master database from db.js");
+        console.log("Successfully loaded offline master database from split db scripts");
         buildSidebar();
         loadActiveCard();
       } else {
-        console.warn("db.js not loaded or empty. Attempting fetch fallback...");
+        console.warn("Split DB scripts not loaded or empty. Attempting fetch fallback...");
         fetchFallback();
       }
 
@@ -676,323 +718,9 @@
         ]);
         wireframes = await wfRes.json();
         guides = await gdRes.json();
-        buildSidebar();
-        loadActiveCard();
       } catch (err) {
         console.error("Critical: Failed to load database.", err);
-        loadLocalDatabaseDirectly();
       }
-    }
-
-    // 파일 프로토콜(file:///) 환경에서 CORS 보안 정책 우회를 위한 완벽한 인라인 로컬 DB 장착
-    function loadLocalDatabaseDirectly() {
-      // 1. Guides DB Fallback
-      guides = {
-        "TAB_CONTAINER": {
-          "cardKey": "TAB_CONTAINER",
-          "name": "탭 컨테이너",
-          "category": "NAV",
-          "sourceFile": "frmPlanTempTabContainer.xfdl (어드민) / TabContainer.tsx (프론트)",
-          "moduleCode": "MD13",
-          "desc": "1단 또는 2단 복합 탭 구조를 조립·설계하여, 사용자가 클릭 시 새로고침 없이 상품 딜 목록 및 배너를 동적으로 비동기 교체하는 초고성능 전시판 컨트롤러입니다.",
-          "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서는 최상단 가로 스크롤링 카테고리 탭 메뉴바가 상단 고정(Sticky)되며, 사용자가 다른 탭 클릭 시 스크롤 위치 이동을 방어하며 내부 상품 슬라이드(Swiper) 및 하위 배너 정보가 비동기로 즉시 리렌더링됩니다. 개별 탭 패널 내부 상단에 이미지 광고 배너(mobiImgPath)를 매핑하거나, 패널 최하단에 상세 랜딩을 유도하는 양끝이 둥근 모던 버튼(btnText)을 기획적 옵션으로 가미할 수 있습니다.",
-          "backendSettings": [
-            { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 여백(Margin) 유무를 설정합니다." },
-            { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백(Padding) 유무를 설정합니다. 기본값 Y." },
-            { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex", "desc": "전체 컴포넌트의 배경색을 Hex값으로 지정합니다. (예: #eeece7)" },
-            { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 최상단에 작게 배치되는 한글 약 25자 내외의 강조 설명 텍스트입니다. 하단 설명 문구와 동시에 등록할 수 없습니다." },
-            { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "탭 컨테이너 대단원 타이틀입니다. 한 줄 최대 한글 10자 내외로 입력하고 줄바꿈(\\n)으로 최대 2줄 등록을 지원합니다." },
-            { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 하단 보조 설명 텍스트입니다. 상단 설명 문구와 동시에 등록할 수 없습니다." },
-            { "field": "탭 형태", "id": "TAB_TYPE_VAL", "type": "Combo (1/2)", "desc": "1: 1단 단일 카테고리 탭 구조 / 2: 대분류-소분류가 연동되는 2단 다단 탭 구조를 세팅합니다." },
-            { "field": "1단 탭 랜덤", "id": "RNDM_SORT_YN", "type": "Radio (Y/N)", "desc": "1단 탭 카테고리 노출 순서를 매 기동 시마다 무작위(랜덤)로 셔플하여 전시할지 결정합니다." },
-            { "field": "2단 탭 랜덤", "id": "PROD_RNDM_SORT_YN", "type": "Radio (Y/N)", "desc": "2단 탭 하위 카테고리 노출 순서를 무작위로 셔플 노출할지 결정합니다." },
-            { "field": "상품 정렬 순서", "id": "PROD_SORT_TYPE_VAL", "type": "Combo (S422)", "desc": "A: 기본 순서 / M: 탭 내부 상품들을 무작위(랜덤) 셔플 노출하여 전시 집중도를 다각화합니다." },
-            { "field": "상품 표현 (MO)", "id": "PROD_EPSR_TYPE_VAL", "type": "Radio (S430)", "desc": "모바일 격자 배치입니다. SW3_2 (3열 2단 격자), SW2_2 (2열 2단 격자), SW1_2 (1열 2단 묶음) 등을 코드값으로 선택합니다." },
-            { "field": "상품 표현 (PC)", "id": "PC_PROD_EPSR_TYPE_VAL", "type": "Radio (S431)", "desc": "PC 사용자 화면의 가로 상품 격자 수 설정입니다. SW4_1 (4열 1단형) 등이 지정됩니다." }
-          ],
-          "codeSnippet": "// TabContainer.tsx - 1단/2단 탭 비동기 로드 및 Swiper 렌더링 로직 일부\nconst TabContainer = React.memo(({ tabInfo, template, onRender }) => {\n  const [ntorNo, setNtorNo] = useState<number>(Number(tabInfo?.tabContainerList![0]?.tabList![0]?.ntorNo) || 0);\n  const { data } = useFetchExhbEventDealProductGET({\n    params: { evntNo: Number(template?.exhbCardNo), orderFlag: tabInfo.prodSortType ?? 'A', ntorNo: ntorNo || 0 }\n  });\n  const swiperSlideList = useMemo(() => {\n    let productList = data?.pages[0].eventDealProductList ?? [];\n    if (tabInfo.prodSortType === 'M') shuffleArray(productList); // 상품 랜덤 셔플\n    return productList?.map((product, idx) => (\n      <SwiperSlide key={`item_${idx}`} className={styles.wrapSlide}>\n        <TabContItem props={product} template={template} />\n      </SwiperSlide>\n    ));\n  }, [data, tabInfo]);\n  return (\n    <div className={styles.tabContainer} style={{ backgroundColor: tabInfo?.bkgdClr }}>\n      <Tabs selectedIndex={containerIdx} onSelect={(idx) => { setContainerIdx(idx); setTabIdx(0); }}>\n        <TabList>\n          {tabInfo?.tabContainerList?.map((item, idx) => (\n            <Tab key={idx}>{item?.tabContainer?.evntNtorMainText}</Tab>\n          ))}\n        </TabList>\n        {/* ... 중첩 자식 탭 및 Swiper 마운트 렌더링 ... */}\n      </Tabs>\n    </div>\n  );\n});",
-          "imageGuidelines": {
-            "pcSize": "가로 1240px × (세로 높이 제한 없음)",
-            "moSize": "가로 750px × (세로 높이 제한 없음) *각 탭 카테고리 패널의 상단 전용 배너 규격",
-            "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-            "maxSize": "파일당 최대 200KB 이하",
-            "adminValidation": "어드민 탭 상세 목록에서 개별 탭별 상단 배너 이미지를 업로드할 수 있으며, 200KB 용량 규격을 1바이트라도 초과할 시 업로드가 자동으로 차단 및 초기화됩니다. 탭별 시즌 테마나 할인 정보 광고 이미지를 적합하게 매핑할 것을 강력 권장합니다."
-          },
-          "qtyGuidelines": {
-            "tabMin": "최소 2개",
-            "tabMax": "최대 15개 (대분류) / 8개 (소분류)",
-            "prodMin": "최소 4개",
-            "prodMax": "최대 48개",
-            "adminValidation": "2단 탭 구조는 선택사항(Optional)으로 1단 단일 카테고리 탭으로만 간소하게 사용하거나, 대분류-소분류가 분기되는 2단 탭 구조를 세팅해 고도화할 수 있습니다.<br>어드민(NBOS) 저장 시 각 탭별로 매핑된 상품 개수가 최소 4개 미만이거나 최대 48개를 초과할 경우 Validation 오류 메시지와 함께 저장이 자동으로 반려됩니다. 또한, 하위 2단 탭(소분류)은 최대 8개까지, 1단 탭은 최대 15개까지 스피너(Spin)를 통해 유연하게 추가 및 조절 가능합니다."
-          },
-          "warnings": "1. [텍스트 상호 배타 규정] 어드민 넥사크로 시스템 제약에 의해 **상단 설명 문구와 하단 설명 문구는 절대 동시에 기입해 저장할 수 없습니다.** 동시 입력 시 넥사크로 폼 검증 스크립트단에서 저장이 반려되므로, 한 영역은 무조건 완전 비워두어야 합니다.\n2. [상품 & 탭 개수 권장 제약] 탭 컨테이너 카드는 구조적 유연성이 높으나 탭 개수가 15개를 초과하거나, 탭당 상품 로딩 수가 50개를 초과할 시 모바일 비동기 API 트랜잭션 지연으로 심각한 화면 로딩 부하를 겪을 수 있습니다. 탭 개수 8개 이하, 상품 수 30개 이내로 제한할 것을 강하게 가이드 권장합니다.\n3. [구조 변경 시 데이터 유실 주의] 기획전 저장 완료 후 어드민 단에서 1단 탭 ↔ 2단 탭으로 구조 설정을 갑작스럽게 클릭 변경하고 저장할 시, 기존에 생성되었던 하위 탭들의 매핑 식별값(ntorNo)이 꼬여 상품 데이터와 엑셀 매핑이 완전히 소실될 위험이 존재합니다. 기획 초기 단계에 탭 뎁스 형태를 최종 확정해 구성하여야 합니다."
-        },
-        "TOP_BANNER": {
-          "cardKey": "TOP_BANNER",
-          "name": "탑배너",
-          "category": "BANNER",
-          "sourceFile": "frmPlanCardBanner.xfdl (어드민) / TopBanner.tsx (프론트)",
-          "moduleCode": "MD1 (MDL1)",
-          "desc": "기획전 최상단에 강렬한 브랜드 이미지를 전달하는 비주얼 포커스 배너입니다. 단일 통 이미지 노출 뿐만 아니라 텍스트 오버레이, 뱃지, 블러 딤드(Dimmed) 레이어 및 직사각형/라운드형 링크 버튼 등의 복합 타이포그래피 요소들을 조립식으로 렌더링할 수 있는 고기능 컴포넌트입니다.",
-          "layoutDescription": "최상단 전체 가로폭 반응형으로 렌더링되며, 모바일 화면에서는 세로 비율을 안전하게 확보하기 위해 '스퀘어형(최대 높이 414px 고정)' 뷰 옵션을 지원합니다. UI 유형에 따라 'OP01/OP03 (포토 중심 타이포)' 및 'OP02 (텍스트 중심 타이포)' 레이아웃이 적용되며, 어드민 여백 설정값에 따라 상/하단 내외부 마진(10px 내외)이 정밀하게 동적 가감됩니다.",
-          "backendSettings": [
-            { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 Margin 여부를 결정합니다." },
-            { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부를 결정합니다. 기본값 Y." },
-            { "field": "이미지 표현 형식", "id": "IMG_WIDE_TYPE_VAL", "type": "Combo (S/W)", "desc": "S: 기본형 (1240px 중앙 가둠) / W: 와이드형 (1920px 화면 가득 채움)" },
-            { "field": "타이틀 오버레이", "id": "BNR_TITE_TEXT", "type": "String (10자 한도)", "desc": "배너 중앙에 배치할 메인 헤드라인 텍스트입니다. 줄바꿈(\\n) 분할 출력을 완벽 지원합니다." },
-            { "field": "서브 타이틀", "id": "BNR_SUB_TITE_TEXT", "type": "String (무제한)", "desc": "메인 타이틀 하단에 배치할 보조 상세 설명 문구입니다." },
-            { "field": "버튼 유형", "id": "BTN_TYPE_VAL", "type": "Radio (O/S)", "desc": "O: 투명 배경에 외곽선만 그리는 고스트 버튼 / S: 채우기 단색 버튼" },
-            { "field": "버튼 스타일", "id": "BTN_STYL_VAL", "type": "Radio (N/S/R)", "desc": "N: 버튼 미노출 / S: 직사각형 버튼 / R: 양끝이 둥근 알약형 라운드 버튼" },
-            { "field": "버튼 링크 URL", "id": "BTN_MVMN_URL_VAL", "type": "String (필수)", "desc": "배너 클릭 또는 전용 버튼 클릭 시 강제 랜딩될 타겟 URL 경로입니다. PC용 스펙을 입력합니다." },
-            { "field": "모바일 전용 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (1080x1080 권장)", "desc": "모바일 전용 반응형 레이아웃에 탑재될 이미지 파일입니다. OP01/OP02 등의 square 모드 활성 시 1:1 비율 적용을 강하게 권장합니다." }
-          ],
-          "codeSnippet": "// TopBanner.tsx - Front-end React 컴포넌트 핵심 분석 소스\nexport const TopBanner = ({ moduleType, templateDetail }) => {\n  if (!templateDetail) return <></>;\n  return (\n    <>\n      {templateDetail?.map((detail) => (\n        <div\n          key={detail.benefitSq}\n          className={[\n            styles.topBanner,\n            detail.imageType === \"OP01\" || detail.imageType === \"OP03\" ? styles.typePhoto : styles.typeText,\n            detail.imageType === \"OP01\" || detail.imageType === \"OP02\" ? styles.square : \"\",\n            moduleType === \"TB02\" ? styles.dimmed : \"\",\n          ].join(\" \")}\n        >\n          <img src={`${IMAGE_PATH}/${detail.bannerImgPath}`} className={styles.banner} alt=\"bannerImage\" />\n          {moduleType === \"TB02\" && (\n            <div className={styles.contents}>\n              {/* h1 한글 기준 10자 입력 제한 권장 */}\n              {detail.title?.split(\"\\n\").map((txt) => <h1 key={txt}>{txt}</h1>)}\n              {detail.subTitle?.split(\"\\n\").map((txt) => <h2 key={txt}>{txt}</h2>)}\n              <p className={styles.badge}>{detail.badge}</p>\n            </div>\n          )}\n        </div>\n      ))}\n    </>\n  );\n};",
-          "warnings": "1. [중요] 메인 타이틀 오버레이는 한 줄당 최대 한글 10자를 가이드 라인으로 잡고 있습니다. 10자를 초과할 시 반응형 모바일 크기에서 텍스트 줄바꿈 강제 래핑 현상에 의해 레이아웃 깨짐이 유발될 수 있으니 등록 시 사전 모니터링을 거쳐야 합니다.\n2. [Dimmed 설정] 어드민 내 모듈 코드가 'TB02 (텍스트 오버레이형)' 일 때는 배경 이미지 위에 30% 블랙 투명 딤드 레이어(rgba(0,0,0,0.3))가 강제로 도포됩니다. 따라서 어둡게 보정될 것을 염두에 두고 원본 이미지의 명도를 과하게 낮추지 않도록 주의해야 합니다.",
-          "imageGuidelines": {
-            "pcSize": "1240px × (세로 높이 제한 없음) *텍스트가 없는 통이미지 타입은 가로 1920px (와이드형) 권장",
-            "moSize": "750px × (세로 높이 제한 없음) *스퀘어형(OP01/OP02) 활성화 시 1:1 비율 (1080x1080) 권장 (모바일 최대 높이 414px 고정)",
-            "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-            "maxSize": "파일당 최대 200KB 이하",
-            "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 200KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. (서버 전체 제한은 10MB이나 UI 단에서 200KB로 2차 검증 차단)"
-          }
-        },
-        "BANNER": {
-          "cardKey": "BANNER",
-          "name": "배너",
-          "category": "BANNER",
-          "sourceFile": "frmPlanCardBanner.xfdl (어드민) / Banner.tsx (프론트)",
-          "moduleCode": "MD12",
-          "desc": "기획전 본문 내에 구성하는 표준적인 단일 혹은 다단 이미지/링크 연동 배너 컴포넌트입니다. 본문에 자유롭게 적재하여 시각적 구분을 하거나 테마별 페이지 전환용 링크 버튼을 내포할 수 있습니다.",
-          "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 타이틀, 설명문구, 버튼이 이미지 위에 겹쳐서 노출(Overlay)되지 않고, 이미지의 위와 아래에 각각 독립적으로 배치되는 수직 레이아웃 형태입니다. 구체적으로 **[상단: 타이틀 & 설명문구] -> [중단: Swiper 슬라이드 이미지 및 페이지네이션 도트] -> [하단: 바로가기 버튼]** 순서로 질서정연하게 렌더링되도록 설계되었습니다. 이미지를 2장 이상 복수 업로드할 경우 중단의 이미지 영역만 Swiper 모듈을 통해 캐러셀(슬라이드) 회전 배너로 작동합니다.",
-          "backendSettings": [
-            { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 여백 유무를 설정합니다." },
-            { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백 유무를 설정합니다. 기본값 Y." },
-            { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 하단 여백 유무를 설정합니다." },
-            { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 하단 여백 유무를 설정합니다." },
-            { "field": "이미지 표현 형식", "id": "IMG_WIDE_TYPE_VAL", "type": "Combo (S/W)", "desc": "S: 기본형 (1240px 중앙 가둠) / W: 와이드형 (1920px 화면 전체 채움)" },
-            { "field": "상단 설명 문구", "id": "BNR_HEDR_TITL_TEXT", "type": "String (50byte 한도)", "desc": "배너 최상단에 작게 배치되는 한글 약 25자 내외의 강조 설명 텍스트입니다. 하단 설명 문구와 중복 등록이 불가합니다." },
-            { "field": "타이틀", "id": "BNR_TITE_TEXT", "type": "String (22byte 한도)", "desc": "배너 중앙 메인 타이틀입니다. 한 줄에 최대 한글 10자 내외로 입력하고 줄바꿈(\\n)으로 최대 2줄까지 등록 가능합니다." },
-            { "field": "하단 설명 문구", "id": "BNR_SUB_TITE_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 하단 보조 설명 텍스트입니다. 상단 설명 문구와 중복 등록이 불가합니다." },
-            { "field": "버튼 형태", "id": "BTN_STYL_VAL", "type": "Radio (N/S/R)", "desc": "N: 버튼 미노출 / S: 직사각형 버튼 / R: 양끝이 둥근 라운드 버튼" },
-            { "field": "버튼 유형", "id": "BTN_TYPE_VAL", "type": "Radio (O/S)", "desc": "O: 투명 배경 고스트 버튼 / S: 채우기 단색 버튼" },
-            { "field": "버튼 명칭", "id": "BTN_TEXT_VAL", "type": "String (40byte 한도)", "desc": "노출될 버튼 이름입니다. 한글 약 20자 한도 내 작성을 권장합니다." },
-            { "field": "버튼 링크 URL", "id": "BTN_MVMN_URL_VAL", "type": "String (선택)", "desc": "버튼 클릭 시 타겟 랜딩 페이지 링크 주소(PC URL 기준)를 매핑합니다." },
-            { "field": "PC 이미지 파일", "id": "PC_IMG_PATH_NM", "type": "File (1240px 권장)", "desc": "PC 사용자 화면에 전시될 표준 이미지 파일입니다. (최대 5장 등록 가능)" },
-            { "field": "모바일 이미지 파일", "id": "MOBI_IMG_PATH_NM", "type": "File (750px 권장)", "desc": "모바일 사용자 화면에 전시될 표준 이미지 파일입니다." },
-            { "field": "배너 개별 링크", "id": "LINK_URL_VAL", "type": "String (선택)", "desc": "배너 자체 클릭 시 이동할 타겟 랜딩 URL입니다. PC URL 스펙으로 작성합니다." },
-            { "field": "링크 타겟", "id": "LINK_TRGE_VAL", "type": "Combo (N/S/B)", "desc": "N: 사용안함 / S: 현재창(_self) / B: 새창(_blank)" },
-            { "field": "eTAG 랜딩 여부", "id": "LINK_DIV_VAL", "type": "Combo (필수)", "desc": "배너 링크 클릭 이벤트를 로깅 및 추적하기 위한 필수 태깅 분류 코드입니다." }
-          ],
-          "codeSnippet": "// Banner.tsx - Front-end React 일반 배너 렌더링 일부\nexport default function Banner({ template }) {\n  const { data: bannerData } = useFetchPlanBannerGET({ param: { moduleType: template?.moduleType } });\n  return (\n    <>\n      {bannerData?.body?.planModuleBannerInfoDTOList?.map((item) => (\n        <Link key={item.bannerNumber} to=\"\" className={styles.banner} onClick={(e) => handleClick(e)}>\n          <img src={`${IMAGE_ROOT_PATH}/${item.mobileImagePath}`} alt=\"배너\" />\n        </Link>\n      ))}\n    </>\n  );}",
-          "warnings": "1. [텍스트 상호 배타 규칙] 상단 설명 문구와 하단 설명 문구는 어드민 시스템 제약 상 **절대 동시에 입력하여 저장할 수 없습니다.** 입력 시 하나의 영역을 비워두어야 Validation 에러가 발생하지 않습니다.\n2. [용량 초과 차단 주의] 일반 배너는 슬라이드 배너 제작을 지원하여 최대 5장의 이미지를 올릴 수 있으나, **개별 이미지 용량이 200KB를 1바이트라도 초과하는 경우** 어드민 내 넥사크로 2차 검증 스크립트단에서 업로드가 원천 차단됩니다. 등록 전 이미지 최적화(용량 압축)가 필수입니다.\n3. [eTAG 필수 규정] 각 이미지 슬라이드마다 랜딩 링크를 활성화하는 경우, **eTAG 랜딩 구분 코드 설정** 누락 시 저장이 불가하니 사전 정의된 프로모션/브랜드/상품 코드를 정확히 매핑하여야 합니다.",
-          "imageGuidelines": {
-            "pcSize": "기본형: 1240px × (세로 높이 제한 없음) / 와이드형: 1920px × (세로 높이 제한 없음)",
-            "moSize": "가로 750px × (세로 높이 제한 없음) (모바일 상단 여백 60px 기본 설정)",
-            "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-            "maxSize": "파일당 최대 200KB 이하 (최대 5장 등록하여 슬라이드 배너 제작 가능)",
-            "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 200KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. 복수 등록 시 프론트에서 자동으로 Swiper 캐러셀(슬라이드) 회전 롤링 배너로 구현되며, 배너 링크 등록 시 eTAG 정보 입력이 필수입니다."
-          }
-        },
-        "T_DEAL": {
-          "cardKey": "T_DEAL",
-          "name": "타임특가",
-          "category": "PROD",
-          "sourceFile": "frmPlanCardTimeDeal.xfdl",
-          "moduleCode": "MD6",
-          "desc": "지정된 시간에만 한정 할인가로 판매하는 시간제 딜 구좌입니다.",
-          "layoutDescription": "실시간 카운트다운 타이머가 함께 표기되며, 시간이 종료되면 자동으로 판매 완료 처리 또는 일반 상품 레이아웃으로 변경됩니다.",
-          "backendSettings": [
-            { "field": "전시 시작 시간", "id": "SDT / STM", "type": "DateTime (필수)", "desc": "시작 날짜와 시작 시간(STM)을 초 단위(HHMMSS)까지 정밀 지정해야 합니다." },
-            { "field": "전시 종료 시간", "id": "EDT / ETM", "type": "DateTime (필수)", "desc": "종료 날짜와 종료 시간(ETM)을 초 단위(HHMMSS)까지 정밀 지정해야 합니다." },
-            { "field": "할인 혜택 매핑", "id": "BENEFIT_CD", "type": "CODE (필수)", "desc": "타겟 할인 혜택 데이터셋과 1:1 결합이 필수입니다." }
-          ],
-          "codeSnippet": "// frmPlanCardTimeDeal.xfdl\nthis.fnTimeDealTimeCalculator = function() {\n    var remainTime = this.gfnGetDiffTime(this.fvEndTime);\n    this.staTimer.set_text(remainTime);\n};",
-          "warnings": "서버 타임과 클라이언트 타임의 오차가 발생하지 않도록 넥사크로 시스템 로컬 타임이 아닌 API 호출 기반 서버 타임을 기준으로 동작해야 합니다."
-        },
-        "FCFS_CPN": {
-          "cardKey": "FCFS_CPN",
-          "name": "선착순 쿠폰",
-          "category": "PROMOTION",
-          "sourceFile": "frmPlanCardFCFSCoupon.xfdl",
-          "moduleCode": "MD3",
-          "desc": "고객이 특정 시간에 선착순으로 직접 클릭하여 획득하는 마케팅 특화용 쿠폰 기능입니다.",
-          "layoutDescription": "남은 쿠폰 수량 상태바와 다운로드 버튼이 연동되어 활성/비활성화 상태를 실시간 시각화합니다.",
-          "backendSettings": [
-            { "field": "캠페인 번호", "id": "CAMPAIGN_NO", "type": "Integer (필수)", "desc": "다운로드 작동 시 정수 처리를 위해 이벤트 캠페인 번호 및 한도 수량을 백엔드와 사전 매핑합니다." }
-          ],
-          "codeSnippet": "// frmPlanCardFCFSCoupon.xfdl\nthis.btnDownload_onclick = function(obj:nexacro.Button, e:nexacro.ClickEventInfo) {\n    this.gfnTransaction(\"downloadCoupon\", \"/promotion/coupon/download\", inData, outData);\n};",
-          "warnings": "중복 클릭 및 불법 자동 매크로를 대비하여 다중 트랜잭션을 제한하고 한도 수량 소진 시 다운로드 클릭이 즉각 클라이언트 단에서도 차단될 수 있도록 에러 트랜잭션을 꼼꼼히 잡아야 합니다."
-        },
-        "NAVI": {
-          "cardKey": "NAVI",
-          "name": "네비게이션",
-          "category": "NAV",
-          "sourceFile": "frmPlanCardNavigation.xfdl (어드민) / Navigation.tsx (프론트)",
-          "moduleCode": "MD13",
-          "desc": "기획전 내부의 특정 섹션이나 상품 코너 영역으로 스크롤 이동을 돕는 유기적인 스크롤 앵커 메뉴바 컴포넌트입니다.",
-          "layoutDescription": "PC 및 모바일의 사용자 화면에서 상단 고정(Sticky) 형태로 작동하며, 사용자가 메뉴명 클릭 시 해당 카드가 노출되는 본문 위치로 부드러운 애니메이션 효과와 함께 자동 스크롤 앵커 포커싱이 수행됩니다. 모바일에서는 가로 드래그 스크롤링 형태의 1단 스크롤 또는 바둑판 배열의 2단 고정 형태로 레이아웃 분기가 처리됩니다.",
-          "backendSettings": [
-            { "field": "메뉴 유형", "id": "LCTI_PATH_DIV_VAL", "type": "Combo (C/P)", "desc": "C: 카드형 (기획전 내 등록된 특정 카드를 타겟팅) / P: 상품형 (등록된 코너 상품 영역을 타겟팅)을 선택 매핑합니다." },
-            { "field": "PC메뉴 넓이", "id": "WIDE_YN", "type": "Radio (Y/N)", "desc": "N: 기본형 (1240px 너비로 본문 중앙에 제한) / Y: 와이드형 (1920px 전체 폭으로 꽉 차게 확장 렌더링)을 설정합니다." },
-            { "field": "네비게이션 형태", "id": "LCTI_PATH_LINE_TYPE_VAL", "type": "Radio (1/2)", "desc": "1: 1단 스크롤형 (개수 제한 없이 가로 스크롤링 메뉴바 작동) / 2: 2단 고정형 (5~8개 전용 바둑판 고정 배열로 노출)을 지정합니다." }
-          ],
-          "codeSnippet": "// frmPlanCardNavigation.xfdl.js - 2단 고정 형태 검증 및 메뉴명 Byte 제한 일부\nthis.checkValidation = function() {\n    var chkVal = 0;\n    var gridVal = this.dsCardMenuList.rowcount > 0 ? this.divCardNavi.form.grdCardList : this.divCornerNavi.form.grdCornerList;\n    var chkCnt = 0;\n    var overCnt = 0;\n    var bindDs = gridVal.getBindDataset();\n    \n    for(var i=0; i < bindDs.rowcount; i++){\n        if(bindDs.getColumn(i, \"USE_YN_CHK\") == 1){\n            chkCnt += 1;\n            if(this.asciiByteCount(bindDs.getColumn(i, \"MENU_NM\")) > 10) overCnt += 1;\n        }\n    }\n    \n    if((this.divCardNavi.form.rdoNaviDispType.value == 2 || this.divCornerNavi.form.rdoNaviDispType.value == 2) && (chkCnt < 5 || chkCnt > 8)) {\n        this.gfnMessage(\"2단 고정 형태는 메뉴 5개 이상 ~ 8개 이하로만 등록할 수 있습니다.\", \"A\");\n        return false;\n    }\n    if((this.divCardNavi.form.rdoNaviDispType.value == 2 || this.divCornerNavi.form.rdoNaviDispType.value == 2) && overCnt > 0) {\n        this.gfnMessage(\"2단 고정 형태는 메뉴명이 한글 기준 5자, 영문기준 10자 이내로만 가능합니다\", \"A\");\n        return false;\n    }\n    return true;\n};",
-          "warnings": "1. [2단 고정 제약] 2단 고정 네비게이션 적용 시 메뉴 개수가 무조건 5개 이상 8개 이하여야 저장이 가능하며, 그 외 수량 범위에서는 어드민 검증에 걸려 저장이 원천 거부됩니다.\n2. [글자 수 자동 잘림 경고] 메뉴명은 10byte(한글 5자, 영문 10자)를 1byte라도 초과할 시, 넥사크로 UI 및 프론트 레이아웃 깨짐을 방어하기 위해 입력한 텍스트가 자동으로 잘려 저장이 초기화되니 등록 전 글자 수를 사전에 확인해야 합니다.\n3. [코너 상품 필수성] 상품형(P) 네비게이션을 활성화하려면 기획전 내에 상품 코너 카드가 사전에 반드시 구성 및 저장되어 있어야 매핑이 가능합니다.",
-          "qtyGuidelines": {
-            "tabMin": "최소 5개 (2단 고정 시)",
-            "tabMax": "최대 8개 (2단 고정 시) *1단 스크롤 무제한",
-            "prodMin": "최대 10byte (한글 5자)",
-            "prodMax": "최대 10byte (영문 10자) *2단 고정 메뉴명에 적용",
-            "adminValidation": "2단 고정(2) 형태를 세팅할 경우, 활성화된 메뉴(USE_YN_CHK) 개수가 5개 미만이거나 8개를 초과하면 Validation 반려가 수행됩니다. 또한, 2단 고정 메뉴명(MENU_NM)은 한글 기준 최대 5자(10byte)를 초과하여 저장할 시 UI 단에서 강제 차단 얼럿이 작동합니다. 1단 가로 스크롤형(1)은 별도의 수량 및 글자 수 Validation을 제한하지 않아 유연하게 사용 가능합니다."
-          }
-        },
-        "B_BENEFIT": {
-          "cardKey": "B_BENEFIT",
-          "name": "구매혜택",
-          "category": "PROMOTION",
-          "sourceFile": "frmPlanCardBenefitB.xfdl (어드민) / BuyBenefit.tsx (프론트)",
-          "moduleCode": "MD3",
-          "desc": "기획전 구매 금액대별 할인쿠폰 다운로드, 사은품 증정, 무료 선물포장 혜택, 추가 마일리지 적립 등 총 5가지 슬롯으로 다양한 고객 리워드를 구성하는 복합 프로모션 카드입니다.",
-          "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 최대 5개의 혜택 섹션을 질서정연하게 수직 배열합니다. 개별 혜택은 유형에 따라 쿠폰 Swiper 슬라이드 회전, 선물포장 단계별 안내 이미지 Swiper, 단색/라운드 액션 버튼(쿠폰 다운로드, URL 이동, 적립 안내 팝업) 등으로 구성되어 최상의 혜택 가시성을 사용자에게 선사합니다.",
-          "backendSettings": [
-            { "field": "혜택 분류 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (CPN/PRC/FCF/NOT/GFT/PRE/WEL/XXX)", "desc": "혜택을 부여할 유형(할인쿠폰, 쿠폰표현, 선착순쿠폰, 추가적립, 사은품, 선물하기, 웰컴쿠폰팩, 사용안함)을 매핑합니다." },
-            { "field": "쿠폰 표현 방식", "id": "CPN_DISP_TYPE_VAL", "type": "Radio (A/I)", "desc": "A: 자동표현 (DB에 매핑된 쿠폰 정보를 기반으로 템플릿화) / I: 이미지 표현 (PC/MO용 제작 이미지를 직접 업로드하여 노출) 중 선택합니다." },
-            { "field": "버튼 액션 유형", "id": "BTN_ACTN_TYPE_VAL", "type": "Combo (B/P/M)", "desc": "B: 쿠폰 다운로드 (로그인 및 API 연동) / P: 적립안내 팝업 노출 / M: URL 이동(랜딩 처리)을 설정합니다." },
-            { "field": "추가 적립율", "id": "editAccVal", "type": "Integer (NOT 전용)", "desc": "추가적립(NOT) 유형 시 기획전 대상 상품에 적용할 보조 적립율 수치입니다." },
-            { "field": "사은품 수량", "id": "editApplyCnt", "type": "Integer (GFT 전용)", "desc": "사은품 지급 선착순 대상 인원수 및 재고 한도를 설정합니다." },
-            { "field": "웰컴 기획전 번호", "id": "editExhbNo", "type": "Integer (WEL 전용)", "desc": "웰컴쿠폰팩과 매핑되어 버튼 클릭 시 이동할 고유 기획전 번호입니다." }
-          ],
-          "codeSnippet": "// BuyBenefit.tsx - Front-end React 쿠폰 다운로드 및 유형 분기 처리 일부\nconst handleBenefitClick = (e, benefit, order) => {\n  if (benefit.btnActnType === \"B\" && (benefit.bnftType === \"CPN\" || benefit.bnftType === \"FCF\")) {\n    if (isPreview) return;\n    if (!loginInfo.isLoginSuccess) {\n      LFAlert.alert(\"로그인 후 다운로드 가능합니다.\");\n    } else {\n      benefitMultiDown.mutate({ exhbNo: Number(exhbNo), bnftNo: Number(benefit.bnftNo), cardType });\n    }\n  }\n};",
-          "warnings": "1. [사은품/선물하기 이미지 필수] 사은품(GFT) 및 선물하기(PRE) 유형 세팅 시, 어드민 상에서 PC 및 MO 이미지가 모두 필수적으로 등록되어 있어야 Validation을 통과하여 저장이 가능합니다.\n2. [용량 규격 주의] 이미지 표현(I)을 적용하는 쿠폰 및 사은품/선물하기 이미지는 200KB 용량 제한 검증 규칙이 적용되어, 초과하는 경우 넥사크로 UI 단에서 업로드가 원천 차단됩니다.\n3. [쿠폰표현 PRC 성격] 쿠폰표현(PRC) 유형은 단순 시각적 안내가 목적이므로 버튼 액션(`BTN_ACTN_TYPE_VAL`)을 '사용안함(XX)'으로 지정하며 버튼이 렌더링되지 않습니다.",
-          "imageGuidelines": {
-            "pcSize": "1240px × (세로 높이 제한 없음)",
-            "moSize": "750px × (세로 높이 제한 없음) *스퀘어(1:1) 비율 권장",
-            "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-            "maxSize": "파일당 최대 200KB 이하",
-            "adminValidation": "사은품(GFT) 및 선물하기(PRE)는 PC/MO 이미지가 누락된 경우 저장 시 유효성 경고와 함께 저장이 거부됩니다. 쿠폰 이미지 표현(I) 시에도 PC/MO 이미지가 동시 필요하며, 파일별 200KB 용량 초과 업로드 시 넥사크로 스크립트에 의해 자동 차단 처리됩니다."
-          },
-          "qtyGuidelines": {
-            "tabMin": "최소 1개",
-            "tabMax": "최대 5개 (총 5개의 혜택 레이아웃 제공)",
-            "prodMin": "최소 1개",
-            "prodMax": "최대 150개 (개별 혜택 섹션에 연동 가능한 최대 쿠폰 수)",
-            "adminValidation": "구매혜택 카드는 한 화면 구좌 내에 최대 5개의 혜택 섹션(1st ~ 5th)을 구성해 저장이 가능합니다. 개별 혜택마다 최대 150개의 쿠폰 코드를 멀티 셀렉션하여 등록할 수 있는 어드민 팝업 제약(maxBenefitCnt: '150')이 존재합니다. 서브타이틀 50byte(한글 25자), 버튼명 40byte(한글 20자), 하단설명 100byte(한글 50자)를 초과하여 저장하려 할 경우 Byte Limit 초과 경고와 함께 저장이 원천 반려됩니다."
-          }
-        },
-        "ATTENTION": {
-          "cardKey": "ATTENTION",
-          "name": "유의사항",
-          "category": "NAV",
-          "sourceFile": "frmPlanCardNotice.xfdl (어드민) / Notice.tsx (프론트)",
-          "moduleCode": "MD10",
-          "desc": "기획전 하단부에 안정적으로 배치하여, 프로모션 대상 조건, 할인/마일리지 적립 한도 및 유효기간, 구매 취소 및 반품 관련 법적/행정적 유의조항들을 일목요연하게 안내하는 표준 약관 정보 카드입니다.",
-          "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 기획전 최하단에 배치되는 차분하고 정돈된 텍스트 목록입니다. 웅장한 타이포그래피 요소보다는 가독성을 저해하지 않는 미니멀한 규칙선을 바탕으로, 특수 기호(■, ●, *, -)가 목록의 최전단에 자동 정렬(Bullet padding)되도록 CSS flex-grid가 적용됩니다.",
-          "backendSettings": [
-            { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 Margin 여부" },
-            { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부 (기본값 Y)" },
-            { "field": "안내문구 작성", "id": "NOTICE_TEXT", "type": "String (RichText)", "desc": "사용자에게 전달할 유의사항 텍스트 본문입니다. HTML 에디터 기능을 통해 볼드, 폰트 컬러, 링크 등의 서식을 부분 지정하여 저장 가능합니다." }
-          ],
-          "codeSnippet": "// Notice.tsx - Front-end React 유의사항 파서 및 dangerouslySetInnerHTML 매핑 소스\nexport const Notice = ({ templateDetail }) => {\n  if (!templateDetail?.noticeText) return <></>;\n  \n  // XSS 공격 방어용 html sanitize 처리 적용\n  const sanitizedHtml = useMemo(() => {\n    return DOMPurify.sanitize(templateDetail.noticeText, {\n      ALLOWED_TAGS: ['p', 'span', 'strong', 'br', 'ul', 'li', 'a', 'font'],\n      ALLOWED_ATTR: ['href', 'target', 'style', 'color']\n    });\n  }, [templateDetail.noticeText]);\n\n  return (\n    <div className={styles.noticeContainer}>\n      <div\n        className={styles.noticeContent}\n        dangerouslySetInnerHTML={{ __html: sanitizedHtml }}\n      />\n    </div>\n  );\n};",
-          "warnings": "1. [용량 및 바이트 검증] 어드민(NBOS) 저장 시 `NOTICE_TEXT` 필드는 **최대 4000byte (한글 2000자)** 제한 조건이 존재합니다. HTML 서식 태그의 길이도 바이트 수에 전부 합산되므로, 에디터 서식을 과도하게 많이 적용할 경우 글자 수가 충분히 남았음에도 저장이 반려될 수 있으니 텍스트 위주 구성을 권장합니다.\n2. [XSS 보안 규정] 사용자 브라우저에 임의의 악성 스크립트가 로드되는 공격을 방지하기 위해 프론트 React 단에서는 반드시 **DOMPurify 등을 경유한 HTML Sanitize 처리**가 필수 적용되어 있어야 합니다.",
-          "qtyGuidelines": {
-            "tabMin": "해당 없음",
-            "tabMax": "해당 없음",
-            "prodMin": "최소 10자 이상 기입",
-            "prodMax": "최대 4000byte (한글 약 2000자 한도, HTML 태그 포함)",
-            "adminValidation": "본 유의사항 카드는 기획전 내 상품 등록 및 이미지 업로드 제약을 요구하지 않는 **순수 텍스트 안내 영역**입니다. 어드민(NBOS) 저장 시 본문(`NOTICE_TEXT`) 바이트 길이가 4000byte를 단 1바이트라도 초과할 경우 넥사크로 UI 및 서버 데이터바인더 단에서 SQL 문자열 길이 초과 오류와 함께 저장이 거부됩니다."
-          }
-        },
-        "COUNT": {
-          "cardKey": "COUNT",
-          "name": "카운트",
-          "category": "NAV",
-          "sourceFile": "frmPlanCardCountTime.xfdl (어드민) / CountTime.tsx (프론트)",
-          "moduleCode": "MD2",
-          "desc": "기획전 내에 실시간 디데이(D-Day) 및 시간/분/초 카운트다운 타이머를 구성하여, 타임특가 행사나 쿠폰 소진 임박 등의 마케팅적 긴박감을 조성하는 기능형 컴포넌트입니다.",
-          "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 지정된 종료 일시까지 실시간으로 차감되는 숫자판 위젯입니다. 어드민 스타일 설정에 따라, 일/시/분/초 숫자가 개별 박스(Flipboard 형태) 안에 강조되어 표시되는 **'박스형 레이아웃'**과 심플하게 텍스트로만 흐르는 **'플랫형 레이아웃'**으로 자동 분기됩니다. 타이머 상단에는 기획자가 커스텀 기입한 소제목(TMR_TITL_TEXT)이 표시됩니다.",
-          "backendSettings": [
-            { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 Margin 여부" },
-            { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부 (기본값 Y)" },
-            { "field": "타이머 상단 문구", "id": "TMR_TITL_TEXT", "type": "String (50byte 한도)", "desc": "카운트다운 숫자 바로 위에 배치할 설명 레이블입니다. (예: '타임특가 종료까지')" },
-            { "field": "카운트 시작 일시", "id": "TMR_STRT_DT", "type": "DateTime (필수)", "desc": "카운트다운 노출이 시작되는 일시입니다. (YYYY-MM-DD HH:mm:ss 포맷)" },
-            { "field": "카운트 종료 일시", "id": "TMR_END_DT", "type": "DateTime (필수)", "desc": "카운트다운이 00:00:00으로 종료되는 최종 타겟 일시입니다." },
-            { "field": "타이머 스타일", "id": "TMR_STYL_DIV_VAL", "type": "Combo (1/2)", "desc": "1: 모던 플립 박스형 / 2: 플랫 텍스트 나열형" },
-            { "field": "배경 색상코드", "id": "BKGD_CLR_VAL", "type": "Color Hex", "desc": "컴포넌트 배경 영역의 Hex 컬러 코드 값 (예: #000000)" },
-            { "field": "숫자색상코드", "id": "TMR_CLR_VAL", "type": "Color Hex", "desc": "타이머 숫자 및 텍스트의 Hex 컬러 코드 값 (예: #ffffff)" }
-          ],
-          "codeSnippet": "// CountTime.tsx - Front-end React 정밀 서버시간 동기화 카운트다운 컴포넌트 일부\nexport const CountTime = ({ templateDetail }) => {\n  const [remainTime, setRemainTime] = useState({ d: 0, h: 0, m: 0, s: 0 });\n  const timerRef = useRef<NodeJS.Timeout>();\n\n  useEffect(() => {\n    // 1. 디바이스 로컬 조작 시간을 방어하기 위한 API 서버 타임 획득\n    fetchServerTime().then((serverTime) => {\n      const targetTime = new Date(templateDetail.tmrEndDt).getTime();\n      let diff = Math.max(0, targetTime - serverTime);\n\n      timerRef.current = setInterval(() => {\n        diff = Math.max(0, diff - 1000);\n        if (diff <= 0) {\n          clearInterval(timerRef.current);\n          // 타임아웃 이벤트 콜백 실행 (기획전 영역 비활성화/노출 제외)\n          if (templateDetail.onTimeout) templateDetail.onTimeout();\n        }\n\n        const d = Math.floor(diff / (1000 * 60 * 60 * 24));\n        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));\n        const s = Math.floor((diff % (1000 * 60)) / 1000);\n        setRemainTime({ d, h, m, s });\n      }, 1000);\n    });\n    return () => clearInterval(timerRef.current);\n  }, [templateDetail.tmrEndDt]);\n\n  return (\n    <div style={{ backgroundColor: templateDetail.bkgdClr }}>\n      <FlipTimer remain={remainTime} title={templateDetail.tmrTitlText} color={templateDetail.tmrClr} />\n    </div>\n  );\n};",
-          "warnings": "1. [정밀 시각 D-Day 동기성] 기획전 특가 유입 유도를 위한 컴퓨터 시계 수정을 방어하기 위해, 디바이스의 로컬 시간 new Date()를 배제하고 API 서버 응답 시각 동기화를 활용하여 가상 틱을 구동하도록 프론트 설계가 유지되어야 합니다.\n2. [날짜 논리 오류 예방] 시작 일시가 종료 일시보다 미래일 경우 저장 유효성 검사 규칙에 의해 저장이 반려되며 프론트 렌더링 시 강제로 00:00:00 종료 포맷으로 강제 차단됩니다.",
-          "qtyGuidelines": {
-            "tabMin": "해당 없음",
-            "tabMax": "해당 없음",
-            "prodMin": "최소 1자 이상 기입",
-            "prodMax": "최대 50byte (한글 약 25자 한도, 소제목 명칭에 적용)",
-            "adminValidation": "본 카드는 상품 전시나 직접적인 이미지 업로드를 요구하지 않는 기능형 순수 정보 컴포넌트입니다. 어드민(NBOS) 저장 시 시작 일시(TMR_STRT_DT)가 종료 일시(TMR_END_DT)보다 1초라도 미래인 논리적 오류가 감지되면 저장 유효성 검증 단에서 차단 메시지와 함께 저장이 거부됩니다."
-          }
-        },
-        "P_BENEFIT": {
-          "cardKey": "P_BENEFIT",
-          "name": "결제혜택",
-          "category": "PROMOTION",
-          "sourceFile": "frmPlanCardBenefitP.xfdl (어드민) / PayBenefit.tsx (프론트)",
-          "moduleCode": "MD3",
-          "desc": "기획전 내에 제휴 신용카드사 및 간편결제사별 즉시할인, 청구할인, 무이자 할부 등의 실질 결제 단계 리워드 명세를 일목요연한 카드 그리드 형태로 제공하는 마케팅 특화용 컴포넌트입니다.",
-          "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 깔끔하게 정돈된 제휴사별 전용 카드 디자인 그리드로 노출됩니다. 각 카드는 제휴사의 상징 로고 배지, 혜택 유형 배지(즉시할인/청구할인/무이자 등), 그리고 핵심 혜택 강조 텍스트(예: '7% 즉시할인')를 내포하며, 하단에는 최소 적용 금액 및 최대 할인 한도 요건이 럭셔리한 구조로 기입됩니다. 등록 슬롯이 4개 이상으로 늘어날 경우 프론트에서 자동으로 스와이프 가능한 회전 캐러셀로도 구동이 전환됩니다.",
-          "backendSettings": [
-            { "field": "제휴사 구분", "id": "CARD_CO_DIV_VAL", "type": "Combo (S402 공통코드)", "desc": "KB국민, 신한, 삼성, 현대, 비씨, 우리 등 제휴사 코드를 바인딩합니다." },
-            { "field": "혜택 적용 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (C/D/P/N)", "desc": "C: 청구할인 / D: 즉시할인 / P: 포인트적립 / N: 무이자할부 중 선택 매핑합니다." },
-            { "field": "최소 기준금액", "id": "MIN_APLI_PRC", "type": "Integer (필수)", "desc": "혜택을 받기 위한 최소 실 결제 금액을 입력합니다. (예: 50,000)" },
-            { "field": "최대 할인한도", "id": "MAX_LIMIT_PRC", "type": "Integer (필수)", "desc": "1회 결제 시 적용되는 최대 혜택 한도 액수입니다. (예: 30,000)" },
-            { "field": "할인율 또는 할인액", "id": "DISC_RATE / DISC_AMT", "type": "Float / Integer", "desc": "할인 적용될 비율(%) 혹은 할인 고정 금액(₩)을 지정합니다." },
-            { "field": "혜택 상세설명", "id": "BNFT_DSCR", "type": "String (200byte 한도)", "desc": "제외 상품군 및 추가 조건에 대해 적는 설명 문구입니다." }
-          ],
-          "codeSnippet": "// PayBenefit.tsx - Front-end React 결제혜택 카드사별 그라데이션 및 뱃지 분기 연동 일부\nexport const PayBenefit = ({ benefitList }) => {\n  return (\n    <div className={styles.payBenefitGrid}>\n      {benefitList.map((item) => (\n        <div key={item.benefitId} className={styles.benefitCard}>\n          <div className={styles.cardHeader}>\n            <span className={styles.coLogo}>{item.cardCoNm}</span>\n            <span className={styles.typeBadge}>{item.bnftType === 'C' ? '청구할인' : '즉시할인'}</span>\n          </div>\n          <h3 className={styles.discountText}>{item.discRate}% {item.bnftType === 'C' ? '청구할인' : '즉시할인'}</h3>\n          <p className={styles.limitInfo}>{item.minApliPrc.toLocaleString()}원 이상 결제 시 (최대 {item.maxLimitPrc.toLocaleString()}원)</p>\n          {item.bnftDscr && <p className={styles.descText}>{item.bnftDscr}</p>}\n        </div>\n      ))}\n    </div>\n  );\n};",
-          "warnings": "1. [자수 초과 경고] 혜택 상세설명(`BNFT_DSCR`)은 최대 200byte (한글 100자) 이내여야 하며, 초과 입력 후 어드민 저장 시 넥사크로 UI 및 트랜잭션 에러에 의해 저장이 자동으로 반려됩니다.\n2. [금액 검증 규정] 최소 기준금액(`MIN_APLI_PRC`)은 무조건 0원 이상이어야 하며, 최대 할인 한도 및 할인 적용률 중 하나도 비어 있으면 저장이 완료되지 않습니다.",
-          "qtyGuidelines": {
-            "tabMin": "최소 1개",
-            "tabMax": "최대 12개 (초과 등록 시 스와이프 회전 캐러셀 전환)",
-            "prodMin": "최소 1자 이상 기입",
-            "prodMax": "최대 200byte (한글 약 100자 한도, 상세설명 필드)",
-            "adminValidation": "본 카드는 상품의 직접적인 이미지 매핑을 요구하지 않는 순수 결제 혜택 메타정보 전시 컴포넌트입니다. 어드민(NBOS) 저장 시 최소 적용 금액(MIN_APLI_PRC)이 누락되었거나 할인 정보(DISC_RATE 또는 DISC_AMT)가 없는 경우 유효성 에러와 함께 트랜잭션 저장이 전면 반려됩니다. 한 구좌당 등록 가능한 카드 혜택 데이터는 최소 1개에서 최대 12개까지로 규정되어 있습니다."
-          }
-        }
-      };
-
-      // 2. Wireframes Fallback (완벽한 로컬 CORS 에러 대응 39종 전체 와이어프레임 셋 탑재)
-      wireframes = {
-        "TAB_CONTAINER": {
-          "moduleCode": "MD13",
-          "wireframeHtml": "<div style='border: 1px solid var(--hairline); background: var(--canvas-white); overflow: hidden; font-family: &quot;Inter&quot;, sans-serif; box-shadow: 0 12px 30px rgba(0,0,0,0.02);'><div style='text-align: center; padding: 24px 16px 12px 16px;'><span style='font-size: 11px; font-weight: 600; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;' class='mono-label'>SEASON EDITORIAL</span><h2 style='font-size: 24px; font-weight: 700; margin: 4px 0 0 0; color: var(--near-black); letter-spacing: -0.5px;'>SUMMER COLLECTION</h2></div><div style='display: flex; border-bottom: 1px solid var(--hairline); background: #fafafa; position: sticky; top: 0; z-index: 10;'><div style='flex: 1; padding: 14px 8px; text-align: center; font-size: 13px; font-weight: 700; color: var(--near-black); border-bottom: 2px solid var(--near-black); cursor: pointer;'>BEST</div><div style='flex: 1; padding: 14px 8px; text-align: center; font-size: 13px; font-weight: 400; color: var(--slate); cursor: pointer;'>신상품</div><div style='flex: 1; padding: 14px 8px; text-align: center; font-size: 13px; font-weight: 400; color: var(--slate); cursor: pointer;'>스타일링</div></div><div style='padding: 16px;'><div style='width: 100%; height: 120px; background: url(&quot;https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80&quot;) center/cover no-repeat; border-radius: 8px; margin-bottom: 16px; position: relative;'><div style='position: absolute; inset: 0; background: rgba(0,0,0,0.25); border-radius: 8px; display: flex; align-items: center; padding: 20px;'><span style='color: white; font-size: 16px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3);'>여름 아우터 30% 특가전</span></div></div><div style='display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;'><div style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>HAZZYS</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>린넨 셔츠</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>35%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩89k</span></div></div></div><div style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>DAKS</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>실크 머플러</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>20%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩120k</span></div></div></div><div style='background: var(--canvas-white); border-radius: 6px; overflow: hidden;'><div style='width: 100%; height: 110px; background: url(&quot;https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=300&q=80&quot;) center/cover no-repeat; border-radius: 6px;'></div><div style='padding: 6px 2px;'><div style='font-size: 9px; font-weight: 700; color: var(--muted-slate); text-transform: uppercase;'>ATHE</div><div style='font-size: 10px; font-weight: 500; color: var(--near-black); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-top: 2px;'>플라워 원피스</div><div style='display: flex; align-items: baseline; gap: 4px; margin-top: 2px;'><span style='font-size: 11px; font-weight: bold; color: var(--coral);'>40%</span><span style='font-size: 11px; font-weight: bold; color: var(--near-black);'>₩189k</span></div></div></div></div><div style='margin-top: 20px; text-align: center;'><span style='display: inline-block; width: 100%; max-width: 160px; padding: 10px 0; background: var(--near-black); color: var(--canvas-white); border-radius: 30px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; text-transform: uppercase;'>MORE PRODUCTS &rarr;</span></div></div></div>"
-        },
-        "TOP_BANNER": {
-          "moduleCode": "MD1",
-          "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; background: var(--near-black); padding: 48px; color: var(--canvas-white); position: relative; overflow: hidden; text-align: center;'><div style='position: relative; z-index: 2;'><span style='background: var(--coral); color: var(--canvas-white); font-size: 11px; padding: 4px 8px; border-radius: 20px;' class='mono-label'>SEASON OFF</span><h2 style='font-size: 32px; margin-top: 12px; font-weight: bold; color: var(--canvas-white);'>LFmall SUMMER BLACK FRIDAY</h2><p style='color: var(--muted-slate); font-size: 14px; margin-top: 8px;'>최대 70% 특가 및 카드사 즉시 할인 혜택</p><div style='margin-top: 20px;'><span style='display: inline-block; padding: 10px 20px; background: var(--canvas-white); color: var(--cohere-black); border-radius: 30px; font-size: 12px; font-weight: 500;'>쿠폰팩 받기</span></div></div><div style='position: absolute; right: 20px; bottom: 20px; font-size: 12px; color: var(--muted-slate);'>1 / 5 &rarr;</div></div>"
-        },
-        "T_DEAL": {
-          "moduleCode": "MD6",
-          "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; background: var(--canvas-white); padding: 24px;'><div style='display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--hairline); padding-bottom: 12px; margin-bottom: 20px;'><div style='display: flex; align-items: center; gap: 12px;'><h4 style='font-size: 18px; font-weight: bold; margin: 0;'>TODAY\\'S SPECIAL L-DEAL</h4><span style='background: var(--cohere-black); color: var(--canvas-white); padding: 4px 8px; border-radius: 4px; font-size: 11px;' class='mono-label'>02:45:12 남음</span></div><a href='#' style='font-size: 12px; color: var(--action-blue); text-decoration: none;'>전체보기</a></div><div style='display: grid; grid-template-columns: 150px 1fr; gap: 20px; border: 1px solid var(--border-light); padding: 16px; border-radius: 8px;'><div style='background: var(--soft-stone); height: 150px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--slate);'>DEAL IMAGE</div><div><span style='color: var(--slate); font-size: 12px;'>[스페셜 타임세일]</span><h5 style='font-size: 16px; font-weight: 500; margin-top: 4px;'>피아제 클래식 메탈 시계</h5><p style='font-size: 13px; color: var(--slate); margin-top: 4px;'>단 24시간 제공되는 단독 할인가 구좌</p><div style='margin-top: 16px; display: flex; align-items: baseline; gap: 8px;'><span style='font-size: 20px; font-weight: bold; color: var(--coral);'>45%</span><span style='font-size: 20px; font-weight: bold;'>₩ 380,000</span><span style='font-size: 13px; color: var(--muted-slate); text-decoration: line-through;'>₩ 690,000</span></div><div style='margin-top: 12px; background: #e5e7eb; height: 6px; border-radius: 3px; position: relative;'><div style='background: var(--coral); width: 82%; height: 6px; border-radius: 3px;'></div></div><div style='font-size: 11px; color: var(--slate); margin-top: 4px;'>현재 82% 판매 완료 (잔여 수량 소량!)</div></div></div></div>"
-        },
-        "FCFS_CPN": {
-          "moduleCode": "MD3",
-          "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 8px; background: var(--pale-green); padding: 32px; display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--enterprise-green);'><div style='max-width: 70%;'><span style='color: var(--enterprise-green); font-size: 11px;' class='mono-label'>DAILY BENEFITS</span><h4 style='font-size: 20px; font-weight: bold; margin-top: 4px; color: var(--enterprise-green);'>선착순 10,000원 앱 전용 장바구니 쿠폰</h4><p style='font-size: 13px; color: var(--slate); margin-top: 4px;'>매일 오전 10시 선착순 다운로드 (5만원 이상 결제 시 적용 가능)</p><div style='margin-top: 12px; font-size: 12px; color: var(--enterprise-green); font-weight: 500;'>잔여 수량: 3,452장 / 10,000장</div></div><div><button style='background: var(--near-black); color: var(--canvas-white); border: none; padding: 14px 28px; border-radius: 30px; font-size: 13px; font-weight: bold; cursor: pointer; transition: background 0.2s;'>쿠폰 받기</button></div></div>"
-        },
-        "BANNER": {
-          "moduleCode": "MD12",
-          "wireframeHtml": "<div style='border: 1px solid var(--hairline); border-radius: 20px; background: var(--canvas-white); padding: 24px 16px; color: var(--ink); position: relative; overflow: hidden; display: flex; flex-direction: column; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.02);'><div style='text-align: center; margin-bottom: 24px;'><h2 style='margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; align-items: center;'><p style='font-family: &quot;Space Grotesk&quot;, sans-serif; font-size: 34px; font-weight: 500; line-height: 41px; letter-spacing: -1px; color: var(--cohere-black); margin: 0;'>TITLE</p><span style='font-family: &quot;Inter&quot;, sans-serif; font-size: 15px; font-weight: 200; letter-spacing: -0.1px; line-height: 19px; color: var(--slate);'>DESCRIPTION</span></h2></div><div style='width: 100%; height: 260px; background: url(&quot;https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80&quot;) center/cover no-repeat; position: relative; border-radius: 12px; overflow: hidden;'><div style='position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;'><span style='width: 8px; height: 8px; background: var(--near-black); border-radius: 50%;'></span><span style='width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);'></span><span style='width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);'></span><span style='width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);'></span></div></div><div style='margin-top: 20px; width: 100%; display: flex; justify-content: center;'><span style='display: inline-block; width: 100%; max-width: 180px; padding: 12px 0; background: var(--near-black); color: var(--canvas-white); border-radius: 30px; font-family: &quot;Inter&quot;, sans-serif; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>BUTTON</span></div></div>"
-        },
-        "B_BENEFIT": {
-          "moduleCode": "MD3",
-          "wireframeHtml": "<div style='background-color: var(--canvas-white); color: var(--near-black); width: 100%; border: 1px solid var(--hairline); border-radius: 12px; overflow: hidden; font-family: \"Inter\", sans-serif; box-shadow: 0 8px 24px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 40px;'><div style='text-align: center; padding: 32px 16px 0 16px;'><span style='background: var(--near-black); color: var(--canvas-white); font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px;' class='mono-label'>PLANNING BENEFIT</span><h3 style='font-size: 24px; font-weight: 700; margin: 12px 0 4px 0; color: var(--near-black); letter-spacing: -0.5px;'>기획전 구매혜택</h3><p style='color: var(--slate); font-size: 13px; margin: 0;'>오직 LFmall 고객님을 위한 3대 스페셜 혜택</p></div><div style='padding: 0 20px;'><span style='display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; margin: 0 auto 12px; border-radius: 50%; background-color: var(--near-black); color: var(--canvas-white); font-size: 15px; font-weight: 600;'>1</span><h4 style='font-size: 15px; font-weight: 500; text-align: center; margin: 0 0 16px 0; color: var(--near-black);'>다운로드 즉시 사용 가능한 전용 쿠폰</h4><div style='position: relative; max-width: 292px; height: 146px; margin: 0 auto; background: #000000; border-radius: 8px; overflow: hidden; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;'><div style='text-align: left;'><div style='color: #ffffff; font-size: 40px; font-weight: 300; font-family: \"Inter\", sans-serif; line-height: 1; letter-spacing: -1px;'>20%</div></div><div style='text-align: left;'><div style='font-size: 10px; color: rgba(255, 255, 255, 0.6); margin-bottom: 2px;'>일반쿠폰</div><div style='font-size: 11px; color: #ffffff; font-weight: 500;'>20만원 이상 구매 시</div></div><div style='position: absolute; right: 54px; top: -6px; width: 12px; height: 6px; background-color: var(--canvas-white); border-radius: 0 0 6px 6px; z-index: 2;'></div><div style='position: absolute; right: 54px; bottom: -6px; width: 12px; height: 6px; background-color: var(--canvas-white); border-radius: 6px 6px 0 0; z-index: 2;'></div><div style='position: absolute; right: 59px; top: 12px; bottom: 12px; border-left: 1px dashed rgba(255, 255, 255, 0.2); z-index: 1;'></div><div style='position: absolute; right: 0; top: 0; bottom: 0; width: 60px; display: flex; align-items: center; justify-content: center; z-index: 1;'><div style='transform: rotate(-90deg); color: rgba(255, 255, 255, 0.5); font-family: monospace; font-size: 11px; font-weight: bold; letter-spacing: 1.5px; white-space: nowrap;'>l.l:mall</div></div></div><div style='display: flex; gap: 8px; justify-content: center; align-items: center; margin-top: 12px;'><span style='width: 1px; height: 6px; background: rgba(0,0,0,0.3);'></span><span style='width: 5px; height: 5px; background: #000000; border-radius: 50%;'></span><span style='width: 1px; height: 6px; background: rgba(0,0,0,0.3);'></span><span style='width: 1px; height: 6px; background: rgba(0,0,0,0.3);'></span></div><a href='#' onclick='return false;' style='display: block; width: 292px; margin: 20px auto 0; background-color: var(--near-black); color: var(--canvas-white); border-radius: 2px; line-height: 56px; text-align: center; text-decoration: none; font-size: 15px; font-weight: 600;'>쿠폰팩 전체 다운로드</a><p style='font-size: 13px; color: var(--slate); text-align: center; margin: 16px 0 0 0;'>ID당 1회 다운로드 및 발급일로부터 7일간 사용 가능</p></div><div style='background-color: #262626; color: var(--canvas-white); padding: 40px 20px; display: flex; flex-direction: column; align-items: center;'><span style='display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; margin: 0 auto 12px; border-radius: 50%; background-color: var(--canvas-white); color: #262626; font-size: 15px; font-weight: 700;'>2</span><h4 style='font-size: 15px; font-weight: 500; text-align: center; margin: 0 0 24px 0; color: var(--canvas-white);'>품격 있는 선물을 위한 무료 선물포장</h4><div style='display: flex; gap: 8px; width: 100%; max-width: 320px; justify-content: space-between;'><div style='flex: 1; text-align: center;'><img src='https://img.lfmall.co.kr/file/WAS/display/images/m/step01_new.png' style='width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);' alt='STEP1'><span style='display: block; font-size: 10px; font-weight: 700; color: var(--coral); margin-top: 8px;'>STEP 1</span><p style='font-size: 9px; color: #ccc; margin: 2px 0 0 0; line-height: 1.3;'>무료 선물포장<br>안내 문구 확인</p></div><div style='flex: 1; text-align: center;'><img src='https://img.lfmall.co.kr/file/WAS/display/images/m/step02_new.png' style='width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);' alt='STEP2'><span style='display: block; font-size: 10px; font-weight: 700; color: var(--coral); margin-top: 8px;'>STEP 2</span><p style='font-size: 9px; color: #ccc; margin: 2px 0 0 0; line-height: 1.3;'>구매 시 희망하는<br>선물포장 옵션 선택</p></div><div style='flex: 1; text-align: center;'><img src='https://img.lfmall.co.kr/file/WAS/display/images/m/step03_new.png' style='width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);' alt='STEP3'><span style='display: block; font-size: 10px; font-weight: 700; color: var(--coral); margin-top: 8px;'>STEP 3</span><p style='font-size: 9px; color: #ccc; margin: 2px 0 0 0; line-height: 1.3;'>주문서에서 확인 후<br>주문 완료</p></div></div><a href='#' onclick='return false;' style='display: block; width: 292px; margin: 24px auto 0; border: 1px solid var(--canvas-white); background-color: transparent; color: var(--canvas-white); border-radius: 2px; line-height: 46px; text-align: center; text-decoration: none; font-size: 15px; font-weight: 500;'>선물하기 추천 기획전 바로가기</a><p style='font-size: 13px; color: #ccc; text-align: center; margin: 16px 0 0 0;'>포장 스펙은 브랜드 사정에 따라 다를 수 있습니다.</p></div><div style='padding: 0 20px 40px 20px;'><span style='display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; margin: 0 auto 12px; border-radius: 50%; background-color: var(--near-black); color: var(--canvas-white); font-size: 15px; font-weight: 600;'>3</span><h4 style='font-size: 15px; font-weight: 500; text-align: center; margin: 0 0 16px 0; color: var(--near-black);'>구매 금액대별 프리미엄 사은 기프트</h4><div style='position: relative; width: 292px; margin: 0 auto;'><img src='https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80' style='display: block; width: 100%; border-radius: 4px;' alt='사은품 이미지'><span style='position: absolute; top: 16px; right: 16px; display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; border-radius: 50%; background-color: var(--near-black); color: var(--canvas-white); font-size: 14px; font-weight: 600;'>100명</span></div><a href='#' onclick='return false;' style='display: block; width: 292px; margin: 24px auto 0; background-color: var(--near-black); color: var(--canvas-white); border-radius: 2px; line-height: 56px; text-align: center; text-decoration: none; font-size: 15px; font-weight: 600;'>대상 사은품 혜택 상세 확인</a><p style='font-size: 13px; color: var(--slate); text-align: center; margin: 16px 0 0 0;'>기획전 대상 브랜드 합산 10만원 이상 결제 고객 한정</p></div></div>"
-        },
-        "ATTENTION": {
-          "moduleCode": "MD10",
-          "wireframeHtml": "<div class='lfmall-notice-acc' style='border: 1px solid #d2d2d2; font-family: &quot;Inter&quot;, sans-serif; overflow: hidden; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.02);'><style>.lfmall-notice-acc .header { display: flex; justify-content: center; align-items: center; gap: 6px; background-color: #cccccc; color: #222222; padding: 14px; font-size: 13px; font-weight: bold; cursor: pointer; user-select: none; transition: background-color 0.2s; }.lfmall-notice-acc .header:hover { background-color: #c0c0c0; }.lfmall-notice-acc .body { background-color: #eeeeee; padding: 24px; transition: max-height 0.3s ease-out, padding 0.3s ease-out; overflow: hidden; max-height: 1000px; display: block; box-sizing: border-box; }.lfmall-notice-acc.collapsed .body { max-height: 0; padding-top: 0; padding-bottom: 0; display: none; }.lfmall-notice-acc .sub-title { font-size: 14px; font-weight: 700; color: #111111; margin: 0 0 16px 0; letter-spacing: -0.2px; }.lfmall-notice-acc .list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }.lfmall-notice-acc .item { font-size: 11.5px; line-height: 1.6; color: #444444; position: relative; padding-left: 0px; }</style><div class='header' onclick='const acc=this.closest(&quot;.lfmall-notice-acc&quot;); const arrow=this.querySelector(&quot;.arrow&quot;); acc.classList.toggle(&quot;collapsed&quot;); if(acc.classList.contains(&quot;collapsed&quot;)){ arrow.innerText=&quot;∨&quot;; }else{ arrow.innerText=&quot;∧&quot;; }'><span>유의사항</span><span class='arrow' style='font-size: 10px; transition: transform 0.2s;'>∧</span></div><div class='body'><h4 class='sub-title'>선착순 7% 쿠폰 증정</h4><ul class='list'><li class='item'>본 혜택은 LFmall 가입 고객에 한하여 ID 당 1일 1회 다운로드 가능합니다.</li><li class='item'>5% 플러스 쿠폰은 전체 금액 상품에 사용 가능합니다.</li><li class='item'>본 쿠폰은 플러스쿠폰으로 상품쿠폰과 중복적용 가능하며, 기획전 대상 상품에 한하여 사용 가능합니다. (일부 상품은 쿠폰 적용 불가)</li><li class='item'>다운로드 받으신 쿠폰은 발급 당일 자정까지 사용 가능하며, 유효기간 만료로 소멸된 쿠폰은 사용이 불가합니다.</li><li class='item'>취소/반품 시 사용한 쿠폰은 소멸됩니다.</li><li class='item'>본 혜택은 당사 사정에 따라 사전 고지없이 변경 혹은 중단될 수 있습니다.</li></ul></div></div>"
-        },
-        "P_BENEFIT": {
-          "moduleCode": "MD3",
-          "wireframeHtml": "<div class='lfmall-pay-benefit' style='background: var(--canvas-white); border: 1px solid var(--hairline); border-radius: 12px; padding: 28px 20px; font-family: \"Inter\", sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,0.02);'><style>.lfmall-pay-benefit .title-box { text-align: center; margin-bottom: 24px; }.lfmall-pay-benefit .card-grid { display: grid; gap: 16px; }.desktop-mockup .lfmall-pay-benefit .card-grid { grid-template-columns: repeat(2, 1fr) !important; }.phone-mockup .lfmall-pay-benefit .card-grid { grid-template-columns: 1fr !important; }.lfmall-pay-benefit .pay-card { border-radius: 8px; padding: 20px; color: var(--canvas-white); display: flex; flex-direction: column; justify-content: space-between; height: 160px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s; cursor: pointer; }.lfmall-pay-benefit .pay-card:hover { transform: translateY(-2px); }.lfmall-pay-benefit .pay-card.kb { background: linear-gradient(135deg, #4d443a 0%, #1e1b18 100%); border-left: 4px solid #ffbc00; }.lfmall-pay-benefit .pay-card.sh { background: linear-gradient(135deg, #0f2e6b 0%, #051330 100%); border-left: 4px solid #0054ff; }.lfmall-pay-benefit .card-head { display: flex; justify-content: space-between; align-items: center; }.lfmall-pay-benefit .co-logo { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; opacity: 0.9; text-transform: uppercase; }.lfmall-pay-benefit .type-badge { font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 20px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #ffffff; }.lfmall-pay-benefit .benefit-val { font-size: 22px; font-weight: 800; margin-top: 14px; letter-spacing: -0.5px; }.lfmall-pay-benefit .cond-info { font-size: 11.5px; opacity: 0.75; margin-top: 4px; line-height: 1.4; }.lfmall-pay-benefit .except-text { font-size: 9.5px; opacity: 0.5; margin-top: 12px; }</style><div class='title-box'><span style='background: var(--near-black); color: var(--canvas-white); font-size: 9px; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px;' class='mono-label'>PARTNER BENEFITS</span><h3 style='font-size: 20px; font-weight: 700; margin: 8px 0 2px 0; color: var(--near-black); letter-spacing: -0.5px;'>제휴 카드 결제 혜택</h3><p style='color: var(--slate); font-size: 12px; margin: 0;'>주문 결제 시 즉각 적용되는 결제사 즉시/청구 할인</p></div><div class='card-grid'><div class='pay-card kb'><div class='card-head'><span class='co-logo'>KB국민카드</span><span class='type-badge'>즉시할인</span></div><div><div class='benefit-val'>7% 즉시할인</div><div class='cond-info'>5만원 이상 결제 시 (최대 20,000원 할인)</div><div class='except-text'>* 가전, 골프웨어, 일부 직배송 및 기프트 상품 제외</div></div></div><div class='pay-card sh'><div class='card-head'><span class='co-logo'>신한카드</span><span class='type-badge'>청구할인</span></div><div><div class='benefit-val'>5% 청구할인</div><div class='cond-info'>7만원 이상 결제 시 (최대 30,000원 할인)</div><div class='except-text'>* 순금, 일부 명품 패션, 특가 핫딜 상품 제외</div></div></div></div></div>"
-        }
-      };
 
       // 만일 db.js 데이터도 없고 fetch도 전부 실패했다면 여기서 직접 local state를 할당하여 살립니다.
       if (!window.ExhibitionWireframes) {
@@ -1021,15 +749,45 @@
       const sidebarMenu = document.getElementById('sidebarMenu');
       sidebarMenu.innerHTML = '';
       
-      Object.keys(guides).forEach(key => {
-        const item = guides[key];
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#" data-card-key="${key}" onclick="switchGuide('${key}')">${item.cardKey} (${item.name})</a>`;
-        sidebarMenu.appendChild(li);
+      // Define category metadata matching list.html exactly
+      const categories = [
+        { code: 'BANNER', label: '배너/화보류' },
+        { code: 'PROD', label: '상품/딜류' },
+        { code: 'PROMOTION', label: '프로모션/이벤트류' },
+        { code: 'NAV', label: '네비게이션/기타' }
+      ];
+
+      categories.forEach(cat => {
+        // Find guides matching this category
+        const filteredKeys = Object.keys(guides).filter(key => guides[key].category === cat.code);
+        if (filteredKeys.length === 0) return;
+
+        // Create category wrapper
+        const catBlock = document.createElement('div');
+        catBlock.className = 'sidebar-category-block';
+
+        // Header
+        const catHeader = document.createElement('div');
+        catHeader.className = 'sidebar-category-title';
+        catHeader.innerHTML = `<span>${cat.label}</span><span class="sidebar-category-count">${filteredKeys.length}</span>`;
+        catBlock.appendChild(catHeader);
+
+        // List
+        const ul = document.createElement('ul');
+        filteredKeys.forEach(key => {
+          const item = guides[key];
+          const li = document.createElement('li');
+          // Format as "국문(영문)" with micro-key
+          li.innerHTML = `<a href="#" data-card-key="${key}" onclick="switchGuide('${key}'); return false;"><span>${item.name}</span><span class="card-key-badge">${item.cardKey}</span></a>`;
+          ul.appendChild(li);
+        });
+
+        catBlock.appendChild(ul);
+        sidebarMenu.appendChild(catBlock);
       });
     }
 
-    function switchGuide(cardKey) {
+    function switchGuide(cardKey, shouldPushState = true) {
       const links = document.querySelectorAll('aside a');
       links.forEach(link => {
         link.classList.remove('active');
@@ -1218,14 +976,26 @@
         `;
 
         // Update active URL parameter cleanly without page refresh (safe query update on both http and file protocols)
-        try {
-          const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?card=' + cardKey;
-          window.history.replaceState({ card: cardKey }, '', newUrl);
-        } catch (e) {
-          console.warn("URL update bypassed or failed due to environment constraints: ", e);
+        if (shouldPushState) {
+          try {
+            window.history.pushState({ card: cardKey }, '', '?card=' + cardKey);
+          } catch (e) {
+            console.warn("URL update bypassed or failed due to environment constraints: ", e);
+          }
         }
       }
     }
+
+    // 뒤로가기 / 앞으로가기 히스토리 브라우저 네비게이션 동기화 처리
+    window.addEventListener('popstate', (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cardParam = urlParams.get('card');
+      if (cardParam && guides[cardParam]) {
+        switchGuide(cardParam, false);
+      } else {
+        switchGuide('TAB_CONTAINER', false);
+      }
+    });
 
     function escapeHtml(text) {
       return text
