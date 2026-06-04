@@ -235,6 +235,59 @@ window.ExhibitionGuides = {
       "adminValidation": "구매혜택 카드는 한 화면 구좌 내에 최대 5개의 혜택 섹션(1st ~ 5th)을 구성해 저장이 가능합니다. 개별 혜택마다 최대 150개의 쿠폰 코드를 멀티 셀렉션하여 등록할 수 있는 어드민 팝업 제약(maxBenefitCnt: '150')이 존재합니다. 서브타이틀 50byte(한글 25자), 버튼명 40byte(한글 20자), 하단설명 100byte(한글 50자)를 초과하여 저장하려 할 경우 Byte Limit 초과 경고와 함께 저장이 원천 반려됩니다."
     }
   },
+  "M_BENEFIT": {
+    "cardKey": "M_BENEFIT",
+    "name": "마케팅혜택",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardBenefitM.xfdl (어드민) / MktBenefit.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "고객의 앱 수신 동의나 소셜 가입 및 개인정보 동의 등 마케팅 유도 장치들과 할인쿠폰 발급을 유기적으로 연동하여 마케팅 성과를 촉진하는 마케팅 특화용 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 메인 타이틀, 설명 문구와 함께 Swiper 형태 또는 세로 리스트 형태로 연동된 쿠폰 목록이 노출됩니다. 또한, 하단에는 마케팅 수신동의 및 개인정보 수집동의 체크박스가 배치되며, 동의 도움말 팝업(LfModal)이 제공됩니다. 쿠폰 받기 버튼 클릭 시 로그인 및 동의 완료 상태를 검증한 후 다중 쿠폰 다운로드를 일괄 처리합니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "마케팅 혜택 영역의 배경 컬러 코드입니다.Hex 패턴(#RRGGBB) 검증을 거치며 프론트에서는 8% 투명도로 연하게 적용됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부입니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부입니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부입니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부입니다." },
+      { "field": "상단 설명 문구", "id": "BNFT_HEDR_TEXT_VAL", "type": "String (50byte 한도)", "desc": "타이틀 위에 배치할 상단 설명 문구입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "BNFT_TITL", "type": "String (22byte 한도)", "desc": "마케팅 혜택 카드의 메인 타이틀입니다. 한글 기준 최대 11자 제한이 있습니다." },
+      { "field": "하단 설명 문구", "id": "BNFT_DSCR", "type": "String (50byte 한도)", "desc": "타이틀 아래에 노출될 하단 설명 문구입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "쿠폰 형태", "id": "CPN_DISP_TYPE_VAL", "type": "Radio (S/V)", "desc": "S: 스와이프 (Swiper 캐러셀 형태 롤링) / V: 리스트 (세로 배열형 나열) 형태로 쿠폰을 렌더링합니다." },
+      { "field": "전체 기간 조건", "id": "ALL_PERD_CNDT_USE_YN", "type": "Radio (Y/N)", "desc": "전체 기간 조건 사용 여부를 결정합니다." },
+      { "field": "전체 기간 조건 값", "id": "ALL_PERD_CNDT_VAL", "type": "Integer", "desc": "전체 기간 조건 활성화 시 구매이력이 없는 기간 수치(일수/년수 등)를 지정합니다." },
+      { "field": "전체 기간 조건 구분", "id": "ALL_PERD_CNDT_TYPE_VAL", "type": "Combo (Y/M/D)", "desc": "전체 기간 조건의 단위(Y: 년, M: 개월, D: 일)를 설정합니다." },
+      { "field": "최근 기간 조건", "id": "RCNT_PERD_CNDT_USE_YN", "type": "Radio (Y/N)", "desc": "최근 기간 조건 사용 여부를 결정합니다." },
+      { "field": "최근 기간 조건 값", "id": "RCNT_PERD_CNDT_VAL", "type": "Integer", "desc": "최근 기간 조건 활성화 시 구매이력이 없는 최근 기간 수치(일수/년수 등)를 지정합니다." },
+      { "field": "최근 기간 조건 구분", "id": "RCNT_PERD_CNDT_TYPE_VAL", "type": "Combo (Y/M/D)", "desc": "최근 기간 조건의 단위(Y: 년, M: 개월, D: 일)를 설정합니다." },
+      { "field": "마케팅 정보 수신 동의", "id": "MRKN_RPTN_AGRM_USE_YN", "type": "Radio (Y/N)", "desc": "마케팅 정보 수신 동의 동적 활성화 여부를 결정합니다." },
+      { "field": "마케팅동의 기본 체크", "id": "MRKN_RPTN_AGRM_BSCS_CHCH_YN", "type": "Checkbox (Y/N)", "desc": "마케팅동의 UI 노출 시 기본으로 체크 표시를 활성화해 둘 것인지 지정합니다." },
+      { "field": "개인정보 수집 동의", "id": "INDV_IFRM_CLCN_AGRM_USE_YN", "type": "Radio (Y/N)", "desc": "개인정보 수집 동의 동적 활성화 여부를 결정합니다." },
+      { "field": "개인정보동의 기본 체크", "id": "PRIN_CLCN_AGRM_CHCH_YN", "type": "Checkbox (Y/N)", "desc": "개인정보동의 UI 노출 시 기본으로 체크 표시를 활성화해 둘 것인지 지정합니다." },
+      { "field": "쿠폰 받기 버튼", "id": "BTN_STYL_VAL", "type": "Radio (XX/OS/SS)", "desc": "쿠폰 받기 다운로드 버튼 스타일입니다. (XX: 사용안함, OS: White 색상, SS: Black 색상)" },
+      { "field": "쿠폰 받기 버튼명", "id": "BTN_TEXT_VAL", "type": "String (30byte 한도)", "desc": "쿠폰 받기 다운로드 버튼 텍스트입니다. 한글 15자 제한이 적용됩니다." },
+      { "field": "혜택 보기 버튼", "id": "SCND_BTN_STYL_VAL", "type": "Radio (XX/OS/SS)", "desc": "혜택 보기 보조 이동 버튼 스타일입니다. (XX: 사용안함, OS: White 색상, SS: Black 색상)" },
+      { "field": "혜택 보기 버튼명", "id": "SCND_BTN_TEXT_VAL", "type": "String (30byte 한도)", "desc": "혜택 보기 버튼 텍스트입니다. 한글 15자 제한이 적용됩니다." },
+      { "field": "혜택 보기 버튼링크", "id": "SCND_BTN_MVMN_URL_VAL", "type": "String (필수)", "desc": "혜택 보기 버튼 클릭 시 이동할 랜딩 PC URL 경로입니다." },
+      { "field": "링크 타겟", "id": "SCND_BTN_LINK_TRGE_VAL", "type": "Combo (S/B)", "desc": "S: 현재창 (_self), B: 새창 (_blank) 중에서 링크 오픈 방식을 매핑합니다." },
+      { "field": "eTAG 랜딩구분", "id": "SCND_BTN_LINK_DIV_VAL", "type": "Combo (필수)", "desc": "성과 분석 및 유입 로그 추적을 위한 eTAG 분류 코드 매핑값입니다." }
+    ],
+    "codeSnippet": "// MktBenefit.tsx - Front-end React 동의 여부 유효성 검증 및 일괄 다운로드 결합 핵심 로직 일부\nconst checkAgreement = () => {\n  if (mktCpns.mrknRptnAgrmUseYn === \"Y\" && !mrkncheck.current) {\n    LFAlert.alert(\"마케팅 정보 수신 동의를 해주셔야\\n쿠폰 다운로드 가능합니다.\");\n    return false;\n  }\n  if (mktCpns.indvIfrmClcnAgrmUseYn === \"Y\" && !indvIfrmCheck.current) {\n    LFAlert.alert(\"개인정보 수집 동의를 해주셔야\\n쿠폰 다운로드 가능합니다.\");\n    return false;\n  }\n  return true;\n};\n\nconst handleBnftDown = () => {\n  benefitMultiDown.mutate({ exhbNo, bnftNo, bnftDetlSeq, cardType: template.cardType });\n};",
+    "warnings": "1. [설명 문구 상호 배타성] 상단 설명 문구(BNFT_HEDR_TEXT_VAL)와 하단 설명 문구(BNFT_DSCR)는 절대 동시에 등록하여 저장할 수 없습니다. 둘 중 하나라도 입력되면 다른 하나의 칸은 반드시 비워 두어야 유효성 검사를 통과합니다.\n2. [글자 수 바이트 엄격 제한] 메인 타이틀은 최대 22byte, 설명 문구류는 최대 50byte, 버튼 명칭은 최대 30byte로 엄격히 용량 한계가 통제되며 초과 시 어드민단에서 저장이 차단됩니다.\n3. [쿠폰 연동 버튼 필수 규칙] 연동된 쿠폰의 총 갯수가 2개 이상일 경우에는 다운로드 액션을 지원하기 위해 쿠폰 받기 버튼 스타일을 반드시 활성화(OS 또는 SS)하여 버튼 명칭을 기재해야 합니다. 사용안함(XX)으로 설정 시 유효성 경고로 저장이 반려됩니다.\n4. [단일 쿠폰 특수 처리] 연동된 쿠폰이 단 1개일 경우, 쿠폰 받기 버튼은 강제로 사용안함(XX) 비활성화 처리되며, 개별 쿠폰 컴포넌트 내에 있는 개별 다운로드 버튼을 통해 다운로드가 수행됩니다.",
+    "imageGuidelines": {
+      "pcSize": "해당 없음 (이미지 파일 업로드를 직접 지원하지 않는 컴포넌트)",
+      "moSize": "해당 없음",
+      "allowTypes": "JPG, JPEG, PNG, GIF",
+      "maxSize": "해당 없음",
+      "adminValidation": "마케팅 혜택 카드는 이미지를 직접 어드민에 업로드하지 않고 텍스트 타이포그래피와 데이터셋 쿠폰 매핑으로 프리셋 UI를 그리는 모듈입니다. 따라서 이미지 업로드 규칙은 제외됩니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 1개 쿠폰 연동 필수",
+      "tabMax": "최대 20개 쿠폰 연동 제한",
+      "prodMin": "혜택 조건 체크 시 숫자 기입 필수",
+      "prodMax": "쿠폰 연결 최대 20개 매핑 가능 (dsCoupon 바인딩 한계)",
+      "adminValidation": "어드민(NBOS) 저장 시 연동된 쿠폰 갯수가 0개일 경우 '혜택 쿠폰을 연결해주세요.' 경고와 함께 저장이 거절됩니다. 또한 전체/최근 기간 조건을 사용(Y)함으로 지정해둔 뒤 조건 수치 값을 비워둘 경우에도 저장 반려 처리가 작동합니다. 쿠폰은 팝업을 통해 한 구좌당 최대 20개까지만 중복 선택하여 연동하는 스크립트 한계가 제공됩니다."
+    }
+  },
   "ATTENTION": {
     "cardKey": "ATTENTION",
     "name": "유의사항",
