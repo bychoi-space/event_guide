@@ -1,4 +1,4 @@
-// LFmall NEW Exhibition Template Guides Master Database (db/db_guides.js)
+﻿// LFmall NEW Exhibition Template Guide Master Database (db/db_guides.js)
 // Enables 100% fail-proof execution on file:/// local protocols bypassing CORS blocks.
 
 window.ExhibitionGuides = {
@@ -6,39 +6,22 @@ window.ExhibitionGuides = {
     "cardKey": "TAB_CONTAINER",
     "name": "탭 컨테이너",
     "category": "NAV",
-    "sourceFile": "frmPlanTempTabContainer.xfdl (어드민) / TabContainer.tsx (프론트)",
+    "sourceFile": "frmPlanTempTabContainer.xfdl",
     "moduleCode": "MD13",
-    "desc": "1단 또는 2단 복합 탭 구조를 조립·설계하여, 사용자가 클릭 시 새로고침 없이 상품 딜 목록 및 배너를 동적으로 비동기 교체하는 초고성능 전시판 컨트롤러입니다.",
-    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서는 최상단 가로 스크롤링 카테고리 탭 메뉴바가 상단 고정(Sticky)되며, 사용자가 다른 탭 클릭 시 스크롤 위치 이동을 방어하며 내부 상품 슬라이드(Swiper) 및 하위 배너 정보가 비동기로 즉시 리렌더링됩니다. 개별 탭 패널 내부 상단에 이미지 광고 배너(mobiImgPath)를 매핑하거나, 패널 최하단에 상세 랜딩을 유도하는 양끝이 둥근 모던 버튼(btnText)을 기획적 옵션으로 가미할 수 있습니다.",
+    "desc": "다수의 상품 카테고리나 하위 템플릿들을 탭 형태로 조립하여 전시 상태를 유기적으로 전환해주는 복합 연동 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/Mobile 기획전 상세페이지)에서는 다단 Depth를 지원하는 탭 메뉴바로 노출됩니다. 사용자가 탭 클릭 시 페이지 전체 새로고침 없이 비동기 방식으로 내부 컨텐츠(강조상품 리스트, 배너 등)를 즉시 교체하여 최적의 쇼핑 탐색 흐름을 만들어 냅니다.",
     "backendSettings": [
-      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 여백(Margin) 유무를 설정합니다." },
-      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백(Padding) 유무를 설정합니다. 기본값 Y." },
-      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex", "desc": "전체 컴포넌트의 배경색을 Hex값으로 지정합니다. (예: #eeece7)" },
-      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 최상단에 작게 배치되는 한글 약 25자 내외의 강조 설명 텍스트입니다. 하단 설명 문구와 동시에 등록할 수 없습니다." },
-      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "탭 컨테이너 대단원 타이틀입니다. 한 줄 최대 한글 10자 내외로 입력하고 줄바꿈(\\n)으로 최대 2줄 등록을 지원합니다." },
-      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 하단 보조 설명 텍스트입니다. 상단 설명 문구와 동시에 등록할 수 없습니다." },
-      { "field": "탭 형태", "id": "TAB_TYPE_VAL", "type": "Combo (1/2)", "desc": "1: 1단 단일 카테고리 탭 구조 / 2: 대분류-소분류가 연동되는 2단 다단 탭 구조를 세팅합니다." },
-      { "field": "1단 탭 랜덤", "id": "RNDM_SORT_YN", "type": "Radio (Y/N)", "desc": "1단 탭 카테고리 노출 순서를 매 기동 시마다 무작위(랜덤)로 셔플하여 전시할지 결정합니다." },
-      { "field": "2단 탭 랜덤", "id": "PROD_RNDM_SORT_YN", "type": "Radio (Y/N)", "desc": "2단 탭 하위 카테고리 노출 순서를 무작위로 셔플 노출할지 결정합니다." },
-      { "field": "상품 정렬 순서", "id": "PROD_SORT_TYPE_VAL", "type": "Combo (S422)", "desc": "A: 기본 순서 / M: 탭 내부 상품들을 무작위(랜덤) 셔플 노출하여 전시 집중도를 다각화합니다." },
-      { "field": "상품 표현 (MO)", "id": "PROD_EPSR_TYPE_VAL", "type": "Radio (S430)", "desc": "모바일 격자 배치입니다. SW3_2 (3열 2단 격자), SW2_2 (2열 2단 격자), SW1_2 (1열 2단 묶음) 등을 코드값으로 선택합니다." },
-      { "field": "상품 표현 (PC)", "id": "PC_PROD_EPSR_TYPE_VAL", "type": "Radio (S431)", "desc": "PC 사용자 화면의 가로 상품 격자 수 설정입니다. SW4_1 (4열 1단형) 등이 지정됩니다." }
+      { "field": "탭 분류 구분", "id": "PLAN_CATE_CD", "type": "CODE (선택)", "desc": "1단 탭, 2단 탭(다단 구조) 및 Leaf 단계의 탭 구성을 선별 지정합니다." },
+      { "field": "연동 폼 주소", "id": "FORM_URL", "type": "String (필수)", "desc": "내부 템플릿 폼의 로드 주소(예: PopupDtl::frmPlanTempTabContainerLeafDepth.xfdl)를 기입합니다." }
     ],
-    "codeSnippet": "// TabContainer.tsx - 1단/2단 탭 비동기 로드 및 Swiper 렌더링 로직 일부\nconst TabContainer = React.memo(({ tabInfo, template, onRender }) => {\n  const [ntorNo, setNtorNo] = useState<number>(Number(tabInfo?.tabContainerList![0]?.tabList![0]?.ntorNo) || 0);\n  const { data } = useFetchExhbEventDealProductGET({\n    params: { evntNo: Number(template?.exhbCardNo), orderFlag: tabInfo.prodSortType ?? 'A', ntorNo: ntorNo || 0 }\n  });\n  const swiperSlideList = useMemo(() => {\n    let productList = data?.pages[0].eventDealProductList ?? [];\n    if (tabInfo.prodSortType === 'M') shuffleArray(productList); // 상품 랜덤 셔플\n    return productList?.map((product, idx) => (\n      <SwiperSlide key={`item_${idx}`} className={styles.wrapSlide}>\n        <TabContItem props={product} template={template} />\n      </SwiperSlide>\n    ));\n  }, [data, tabInfo]);\n  return (\n    <div className={styles.tabContainer} style={{ backgroundColor: tabInfo?.bkgdClr }}>\n      <Tabs selectedIndex={containerIdx} onSelect={(idx) => { setContainerIdx(idx); setTabIdx(0); }}>\n        <TabList>\n          {tabInfo?.tabContainerList?.map((item, idx) => (\n            <Tab key={idx}>{item?.tabContainer?.evntNtorMainText}</Tab>\n          ))}\n        </TabList>\n        {/* ... 중첩 자식 탭 및 Swiper 마운트 렌더링 ... */}\n      </Tabs>\n    </div>\n  );\n});",
-    "imageGuidelines": {
-      "pcSize": "가로 1240px × (세로 높이 제한 없음)",
-      "moSize": "가로 750px × (세로 높이 제한 없음) *각 탭 카테고리 패널의 상단 전용 배너 규격",
-      "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-      "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "어드민 탭 상세 목록에서 개별 탭별 상단 배너 이미지를 업로드할 수 있으며, 200KB 용량 규격을 1바이트라도 초과할 시 업로드가 자동으로 차단 및 초기화됩니다. 탭별 시즌 테마나 할인 정보 광고 이미지를 적합하게 매핑할 것을 강력 권장합니다."
-    },
-    "warnings": "1. [텍스트 상호 배타 규정] 어드민 넥사크로 시스템 제약에 의해 **상단 설명 문구와 하단 설명 문구는 절대 동시에 기입해 저장할 수 없습니다.** 동시 입력 시 넥사크로 폼 검증 스크립트단에서 저장이 반려되므로, 한 영역은 무조건 완전 비워두어야 합니다.\n2. [상품 & 탭 개수 권장 제약] 탭 컨테이너 카드는 구조적 유연성이 높으나 탭 개수가 15개를 초과하거나, 탭당 상품 로딩 수가 50개를 초과할 시 모바일 비동기 API 트랜잭션 지연으로 심각한 화면 로딩 부하를 겪을 수 있습니다. 탭 개수 8개 이하, 상품 수 30개 이내로 제한할 것을 강하게 가이드 권장합니다.\n3. [구조 변경 시 데이터 유실 주의] 기획전 저장 완료 후 어드민 단에서 1단 탭 ↔ 2단 탭으로 구조 설정을 갑작스럽게 클릭 변경하고 저장할 시, 기존에 생성되었던 하위 탭들의 매핑 식별값(ntorNo)이 꼬여 상품 데이터와 엑셀 매핑이 완전히 소실될 위험이 존재합니다. 기획 초기 단계에 탭 뎁스 형태를 최종 확정해 구성하여야 합니다.",
+    "codeSnippet": "// PopupDtl::frmPlanTempTabContainerTopDepth.xfdl (내부 2단 템플릿 로직 일부)\nthis.frmPlanTempTabContainerTopDepth_onload = function(obj:nexacro.Form, e:nexacro.LoadEventInfo) {\n    trace(\"== frmPlanTempTabContainerTopDepth_onload start ==\");\n    partsDiv.set_url(\"PopupDtl::frmPlanTempTabContainerLeafDepth.xfdl\");\n};",
+    "warnings": "NEW 템플릿에 추가 가능한 카드는 최대 20장입니다. 탭 컨테이너 하위에 들어가는 내부 데이터 역시 전체 카드 수 제한에 걸려 있는지 꼼꼼하게 유의해야 하며, 탭 단계가 2단계 이상 늘어날 시 화면 로딩 부하가 생길 수 있으므로 상품 데이터 수를 탭당 50개 이하로 제한할 것을 권장합니다.",
     "qtyGuidelines": {
       "tabMin": "최소 2개",
       "tabMax": "최대 15개 (대분류) / 8개 (소분류)",
       "prodMin": "최소 4개",
       "prodMax": "최대 48개",
-      "adminValidation": "2단 탭 구조는 선택사항(Optional)으로 1단 단일 카테고리 탭으로만 간소하게 사용하거나, 대분류-소분류가 연동되는 2단 탭 구조를 세팅해 고도화할 수 있습니다.<br>어드민(NBOS) 저장 시 각 탭별로 매핑된 상품 개수가 최소 4개 미만이거나 최대 48개를 초과할 경우 Validation 오류 메시지와 함께 저장이 자동으로 반려됩니다. 또한, 하위 2단 탭(소분류)은 최대 8개까지, 1단 탭은 최대 15개까지 스피너(Spin)를 통해 유연하게 추가 및 조절 가능합니다."
+      "adminValidation": "2단 탭 구조는 선택사항(Optional)으로 1단 단일 카테고리 탭으로만 간소하게 사용하거나, 대분류-소분류가 분기되는 2단 탭 구조를 세팅해 고도화할 수 있습니다.<br>어드민(NBOS) 저장 시 각 탭별로 매핑된 상품 개수가 최소 4개 미만이거나 최대 48개를 초과할 경우 Validation 오류 메시지와 함께 저장이 자동으로 반려됩니다. 또한, 하위 2단 탭(소분류)은 최대 8개까지, 1단 탭은 최대 15개까지 스피너(Spin)를 통해 유연하게 추가 및 조절 가능합니다."
     }
   },
   "TOP_BANNER": {
@@ -107,6 +90,151 @@ window.ExhibitionGuides = {
       "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 200KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. 복수 등록 시 프론트에서 자동으로 Swiper 캐러셀(슬라이드) 회전 롤링 배너로 구현되며, 배너 링크 등록 시 eTAG 정보 입력이 필수입니다."
     }
   },
+  "T_DEAL": {
+    "cardKey": "T_DEAL",
+    "name": "타임특가",
+    "category": "PROD",
+    "sourceFile": "frmPlanCardTimeDeal.xfdl (어드민) / TimeDealCard.tsx (프론트)",
+    "moduleCode": "MD6",
+    "desc": "기획전 본문 내에서 지정된 제한 시간 동안만 파격적인 할인가로 상품을 노출하여, 고객의 심리적 마감 임박 효과를 유도하는 시간 한정형 마케팅 핵심 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 개별 상품 카드마다 상단 모서리에 째깍이는 실시간 카운트다운 타이머 배지(⏳ 04:12:35)가 브랜드 포인트 코랄 컬러로 역동적 노출됩니다. 또한 실시간 판매율 진행 상태바(Progress Bar)를 적용하여 시각적 소진 속도를 직관적으로 인지시킵니다. (PC 화면에서는 가로 2열 배치로 시원한 와이드 룩을 연출하며, 모바일 화면에서는 세로 1열 풀 레이아웃 그리드로 유연하게 반응형 렌더링 전환됩니다.)",
+    "backendSettings": [
+      { "field": "타임딜 상품 선택", "id": "PRODUCT_CD", "type": "String (필수)", "desc": "넥사크로 상품 마스터 DB에서 직접 연계할 특가 상품의 고유 13자리 식별 번호입니다." },
+      { "field": "할인 혜택 매핑코드", "id": "BENEFIT_CD", "type": "CODE (필수)", "desc": "해당 상품에 매핑되어 가격 줄긋기(원래 가격)와 실시간 할인가를 동적으로 노출할 혜택 코드입니다." },
+      { "field": "전시 시작 일자", "id": "SDT", "type": "Date (필수)", "desc": "타임특가 판매가 시작될 연월일 설정입니다. (YYYYMMDD)" },
+      { "field": "전시 시작 시간", "id": "STM", "type": "Time (필수)", "desc": "타임특가 판매가 시작될 시분초 설정입니다. (HHMMSS)" },
+      { "field": "전시 종료 일자", "id": "EDT", "type": "Date (필수)", "desc": "타임특가 판매가 종료될 연월일 설정입니다. (YYYYMMDD)" },
+      { "field": "전시 종료 시간", "id": "ETM", "type": "Time (필수)", "desc": "타임특가 판매가 종료될 시분초 설정입니다. (HHMMSS)" },
+      { "field": "전체 여백 설정", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "기획전 레이아웃 내에서 타임특가 구좌 상하단에 외부 여백(margin)을 유연하게 줄 것인지 여부입니다." },
+      { "field": "배경 색상 코드", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "타임특가 카드 뒷배경을 우아하게 채울 HSL 테마 맞춤 컬러 코드 설정입니다. 기본값은 투명(Transparent)입니다." }
+    ],
+    "codeSnippet": "// frmPlanCardTimeDeal.xfdl.js - 타임특가 등록 시 전시 시작일시-종료일시 정밀 선후 관계 검증 스크립트\nthis.fnTimeDealPeriodValidator = function() {\n    var startDt = this.dsTimeDealInfo.getColumn(0, \"SDT\") + this.dsTimeDealInfo.getColumn(0, \"STM\");\n    var endDt = this.dsTimeDealInfo.getColumn(0, \"EDT\") + this.dsTimeDealInfo.getColumn(0, \"ETM\");\n    \n    // 시작 시간이 종료 시간보다 미래이거나 동일할 때 저장을 반려하는 정밀 안전 장치\n    if (startDt >= endDt) {\n        this.gfnMessage(\"타임특가 시작 시간은 종료 시간보다 미래이거나 같을 수 없습니다. 정확한 전시 기간을 입력해주세요.\", \"A\");\n        return false;\n    }\n    return true;\n};",
+    "warnings": "1. [시간 유효성 엄격] 타임특가의 시작 일시(SDT+STM)는 반드시 종료 일시(EDT+ETM)보다 정밀히 이전 시점이어야 하며, 1초라도 어긋날 시 넥사크로 어드민 폼 검증 단에서 에러 경고와 함께 저장이 반려됩니다.\n2. [서버 기준 시간 동기화] 클라이언트-서버 간 시간차로 인해 종료 타이머 오차가 유발되는 사고를 사전에 차단하기 위해, 브라우저 로컬 PC 시스템 시계를 절대 직접 참조하지 않고 넥사크로 공통 백엔드 API 서버의 UTC 기준 라이브 서버 타임을 호출하여 카운트다운을 표시하도록 코딩되어야 합니다.\n3. [종료 시 자동 미노출] 설정된 전시 종료 시간이 도달하면 화면에서 컴포넌트 전체가 자동으로 보이지 않도록 동적 렌더링 스위치가 제어됩니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
+      "moSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
+      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
+      "maxSize": "파일당 최대 200KB 이하",
+      "adminValidation": "타임특가 대표 상품 이미지는 넥사크로 UI 파일업로드 핸들러에서 **200KB를 1바이트라도 초과 시 업로드를 즉시 반려**하고 에러를 호출합니다. 업로드 전 사전에 이미지를 리사이징하는 것이 필수입니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 1개 등록 필수",
+      "prodMax": "최대 4개 (가로형 2열 슬라이더 지원 한도)",
+      "adminValidation": "타임특가의 시각 완성도와 쾌적한 템플릿 로딩을 위해 **최소 1개 이상, 최대 4개 이하의 상품만 매핑**해야 합니다. 어드민(NBOS) 저장 시 매핑된 상품 개수가 없거나, 4개를 초과 등록 시 저장 유효성 검증을 통과하지 못해 기획전 발행이 즉각 반려됩니다. 또한 메인 타이틀은 최대 40byte(한글 기준 20자, 영문 40자) 이내 기입을 원칙으로 삼고 있습니다."
+    }
+  },
+  "FLASH_SALE": {
+    "cardKey": "FLASH_SALE",
+    "name": "플래시 세일",
+    "category": "PROD",
+    "sourceFile": "frmPlanCardFlashSale.xfdl (어드민) / FlashSale.tsx (프론트)",
+    "moduleCode": "MD6",
+    "desc": "극히 짧은 시간에 강력한 폭탄 파격 세일가를 적용하여 전시하는 구좌입니다. 정해진 진행시간에 맞게 째깍이는 타이머가 노출되며, Swiper 슬라이더로 상품 리스트를 노출합니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상하단 여백 및 배경 색상이 지정에 따라 가변 렌더링되며, 중앙에는 메인 타이틀과 상/하단 설명 문구 중 하나가 노출됩니다. 또한, 진행 시간에 따라 실시간 카운트다운 타이머가 표시되고, 하단에는 Swiper 슬라이더를 통해 등록된 상품(1.113 slidesPerView 모바일 특화 구조)들이 브랜드, 상품명, 할인가(dcRate 적용 시 정가 대비 할인율 오버레이) 정보와 함께 좌우 롤링 형태로 노출됩니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "플래시 세일 영역의 배경색을 Hex 코드형태(예: #757575)로 입력합니다. 해당 값은 프론트에서 8% 투명도로 연하게 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 위에 작게 노출되는 서브 설명입니다. 하단 설명 문구와 동시에 등록할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "플래시 세일의 메인 타이틀 제목입니다. 한글 기준 11자 내외 작성이 권장됩니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 아래 노출되는 상세 부연설명입니다. 상단 설명 문구와 동시에 등록할 수 없습니다." },
+      { "field": "남은시간 표현", "id": "TM_TYPE_VAL", "type": "Radio (HMS/HMSMS)", "desc": "HMS: 시분초 표시 (HH|MM|SS), HMSMS: 시분초 및 밀리초 표시 (HH|MM|SS|MS)." },
+      { "field": "타이머 시작일시", "id": "STRT_DT (SDT+STM)", "type": "DateTime (필수)", "desc": "플래시 세일 카운트다운 타이머가 시작되는 시각입니다. (YYYYMMDDHHmmss)" },
+      { "field": "타이머 종료일시", "id": "END_DT (EDT+ETM)", "type": "DateTime (필수)", "desc": "플래시 세일 카운트다운 타이머가 마감되는 시각입니다. (YYYYMMDDHHmmss)" },
+      { "field": "상품정렬", "id": "PROD_SORT_TYPE_VAL", "type": "Radio (A/M)", "desc": "A: 등록순으로 상품을 고정 전시합니다, M: 랜덤으로 상품 순서를 섞어 노출합니다." },
+      { "field": "상품 코드", "id": "PROD_CD", "type": "String (필수)", "desc": "매핑될 13자리 상품 코드입니다. 총 0건 표시 영역 우측 상품추가 버튼을 통해 관리합니다." }
+    ],
+    "codeSnippet": "// FlashSale.tsx - React Swiper 슬라이더 및 타이머 렌더링 로직\nexport default function FlashSale({ template, onRender }) {\n  const { data } = useFetchExhbFlashSaleGET({ evntNo: Number(template.exhbCardNo), siteCd: \"03\" });\n  const titleOptions = {\n    title: data?.body?.evntMainText?.split(\"\\n\"),\n    disc: data?.body?.evntHedrText?.split(\"\\n\") ?? data?.body?.evntSubText?.split(\"\\n\") ?? [],\n    subTitlePosition: data?.body?.evntHedrText ? \"top\" : data?.body?.evntSubText ? \"bottom\" : \"\"\n  };\n  return (\n    <div className={styles.flashSale} style={{ backgroundColor: data?.body?.bkgdClr }}>\n      <PlanTitle options={titleOptions} />\n      {data?.body?.tmUseYn === \"Y\" && <Timer props={data?.body?.tmInfos || {}} textUnderTime=\"Y\" />}\n      <Swiper slidesPerView={1.113} spaceBetween={8}>\n        {data?.body?.exhbEvntProds?.map((item, idx) => (\n          <SwiperSlide key={idx}>\n            <FlashSaleItem props={item} prodIdx={idx + 1} />\n          </SwiperSlide>\n        ))}\n      </Swiper>\n    </div>\n  );\n}",
+    "warnings": "1. [색상코드 포맷 체크] 배경색상 입력 칸(editBtnText)에 컬러코드를 입력하는 경우, 반드시 `#RRGGBB` 형태의 정규식 패턴(`/^#[0-9A-Fa-f]{6,8}$/`) 형식을 온전히 만족해야 합니다. 만족하지 못할 시 어드민 저장 검증단에서 오류를 발생시킵니다.\n2. [설명문구 배타 등록] 상단 설명 문구와 하단 설명 문구를 동시에 입력하여 저장을 시도할 경우, '상단 설명 문구, 하단 설명 문구 중 하나만 입력하세요.' 메시지와 함께 저장이 반려됩니다.\n3. [기간 범위 한계 설정] 설정하려는 타이머 진행기간(시작~종료)은 반드시 상위 카드기간(부모의 SDT+STM ~ EDT+ETM)의 날짜/시간 영역 내에 온전히 존재해야 하며, 범위를 단 1초라도 이탈하거나 시작일시가 종료일시보다 클 경우 오류 알럿을 띄워 저장을 거부합니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 600px × 세로 600px 권장 (1:1 정비율 상품 컷)",
+      "moSize": "가로 600px × 세로 600px 권장 (1:1 정비율 상품 컷)",
+      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
+      "maxSize": "파일당 최대 200KB 이하",
+      "adminValidation": "상품 썸네일 이미지는 200KB 용량 제한 조건에 걸쳐 있어 초과 시 넥사크로 UI에서 즉시 등록이 반려됩니다. 플래시 세일의 특성상 빠른 로딩을 위해 이미지 최적화가 필수적입니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 1개 상품 필수 등록",
+      "prodMax": "최대 10개 상품까지 등록 제한",
+      "adminValidation": "플래시 세일은 단시간 강렬한 판매 집중을 유도하기 위해 **최소 1개에서 최대 10개** 범위 내에서만 상품 등록을 허용하고 있으며, 10개를 초과해 상품을 배치하거나 상품이 전혀 없을 경우 어드민단에서 저장 처리를 반려합니다."
+    }
+  },
+  "FCFS_CPN": {
+    "cardKey": "FCFS_CPN",
+    "name": "선착순 쿠폰",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardFCFSCoupon.xfdl",
+    "moduleCode": "MD3",
+    "desc": "고객이 특정 시간에 선착순으로 직접 클릭하여 획득하는 마케팅 특화용 쿠폰 기능입니다.",
+    "layoutDescription": "남은 쿠폰 수량 상태바와 다운로드 버튼이 연동되어 활성/비활성화 상태를 실시간 시각화합니다.",
+    "backendSettings": [
+      { "field": "캠페인 번호", "id": "CAMPAIGN_NO", "type": "Integer (필수)", "desc": "다운로드 작동 시 정수 처리를 위해 이벤트 캠페인 번호 및 한도 수량을 백엔드와 사전 매핑합니다." }
+    ],
+    "codeSnippet": "// frmPlanCardFCFSCoupon.xfdl\nthis.btnDownload_onclick = function(obj:nexacro.Button, e:nexacro.ClickEventInfo) {\n    this.gfnTransaction(\"downloadCoupon\", \"/promotion/coupon/download\", inData, outData);\n};",
+    "warnings": "중복 클릭 및 불법 자동 매크로를 대비하여 다중 트랜잭션을 제한하고 한도 수량 소진 시 다운로드 클릭이 즉각 클라이언트 단에서도 차단될 수 있도록 에러 트랜잭션을 꼼꼼히 잡아야 합니다."
+  },
+  "NAVI": {
+    "cardKey": "NAVI",
+    "name": "네비게이션",
+    "category": "NAV",
+    "sourceFile": "frmPlanCardNavigation.xfdl (어드민) / Navigation.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "기획전 내부의 특정 섹션이나 상품 코너 영역으로 스크롤 이동을 돕는 유기적인 스크롤 앵커 메뉴바 컴포넌트입니다.",
+    "layoutDescription": "PC 및 모바일의 사용자 화면에서 상단 고정(Sticky) 형태로 작동하며, 사용자가 메뉴명 클릭 시 해당 카드가 노출되는 본문 위치로 부드러운 애니메이션 효과와 함께 자동 스크롤 앵커 포커싱이 수행됩니다. 모바일에서는 가로 드래그 스크롤링 형태의 1단 스크롤 또는 바둑판 배열의 2단 고정 형태로 레이아웃 분기가 처리됩니다.",
+    "backendSettings": [
+      { "field": "메뉴 유형", "id": "LCTI_PATH_DIV_VAL", "type": "Combo (C/P)", "desc": "C: 카드형 (기획전 내 등록된 특정 카드를 타겟팅) / P: 상품형 (등록된 코너 상품 영역을 타겟팅)을 선택 매핑합니다." },
+      { "field": "PC메뉴 넓이", "id": "WIDE_YN", "type": "Radio (Y/N)", "desc": "N: 기본형 (1240px 너비로 본문 중앙에 제한) / Y: 와이드형 (1920px 전체 폭으로 꽉 차게 확장 렌더링)을 설정합니다." },
+      { "field": "네비게이션 형태", "id": "LCTI_PATH_LINE_TYPE_VAL", "type": "Radio (1/2)", "desc": "1: 1단 스크롤형 (개수 제한 없이 가로 스크롤링 메뉴바 작동) / 2: 2단 고정형 (5~8개 전용 바둑판 고정 배열로 노출)을 지정합니다." }
+    ],
+    "codeSnippet": "// frmPlanCardNavigation.xfdl.js - 2단 고정 형태 검증 및 메뉴명 Byte 제한 일부\nthis.checkValidation = function() {\n    var chkVal = 0;\n    var gridVal = this.dsCardMenuList.rowcount > 0 ? this.divCardNavi.form.grdCardList : this.divCornerNavi.form.grdCornerList;\n    var chkCnt = 0;\n    var overCnt = 0;\n    var bindDs = gridVal.getBindDataset();\n    \n    for(var i=0; i < bindDs.rowcount; i++){\n        if(bindDs.getColumn(i, \"USE_YN_CHK\") == 1){\n            chkCnt += 1;\n            if(this.asciiByteCount(bindDs.getColumn(i, \"MENU_NM\")) > 10) overCnt += 1;\n        }\n    }\n    \n    if((this.divCardNavi.form.rdoNaviDispType.value == 2 || this.divCornerNavi.form.rdoNaviDispType.value == 2) && (chkCnt < 5 || chkCnt > 8)) {\n        this.gfnMessage(\"2단 고정 형태는 메뉴 5개 이상 ~ 8개 이하로만 등록할 수 있습니다.\", \"A\");\n        return false;\n    }\n    if((this.divCardNavi.form.rdoNaviDispType.value == 2 || this.divCornerNavi.form.rdoNaviDispType.value == 2) && overCnt > 0) {\n        this.gfnMessage(\"2단 고정 형태는 메뉴명이 한글 기준 5자, 영문기준 10자 이내로만 가능합니다\", \"A\");\n        return false;\n    }\n    return true;\n};",
+    "warnings": "1. [2단 고정 제약] 2단 고정 네비게이션 적용 시 메뉴 개수가 무조건 5개 이상 8개 이하여야 저장이 가능하며, 그 외 수량 범위에서는 어드민 검증에 걸려 저장이 원천 거부됩니다.\n2. [글자 수 자동 잘림 경고] 메뉴명은 10byte(한글 5자, 영문 10자)를 1byte라도 초과할 시, 넥사크로 UI 및 프론트 레이아웃 깨짐을 방어하기 위해 입력한 텍스트가 자동으로 잘려 저장이 초기화되니 등록 전 글자 수를 사전에 확인해야 합니다.\n3. [코너 상품 필수성] 상품형(P) 네비게이션을 활성화하려면 기획전 내에 상품 코너 카드가 사전에 반드시 구성 및 저장되어 있어야 매핑이 가능합니다.",
+    "qtyGuidelines": {
+      "tabMin": "최소 5개 (2단 고정 시)",
+      "tabMax": "최대 8개 (2단 고정 시) *1단 스크롤 무제한",
+      "prodMin": "최대 10byte (한글 5자)",
+      "prodMax": "최대 10byte (영문 10자) *2단 고정 메뉴명에 적용",
+      "adminValidation": "2단 고정(2) 형태를 세팅할 경우, 활성화된 메뉴(USE_YN_CHK) 개수가 5개 미만이거나 8개를 초과하면 Validation 반려가 수행됩니다. 또한, 2단 고정 메뉴명(MENU_NM)은 한글 기준 최대 5자(10byte)를 초과하여 저장할 시 UI 단에서 강제 차단 얼럿이 작동합니다. 1단 가로 스크롤형(1)은 별도의 수량 및 글자 수 Validation을 제한하지 않아 유연하게 사용 가능합니다."
+    }
+  },
+  "B_BENEFIT": {
+    "cardKey": "B_BENEFIT",
+    "name": "구매혜택",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardBenefitB.xfdl (어드민) / BuyBenefit.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "기획전 구매 금액대별 할인쿠폰 다운로드, 사은품 증정, 무료 선물포장 혜택, 추가 마일리지 적립 등 총 5가지 슬롯으로 다양한 고객 리워드를 구성하는 복합 프로모션 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 최대 5개의 혜택 섹션을 질서정연하게 수직 배열합니다. 개별 혜택은 유형에 따라 쿠폰 Swiper 슬라이드 회전, 선물포장 단계별 안내 이미지 Swiper, 단색/라운드 액션 버튼(쿠폰 다운로드, URL 이동, 적립 안내 팝업) 등으로 구성되어 최상의 혜택 가시성을 사용자에게 선사합니다.",
+    "backendSettings": [
+      { "field": "혜택 분류 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (CPN/PRC/FCF/NOT/GFT/PRE/WEL/XXX)", "desc": "혜택을 부여할 유형(할인쿠폰, 쿠폰표현, 선착순쿠폰, 추가적립, 사은품, 선물하기, 웰컴쿠폰팩, 사용안함)을 매핑합니다." },
+      { "field": "쿠폰 표현 방식", "id": "CPN_DISP_TYPE_VAL", "type": "Radio (A/I)", "desc": "A: 자동표현 (DB에 매핑된 쿠폰 정보를 기반으로 템플릿화) / I: 이미지 표현 (PC/MO용 제작 이미지를 직접 업로드하여 노출) 중 선택합니다." },
+      { "field": "버튼 액션 유형", "id": "BTN_ACTN_TYPE_VAL", "type": "Combo (B/P/M)", "desc": "B: 쿠폰 다운로드 (로그인 및 API 연동) / P: 적립안내 팝업 노출 / M: URL 이동(랜딩 처리)을 설정합니다." },
+      { "field": "추가 적립율", "id": "editAccVal", "type": "Integer (NOT 전용)", "desc": "추가적립(NOT) 유형 시 기획전 대상 상품에 적용할 보조 적립율 수치입니다." },
+      { "field": "사은품 수량", "id": "editApplyCnt", "type": "Integer (GFT 전용)", "desc": "사은품 지급 선착순 대상 인원수 및 재고 한도를 설정합니다." },
+      { "field": "웰컴 기획전 번호", "id": "editExhbNo", "type": "Integer (WEL 전용)", "desc": "웰컴쿠폰팩과 매핑되어 버튼 클릭 시 이동할 고유 기획전 번호입니다." }
+    ],
+    "codeSnippet": "// BuyBenefit.tsx - Front-end React 쿠폰 다운로드 및 유형 분기 처리 일부\nconst handleBenefitClick = (e, benefit, order) => {\n  if (benefit.btnActnType === \"B\" && (benefit.bnftType === \"CPN\" || benefit.bnftType === \"FCF\")) {\n    if (isPreview) return;\n    if (!loginInfo.isLoginSuccess) {\n      LFAlert.alert(\"로그인 후 다운로드 가능합니다.\");\n    } else {\n      benefitMultiDown.mutate({ exhbNo: Number(exhbNo), bnftNo: Number(benefit.bnftNo), cardType });\n    }\n  }\n};",
+    "warnings": "1. [사은품/선물하기 이미지 필수] 사은품(GFT) 및 선물하기(PRE) 유형 세팅 시, 어드민 상에서 PC 및 MO 이미지가 모두 필수적으로 등록되어 있어야 Validation을 통과하여 저장이 가능합니다.\n2. [용량 규격 주의] 이미지 표현(I)을 적용하는 쿠폰 및 사은품/선물하기 이미지는 200KB 용량 제한 검증 규칙이 적용되어, 초과하는 경우 넥사크로 UI 단에서 업로드가 원천 차단됩니다.\n3. [쿠폰표현 PRC 성격] 쿠폰표현(PRC) 유형은 단순 시각적 안내가 목적이므로 버튼 액션(`BTN_ACTN_TYPE_VAL`)을 '사용안함(XX)'으로 지정하며 버튼이 렌더링되지 않습니다.",
+    "imageGuidelines": {
+      "pcSize": "1240px × (세로 높이 제한 없음)",
+      "moSize": "750px × (세로 높이 제한 없음) *스퀘어(1:1) 비율 권장",
+      "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
+      "maxSize": "파일당 최대 200KB 이하",
+      "adminValidation": "사은품(GFT) 및 선물하기(PRE)는 PC/MO 이미지가 누락된 경우 저장 시 유효성 경고와 함께 저장이 거부됩니다. 쿠폰 이미지 표현(I) 시에도 PC/MO 이미지가 동시 필요하며, 파일별 200KB 용량 초과 업로드 시 넥사크로 스크립트에 의해 자동 차단 처리됩니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 1개",
+      "tabMax": "최대 5개 (총 5개의 혜택 레이아웃 제공)",
+      "prodMin": "최소 1개",
+      "prodMax": "최대 150개 (개별 혜택 섹션에 연동 가능한 최대 쿠폰 수)",
+      "adminValidation": "구매혜택 카드는 한 화면 구좌 내에 최대 5개의 혜택 섹션(1st ~ 5th)을 구성해 저장이 가능합니다. 개별 혜택마다 최대 150개의 쿠폰 코드를 멀티 셀렉션하여 등록할 수 있는 어드민 팝업 제약(maxBenefitCnt: '150')이 존재합니다. 서브타이틀 50byte(한글 25자), 버튼명 40byte(한글 20자), 하단설명 100byte(한글 50자)를 초과하여 저장하려 할 경우 Byte Limit 초과 경고와 함께 저장이 원천 반려됩니다."
+    }
+  },
   "ATTENTION": {
     "cardKey": "ATTENTION",
     "name": "유의사항",
@@ -149,83 +277,46 @@ window.ExhibitionGuides = {
       { "field": "숫자색상코드", "id": "TMR_CLR_VAL", "type": "Color Hex", "desc": "타이머 숫자 및 텍스트의 Hex 컬러 코드 값 (예: #ffffff)" }
     ],
     "codeSnippet": "// CountTime.tsx - Front-end React 정밀 서버시간 동기화 카운트다운 컴포넌트 일부\nexport const CountTime = ({ templateDetail }) => {\n  const [remainTime, setRemainTime] = useState({ d: 0, h: 0, m: 0, s: 0 });\n  const timerRef = useRef<NodeJS.Timeout>();\n\n  useEffect(() => {\n    // 1. 디바이스 로컬 조작 시간을 방어하기 위한 API 서버 타임 획득\n    fetchServerTime().then((serverTime) => {\n      const targetTime = new Date(templateDetail.tmrEndDt).getTime();\n      let diff = Math.max(0, targetTime - serverTime);\n\n      timerRef.current = setInterval(() => {\n        diff = Math.max(0, diff - 1000);\n        if (diff <= 0) {\n          clearInterval(timerRef.current);\n          // 타임아웃 이벤트 콜백 실행 (기획전 영역 비활성화/노출 제외)\n          if (templateDetail.onTimeout) templateDetail.onTimeout();\n        }\n\n        const d = Math.floor(diff / (1000 * 60 * 60 * 24));\n        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));\n        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));\n        const s = Math.floor((diff % (1000 * 60)) / 1000);\n        setRemainTime({ d, h, m, s });\n      }, 1000);\n    });\n    return () => clearInterval(timerRef.current);\n  }, [templateDetail.tmrEndDt]);\n\n  return (\n    <div style={{ backgroundColor: templateDetail.bkgdClr }}>\n      <FlipTimer remain={remainTime} title={templateDetail.tmrTitlText} color={templateDetail.tmrClr} />\n    </div>\n  );\n};",
-    "warnings": "1. [정밀 시각 동기성] 기획전 특가 유혹을 위한 임의 시간 조작(로컬 PC 컴퓨터 시계 수정)을 원천 방어하기 위해, **로컬 `new Date()`를 배제하고 반드시 API 응답 헤더나 서버 타임 동기화 모듈(`fetchServerTime`)을 활용해 가상 틱을 구동**하도록 프론트 설계가 유지되어야 합니다.\n2. [논리 오류 예방] 시작 일시가 종료 일시보다 미래일 경우, 저장 유효성 검사 규칙에 의해 저장이 반려되며 프론트 렌더링 시 강제로 `00:00:00` 종료 템플릿이 렌더링되어 검은색 화면으로 노출되니 세팅에 각별히 유의해야 합니다.",
+    "warnings": "1. [정밀 시각 D-Day 동기성] 기획전 특가 유입 유도를 위한 컴퓨터 시계 수정을 방어하기 위해, 디바이스의 로컬 시간 new Date()를 배제하고 API 서버 응답 시각 동기화를 활용하여 가상 틱을 구동하도록 프론트 설계가 유지되어야 합니다.\n2. [날짜 논리 오류 예방] 시작 일시가 종료 일시보다 미래일 경우 저장 유효성 검사 규칙에 의해 저장이 반려되며 프론트 렌더링 시 강제로 00:00:00 종료 포맷으로 강제 차단됩니다.",
     "qtyGuidelines": {
       "tabMin": "해당 없음",
       "tabMax": "해당 없음",
       "prodMin": "최소 1자 이상 기입",
       "prodMax": "최대 50byte (한글 약 25자 한도, 소제목 명칭에 적용)",
-      "adminValidation": "본 카드는 상품 전시나 직접적인 이미지 업로드를 요구하지 않는 **기능형 순수 정보 컴포넌트**입니다. 어드민(NBOS) 저장 시 시작 일시(TMR_STRT_DT)가 종료 일시(TMR_END_DT)보다 1초라도 미래인 논리적 오류가 감지되면 저장 유효성 검증 단에서 차단 메시지와 함께 저장이 거부됩니다."
+      "adminValidation": "본 카드는 상품 전시나 직접적인 이미지 업로드를 요구하지 않는 기능형 순수 정보 컴포넌트입니다. 어드민(NBOS) 저장 시 시작 일시(TMR_STRT_DT)가 종료 일시(TMR_END_DT)보다 1초라도 미래인 논리적 오류가 감지되면 저장 유효성 검증 단에서 차단 메시지와 함께 저장이 거부됩니다."
     }
   },
   "P_BENEFIT": {
     "cardKey": "P_BENEFIT",
     "name": "결제혜택",
     "category": "PROMOTION",
-    "sourceFile": "frmPlanCardBenefitP.xfdl",
+    "sourceFile": "frmPlanCardBenefitP.xfdl (어드민) / PayBenefit.tsx (프론트)",
     "moduleCode": "MD3",
-    "desc": "카드사 제휴 할인이나 페이백 혜택 정보를 강조하여 표기합니다.",
-    "layoutDescription": "결제 수단별 혜택 카드입니다.",
+    "desc": "기획전 상단에 아코디언 토글 형태의 접고 펼쳐지는 헤더와 서브타이틀, 텍스트 상세설명 및 이미지 배너 영역을 제공하며, 하단에는 어두운 테마 배경 속에서 실물 카드사 혜택(카드사 플레이트 이미지 자동 호출) 및 카카오페이 등 간편결제사 혜택 카드가 Swiper 슬라이드 캐러셀 형태로 롤링 전시되는 고기능 복합 프로모션 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상단의 '결제 혜택' 헤더를 누르면 우측 화살표 표시가 ∧/∨ 형태로 반전되며 하단의 기획전 소개 및 수동 이미지 배너 영역(IMG AREA)이 부드럽게 슬라이딩 개폐됩니다. 그 바로 아래에는 어두운 다크그레이 배경 프레임이 깔리며, 신용카드사 실물 이미지(국민/현대/신한 등)가 세 장 나란히 '자동 호출' 형태로 노출되는 슬라이드와, 카카오페이 등 노란색 브랜드 바 및 '1만원 즉시할인' 텍스트 뱃지, 개별 유의사항 안내 문구가 나열되는 슬라이드가 Swiper 페이지네이션 도트와 함께 실시간 가로 롤링 캐러셀로 렌더링됩니다.",
     "backendSettings": [
-      { "field": "제휴사 선택", "id": "CARD_COMPANY", "type": "CODE (선택)", "desc": "제휴 카드사 명 및 혜택 금액을 매핑합니다." }
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부를 결정합니다. 기본값 Y." },
+      { "field": "서브타이틀", "id": "TMR_SUB_TITL_TEXT", "type": "String (50byte 한도)", "desc": "본문 최상단에 강조될 결제혜택 안내 소제목입니다. (예: '5월의 결제혜택')" },
+      { "field": "안내문구 작성", "id": "NOTICE_TEXT", "type": "String (RichText)", "desc": "사용자에게 전달할 결제혜택 텍스트 상세 본문입니다. HTML 에디터 서식을 부분 지원합니다." },
+      { "field": "PC 배너 이미지", "id": "PC_IMG_PATH_NM", "type": "File (1240px 권장)", "desc": "기획전 본문 상세 영역에 등록될 수동 PC 배너 이미지 파일입니다." },
+      { "field": "모바일 배너 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (750px 권장)", "desc": "기획전 본문 상세 영역에 등록될 수동 모바일 배너 이미지 파일입니다." },
+      { "field": "제휴사 혜택 데이터", "id": "dsCardDetail", "type": "DataSet", "desc": "카드사 자동 이미지 매핑 정보, 즉시/청구 할인율, 간편결제 뱃지 텍스트, 개별 유의사항 목록을 적재합니다." }
     ],
-    "codeSnippet": "// 결제 혜택 로직",
-    "warnings": "금액 표기 오류에 주의하십시오."
-  },
-  "B_BENEFIT": {
-    "cardKey": "B_BENEFIT",
-    "name": "구매혜택",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardBenefitB.xfdl (어드민) / BuyBenefit.tsx (프론트)",
-    "moduleCode": "MD3",
-    "desc": "기획전 구매 금액대별 할인쿠폰 다운로드, 사은품 증정, 무료 선물포장 혜택, 추가 마일리지 적립 등 총 5가지 슬롯으로 다양한 고객 리워드를 구성하는 복합 프로모션 카드입니다.",
-    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 최대 5개의 혜택 섹션을 질서정연하게 수직 배열합니다. 개별 혜택은 유형에 따라 쿠폰 Swiper 슬라이드 회전, 선물포장 단계별 안내 이미지 Swiper, 단색/라운드 액션 버튼(쿠폰 다운로드, URL 이동, 적립 안내 팝업) 등으로 구성되어 최상의 혜택 가시성을 사용자에게 선사합니다.",
-    "backendSettings": [
-      { "field": "혜택 분류 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (CPN/PRC/FCF/NOT/GFT/PRE/WEL/XXX)", "desc": "혜택을 부여할 유형(할인쿠폰, 쿠폰표현, 선착순쿠폰, 추가적립, 사은품, 선물하기, 웰컴쿠폰팩, 사용안함)을 매핑합니다." },
-      { "field": "쿠폰 표현 방식", "id": "CPN_DISP_TYPE_VAL", "type": "Radio (A/I)", "desc": "A: 자동표현 (DB에 매핑된 쿠폰 정보를 기반으로 템플릿화) / I: 이미지 표현 (PC/MO용 제작 이미지를 직접 업로드하여 노출) 중 선택합니다." },
-      { "field": "버튼 액션 유형", "id": "BTN_ACTN_TYPE_VAL", "type": "Combo (B/P/M)", "desc": "B: 쿠폰 다운로드 (로그인 및 API 연동) / P: 적립안내 팝업 노출 / M: URL 이동(랜딩 처리)을 설정합니다." },
-      { "field": "추가 적립율", "id": "editAccVal", "type": "Integer (NOT 전용)", "desc": "추가적립(NOT) 유형 시 기획전 대상 상품에 적용할 보조 적립율 수치입니다." },
-      { "field": "사은품 수량", "id": "editApplyCnt", "type": "Integer (GFT 전용)", "desc": "사은품 지급 선착순 대상 인원수 및 재고 한도를 설정합니다." },
-      { "field": "웰컴 기획전 번호", "id": "editExhbNo", "type": "Integer (WEL 전용)", "desc": "웰컴쿠폰팩과 매핑되어 버튼 클릭 시 이동할 고유 기획전 번호입니다." }
-    ],
-    "codeSnippet": "// BuyBenefit.tsx - Front-end React 쿠폰 다운로드 및 유형 분기 처리 일부\nconst handleBenefitClick = (e, benefit, order) => {\n  if (benefit.btnActnType === \"B\" && (benefit.bnftType === \"CPN\" || benefit.bnftType === \"FCF\")) {\n    if (isPreview) return;\n    if (!loginInfo.isLoginSuccess) {\n      LFAlert.alert(\"로그인 후 다운로드 가능합니다.\");\n    } else {\n      benefitMultiDown.mutate({ exhbNo: Number(exhbNo), bnftNo: Number(benefit.bnftNo), cardType });\n    }\n  }\n};",
-    "warnings": "1. [사은품/선물하기 이미지 필수] 사은품(GFT) 및 선물하기(PRE) 유형 세팅 시, 어드민 상에서 PC 및 MO 이미지가 모두 필수적으로 등록되어 있어야 Validation을 통과하여 저장이 가능합니다.\n2. [용량 규격 주의] 이미지 표현(I)을 적용하는 쿠폰 및 사은품/선물하기 이미지는 200KB 용량 제한 검증 규칙이 적용되어, 초과하는 경우 넥사크로 UI 단에서 업로드가 원천 차단됩니다.\n3. [쿠폰표현 PRC 성격] 쿠폰표현(PRC) 유형은 단순 시각적 안내가 목적이므로 버튼 액션(`BTN_ACTN_TYPE_VAL`)을 '사용안함(XX)'으로 지정하며 버튼이 렌더링되지 않습니다.",
+    "codeSnippet": "// PayBenefit.tsx - Front-end React 아코디언 토글 상태값 및 Swiper 다크 캐러셀 분기 구현\nexport const PayBenefit = ({ templateDetail }) => {\n  const [isOpen, setIsOpen] = useState(true);\n  return (\n    <div className={styles.payBenefitContainer}>\n      {/* 1. 아코디언 토글 헤더 */}\n      <div className={styles.header} onClick={() => setIsOpen(!isOpen)}>\n        <h2>결제 혜택</h2>\n        <span className={styles.arrow}>{isOpen ? '∧' : '∨'}</span>\n      </div>\n      \n      {/* 2. 본문 및 이미지 배너 영역 */}\n      <div className={`${styles.body} ${!isOpen ? styles.collapsed : ''}`}>\n        <h3>{templateDetail.subTitle}</h3>\n        <div dangerouslySetInnerHTML={{ __html: templateDetail.noticeText }} />\n        {templateDetail.pcImgPath && <img src={templateDetail.pcImgPath} alt=\"배너\" />}\n      </div>\n\n      {/* 3. 하단 다크 Swiper 캐러셀 영역 */}\n      <Swiper className={styles.darkCarousel} pagination={{ clickable: true }}>\n        <SwiperSlide className={styles.cardSlide}>\n          <h4>신용카드 결제 혜택</h4>\n          <div className={styles.autoImgRow}>{/* 카드사 실물 이미지 3장 자동 로드 */}</div>\n        </SwiperSlide>\n        <SwiperSlide className={styles.paySlide}>\n          <div className={styles.payBrandRow}>\n            <span className={styles.kakaoBadge}>kakaopay</span>\n            <span>1만원 즉시할인</span>\n          </div>\n        </SwiperSlide>\n      </Swiper>\n    </div>\n  );\n};",
+    "warnings": "1. [아코디언 토글 붕괴 방어] 모바일 뷰포트에서 토글 개폐 시 CSS 높이 트랜지션(`max-height`) 효과가 버벅거리거나 끊기지 않도록, 내부 배너 이미지 크기를 반응형 비율로 정밀 래핑해야 레이아웃 손상이 일어나지 않습니다.\n2. [용량 규격 주의] 본문 내 배너 이미지 등록 시 200KB 용량 제한 검증 규칙이 적용되어, 초과하는 경우 넥사크로 UI 단에서 업로드가 차단됩니다.\n3. [상세설명 자수 제약] 아코디언 내 안내문구(`NOTICE_TEXT`)는 HTML 태그를 포함하여 최대 4000byte를 초과하여 저장 시 강제 잘림 현상이 발생합니다.",
     "imageGuidelines": {
       "pcSize": "1240px × (세로 높이 제한 없음)",
-      "moSize": "750px × (세로 높이 제한 없음) *스퀘어(1:1) 비율 권장",
+      "moSize": "750px × (세로 높이 제한 없음) *가독성을 위한 패션 배너 비율 권장",
       "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
       "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "사은품(GFT) 및 선물하기(PRE)는 PC/MO 이미지가 누락된 경우 저장 시 유효성 경고와 함께 저장이 거부됩니다. 쿠폰 이미지 표현(I) 시에도 PC/MO 이미지가 동시 필요하며, 파일별 200KB 용량 초과 업로드 시 넥사크로 스크립트에 의해 자동 차단 처리됩니다."
+      "adminValidation": "본문 이미지(PC/MO) 등록 시 파일별 200KB 용량 초과 업로드 시 넥사크로 스크립트에 의해 자동 차단 처리되며, 이미지 누락 시 기획전 발행에 경고가 수반됩니다."
     },
     "qtyGuidelines": {
       "tabMin": "최소 1개",
-      "tabMax": "최대 5개 (총 5개의 혜택 레이아웃 제공)",
-      "prodMin": "최소 1개",
-      "prodMax": "최대 150개 (개별 혜택 섹션에 연동 가능한 최대 쿠폰 수)",
-      "adminValidation": "구매혜택 카드는 한 화면 구좌 내에 최대 5개의 혜택 섹션(1st ~ 5th)을 구성해 저장이 가능합니다. 개별 혜택마다 최대 150개의 쿠폰 코드를 멀티 셀렉션하여 등록할 수 있는 어드민 팝업 제약(maxBenefitCnt: '150')이 존재합니다. 서브타이틀 50byte(한글 25자), 버튼명 40byte(한글 20자), 하단설명 100byte(한글 50자)를 초과하여 저장하려 할 경우 Byte Limit 초과 경고와 함께 저장이 원천 반려됩니다."
-    }
-  },
-  "NAVI": {
-    "cardKey": "NAVI",
-    "name": "네비게이션",
-    "category": "NAV",
-    "sourceFile": "frmPlanCardNavigation.xfdl (어드민) / Navigation.tsx (프론트)",
-    "moduleCode": "MD13",
-    "desc": "기획전 내부의 특정 섹션이나 상품 코너 영역으로 스크롤 이동을 돕는 유기적인 스크롤 앵커 메뉴바 컴포넌트입니다.",
-    "layoutDescription": "PC 및 모바일의 사용자 화면에서 상단 고정(Sticky) 형태로 작동하며, 사용자가 메뉴명 클릭 시 해당 카드가 노출되는 본문 위치로 부드러운 애니메이션 효과와 함께 자동 스크롤 앵커 포커싱이 수행됩니다. 모바일에서는 가로 드래그 스크롤링 형태의 1단 스크롤 또는 바둑판 배열의 2단 고정 형태로 레이아웃 분기가 처리됩니다.",
-    "backendSettings": [
-      { "field": "메뉴 유형", "id": "LCTI_PATH_DIV_VAL", "type": "Combo (C/P)", "desc": "C: 카드형 (기획전 내 등록된 특정 카드를 타겟팅) / P: 상품형 (등록된 코너 상품 영역을 타겟팅)을 선택 매핑합니다." },
-      { "field": "PC메뉴 넓이", "id": "WIDE_YN", "type": "Radio (Y/N)", "desc": "N: 기본형 (1240px 너비로 본문 중앙에 제한) / Y: 와이드형 (1920px 전체 폭으로 꽉 차게 확장 렌더링)을 설정합니다." },
-      { "field": "네비게이션 형태", "id": "LCTI_PATH_LINE_TYPE_VAL", "type": "Radio (1/2)", "desc": "1: 1단 스크롤형 (개수 제한 없이 가로 스크롤링 메뉴바 작동) / 2: 2단 고정형 (5~8개 전용 바둑판 고정 배열로 노출)을 지정합니다." }
-    ],
-    "codeSnippet": "// frmPlanCardNavigation.xfdl.js - 2단 고정 형태 검증 및 메뉴명 Byte 제한 일부\nthis.checkValidation = function() {\n    var chkVal = 0;\n    var gridVal = this.dsCardMenuList.rowcount > 0 ? this.divCardNavi.form.grdCardList : this.divCornerNavi.form.grdCornerList;\n    var chkCnt = 0;\n    var overCnt = 0;\n    var bindDs = gridVal.getBindDataset();\n    \n    for(var i=0; i < bindDs.rowcount; i++){\n        if(bindDs.getColumn(i, \"USE_YN_CHK\") == 1){\n            chkCnt += 1;\n            if(this.asciiByteCount(bindDs.getColumn(i, \"MENU_NM\")) > 10) overCnt += 1;\n        }\n    }\n    \n    if((this.divCardNavi.form.rdoNaviDispType.value == 2 || this.divCornerNavi.form.rdoNaviDispType.value == 2) && (chkCnt < 5 || chkCnt > 8)) {\n        this.gfnMessage(\"2단 고정 형태는 메뉴 5개 이상 ~ 8개 이하로만 등록할 수 있습니다.\", \"A\");\n        return false;\n    }\n    if((this.divCardNavi.form.rdoNaviDispType.value == 2 || this.divCornerNavi.form.rdoNaviDispType.value == 2) && overCnt > 0) {\n        this.gfnMessage(\"2단 고정 형태는 메뉴명이 한글 기준 5자, 영문기준 10자 이내로만 가능합니다\", \"A\");\n        return false;\n    }\n    return true;\n};",
-    "warnings": "1. [2단 고정 제약] 2단 고정 네비게이션 적용 시 메뉴 개수가 무조건 5개 이상 8개 이하여야 저장이 가능하며, 그 외 수량 범위에서는 어드민 검증에 걸려 저장이 원천 거부됩니다.\n2. [글자 수 자동 잘림 경고] 메뉴명은 10byte(한글 5자, 영문 10자)를 1byte라도 초과할 시, 넥사크로 UI 및 프론트 레이아웃 깨짐을 방어하기 위해 입력한 텍스트가 자동으로 잘려 저장이 초기화되니 등록 전 글자 수를 사전에 확인해야 합니다.\n3. [코너 상품 필수성] 상품형(P) 네비게이션을 활성화하려면 기획전 내에 상품 코너 카드가 사전에 반드시 구성 및 저장되어 있어야 매핑이 가능합니다.",
-    "qtyGuidelines": {
-      "tabMin": "최소 5개 (2단 고정 시)",
-      "tabMax": "최대 8개 (2단 고정 시) *1단 스크롤 무제한",
-      "prodMin": "최대 10byte (한글 5자)",
-      "prodMax": "최대 10byte (영문 10자) *2단 고정 메뉴명에 적용",
-      "adminValidation": "2단 고정(2) 형태를 세팅할 경우, 활성화된 메뉴(USE_YN_CHK) 개수가 5개 미만이거나 8개를 초과하면 Validation 반려가 수행됩니다. 또한, 2단 고정 메뉴명(MENU_NM)은 한글 기준 최대 5자(10byte)를 초과하여 저장할 시 UI 단에서 강제 차단 얼럿이 작동합니다. 1단 가로 스크롤형(1)은 별도의 수량 및 글자 수 Validation을 제한하지 않아 유연하게 사용 가능합니다."
+      "tabMax": "최대 12개 (하단 다크 슬라이드 혜택 카드 최대 구성 한도)",
+      "prodMin": "최소 1자 이상 기입",
+      "prodMax": "최대 4000byte (HTML 스타일 태그 포함, 본문 안내문구 필드)",
+      "adminValidation": "결제혜택 카드는 아코디언 토글 구조에 들어갈 텍스트와 이미지 배너 데이터, 그리고 하단 다크그레이 영역에 적용될 최대 12개의 제휴 카드/간편결제 데이터셋(`dsCardDetail`)을 동시에 저장 관리합니다. 어드민(NBOS) 저장 시 시작/종료 전시 일시가 선후 관계를 위반하거나, 하단 데이터셋의 카드사 공통코드 매핑이 잘못된 경우 저장 에러와 함께 기획전 적재가 반려됩니다."
     }
   },
   "SEARCH": {
@@ -235,43 +326,20 @@ window.ExhibitionGuides = {
     "sourceFile": "frmPlanCardSearch.xfdl (어드민) / SearchInput.tsx + PlanningSearch/index.tsx (프론트)",
     "moduleCode": "MD10",
     "desc": "기획전 내부에서 키워드를 직접 입력하여 원하는 기획전을 즉시 조회할 수 있는 인라인 검색 인풋 컴포넌트입니다. 추천 해시태그를 클릭하면 해당 키워드가 자동 입력되어 검색이 실행됩니다.",
-    "layoutDescription": "PC·모바일 공통으로 '진행 중인 기획전' 타이틀 아래에 배치됩니다. 입력창은 테두리 없이 하단에 2px solid 검정 구분선만 긋는 언더라인 방식이 특징이며, 우측에 SVG 돋보기 아이콘 버튼이 고정됩니다. 입력 중에는 x버튼(지우기)이 돋보기 좌측에 추가로 노출됩니다. 하단에는 어드민에서 등록한 추천 태그가 '#키워드' 형식으로 가로 스크롤 나열됩니다.",
+    "layoutDescription": "PC·모바일 공통으로 '진행 중인 기획전' 타이틀(h2) 아래에 배치됩니다. 입력창은 테두리 없이 하단에 2px solid 검정 구분선만 긋는 언더라인 방식이 특징이며, 우측에 SVG 돋보기 아이콘 버튼이 고정됩니다. 입력 중에는 X버튼(지우기)이 돋보기 좌측에 추가로 노출됩니다. 하단에는 어드민에서 등록한 추천 태그가 '#키워드' 형식으로 가로 스크롤 나열됩니다. 검색 영역 전체는 scroll sticky로 상단 고정됩니다(z-index: 6).",
     "backendSettings": [
       { "field": "추천 태그 (키워드)", "id": "RECOMMENDED_TAGS", "type": "String (선택, 콤마 구분)", "desc": "검색창 하단에 노출될 추천 검색 해시태그를 콤마(,)로 구분하여 등록합니다. 등록된 태그는 '#키워드' 형식으로 가로 스크롤 나열되며, 클릭 시 해당 키워드가 자동 검색됩니다." },
       { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 Margin 사용 여부를 설정합니다." },
       { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 사용 여부를 설정합니다. (기본값 Y)" }
     ],
-    "codeSnippet": "// SearchInput.tsx - Front-end React 검색 인풋 + 추천 키워드 렌더링 일부\nexport default function SearchInput({ value, onChange, onSearchSubmit, onKeywordSelect, inputRef, contentRef }) {\n  const { data: keywordData } = useFetchEventKeyword({ options: { staleTime: 1000 * 60 * 2 } });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') { e.preventDefault(); onSearchSubmit(); }\n  };\n\n  return (\n    <div className={styles.searchArea} ref={contentRef}>\n      <div className={styles.searchBox}>\n        <input type=\"text\" enterKeyHint=\"search\" ref={inputRef}\n          value={value} autoComplete=\"off\"\n          placeholder=\"기획전을 검색해 보세요\"\n          onChange={(e) => onChange(e.target.value)}\n          onKeyPress={handleKeyPress} />\n        {value !== '' && (\n          <button type=\"button\" className={styles.iconDelSearch}\n            onClick={() => { onChange(''); inputRef?.current?.focus(); }}>\n            <span className=\"blind\">검색어 지우기</span>\n          </button>\n        )}\n        <button type=\"button\" className={styles.btnSearch}\n          onClick={() => onSearchSubmit()}>\n          <span className=\"blind\">검색</span>\n        </button>\n      </div>\n      {keywordData?.body?.length > 0 && (\n        <div className={styles.keywordList}>\n          {keywordData.body.map((kw, i) => (\n            <span key={kw.keyword + i} className={styles.keyword}\n              onClick={() => onKeywordSelect(kw)}>#{kw.keyword}</span>\n          ))}\n        </div>\n      )}\n    </div>\n  );\n}",
-    "warnings": "1. [엔터 이벤트] 입력창에서 Enter 키 입력 시 onKeyPress 핸들러를 통해 검색이 실행됩니다. 검색어가 빈 문자열일 경우 '검색어를 입력해주세요.' 알럿이 노출되며 입력창에 포커스가 강제 이동합니다.\n2. [검색어 X 버튼] 입력된 검색어가 존재할 때만 지우기(X) 버튼이 노출됩니다. 클릭 시 입력값이 초기화되고 포커스가 유지됩니다.\n3. [추천 키워드 API] 추천 태그 데이터는 useFetchEventKeyword 훅을 통해 API에서 비동기 조회됩니다. 어드민에서 태그를 등록하지 않으면 키워드 영역 자체가 렌더링되지 않습니다.\n4. [스티키 동작] 검색 영역은 스크롤 시 상단에 고정(z-index: 6)되어 항상 접근 가능하도록 설계되어 있습니다."
-  },
-  "BADGE": {
-    "cardKey": "BADGE",
-    "name": "행사뱃지",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardBadge.xfdl (어드민) / BadgeList.tsx (프론트)",
-    "moduleCode": "MD3",
-    "desc": "기획전 고유 행사 아이콘이나 특별 혜택 뱃지들을 전시하는 컴포넌트입니다. 단순한 텍스트 배지 노출을 넘어 제휴 카드 혜택, 무료배송, 앱 다운로드 등의 아이콘을 직관적으로 전시하여 고객 참여를 극대화합니다.",
-    "layoutDescription": "등록된 행사 뱃지 아이콘들이 중앙 정렬된 가로형 그리드로 노출되며, PC에서는 4열 배치, 모바일 등 좁은 화면에서는 2열 배치로 레이아웃이 유연하게 반응합니다. 개수 초과 시 프론트 UI에서 가로 스크롤 캐러셀로 자동 전환되어 렌더링 영역의 낭비를 방지합니다.",
-    "backendSettings": [
-      { "field": "뱃지 등록", "id": "BADGE_IMG", "type": "File (선택)", "desc": "뱃지 아이콘 이미지를 매핑합니다. 투명 배경의 PNG-24 포맷을 권장합니다." },
-      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 여백(Margin) 유무를 설정합니다." },
-      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백(Padding) 유무를 설정합니다. 기본값 Y." }
-    ],
-    "codeSnippet": "// frmPlanCardBadge.xfdl.js - 어드민 뱃지 바인딩 및 해상도 유효성 검증\nthis.fnBadgeValidation = function() {\n    var fileNm = this.dsPlanCardInfo.getColumn(0, \"BADGE_IMG\");\n    if (this.gfnIsEmpty(fileNm)) {\n        this.gfnMessage(\"행사뱃지 아이콘 이미지를 매핑해야 저장이 완료됩니다.\", \"A\");\n        return false;\n    }\n    if (fileNm.indexOf(\".png\") == -1) {\n        this.gfnMessage(\"행사뱃지 아이콘은 투명 배경을 보장하는 PNG 파일만 업로드할 수 있습니다.\", \"A\");\n        return false;\n    }\n    return true;\n};",
-    "warnings": "1. [PNG 포맷 권장] 뱃지의 다양한 배경색 및 오버레이 대응을 위해 **반드시 배경이 투명한 PNG 포맷**으로 디자인하여 업로드해야 합니다. 불투명한 JPG나 GIF 포맷 업로드 시, 모바일 화면 다크모드 또는 그라데이션 영역에서 시각적 화이트 박스 노이즈를 유발합니다.\n2. [해상도 주의] 모바일 레티나 고해상도 대응을 위해 실제 렌더링 크기(60x60)의 2배 스펙인 **120x120px 이상의 정비율 이미지**를 제작하여 올리는 것을 강력 권장합니다.",
-    "imageGuidelines": {
-      "pcSize": "가로 120px × 세로 120px 권장 (정비율)",
-      "moSize": "가로 120px × 세로 120px 권장 (정비율) *배경이 투명한 PNG 포맷 필수",
-      "allowTypes": "PNG",
-      "maxSize": "파일당 최대 50KB 이하",
-      "adminValidation": "넥사크로 어드민 뱃지 등록 시, 뱃지의 선명한 표현과 라운딩 및 다양한 배경 오버레이 대응을 위해 **반드시 배경이 투명한 PNG 포맷만 업로드**할 수 있도록 필터링이 가미되어 있습니다. JPG나 GIF 등의 불투명 이미지를 업로드할 시 어드민 폼 검증 단에서 에러 경고와 함께 저장이 반려됩니다."
-    },
+    "codeSnippet": "// SearchInput.tsx - Front-end React 검색 인풋 + 추천 키워드 렌더링 핵심 로직\nexport default function SearchInput({ value, onChange, onSearchSubmit, onKeywordSelect, inputRef, contentRef }) {\n  const { data: keywordData } = useFetchEventKeyword({ options: { staleTime: 1000 * 60 * 2 } });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') { e.preventDefault(); onSearchSubmit(); }\n  };\n\n  return (\n    <div className={styles.searchArea} ref={contentRef}>\n      <div className={styles.searchBox}>\n        {/* 언더라인 border-bottom: 2px solid $black 구분선 방식의 입력창 */}\n        <input type=\"text\" enterKeyHint=\"search\" ref={inputRef}\n          value={value} autoComplete=\"off\"\n          placeholder=\"기획전을 검색해 보세요\"\n          onChange={(e) => onChange(e.target.value)}\n          onKeyPress={handleKeyPress} />\n        {/* 입력값이 있을 때만 X 지우기 버튼 표시 */}\n        {value !== '' && (\n          <button type=\"button\" className={styles.iconDelSearch}\n            onClick={() => { onChange(''); inputRef?.current?.focus(); }}>\n            <span className=\"blind\">검색어 지우기</span>\n          </button>\n        )}\n        {/* 돋보기 아이콘 버튼 (SVG 이미지 방식) */}\n        <button type=\"button\" className={styles.btnSearch}\n          onClick={() => onSearchSubmit()}>\n          <span className=\"blind\">검색</span>\n        </button>\n      </div>\n      {/* 추천 키워드 영역: API 미등록 시 미노출 */}\n      {keywordData?.body?.length > 0 && (\n        <div className={styles.keywordList}>\n          {keywordData.body.map((kw, i) => (\n            <span key={kw.keyword + i} className={styles.keyword}\n              onClick={() => onKeywordSelect(kw)}>#{kw.keyword}</span>\n          ))}\n        </div>\n      )}\n    </div>\n  );\n}",
+    "warnings": "1. [엔터 이벤트 처리] 입력창에서 Enter 키 입력 시 onKeyPress 핸들러를 통해 검색이 실행됩니다. 검색어가 빈 문자열일 경우 '검색어를 입력해주세요.' 알럿이 노출되며 입력창에 포커스가 강제 이동합니다.\n2. [X 지우기 버튼 조건부 노출] 입력된 검색어가 존재할 때만 지우기(X) 버튼이 노출됩니다. 클릭 시 입력값이 초기화되고 입력창에 포커스가 유지됩니다.\n3. [추천 키워드 API 연동 필수] 추천 태그 데이터는 useFetchEventKeyword 훅을 통해 API에서 비동기 조회됩니다. 어드민에서 태그를 등록하지 않으면 키워드 영역 자체가 렌더링되지 않으며, staleTime(2분) 기반 캐싱이 적용됩니다.\n4. [스티키 고정 동작] 검색 영역(searchArea)은 z-index: 6이 적용되어 스크롤 시 화면 상단에 고정(sticky)되므로, 상단 컴포넌트와의 z-index 충돌 여부를 반드시 확인해야 합니다.\n5. [eTAG 로깅] 검색 실행 및 추천 키워드 선택 이벤트는 각각 별도 eTAG(E093, E223)로 로깅되므로 마케팅 GA 분석과의 연동 시 코드 충돌이 없는지 사전에 검증해야 합니다.",
     "qtyGuidelines": {
-      "tabMin": "최소 2개",
-      "tabMax": "최대 8개 (초과 등록 시 화면 가로 스크롤 캐러셀로 자동 전환)",
-      "prodMin": "해당 없음",
-      "prodMax": "해당 없음",
-      "adminValidation": "기획전 내 단독 노출 및 가시성을 지키기 위해 **최소 2개 이상의 뱃지 등록**을 요구합니다. 어드민에서 뱃지를 1개만 등록하고 저장하려 할 경우 최소 등록 규정 위반으로 저장이 반려되며, 최대 8개까지 세팅 가능합니다. 4개 초과 등록 시 프론트 UI에서는 드래그 가능한 가로 슬라이더 레이아웃으로 자동 리렌더링됩니다."
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "추천 태그 최소 0개 (미등록 시 태그 영역 자체 미노출)",
+      "prodMax": "추천 태그 최대 제한 없음 (가로 스크롤로 처리)",
+      "adminValidation": "검색창 카드는 상품 직접 전시 및 이미지 업로드 기능이 없는 순수 기능형 NAV 컴포넌트입니다. 별도 필수 등록 항목이 없으므로 어드민(NBOS) 저장 시 특수 Validation 차단 조건은 존재하지 않습니다. 단, 추천 태그(RECOMMENDED_TAGS)를 등록할 경우 실제 기획전 검색 API와의 키워드 매핑이 정상적으로 이루어졌는지 QA 검수 후 기획전을 발행해야 합니다."
     }
   },
   "TILE_BANNER": {
@@ -295,7 +363,7 @@ window.ExhibitionGuides = {
       { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백 유무를 설정합니다. 기본값 Y." }
     ],
     "codeSnippet": "// frmPlanCardTileBanner.xfdl.js - 텍스트 입력 시 실시간 바이트 제한 스크립트\nthis.limitInputTo20Bytes = function(obj:nexacro.Edit, e:nexacro.KeyEventInfo) {\n    var textVal = obj.value;\n    var byteCount = this.asciiByteCount(textVal);\n    \n    // 타일 배너 명칭 및 텍스트 뱃지는 최대 20byte (한글 10자, 영문 20자) 한도\n    if (byteCount > 20) {\n        this.gfnMessage(\"타일 텍스트 입력값은 최대 20byte(한글 기준 10자, 영문/기호 기준 20자)를 초과할 수 없습니다.\", \"A\");\n        obj.set_value(this.asciiByteSubstring(textVal, 20));\n    }\n};",
-    "warnings": "1. [텍스트 자수 제한 엄격] 개별 타일의 텍스트 및 텍스트 뱃지는 **최대 20byte (한글 10자, 영문 20자)** 한도 제약이 있어, 입력 시 즉각 차단 경고음과 함께 초과 텍스트가 강제 잘림 처리됩니다.\n2. [홀수 개수 등록 시 빈 타일 채움] '2단 리스트(T2/T3)' 레이아웃 적용 시, 등록한 타일의 개수가 홀수일 경우 UI 레이아웃 무너짐을 방지하기 위해 프론트 컴포넌트 내부에서 **자동으로 1개의 빈 타일 구좌(emptyItem)**를 생성하여 짝수를 맞추어 줍니다.\n3. [랜덤 정렬 설정 주의] 랜덤 정렬 여부(RNDM_SORT_YN)가 'Y'로 설정되어 있으면 프론트 Swiper 렌더링 시 타일들의 순서가 페이지 로드 시마다 무작위 셔플되므로 순서 고정이 필요한 경우 'N'으로 지정하십시오.",
+    "warnings": "1. [텍스트 자수 제한 엄격] 개별 타일의 텍스트 및 텍스트 뱃지는 **최대 20byte (한글 10자, 영문 20자)** 한도 제약이 있어, 입력 시 즉각 차단 경고음과 함께 초과 텍스트가 강제 잘림 처리됩니다.\n2. [홀수 개수 등록 시 빈 타일 채움] '2단 리스트(T2/T3)' 레이아웃 적용 시, 등록한 타일의 개수가 홀수일 경우 UI 레이아웃 무너짐을 방지하기 위해 프론트 컴포넌트 내부에서 **자동으로 1개의 빈 타일 구좌(emptyItem)**를 생성하여 짝수를 맞추어 줍니다.\n3. [랜덤 정렬 설정 주의] 랜덤 정렬 여부(RNDM_SORT_YN)가 'Y'로 설정되어 있으면 프론트 Swiper 렌더링 시 타일들의 순서가 페이지 로드 시마다 실시간으로 무작위 셔플되므로 순서 고정이 필요한 경우 'N'으로 지정하십시오.",
     "imageGuidelines": {
       "pcSize": "가로 280px × 세로 280px 권장 (1:1 정비율)",
       "moSize": "가로 100px × 세로 100px 권장 (1:1 정비율) *원형/사각형 크롭 처리가 자동 수행됨",
@@ -315,15 +383,33 @@ window.ExhibitionGuides = {
     "cardKey": "ATTENDANCE",
     "name": "출석체크",
     "category": "PROMOTION",
-    "sourceFile": "frmPlanCardAttendance.xfdl",
+    "sourceFile": "frmPlanCardStamp.xfdl (어드민) / AttendanceStamp.tsx (프론트)",
     "moduleCode": "MD3",
-    "desc": "기획전 내부에서 일자별 참여를 유도하는 마케팅 특화용 출석 이벤트 블록입니다.",
-    "layoutDescription": "출석 도장 달력 캘린더가 렌더링됩니다.",
+    "desc": "기획전 본문에서 일 단위로 출석체크 스탬프를 찍어 브랜드 방문 리텐션을 확보하고 구매 혜택 및 마일리지를 지급하는 마케팅 특화용 구좌입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 달력형 7일/14일/30일 등의 스탬프 도장판을 노출합니다. 사용자가 '출석 도장 찍기' 버튼 클릭 시 실시간 API 통신을 통해 해당 일자에 완료 도장(Checked)이 날인되며, 누적 출석 일수에 따라 혜택 달성률 게이지 바(Progress bar)가 실시간으로 차오릅니다.",
     "backendSettings": [
-      { "field": "스탬프 코드", "id": "STAMP_CD", "type": "CODE (필수)", "desc": "출석 체크 처리 고유 코드 일치를 보장합니다." }
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 Padding 여부를 결정합니다. 기본값 Y." },
+      { "field": "캠페인 고유번호", "id": "STMP_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "어드민 프로모션 관리에서 등록된 연동 출석체크 캠페인 고유 식별 번호입니다." },
+      { "field": "스탬프 전체 일수", "id": "STMP_TOT_DAYS", "type": "Combo (5/7/10/14/30일)", "desc": "출석체크를 진행할 총 일수입니다. 이에 따라 프론트 도장판 개수가 반응형 그리드로 동적 매핑됩니다." },
+      { "field": "보너스 혜택 조건", "id": "dsStampReward", "type": "DataSet", "desc": "특정 일차(예: 3일차, 5일차, 7일 완주) 달성 시 자동으로 마일리지나 쿠폰을 지급하기 위한 구간별 적립액 설정 데이터셋입니다." },
+      { "field": "배경 색상코드", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "컴포넌트 배경 영역의 Hex 컬러 코드 값 (예: #ffffff)" }
     ],
-    "codeSnippet": "// 출석 체크 스탬프 스크립트",
-    "warnings": "동일 유저의 부정 중복 참여 방지 정책이 가동되어야 합니다."
+    "codeSnippet": "// frmPlanCardStamp.xfdl.js - 기획전 전시 기간과 출석체크 캠페인 기간의 불일치를 방어하기 위한 정밀 유효성 스크립트 일부\nthis.fnStampPeriodValidator = function() {\n    var exhbStart = this.dsExhbInfo.getColumn(0, \"STRT_DT\");\n    var exhbEnd = this.dsExhbInfo.getColumn(0, \"END_DT\");\n    var stampStart = this.dsStampCampaign.getColumn(0, \"STRT_DT\");\n    var stampEnd = this.dsStampCampaign.getColumn(0, \"END_DT\");\n    \n    if (stampStart > exhbStart || stampEnd < exhbEnd) {\n        this.gfnMessage(\"출석체크 캠페인 기간은 기획전 전체 전시 기간을 포함(시작일은 같거나 이전, 종료일은 같거나 이후)해야 안전하게 동작합니다.\", \"A\");\n        return false;\n    }\n    return true;\n};",
+    "warnings": "1. [캠페인 기간 종속성] 출석체크 캠페인 기간이 기획전 전시 기간보다 짧을 경우, 고객이 기획전에 진입했으나 출석체크 API가 조기 차단되어 프론트 템플릿 오류가 발생합니다. 반드시 캠페인 운영 기간을 기획전 전시 기간보다 여유 있게 설정하십시오.\n2. [어뷰징 및 동시성 락] 기획전 선착순 및 완주 혜택 마일리지 지급 시 매크로를 통한 다중 호출 공격을 차단하기 위해, 프론트 다운로드 액션 시 트랜잭션 락(isSubmitting 상태 분기)을 엄격히 적용해야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 120px × 세로 120px 권장 (커스텀 스탬프 도장 이미지 교체 시 적용)",
+      "moSize": "가로 80px × 세로 80px 권장 (1:1 비율)",
+      "allowTypes": "PNG, SVG (투명 배경 필수)",
+      "maxSize": "파일당 최대 100KB 이하",
+      "adminValidation": "기본적으로 LFmall의 고급 시그니처 완료 도장 디자인이 자동 적용되므로 이미지 등록은 선택사항(Optional)입니다. 교체 등록 시 용량이 100KB를 넘거나 투명 배경이 아닌 경우 디자인 정렬이 깨져 업로드가 제한됩니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 5일 구성",
+      "tabMax": "최대 30일 구성 (5/7/10/14/30일 분기)",
+      "prodMin": "보너스 리워드 최소 1구간 이상 설정 필수",
+      "prodMax": "보너스 리워드 최대 3구간 이하 설정 제약",
+      "adminValidation": "스탬프 전체 일수는 마케팅 성격에 따라 5일, 7일, 10일, 14일, 30일 중 콤보박스 형태로만 조절하여 세팅이 가능합니다. 어드민(NBOS) 저장 시 구간별 보너스 혜택 지급 설정(dsStampReward)이 단 1구간도 등록되지 않았거나 3구간을 초과하면 Validation 위반 에러와 함께 저장이 거부됩니다."
+    }
   },
   "H_DEAL": {
     "cardKey": "H_DEAL",
@@ -356,41 +442,6 @@ window.ExhibitionGuides = {
       "prodMin": "최소 1개 등록 필수",
       "prodMax": "최대 1개 (단일 명품 특가 구좌 원칙)",
       "adminValidation": "핫딜의 극대화된 시각 집중도와 완성도를 위해 **반드시 정확히 1개의 상품만 매핑**해야 합니다. 어드민(NBOS) 저장 시 매핑된 상품 개수가 없거나, 2개 이상을 과도하게 초과 등록 시 저장 유효성 검증을 통과하지 못해 기획전 발행이 즉각 반려됩니다. 또한 핫딜 타이틀 및 설명 문구는 최대 30byte(한글 기준 15자, 영문 30자) 이내 기입을 원칙으로 삼고 있습니다."
-    }
-  },
-  "T_DEAL": {
-    "cardKey": "T_DEAL",
-    "name": "타임특가",
-    "category": "PROD",
-    "sourceFile": "frmPlanCardTimeDeal.xfdl (어드민) / TimeDealCard.tsx (프론트)",
-    "moduleCode": "MD6",
-    "desc": "기획전 본문 내에서 지정된 제한 시간 동안만 파격적인 할인가로 상품을 노출하여, 고객의 심리적 마감 임박 효과를 유도하는 시간 한정형 마케팅 핵심 컴포넌트입니다.",
-    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 개별 상품 카드마다 상단 모서리에 째깍이는 실시간 카운트다운 타이머 배지(⏳ 04:12:35)가 브랜드 포인트 코랄 컬러로 역동적 노출됩니다. 또한 실시간 판매율 진행 상태바(Progress Bar)를 적용하여 시각적 소진 속도를 직관적으로 인지시킵니다. (PC 화면에서는 가로 2열 배치로 시원한 와이드 룩을 연출하며, 모바일 화면에서는 세로 1열 풀 레이아웃 그리드로 유연하게 반응형 렌더링 전환됩니다.)",
-    "backendSettings": [
-      { "field": "타임딜 상품 선택", "id": "PRODUCT_CD", "type": "String (필수)", "desc": "넥사크로 상품 마스터 DB에서 직접 연계할 특가 상품의 고유 13자리 식별 번호입니다." },
-      { "field": "할인 혜택 매핑코드", "id": "BENEFIT_CD", "type": "CODE (필수)", "desc": "해당 상품에 매핑되어 가격 줄긋기(원래 가격)와 실시간 할인가를 동적으로 노출할 혜택 코드입니다." },
-      { "field": "전시 시작 일자", "id": "SDT", "type": "Date (필수)", "desc": "타임특가 판매가 시작될 연월일 설정입니다. (YYYYMMDD)" },
-      { "field": "전시 시작 시간", "id": "STM", "type": "Time (필수)", "desc": "타임특가 판매가 시작될 시분초 설정입니다. (HHMMSS)" },
-      { "field": "전시 종료 일자", "id": "EDT", "type": "Date (필수)", "desc": "타임특가 판매가 종료될 연월일 설정입니다. (YYYYMMDD)" },
-      { "field": "전시 종료 시간", "id": "ETM", "type": "Time (필수)", "desc": "타임특가 판매가 종료될 시분초 설정입니다. (HHMMSS)" },
-      { "field": "전체 여백 설정", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "기획전 레이아웃 내에서 타임특가 구좌 상하단에 외부 여백(margin)을 유연하게 줄 것인지 여부입니다." },
-      { "field": "배경 색상 코드", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "타임특가 카드 뒷배경을 우아하게 채울 HSL 테마 맞춤 컬러 코드 설정입니다. 기본값은 투명(Transparent)입니다." }
-    ],
-    "codeSnippet": "// frmPlanCardTimeDeal.xfdl.js - 타임특가 등록 시 전시 시작일시-종료일시 정밀 선후 관계 검증 스크립트\nthis.fnTimeDealPeriodValidator = function() {\n    var startDt = this.dsTimeDealInfo.getColumn(0, \"SDT\") + this.dsTimeDealInfo.getColumn(0, \"STM\");\n    var endDt = this.dsTimeDealInfo.getColumn(0, \"EDT\") + this.dsTimeDealInfo.getColumn(0, \"ETM\");\n    \n    // 시작 시간이 종료 시간보다 미래이거나 동일할 때 저장을 반려하는 정밀 안전 장치\n    if (startDt >= endDt) {\n        this.gfnMessage(\"타임특가 시작 시간은 종료 시간보다 미래이거나 같을 수 없습니다. 정확한 전시 기간을 입력해주세요.\", \"A\");\n        return false;\n    }\n    return true;\n};",
-    "warnings": "1. [시간 유효성 엄격] 타임특가의 시작 일시(SDT+STM)는 반드시 종료 일시(EDT+ETM)보다 정밀히 이전 시점이어야 하며, 1초라도 어긋날 시 넥사크로 어드민 폼 검증 단에서 에러 경고와 함께 저장이 반려됩니다.\n2. [서버 기준 시간 동기화] 클라이언트-서버 간 시간차로 인해 종료 타이머 오차가 유발되는 사고를 사전에 차단하기 위해, 브라우저 로컬 PC 시스템 시계를 절대 직접 참조하지 않고 넥사크로 공통 백엔드 API 서버의 UTC 기준 라이브 서버 타임을 호출하여 카운트다운을 표시하도록 코딩되어야 합니다.\n3. [종료 시 자동 미노출] 설정된 전시 종료 시간이 도달하면 화면에서 컴포넌트 전체가 자동으로 보이지 않도록 동적 렌더링 스위치가 제어됩니다.",
-    "imageGuidelines": {
-      "pcSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
-      "moSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
-      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
-      "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "타임특가 대표 상품 이미지는 넥사크로 UI 파일업로드 핸들러에서 **200KB를 1바이트라도 초과 시 업로드를 즉시 반려**하고 에러를 호출합니다. 업로드 전 사전에 이미지를 리사이징하는 것이 필수입니다."
-    },
-    "qtyGuidelines": {
-      "tabMin": "해당 없음",
-      "tabMax": "해당 없음",
-      "prodMin": "최소 1개 등록 필수",
-      "prodMax": "최대 4개 (가로형 2열 슬라이더 지원 한도)",
-      "adminValidation": "타임특가의 시각 완성도와 쾌적한 템플릿 로딩을 위해 **최소 1개 이상, 최대 4개 이하의 상품만 매핑**해야 합니다. 어드민(NBOS) 저장 시 매핑된 상품 개수가 없거나, 4개를 초과 등록 시 저장 유효성 검증을 통과하지 못해 기획전 발행이 즉각 반려됩니다. 또한 메인 타이틀은 최대 40byte(한글 기준 20자, 영문 40자) 이내 기입을 원칙으로 삼고 있습니다."
     }
   },
   "REVIEW": {
@@ -434,13 +485,38 @@ window.ExhibitionGuides = {
     "desc": "기획전 본문 내에 화려하고 유려한 100% 당첨형 룰렛 게임 그래픽을 연출하여, 고객들의 매일 반복적인 참여를 유도함으로써 브랜드 리텐션을 격상시키고 실시간으로 마일리지/시크릿 쿠폰 등의 당첨 혜택을 즉석 지급하는 고기능 마케팅 컴포넌트입니다.",
     "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 원형의 우아한 회전판 그래픽과 정중앙의 시작(START) 버튼, 상단의 대칭형 삼각 지침 핀이 렌더링됩니다. 어드민 설정에 따라 6칸 또는 8칸 룰렛판으로 분기되며, 사용자가 START 클릭 시 기동되는 5초간의 부드러운 가감속 회전 애니메이션이 탑재되어 극도의 몰입감과 기획전 긴장감을 증폭시킵니다. (PC 및 모바일 환경에서 정비율 1:1 박스 구조를 유지하여 회전 시 찌그러짐 현상이 유도되지 않도록 반응형 랩 처리가 완벽히 적용되어 있습니다.)",
     "backendSettings": [
-      { "field": "캠페인 고유번호", "id": "ROULET_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "어드민 프로모션 관리에서 사전에 등록된 연동 룰렛 이벤트 캠페인의 고유 식별 번호입니다." },
-      { "field": "룰렛판 칸수 유형", "id": "radioRouletType", "type": "Combo/Radio (6/8)", "desc": "룰렛판 회전 그래픽의 칸 구성 형태를 결정합니다. 6칸형 또는 8칸형 선택에 따라 프론트 룰렛판 리워드 각도가 동적으로 분할 렌더링됩니다." },
-      { "field": "시작버튼 유형", "id": "radioBtnType", "type": "Combo/Radio (A/B)", "desc": "정중앙의 스타트 버튼 디자인 유형입니다. A형: 모던 블랙&화이트 텍스트형 / B형: 강렬한 코랄 포인트 원형 심볼형 중 선택합니다." },
-      { "field": "컴포넌트 배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "룰렛 게임 영역의 뒷배경을 채울 Hex 컬러 코드로 지정합니다. 기본값은 투명(Transparent)입니다." },
-      { "field": "구간별 경품 목록", "id": "dsRouletReward", "type": "DataSet (필수)", "desc": "선택한 칸수 사양에 맞춘 당첨 리워드 정보 데이터셋입니다. 각 행마다 1대1 매핑할 리워드명(마일리지, 쿠폰 등), 혜택값(식별 ID), 아이콘 이미지, 그리고 로깅용 통계 카테고리 명칭을 필수로 등록해야 합니다." }
+      {
+        "field": "캠페인 고유번호",
+        "id": "ROULET_CAMPAIGN_NO",
+        "type": "Integer (필수)",
+        "desc": "어드민 프로모션 관리에서 사전에 등록된 연동 룰렛 이벤트 캠페인의 고유 식별 번호입니다."
+      },
+      {
+        "field": "룰렛판 칸수 유형",
+        "id": "radioRouletType",
+        "type": "Combo/Radio (6/8)",
+        "desc": "룰렛판 회전 그래픽의 칸 구성 형태를 결정합니다. 6칸형 또는 8칸형 선택에 따라 프론트 룰렛판 리워드 각도가 동적으로 분할 렌더링됩니다."
+      },
+      {
+        "field": "시작버튼 유형",
+        "id": "radioBtnType",
+        "type": "Combo/Radio (A/B)",
+        "desc": "정중앙의 스타트 버튼 디자인 유형입니다. A형: 모던 블랙&화이트 텍스트형 / B형: 강렬한 코랄 포인트 원형 심볼형 중 선택합니다."
+      },
+      {
+        "field": "컴포넌트 배경색상",
+        "id": "BKGD_CLR_VAL",
+        "type": "Color Hex (선택)",
+        "desc": "룰렛 게임 영역의 뒷배경을 채울 Hex 컬러 코드로 지정합니다. 기본값은 투명(Transparent)입니다."
+      },
+      {
+        "field": "구간별 경품 목록",
+        "id": "dsRouletReward",
+        "type": "DataSet (필수)",
+        "desc": "선택한 칸수 사양에 맞춘 당첨 리워드 정보 데이터셋입니다. 각 행마다 1대1 매핑할 리워드명(마일리지, 쿠폰 등), 혜택값(식별 ID), 아이콘 이미지, 그리고 로깅용 통계 카테고리 명칭을 필수로 등록해야 합니다."
+      }
     ],
-    "codeSnippet": "// RouletteGame.tsx - Front-end React 룰렛 회전판 인터랙션 및 애니메이션 제어 로직 일부\nconst RouletteGame = React.memo(({ rouletteInfo, isPreview }) => {\n  const [isSpinning, setIsSpinning] = useState(false);\n  const [prizeDeg, setPrizeDeg] = useState(0);\n  const { mutate: claimReward } = useMutationExhbRouletClaimPOST({\n    onSuccess: (data) => {\n      // 1. 당첨 결과에 따른 각도 계산 (전체 360도 중 당첨 구간 타겟팅 + 5회 이상 강제 롤링 보정)\n      const targetSector = data.winIndex; // 예: 0 ~ 5 (6칸 기준)\n      const sectorDeg = 360 / (rouletteInfo.rouletType === '6' ? 6 : 8);\n      const randomOffset = sectorDeg * 0.1 + Math.random() * (sectorDeg * 0.8);\n      const stopDeg = 3600 + (360 - (targetSector * sectorDeg + randomOffset));\n      setPrizeDeg(stopDeg);\n      setIsSpinning(true);\n      \n      setTimeout(() => {\n        setIsSpinning(false);\n        LFAlert.alert(`${data.rewardName}에 당첨되셨습니다! 🎁`);\n      }, 5000); // 5초간 회전 애니메이션 진행\n    },\n    onError: (err) => {\n      LFAlert.alert(err.message || \"이미 오늘 참여하셨거나 룰렛 참여 대상이 아닙니다.\");\n    }\n  });\n  \n  const handleStartSpin = () => {\n    if (isPreview) return LFAlert.alert(\"미리보기 화면에서는 룰렛을 돌릴 수 없습니다.\");\n    if (isSpinning) return;\n    claimReward({ campaignNo: rouletteInfo.rouletCampaignNo });\n  };",
+    "codeSnippet": "// RouletteGame.tsx - Front-end React 룰렛 회전판 인터랙션 및 애니메이션 제어 로직 일부\nconst RouletteGame = React.memo(({ rouletteInfo, isPreview }) => {\n  const [isSpinning, setIsSpinning] = useState(false);\n  const [prizeDeg, setPrizeDeg] = useState(0);\n  const { mutate: claimReward } = useMutationExhbRouletClaimPOST({\n    onSuccess: (data) => {\n      // 1. 당첨 결과에 따른 각도 계산 (전체 360도 중 당첨 구간 타겟팅 + 5회 이상 강제 롤링 보정)\n      const targetSector = data.winIndex; // 예: 0 ~ 5 (6칸 기준)\n      const sectorDeg = 360 / (rouletteInfo.rouletType === '6' ? 6 : 8);\n      const randomOffset = sectorDeg * 0.1 + Math.random() * (sectorDeg * 0.8);\n      const stopDeg = 3600 + (360 - (targetSector * sectorDeg + randomOffset));\n      setPrizeDeg(stopDeg);\n      setIsSpinning(true);\n      \n      setTimeout(() => {\n        setIsSpinning(false);\n        LFAlert.alert(`${data.rewardName}에 당첨되셨습니다! 🎁`);\n      }, 5000); // 5초간 회전 애니메이션 진행\n    },\n    onError: (err) => {\n      LFAlert.alert(err.message || \"이미 오늘 참여하셨거나 룰렛 참여 대상이 아닙니다.\");\n    }\n  });\n  \n  const handleStartSpin = () => {\n    if (isPreview) return LFAlert.alert(\"미리보기 화면에서는 룰렛을 돌릴 수 없습니다.\");\n    if (isSpinning) return;\n    claimReward({ campaignNo: rouletteInfo.rouletCampaignNo });\n  };\n  // ...\n});",
     "warnings": "1. [프로모션 연동 유효기간] 룰렛 캠페인의 운영 기간은 반드시 기획전 전시 기간을 완벽히 포함해야 합니다. 기획전 오픈 시점에 룰렛 캠페인이 비활성 상태거나 조기 종료되면 프론트 룰렛판 렌더링 시 빈 화면이 노출되어 대형 장애로 이어질 수 있습니다.\n2. [클라이언트 프론트 조작 어뷰징 방지] 룰렛의 회전 연출 및 결과 표시는 프론트 CSS/JS 모션으로 처리되지만, 실제 당첨 결과 데이터(경품 정보, 지급 여부)는 백엔드 API에서 암호화 검증된 토큰으로 처리되어야 합니다. 로컬 JS 난수로 당첨을 결정할 경우 심각한 보안 어뷰징 위험이 있으므로 절대 금지합니다.\n3. [6칸/8칸 리워드 매핑 일치성] 어드민 저장 시 룰렛 유형(6칸/8칸)과 등록한 리워드 수(dsRouletReward)가 정확히 일치하지 않는 경우 프론트에서 룰렛 판 그래픽 각도가 어긋나 텍스트와 보상이 꼬이게 되므로 저장 전 반드시 사전 체크를 진행해 주십시오.",
     "imageGuidelines": {
       "pcSize": "가로 600px × 세로 600px 권장 (원형 룰렛판 백그라운드 이미지 스펙)",
@@ -466,20 +542,45 @@ window.ExhibitionGuides = {
     "desc": "기획전 상품에 대하여 실시간으로 구매 및 참여 신청 인원이 누적될수록 단계별 목표(Milestone)를 달성하여 할인 혜택율이 점점 올라가도록 유도하는 마케팅 특화형 소셜 커머스 상품 카드입니다.",
     "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상품의 고화질 이미지와 함께 실시간 신청 인원 현황, 그리고 목표 단계별(1단계 / 2단계 / 3단계 최종) 달성 진척도 게이지 바(Progress Bar)를 세련되게 묘사합니다. 사용자가 '공동구매 참여하기' 클릭 시 실시간 API 통신으로 누적 수치가 올라가며, 게이지가 역동적으로 확장하여 고객의 공동 참여 심리와 구매 바이럴을 유도합니다. (PC에서는 가로형 그리드 배열, 모바일에서는 세로 적층형의 유연한 반응형 뷰를 제공합니다.)",
     "backendSettings": [
-      { "field": "공구 캠페인 번호", "id": "GPUR_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "어드민 프로모션 관리 시스템에서 생성된 연동 공동구매 캠페인의 고유 식별 번호입니다." },
-      { "field": "대상 상품 코드", "id": "PRODUCT_CD", "type": "String (필수)", "desc": "공동구매 특가 혜택을 매핑할 13자리 상품 마스터 코드입니다." },
-      { "field": "최소 활성 인원", "id": "editMinQty", "type": "Integer (필수)", "desc": "공동구매 딜이 최종 발효(성공)되기 위해 필요한 최소 총 신청 인원 한계선입니다." },
-      { "field": "구간 할인율 설정", "id": "dsGpurScale", "type": "DataSet (필수)", "desc": "단계별 달성 인원 및 할인율 매핑 정보입니다. (예: 1단계: 100명/20%, 2단계: 500명/35%, 3단계: 1000명/50% 반값 특가)" },
-      { "field": "배경 색상 코드", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "공동구매 컴포넌트 전체의 테마 배경색을 지정합니다. 기본값은 투명(Transparent)입니다." }
+      {
+        "field": "공구 캠페인 번호",
+        "id": "GPUR_CAMPAIGN_NO",
+        "type": "Integer (필수)",
+        "desc": "어드민 프로모션 관리 시스템에서 생성된 연동 공동구매 캠페인의 고유 식별 번호입니다."
+      },
+      {
+        "field": "대상 상품 코드",
+        "id": "PRODUCT_CD",
+        "type": "String (필수)",
+        "desc": "공동구매 특가 혜택을 매핑할 13자리 상품 마스터 코드입니다."
+      },
+      {
+        "field": "최소 활성 인원",
+        "id": "editMinQty",
+        "type": "Integer (필수)",
+        "desc": "공동구매 딜이 최종 발효(성공)되기 위해 필요한 최소 총 신청 인원 한계선입니다."
+      },
+      {
+        "field": "구간 할인율 설정",
+        "id": "dsGpurScale",
+        "type": "DataSet (필수)",
+        "desc": "단계별 달성 인원 및 할인율 매핑 정보입니다. (예: 1단계: 100명/20%, 2단계: 500명/35%, 3단계: 1000명/50% 반값 특가)"
+      },
+      {
+        "field": "배경 색상 코드",
+        "id": "BKGD_CLR_VAL",
+        "type": "Color Hex (선택)",
+        "desc": "공동구매 컴포넌트 전체의 테마 배경색을 지정합니다. 기본값은 투명(Transparent)입니다."
+      }
     ],
-    "codeSnippet": "// GroupPurchaseCard.tsx - Front-end React 공동구매 실시간 인원 신청 및 게이지 렌더링 일부\nconst GroupPurchaseCard = React.memo(({ gpurInfo, isPreview }) => {\n  const [currentQty, setCurrentQty] = useState(gpurInfo.totalAppliedQty || 0);\n  const { mutate: applyGroupPurchase } = useMutationExhbGpurApplyPOST({\n    onSuccess: (data) => {\n      setCurrentQty(prev => prev + 1);\n      LFAlert.alert(\"공동구매 신청이 완료되었습니다! 목표 달성 시 특가 혜택이 적용됩니다. 🎉\");\n    },\n    onError: (err) => {\n      LFAlert.alert(err.message || \"이미 신청하셨거나 신청 불가능한 상품입니다.\");\n    }\n  });\n  // 구간 계산\n  const progressPercent = useMemo(() => {\n    const maxQty = gpurInfo.scaleList[gpurInfo.scaleList.length - 1].targetQty;\n    return Math.min(100, (currentQty / maxQty) * 100);\n  }, [currentQty, gpurInfo]);",
-    "warnings": "1. [인원수 논리 오류 방지] 각 할인 단계(1단계 ~ 3단계)의 목표 인원수(`dsGpurScale.TARGET_QTY`)는 이전 단계보다 무조건 순차적으로 큰 값이어야 하며, 위반 시 넥사크로 어드민 폼 저장 스크립트단에서 저장이 차단됩니다.\n2. [실시간 동시성 락] 대량의 신청자가 동시에 공구 참여 버튼을 누르는 핫딜/선착순 형태의 폭주 상황을 방어하기 위해, 프론트 단에서는 트랜잭션 신청 중(`isSubmitting` 락) 버튼 재클릭을 강제 비활성화해야 합니다.\n3. [취소/환불 보정 규칙] 공동구매 행사 중 결제 취소 또는 환불건 발생 시 누적 참여 인원수의 실시간 감산 처리를 백엔드 스케줄러가 보정 동기화해야 최종 단계 도달 및 가격 정산 오류를 막을 수 있습니다.",
+    "codeSnippet": "// GroupPurchaseCard.tsx - Front-end React 공동구매 실시간 인원 신청 및 게이지 렌더링 일부\nconst GroupPurchaseCard = React.memo(({ gpurInfo, isPreview }) => {\n  const [currentQty, setCurrentQty] = useState(gpurInfo.totalAppliedQty || 0);\n  const { mutate: applyGroupPurchase } = useMutationExhbGpurApplyPOST({\n    onSuccess: (data) => {\n      setCurrentQty(prev => prev + 1);\n      LFAlert.alert(\"공동구매 신청이 완료되었습니다! 목표 달성 시 특가 혜택이 적용됩니다. 🎉\");\n    },\n    onError: (err) => {\n      LFAlert.alert(err.message || \"이미 신청하셨거나 신청 불가능한 상품입니다.\");\n    }\n  });\n  // ...\n});",
+    "warnings": "1. [인원수 논리 오류 방지] 각 할인 단계(1단계 ~ 3단계)의 목표 인원수(dsGpurScale.TARGET_QTY)는 이전 단계보다 무조건 순차적으로 큰 값이어야 하며, 위반 시 넥사크로 어드민 폼 저장 스크립트단에서 저장이 차단됩니다.\n2. [실시간 동시성 락] 대량의 신청자가 동시에 공구 참여 버튼을 누르는 핫딜/선착순 형태의 폭주 상황을 방어하기 위해, 프론트 단에서는 트랜잭션 신청 중(isSubmitting 락) 버튼 재클릭을 강제 비활성화해야 합니다.\n3. [취소/환불 보정 규칙] 공동구매 행사 중 결제 취소 또는 환불건 발생 시 누적 참여 인원수의 실시간 감산 처리를 백엔드 스케줄러가 보정 동기화해야 최종 단계 도달 및 가격 정산 오류를 막을 수 있습니다.",
     "imageGuidelines": {
       "pcSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
       "moSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
       "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
       "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "공동구매 대표 상품 썸네일 이미지는 넥사크로 UI 파일업로드 핸들러에서 **200KB를 초과할 시 업로드를 차단**합니다. 업로드 전 사전에 이미지를 리사이징하고 경량화하는 것이 필수입니다."
+      "adminValidation": "공동구매 대표 상품 썸네일 이미지는 넥사크로 UI 파일업로드 핸들러에서 200KB를 초과할 시 업로드를 차단합니다. 업로드 전 사전에 이미지를 리사이징하고 경량화하는 것이 필수입니다."
     },
     "qtyGuidelines": {
       "tabMin": "최소 1개 공동구매 딜 등록 필수",
@@ -498,13 +599,33 @@ window.ExhibitionGuides = {
     "desc": "기획전 본문 내에서 앱 푸시 수신, 야간 마케팅 알림 동의, 소셜 계정 연동 로그인 등 다양한 마케팅성 고객 액션을 장려하고 조건 충족 시 실시간 쿠폰 또는 포인트를 자동 발급하는 혜택 유도 전용 프로모션 컴포넌트입니다.",
     "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 은은한 그라데이션이 감도는 와이드 띠 배너와 혜택 수령용 바로가기 버튼(CTA)이 가로 플렉스로 배치됩니다. 사용자가 '동의하고 쿠폰받기' 클릭 시 브라우저 푸시 알림 권한 체크 또는 소셜 계정 동의 창이 팝업되며, 성공 처리에 따라 버튼 상태가 실시간 '동의 완료' 회색 비활성형으로 유려하게 토글 전환되어 동시성 중복 발급을 차단합니다.",
     "backendSettings": [
-      { "field": "마케팅 캠페인 번호", "id": "MKTG_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "어드민 프로모션 관리 도구에서 사전 기획 생성된 연동 마케팅 캠페인의 고유 번호입니다." },
-      { "field": "참여 유도 유형", "id": "comboMktgType", "type": "Combo (PUSH/NIGHT/SNS/SMS)", "desc": "마케팅 액션 분류 유형을 정의합니다. PUSH(앱 알림 동의), NIGHT(야간 푸시 동의), SNS(소셜 회원 연계), SMS(마케팅 문자 동의)에 따라 프론트 팝업 시나리오가 자동으로 분기 매핑됩니다." },
-      { "field": "컴포넌트 배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "마케팅 혜택 영역의 배경색상입니다. 기본값은 투명(Transparent)이며 HSL 테마 매칭 컬러를 추천합니다." },
-      { "field": "리워드 연동 설정", "id": "dsMktgReward", "type": "DataSet (필수)", "desc": "조건 충족 시 발급할 마일리지 코드, 쿠폰 마스터 번호 및 노출용 보상 텍스트를 기입하기 위한 혜택 설정 데이터셋입니다." }
+      {
+        "field": "마케팅 캠페인 번호",
+        "id": "MKTG_CAMPAIGN_NO",
+        "type": "Integer (필수)",
+        "desc": "어드민 프로모션 관리 도구에서 사전 기획 생성된 연동 마케팅 캠페인의 고유 번호입니다."
+      },
+      {
+        "field": "참여 유도 유형",
+        "id": "comboMktgType",
+        "type": "Combo (PUSH/NIGHT/SNS/SMS)",
+        "desc": "마케팅 액션 분류 유형을 정의합니다. PUSH(앱 알림 동의), NIGHT(야간 푸시 동의), SNS(소셜 회원 연계), SMS(마케팅 문자 동의)에 따라 프론트 팝업 시나리오가 자동으로 분기 매핑됩니다."
+      },
+      {
+        "field": "컴포넌트 배경색상",
+        "id": "BKGD_CLR_VAL",
+        "type": "Color Hex (선택)",
+        "desc": "마케팅 혜택 영역의 배경색상입니다. 기본값은 투명(Transparent)이며 HSL 테마 매칭 컬러를 추천합니다."
+      },
+      {
+        "field": "리워드 연동 설정",
+        "id": "dsMktgReward",
+        "type": "DataSet (필수)",
+        "desc": "조건 충족 시 발급할 마일리지 코드, 쿠폰 마스터 번호 및 노출용 보상 텍스트를 기입하기 위한 혜택 설정 데이터셋입니다."
+      }
     ],
-    "codeSnippet": "// MarketingBenefitCard.tsx - Front-end React 앱 푸시 및 야간 알림 동의 인터랙션 일부\nconst MarketingBenefitCard = React.memo(({ mktgInfo, isPreview }) => {\n  const [isAgreed, setIsAgreed] = useState(mktgInfo.isPushConsented || false);\n  const { mutate: requestPushConsent } = useMutationExhbPushConsentPOST({\n    onSuccess: (data) => {\n      setIsAgreed(true);\n      LFAlert.alert(\"동의 완료! 마케팅 수신동의 무료배송 쿠폰 발급이 완료되었습니다. 🎁\");\n    },\n    onError: (err) => {\n      LFAlert.alert(err.message || \"이미 혜택을 받으셨거나 참여 대상 고객이 아닙니다.\");\n    }\n  });\n\n  const handleActionClick = () => {\n    if (isPreview) return LFAlert.alert(\"미리보기 화면에서는 혜택 수령이 불가능합니다.\");\n    if (isAgreed) return;\n    requestPushConsent({ campaignNo: mktgInfo.mktgCampaignNo, type: mktgInfo.mktgType });\n  };",
-    "warnings": "1. [유형별 디바이스 종속성] 앱 푸시(PUSH) 및 야간 알림(NIGHT) 동의는 **모바일 모바일 웹뷰(WebView) 또는 모바일 네이티브 앱(App) 환경에서만 정상 작동**합니다. PC 및 모바일 일반 브라우저(Safari, Chrome 등) 진입 시에는 브라우저 API 환경의 제약으로 동의 팝업이 무조건 에러 차단되므로, 프론트에서는 PC/웹 환경에 대응해 'LFmall 모바일 앱 전용 혜택' 문구와 함께 스토어 다운로드 랜딩 또는 QR코드 레이어를 띄우도록 가드 코딩이 필수 적용되어야 합니다.\n2. [리워드 공백 반려] 마케팅 캠페인 저장 시 발급 대상 쿠폰이나 마일리지 데이터셋(`dsMktgReward`)이 완전 비어있을 시 넥사크로 유효성 스크립트에 의해 저장이 원천 반려됩니다.\n3. [개인정보 처리 동기화] 동의 철회 또는 푸시 권한 수동 변경 시의 싱크 상태를 백엔드 배치 데몬이 주기적으로 동기화하여야 부정 중복 발급 시도를 제어할 수 있습니다.",
+    "codeSnippet": "// MarketingBenefitCard.tsx - Front-end React 앱 푸시 및 야간 알림 동의 인터랙션 일부\nconst MarketingBenefitCard = React.memo(({ mktgInfo, isPreview }) => {\n  const [isAgreed, setIsAgreed] = useState(mktgInfo.isPushConsented || false);\n  const { mutate: requestPushConsent } = useMutationExhbPushConsentPOST({\n    onSuccess: (data) => {\n      setIsAgreed(true);\n      LFAlert.alert(\"동의 완료! 마케팅 수신동의 무료배송 쿠폰 발급이 완료되었습니다. 🎁\");\n    },\n    onError: (err) => {\n      LFAlert.alert(err.message || \"이미 혜택을 받으셨거나 참여 대상 고객이 아닙니다.\");\n    }\n  });\n  // ...\n});",
+    "warnings": "1. [유형별 디바이스 종속성] 앱 푸시(PUSH) 및 야간 알림(NIGHT) 동의는 모바일 모바일 웹뷰(WebView) 또는 모바일 네이티브 앱(App) 환경에서만 정상 작동합니다. PC 및 모바일 일반 브라우저(Safari, Chrome 등) 진입 시에는 브라우저 API 환경의 제약으로 동의 팝업이 무조건 에러 차단되므로, 프론트에서는 PC/웹 환경에 대응해 'LFmall 모바일 앱 전용 혜택' 문구와 함께 스토어 다운로드 랜딩 또는 QR코드 레이어를 띄우도록 가드 코딩이 필수 적용되어야 합니다.\n2. [리워드 공백 반려] 마케팅 캠페인 저장 시 발급 대상 쿠폰이나 마일리지 데이터셋(dsMktgReward)이 완전 비어있을 시 넥사크로 유효성 스크립트에 의해 저장이 원천 반려됩니다.\n3. [개인정보 처리 동기화] 동의 철회 또는 푸시 권한 수동 변경 시의 싱크 상태를 백엔드 배치 데몬이 주기적으로 동기화하여야 부정 중복 발급 시도를 제어할 수 있습니다.",
     "imageGuidelines": {
       "pcSize": "가로 800px × 세로 200px 권장 (와이드형 띠 배너)",
       "moSize": "가로 710px × 세로 280px 권장 (1단 띠 배너)",
@@ -517,64 +638,8 @@ window.ExhibitionGuides = {
       "tabMax": "최대 2개 마케팅 구좌 등록 가능 (수직 스택형 배열 한도)",
       "prodMin": "해당 사항 없음 (상품 비연합 독립형)",
       "prodMax": "최대 1개 리워드 코드 매핑 제한",
-      "adminValidation": "마케팅 구좌 저장 시 연동 가능한 리워드 혜택(dsMktgReward)은 논리 정합성 유지를 위해 **최대 1개로 제약**됩니다. 리워드 코드가 존재하지 않거나 2개 이상 과도하게 매핑되어 저장 시도할 경우, 어드민 검증에 의해 저장이 반려됩니다."
+      "adminValidation": "마케팅 구좌 저장 시 연동 가능한 리워드 혜택(dsMktgReward)은 논리 정합성 유지를 위해 최대 1개로 제약됩니다. 리워드 코드가 존재하지 않거나 2개 이상 과도하게 매핑되어 저장 시도할 경우, 어드민 검증에 의해 저장이 반려됩니다."
     }
-  },
-  "PAYBACK": {
-    "cardKey": "PAYBACK",
-    "name": "페이백",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardPayBack.xfdl",
-    "moduleCode": "MD3",
-    "desc": "구매 완료 시 결제 금액의 일정 비율을 적립금으로 페이백해주는 특화 혜택입니다.",
-    "layoutDescription": "페이백 금액 산출기입니다.",
-    "backendSettings": [
-      { "field": "적립 비율", "id": "PAYBACK_RATIO", "type": "Integer (필수)", "desc": "페이백 적립율을 10단위 백분율로 입력합니다." }
-    ],
-    "codeSnippet": "// 페이백 연계",
-    "warnings": "페이백 실지급은 배송 완료 이후에만 가동되는 규칙 준수가 요구됩니다."
-  },
-  "ENTCODE": {
-    "cardKey": "ENTCODE",
-    "name": "입장코드",
-    "category": "NAV",
-    "sourceFile": "frmPlanCardAccessCode.xfdl",
-    "moduleCode": "MD13",
-    "desc": "프라이빗 기획전 진입을 위해 전용 입장 암호코드를 넣어야 하는 차단 영역입니다.",
-    "layoutDescription": "패스워드 입력창 형태입니다.",
-    "backendSettings": [
-      { "field": "입장코드 설정", "id": "PASS_CODE", "type": "String (필수)", "desc": "검증용 특수 코드 문자열을 기입합니다." }
-    ],
-    "codeSnippet": "// 입장코드 검증",
-    "warnings": "대소문자 구분 및 빈칸 예외 처리를 엄격히 적용하십시오."
-  },
-  "APPLY": {
-    "cardKey": "APPLY",
-    "name": "응모하기",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardEnter.xfdl",
-    "moduleCode": "MD3",
-    "desc": "럭키 드로우나 사은 행사 등에 실시간 원클릭으로 응모 및 접수하는 버튼 영역입니다.",
-    "layoutDescription": "응모 제출용 버튼 위젯입니다.",
-    "backendSettings": [
-      { "field": "응모 자격", "id": "APPLY_GRADE", "type": "CODE (선택)", "desc": "등급별 응모 자격 제한 유무를 세팅합니다." }
-    ],
-    "codeSnippet": "// 응모 트랜잭션",
-    "warnings": "다중 응모 방지 데이터 트래킹 세팅이 권장됩니다."
-  },
-  "SHARE": {
-    "cardKey": "SHARE",
-    "name": "공유하기",
-    "category": "NAV",
-    "sourceFile": "frmPlanCardShare.xfdl",
-    "moduleCode": "MD13",
-    "desc": "SNS나 카카오톡 링크 전송 버튼들을 정렬 노출하는 공유 모듈입니다.",
-    "layoutDescription": "카카오톡/페이스북 공유 링크 목록입니다.",
-    "backendSettings": [
-      { "field": "공유 텍스트", "id": "SHARE_MSG", "type": "String (필수)", "desc": "카카오톡 공유 시 노출될 대표 썸네일과 공유 기본 문구를 세팅합니다." }
-    ],
-    "codeSnippet": "// SNS API 공유",
-    "warnings": "카카오 개발자 API 키 매핑을 크로스 체크해야 합니다."
   },
   "BANNER_BLOCK": {
     "cardKey": "BANNER_BLOCK",
@@ -585,15 +650,60 @@ window.ExhibitionGuides = {
     "desc": "한 구좌 내에 정밀하게 대칭되는 2열(2분할) 또는 3열(3분할) 레이아웃 형태로 여러 장의 시각 배너 이미지를 격자 적재하여 테마 기획전, 브랜드 모음전 또는 하위 카테고리 숏컷 랜딩을 질서 있게 유도하는 복합 그리드 배너 컴포넌트입니다.",
     "layoutDescription": "사용자 프론트 화면(PC/Mobile)에서 바둑판 모양의 정렬된 격자(Grid) 구조로 렌더링됩니다. 어드민의 '노출 열 개수(BLOCK_COL_CNT)' 및 '여백 크기(BLOCK_GAPS)' 설정에 따라 **2열 바둑판(PC 가로 정렬, 모바일 1열 2단 자동 래핑 등) 또는 3열 다단 배열**로 완전 반응형 유연 정렬이 수행됩니다. 개별 배너는 개별 링크와 대체 텍스트(alt)를 수반하여 단독 배너처럼 독립 작동합니다.",
     "backendSettings": [
-      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "배너 블록 최상단 바깥 여백(Margin) 적용 유무입니다." },
-      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "배너 블록 최상단 안쪽 여백(Padding) 적용 유무입니다." },
-      { "field": "노출 열 개수", "id": "BLOCK_COL_CNT", "type": "Combo (2/3)", "desc": "한 가로줄에 노출할 격자 컬럼 개수(2열 또는 3열 분할)를 결정합니다." },
-      { "field": "블록간 여백", "id": "BLOCK_GAPS", "type": "Integer (px)", "desc": "배너 그리드 블록 간의 여백 크기를 픽셀 단위로 설정합니다. (기본값 8px, 최대 24px)" },
-      { "field": "PC 이미지", "id": "PC_IMG_PATH_NM", "type": "File (그리드별)", "desc": "격자 구좌별 PC 화면용 배너 원본 파일입니다. (최소 2장 ~ 최대 6장)" },
-      { "field": "모바일 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (그리드별)", "desc": "격자 구좌별 모바일 화면용 배너 원본 파일입니다." },
-      { "field": "개별 배너 링크", "id": "LINK_URL_VAL", "type": "String (구좌별)", "desc": "해당 배너 클릭 시 각각 강제 랜딩될 타겟 URL 경로입니다. PC용 스펙을 입력합니다." },
-      { "field": "링크 타겟", "id": "LINK_TRGE_VAL", "type": "Combo (S/B)", "desc": "S: 현재창(_self) / B: 새창(_blank)" },
-      { "field": "eTAG 랜딩 코드", "id": "LINK_DIV_VAL", "type": "Combo (필수)", "desc": "배너 클릭 로깅 및 마케팅 성과 추적을 위한 필수 태깅 코드입니다." }
+      {
+        "field": "여백 상단외부",
+        "id": "CARD_THTP_EXTR_MRGI_USE_YN",
+        "type": "Boolean (Y/N)",
+        "desc": "배너 블록 최상단 바깥 여백(Margin) 적용 유무입니다."
+      },
+      {
+        "field": "여백 상단내부",
+        "id": "CARD_THTP_INNR_MRGI_USE_YN",
+        "type": "Boolean (Y/N)",
+        "desc": "배너 블록 최상단 안쪽 여백(Padding) 적용 유무입니다."
+      },
+      {
+        "field": "노출 열 개수",
+        "id": "BLOCK_COL_CNT",
+        "type": "Combo (2/3)",
+        "desc": "한 가로줄에 노출할 격자 컬럼 개수(2열 또는 3열 분할)를 결정합니다."
+      },
+      {
+        "field": "블록간 여백",
+        "id": "BLOCK_GAPS",
+        "type": "Integer (px)",
+        "desc": "배너 그리드 블록 간의 여백 크기를 픽셀 단위로 설정합니다. (기본값 8px, 최대 24px)"
+      },
+      {
+        "field": "PC 이미지",
+        "id": "PC_IMG_PATH_NM",
+        "type": "File (그리드별)",
+        "desc": "격자 구좌별 PC 화면용 배너 원본 파일입니다. (최소 2장 ~ 최대 6장)"
+      },
+      {
+        "field": "모바일 이미지",
+        "id": "MOBI_IMG_PATH_NM",
+        "type": "File (그리드별)",
+        "desc": "격자 구좌별 모바일 화면용 배너 원본 파일입니다."
+      },
+      {
+        "field": "개별 배너 링크",
+        "id": "LINK_URL_VAL",
+        "type": "String (구좌별)",
+        "desc": "해당 배너 클릭 시 각각 강제 랜딩될 타겟 URL 경로입니다. PC용 스펙을 입력합니다."
+      },
+      {
+        "field": "링크 타겟",
+        "id": "LINK_TRGE_VAL",
+        "type": "Combo (S/B)",
+        "desc": "S: 현재창(_self) / B: 새창(_blank)"
+      },
+      {
+        "field": "eTAG 랜딩 코드",
+        "id": "LINK_DIV_VAL",
+        "type": "Combo (필수)",
+        "desc": "배너 클릭 로깅 및 마케팅 성과 추적을 위한 필수 태깅 코드입니다."
+      }
     ],
     "codeSnippet": "// BannerBlock.tsx - Front-end React 그리드 분할 및 모바일 2열 전환 계산 로직 일부\nexport const BannerBlock = React.memo(({ templateDetail, blockColCnt = 3, blockGaps = 8 }) => {\n  const banners = templateDetail?.planModuleBannerBlockList ?? [];\n  \n  const gridStyle = useMemo(() => ({\n    display: 'grid',\n    gap: `${blockGaps}px`,\n    gridTemplateColumns: `repeat(${blockColCnt}, 1fr)`,\n  }), [blockColCnt, blockGaps]);\n\n  return (\n    <div className={styles.bannerBlockContainer}>\n      <div style={gridStyle} className={styles.bannerGrid}>\n        {banners.map((bnr, idx) => (\n          <a key={bnr.bannerBlockSq || idx} href={bnr.linkUrl} target={bnr.linkTarget === 'B' ? '_blank' : '_self'}>\n            <picture>\n              <source srcSet={`${IMAGE_HOST}/${bnr.mobiImgPath}`} media=\"(max-width: 768px)\" />\n              <img src={`${IMAGE_HOST}/${bnr.pcImgPath}`} className={styles.gridImage} alt={bnr.imgAltText || `배너_${idx + 1}`} />\n            </picture>\n          </a>\n        ))}\n      </div>\n    </div>\n  );\n});",
     "warnings": "1. [eTAG 연동 필수 규정] 그리드에 적재되는 **모든 개별 이미지 배너 슬롯마다 eTAG 랜딩 구분 코드 설정이 누락 없이 강제 매핑**되어야만 어드민 저장이 유효합니다. 단 하나라도 누락되면 넥사크로 DataSet의 유효성 바인더(checkValidation)단에서 저장이 차단됩니다.\n2. [비율 불일치 경고] 격자형 배너 특성상 등록되는 배너 이미지들 간의 **세로 높이 비율이 1픽셀이라도 다를 경우**, 프론트엔드 그리드 렌더링 시 높낮이가 어긋나는 치명적인 불균형 현상이 초래됩니다. 기획 단계에서 모든 그리드 배너의 크기를 픽셀 단위로 완벽하게 동일 정규화해 업로드하여야 합니다.",
@@ -612,214 +722,76 @@ window.ExhibitionGuides = {
       "adminValidation": "어드민(NBOS) 저장 시 노출 열 개수(BLOCK_COL_CNT)는 2 또는 3만 콤보박스로 선택 가능하며, 등록된 배너의 총 개수가 최소 2개 미만이거나 최대 6개를 초과할 시 저장 유효성 검증 단에서 반려 얼럿이 작동합니다. 블록간 간격(BLOCK_GAPS)은 스피너(Spin)를 통해 4px ~ 24px 범위를 벗어나 수동 입력할 시 저장 단에서 8px 기본값으로 강제 리셋 교정되어 안전 처리됩니다."
     }
   },
-  "FLASH_SALE": {
-    "cardKey": "FLASH_SALE",
-    "name": "플래시 세일",
-    "category": "PROD",
-    "sourceFile": "frmPlanCardFlashSale.xfdl",
-    "moduleCode": "MD6",
-    "desc": "극히 짧은 시간에 강력한 폭탄 파격 세일가를 적용하여 전시하는 구좌입니다.",
-    "layoutDescription": "임시 팝업 성격의 파격가 딜 노출입니다.",
-    "backendSettings": [
-      { "field": "파격가 셋업", "id": "FLASH_PRC", "type": "CODE (필수)", "desc": "특가 상품 ID 및 적용 타임 테이블을 연계합니다." }
-    ],
-    "codeSnippet": "// 플래시 세일 연동",
-    "warnings": "과도한 트래픽 몰림 시를 대비한 API 캐싱 처리가 요구됩니다."
-  },
-  "BUY_KING": {
-    "cardKey": "BUY_KING",
-    "name": "구매왕",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardTopBuyer.xfdl",
-    "moduleCode": "MD3",
-    "desc": "기간 동안 최고 구매액 결제 순위를 실시간 리더보드로 노출하여 결제를 자극합니다.",
-    "layoutDescription": "리더보드 랭킹 테이블 구조입니다.",
-    "backendSettings": [
-      { "field": "집계 기한", "id": "RANK_DATE", "type": "DateTime (필수)", "desc": "랭킹 집계 시작 및 종료 일시를 입력합니다." }
-    ],
-    "codeSnippet": "// 구매액 랭킹 집계 처리",
-    "warnings": "취소/반품 거래액이 즉각 랭킹에서 마이너스 반영되도록 집계 쿼리를 설계해야 합니다."
-  },
-  "RANDOM_NO": {
-    "cardKey": "RANDOM_NO",
-    "name": "난수입력",
-    "category": "NAV",
-    "sourceFile": "frmPlanCardRandomNumber.xfdl",
-    "moduleCode": "MD13",
-    "desc": "배포된 전용 시리얼 쿠폰이나 1회용 프로모션 난수코드를 검증/입력하는 곳입니다.",
-    "layoutDescription": "난수 코드 검증 필드입니다.",
-    "backendSettings": [
-      { "field": "시리얼 풀 연동", "id": "SERIAL_POOL_ID", "type": "CODE (필수)", "desc": "미리 생성된 유효 난수 시리얼 대량 풀을 지정 연계합니다." }
-    ],
-    "codeSnippet": "// 시리얼 인증",
-    "warnings": "오류 반복 입력 차단 횟수를 지정하여 브루트포스 어택을 방어하십시오."
-  },
-  "SALE_CODE": {
-    "cardKey": "SALE_CODE",
-    "name": "할인코드",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardDiscountCode.xfdl",
-    "moduleCode": "MD3",
-    "desc": "기획전 한정 제휴 할인코드 발급 및 입력을 검증하는 블록입니다.",
-    "layoutDescription": "쿠폰 발급 연동 코드 입력 인풋입니다.",
-    "backendSettings": [
-      { "field": "프로모션 연결", "id": "PROMOTION_ID", "type": "CODE (필수)", "desc": "특정 할인율의 프로모션 ID를 연동 코드와 매핑합니다." }
-    ],
-    "codeSnippet": "// 할인코드 검증",
-    "warnings": "쿠폰 재발급 여부를 설정하십시오."
-  },
-  "FCFS_CPN": {
-    "cardKey": "FCFS_CPN",
-    "name": "선착순쿠폰",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardFCFSCoupon.xfdl",
-    "moduleCode": "MD3",
-    "desc": "시간에 맞춰 선착순 다운로드 버튼이 작동하는 기능형 마케팅 쿠폰입니다.",
-    "layoutDescription": "남은 쿠폰 수량 상태바와 다운로드 버튼이 연동되어 활성/비활성화 상태를 실시간 시각화합니다.",
-    "backendSettings": [
-      { "field": "캠페인 코드 바인딩", "id": "CAMPAIGN_NO", "type": "Integer (필수)", "desc": "다운로드 작동 시 정수 처리를 위해 이벤트 캠페인 번호 및 한도 수량을 백엔드와 사전 매핑합니다." }
-    ],
-    "codeSnippet": "// frmPlanCardFCFSCoupon.xfdl\nthis.btnDownload_onclick = function(obj:nexacro.Button, e:nexacro.ClickEventInfo) {\n    this.gfnTransaction(\"downloadCoupon\", \"/promotion/coupon/download\", inData, outData);\n};\n",
-    "warnings": "중복 클릭 및 불법 자동 매크로를 대비하여 다중 트랜잭션을 제한하고 한도 수량 소진 시 다운로드 클릭이 즉각 클라이언트 단에서도 차단될 수 있도록 에러 트랜잭션을 꼼꼼히 잡아야 합니다."
-  },
-  "CNDT_BNFT": {
-    "cardKey": "CNDT_BNFT",
-    "name": "조건혜택",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardBenefitC.xfdl",
-    "moduleCode": "MD3",
-    "desc": "특정 등급이나 신규 첫 구매 등 개별 조건에 부합할 시에만 오픈되는 혜택 영역입니다.",
-    "layoutDescription": "조건 제한식 프라이빗 혜택 연출입니다.",
-    "backendSettings": [
-      { "field": "조건 기준 선택", "id": "VIP_RULE_CD", "type": "CODE (선택)", "desc": "첫구매 여부 및 VIP 등 자격 등급 셋팅을 활성화합니다." }
-    ],
-    "codeSnippet": "// 등급 조건 필터",
-    "warnings": "비회원이 접근할 시 세션 로그인 레이어를 즉각 호출하도록 제어해야 합니다."
-  },
-  "RANGE": {
-    "cardKey": "RANGE",
-    "name": "레인지",
-    "category": "PROD",
-    "sourceFile": "frmPlanCardRange.xfdl",
-    "moduleCode": "MD6",
-    "desc": "가격대별, 혹은 혜택대별 상품 필터 슬라이더를 지원하는 상품 범위 표기입니다.",
-    "layoutDescription": "양방향 레인지 슬라이더 필터 UI입니다.",
-    "backendSettings": [
-      { "field": "최대/최소 바운드", "id": "PRICE_BOUNDS", "type": "Integer (필수)", "desc": "노출할 가격의 최대 및 최소 경계를 설정합니다." }
-    ],
-    "codeSnippet": "// 슬라이더 레인지 필터",
-    "warnings": "가격 포맷팅 컴마(Comma) 필터링 처리를 확실히 세팅해 줍니다."
-  },
-  "COMMENT": {
-    "cardKey": "COMMENT",
-    "name": "댓글",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardComment.xfdl",
-    "moduleCode": "MD3",
-    "desc": "사용자들의 실시간 댓글 작성 및 소통 참여가 이루어지는 대화형 영역입니다.",
-    "layoutDescription": "텍스트 입력 리스트형 스레드입니다.",
-    "backendSettings": [
-      { "field": "이벤트 게시판 ID", "id": "BOARD_ID", "type": "Integer (필수)", "desc": "댓글이 적재될 시스템 게시판 고유 아이디를 매핑합니다." }
-    ],
-    "codeSnippet": "// 댓글 스레드 렌더링",
-    "warnings": "도배 방지를 위해 1개 세션 당 30초 내 재작성 차단 타임 아웃 규칙을 권장합니다."
-  },
-  "FCFS_CPN_P": {
-    "cardKey": "FCFS_CPN_P",
-    "name": "선착순쿠폰상품",
-    "category": "PROD",
-    "sourceFile": "frmPlanCardFCFSCouponFrod.xfdl",
-    "moduleCode": "MD6",
-    "desc": "선착순 혜택 대상 상품 목록을 바인딩하여 혜택 뱃지와 함께 노출합니다.",
-    "layoutDescription": "쿠폰 적용 특가 전용 상품 그리드입니다.",
-    "backendSettings": [
-      { "field": "대상 상품 연계", "id": "PROD_MAPPING_CD", "type": "CODE (필수)", "desc": "선착순 할인 혜택이 정상 작동하는 상품들만 필터 지정합니다." }
-    ],
-    "codeSnippet": "// 선착순 대상 상품 목록 바인딩",
-    "warnings": "대량의 대상 상품 리스트 업로드 시 엑셀 일괄 업로드 규격 형식을 필히 준수하십시오."
-  },
-  "OPT_CONTAINER": {
-    "cardKey": "OPT_CONTAINER",
-    "name": "옵션컨테이너",
-    "category": "NAV",
-    "sourceFile": "frmPlanCardOptionContainer.xfdl",
-    "moduleCode": "MD13",
-    "desc": "상품의 여러 컬러, 사이즈 등 핵심 옵션 셀렉터 구조를 직접 노출해주는 영역입니다.",
-    "layoutDescription": "옵션 드롭다운 메뉴 및 칩 그리드입니다.",
-    "backendSettings": [
-      { "field": "대표 옵션 지정", "id": "MAPPED_OPTION_CD", "type": "CODE (필수)", "desc": "렌더링할 타겟 공용 옵션 형식을 매핑합니다." }
-    ],
-    "codeSnippet": "// 옵션 선택 처리",
-    "warnings": "옵션별 품절(Sold-Out) 상태를 실시간 연동해 주어야 사용자 이탈을 막습니다."
-  },
-  "GAME_CARD1": {
-    "cardKey": "GAME_CARD1",
-    "name": "게임카드1",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardGameTypeA.xfdl",
-    "moduleCode": "MD3",
-    "desc": "고객 참여 활성화를 위해 탑재된 복합 캐주얼 미니 이벤트 카드타입 A형입니다.",
-    "layoutDescription": "플랩 뒤집기형 그래픽 모듈입니다.",
-    "backendSettings": [
-      { "field": "게임 시나리오", "id": "GAME_SCENARIO_ID", "type": "CODE (필수)", "desc": "꽝/성공 셋팅 및 경품 리워드 데이터셋을 매핑합니다." }
-    ],
-    "codeSnippet": "// 게임 엔진 연계",
-    "warnings": "동적 자바스크립트 로직의 오작동 방지를 위해 사전에 프론트 리액트 렌더러와 철저히 동기화해 주십시오."
-  },
-  "GAME_CARD2": {
-    "cardKey": "GAME_CARD2",
-    "name": "게임카드2",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardGameTypeB.xfdl",
-    "moduleCode": "MD3",
-    "desc": "마케팅 재미 요소를 고도화한 플랩 또는 뒤집기 형태의 미니 게임 카드타입 B형입니다.",
-    "layoutDescription": "스핀 또는 매칭 형태 미니게임 뷰어입니다.",
-    "backendSettings": [
-      { "field": "참여 회수", "id": "GAME_LIMIT_COUNT", "type": "Integer (필수)", "desc": "1일당 계정 참여 한계치(예: 최대 3회)를 어드민 설정합니다." }
-    ],
-    "codeSnippet": "// 게임엔진 B 연동",
-    "warnings": "이벤트 참여 내역 검증 데이터 누수를 철저히 제어해 주십시오."
-  },
   "TEXT": {
     "cardKey": "TEXT",
     "name": "텍스트",
     "category": "BANNER",
-    "sourceFile": "frmPlanCardText.xfdl",
+    "sourceFile": "frmPlanCardText.xfdl (어드민) / Intro.tsx (프론트)",
     "moduleCode": "MD2",
-    "desc": "자유롭고 감각적인 대/소단 타이틀과 설명 문구를 배치할 수 있는 공용 텍스트 영역입니다.",
-    "layoutDescription": "순수 타이포그래피 정렬 블록입니다.",
+    "desc": "자유롭고 감각적인 대/소단 타이틀과 설명 문구를 배치할 수 있는 공용 텍스트 영역입니다. 어드민에서 지정한 상/하단 여백 및 기획전 소개 문구, 진행 기간 등을 감각적인 에디토리얼 레이아웃으로 표현합니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상단 여백 설정(상단외부/내부, 하단외부/내부)에 반응하며, 브랜드 타이포그래피 규칙에 맞춰 상단 설명 문구, 메인 타이틀(최대 2줄), 하단 설명 문구, 그리고 기획전 소개 본문 내용(최대 120자)이 수직 정렬 형태로 노출됩니다. 기획전 진행 기간이 존재할 경우 하단에 날짜 범위 텍스트가 표시됩니다.",
     "backendSettings": [
-      { "field": "제목 및 폰트색", "id": "TEXT_ALIGN_CD", "type": "CODE (선택)", "desc": "노출할 텍스트 문자열 및 좌/우/중앙 정렬 포깝팅을 셋팅합니다." }
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 여백(Margin) 사용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백(Padding) 사용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 하단 여백(Margin) 사용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 하단 여백(Padding) 사용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "TEXT_HDR_TITL", "type": "String (50자 한도)", "desc": "타이틀 상단에 작게 배치되는 강조 설명 텍스트입니다. 하단 설명 문구와 동시에 등록할 수 없습니다." },
+      { "field": "타이틀", "id": "TEXT_TITL", "type": "String (30자 한도)", "desc": "텍스트 컴포넌트의 메인 타이틀입니다. 최대 2줄까지만 입력이 지원됩니다." },
+      { "field": "하단 설명 문구", "id": "TEXT_SUB_TITL", "type": "String (50자 한도)", "desc": "타이틀 하단에 배치되는 설명 텍스트입니다. 상단 설명 문구와 동시에 등록할 수 없습니다." },
+      { "field": "내용 (소개문구)", "id": "TEXT_CONTENTS_VAL", "type": "String (120자 한도, 필수)", "desc": "기획전의 상세 소개 본문 내용입니다. 공백 포함 120자까지 작성이 가능합니다." },
+      { "field": "진행기간", "id": "PGSS_PERD_TEXT", "type": "String (선택)", "desc": "기획전 진행 날짜 범위를 지정합니다. 'YYYYMMDD HHmmss ~ YYYYMMDD HHmmss' 형식으로 저장됩니다." }
     ],
-    "codeSnippet": "// 텍스트 바인딩",
-    "warnings": "태그 입력을 강제 필터링하여 프론트 XSS 인젝션 취약점을 무력화시킵니다."
+    "codeSnippet": "// Intro.tsx - Front-end React 텍스트(기획전 소개) 컴포넌트 핵심 로직\nexport const Intro = ({ template }: { template: PlanTemplateMasterDTO }) => {\n  const { data } = useFetchPlanIntroModuleGET({\n    param: { masterNumber: Number(template?.masterNumber), planSq: Number(template?.planSq), moduleType: template?.moduleType, siteCd: \"03\" }\n  });\n  if (data?.body?.exhibitionYn === \"N\") return <></>;\n  return (\n    <div className={styles.intro}>\n      {data?.body?.content?.split(\"\\n\").map((title, idx) =>\n        title === \"\" ? <br key={idx} /> : <p key={idx}>{title}</p>\n      )}\n      <p className={styles.date}>{data?.body?.moduleTitle}</p>\n    </div>\n  );\n};",
+    "warnings": "1. [상/하단 설명 문구 상호 배타성] 어드민 nexacro 저장 검증 시 상단 설명 문구(TEXT_HDR_TITL)와 하단 설명 문구(TEXT_SUB_TITL)는 동시에 등록할 수 없습니다. 동시에 등록하여 저장을 시도할 시 오류 알럿과 함께 저장이 반려됩니다.\n2. [소개글 필수 및 글자 수 제한] 본문 내용(TEXT_CONTENTS_VAL)은 필수 입력 항목이며, 공백 포함 최대 120자까지만 저장을 허용합니다.\n3. [타이틀 개행 제약] 메인 타이틀(TEXT_TITL)은 최대 30자 이내여야 하며, 개행(\\n)은 최대 2줄까지만 허용합니다. 3줄 이상 입력하고 저장을 시도할 경우, 어드민단에서 차단 알럿이 구동됩니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 1자 이상 기입 (내용 필드 필수)",
+      "prodMax": "최대 120자 (내용 필드) / 30자 (타이틀 필드)",
+      "adminValidation": "텍스트 카드는 상품이나 이미지를 직접 전시하지 않는 에디토리얼 전용 컴포넌트입니다. 어드민(NBOS) 저장 시 내용(소개문구)이 비어있거나 120자를 초과할 경우 저장이 거부됩니다. 또한 타이틀의 라인수가 3줄 이상이거나, 상/하단 설명 문구가 둘 다 채워져 있는 모순이 발생하면 반려 스크립트가 실행됩니다."
+    }
   },
   "PICTORIAL": {
     "cardKey": "PICTORIAL",
     "name": "화보",
     "category": "BANNER",
-    "sourceFile": "frmPlanCardPictorial.xfdl",
+    "sourceFile": "frmPlanCardPictorial.xfdl (어드민) / Magazine.tsx (프론트)",
     "moduleCode": "MD8",
-    "desc": "룩북이나 매거진 화보 레이아웃을 본떠 고화질 이미지를 잡지처럼 넘겨보는 갤러리 뷰어입니다.",
-    "layoutDescription": "가로 넘기기형 갤러리 슬라이더 구조입니다.",
+    "desc": "룩북이나 매거진 화보 레이아웃을 본떠 고화질 이미지를 잡지처럼 넘겨보고, 이미지 내 3x3 핫스팟 구역(1~9번 위치)을 통해 모델 착장 상품을 즉각 태깅하여 바로가기 링크를 연계하는 인터랙티브 스타일 배너 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상단 여백 옵션이 유연하게 동적 가감되며, 에디토리얼 디자인에 맞게 최상단에 화보 썸네일들이 바둑판식 격자로 배치(이미지가 4개인 경우 styles.photo4 전용 레이아웃 분기 구동)됩니다. 그 하단에 메인 타이틀, 홍보 문구 설명이 표시되고, 개별 화보 슬라이드 하단에 설명 문구가 출력됩니다. 화보 이미지 위에 3x3 격자(goProduct no1~no9) 형태로 영역이 구분되어 있어, 사용자가 이미지 내 상품 부위를 직접 탭하면 해당 상품 상세페이지로 부드럽게 화면 이동됩니다.",
     "backendSettings": [
-      { "field": "화보 이미지 등록", "id": "LOOKBOOK_SLIDES", "type": "Files (필수)", "desc": "페이지별 고해상도 화보 파일들을 순서대로 링크 매핑합니다." }
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 상단 여백(Margin) 유무를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 상단 여백(Padding) 유무를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 바깥쪽 하단 여백(Margin) 유무를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "컴포넌트 안쪽 하단 여백(Padding) 유무를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "TEXT_HDR_TITL", "type": "String (50자 한도)", "desc": "타이틀 상단에 작게 배치되는 서브 설명 문구입니다." },
+      { "field": "타이틀", "id": "TEXT_TITL", "type": "String (30자 한도)", "desc": "화보 컴포넌트의 메인 타이틀입니다. 최대 2줄까지만 입력이 지원됩니다." },
+      { "field": "하단 설명 문구", "id": "TEXT_SUB_TITL", "type": "String (50자 한도)", "desc": "메인 타이틀 하단 보조 설명 텍스트입니다." },
+      { "field": "중간 타이틀", "id": "MID_TITE_VAL", "type": "String (30자 한도)", "desc": "화보 슬라이드 영역 바로 상단에 단독 강조되는 보조 타이틀 텍스트입니다." },
+      { "field": "홍보 문구", "id": "EVNT_DSCR", "type": "String (120자 한도)", "desc": "화보 전체의 컨셉이나 브랜드 스토리를 전달하는 본문 상세 글입니다." },
+      { "field": "화보 개수", "id": "comboPictorialCnt", "type": "Combo (2~8개)", "desc": "전시할 화보 이미지 슬라이드 장수를 세팅합니다." },
+      { "field": "이미지 업로드", "id": "PC_IMG_PATH_NM / MOBI_IMG_PATH_NM", "type": "Files (필수)", "desc": "각 화보 슬라이드에 노출될 PC/MO 이미지 파일입니다." },
+      { "field": "링크 갯수", "id": "comboProdCnt", "type": "Combo (0~9개)", "desc": "개별 화보 이미지 내에 배치할 핫스팟 링크 영역의 총 수량을 지정합니다." },
+      { "field": "링크 위치", "id": "comboLinkPosition", "type": "Combo (1~9번 구역)", "desc": "3x3 격자 분할된 가상 영역 중 핫스팟 아이콘을 배치할 좌표 구역 번호입니다." },
+      { "field": "링크 타입", "id": "comboCodeType", "type": "Combo (PROD/EXHB/BRAND)", "desc": "핫스팟 클릭 시 이동할 랜딩 대상 코드 속성 구분입니다." },
+      { "field": "링크 값", "id": "editLinkDtlValue", "type": "String (필수)", "desc": "매핑할 상품 코드 또는 전시 기획전 고유 코드 값입니다." }
     ],
-    "codeSnippet": "// 화보 롤러 로직",
-    "warnings": "모바일 이미지 크기 및 로딩 속도를 감안해 경량화된 최적 웹 포맷(WebP) 활용을 적극 권장합니다."
-  },
-  "REVIEW_GUIDE": {
-    "cardKey": "REVIEW_GUIDE",
-    "name": "리뷰 작성",
-    "category": "NAV",
-    "sourceFile": "frmPlanCardReviewGuide.xfdl",
-    "moduleCode": "MD13",
-    "desc": "구매자들에게 적극적인 평점 및 리뷰 작성을 유도하고 보상 혜택을 알려주는 위젯입니다.",
-    "layoutDescription": "작성 유도 CTA 박스입니다.",
-    "backendSettings": [
-      { "field": "리워드 명시", "id": "REVIEW_REWARD_PTS", "type": "Integer (필수)", "desc": "리뷰 작성 시 마일리지 적립 기준을 노출합니다." }
-    ],
-    "codeSnippet": "// 리뷰 작성 이동",
-    "warnings": "실제 구매 내역이 있는 고객에게만 작성 유도 버튼이 클릭 활성화되도록 분기해야 합니다."
+    "codeSnippet": "// Magazine.tsx - Front-end React 화보 3x3 핫스팟 이미지 맵 및 상품 앵커 매핑 일부\nconst MagazineItem = ({ mobileImagePath, planModuleProductInfoDTOList, content }) => {\n  const exhibitionSequences = planModuleProductInfoDTOList?.reduce(\n    (pre, cur) => [...pre, styles[`selectNo${cur.exhibitionSequence}`]], []\n  );\n  return (\n    <div className={styles.magazine__items}>\n      <div className={styles.photo}>\n        <img src={`https://img.lfmall.co.kr/file/WAS/display/${mobileImagePath}`} className={styles.thumb} alt=\"화보\" />\n        <div className={`${styles.wrapLinks} ${exhibitionSequences?.join(\" \")}`}>\n          {planModuleProductInfoDTOList?.map((item, idx) => (\n            <Link to={`${ROUTE_PATH.PRODUCT}/${item.productCode}`} key={`${item.productCode}_${idx}`} className={`${styles.goProduct} no${item.exhibitionSequence}`}>\n              <span className=\"blind\">상품 바로가기</span>\n            </Link>\n          ))}\n        </div>\n      </div>\n      {content && <div className={styles.disc}>{content.split(\"\\n\").map((txt, i) => <Fragment key={i}>{i !== 0 && <br />}{txt}</Fragment>)}</div>}\n    </div>\n  );\n};",
+    "warnings": "1. [핫스팟 링크 중복 방지] 동일한 화보 슬라이드 내에서 링크 위치(1~9번 구역)는 중복 지정될 수 없습니다. 중복 지정 시 어드민단에서 경고 메시지를 노출하며, 프론트엔드에서도 두 개의 상품 정보 버튼이 겹쳐 렌더링 손상이 초래됩니다.\n2. [용량 및 포맷 규격 제한] 개별 화보 이미지의 용량은 파일당 최대 200KB 이하여야 합니다. 모바일 무선 트래픽 부담을 덜기 위해 이미지 최적화를 마친 후 업로드해야 합니다.\n3. [상/하단 설명 문구 상호 배타성] 어드민 nexacro 시스템 제약으로 상단 설명 문구와 하단 설명 문구는 동시에 적재해 저장할 수 없으므로 둘 중 하나만 채워야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 1240px × 세로 비율 제한 없음 (세로형 화보는 3:4 비율 권장)",
+      "moSize": "가로 750px × 세로 비율 제한 없음 (모바일 풀사이즈 소구 시 세로 1000px 이상 권장)",
+      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
+      "maxSize": "파일당 최대 200KB 이하 (화보별 최대 8장 등록 가능)",
+      "adminValidation": "어드민 넥사크로 UI 파일 바인더에서 이미지당 200KB를 1바이트라도 초과하는 경우 업로드가 원천 차단됩니다. 핫스팟 링크를 활성화하는 경우 상품 데이터 무결성을 위해 실존하는 정상 판매 상태의 13자리 상품 코드를 정확히 기재해야 Validation을 통과합니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 2장 이상 필수",
+      "tabMax": "최대 8장까지 등록 가능",
+      "prodMin": "화보당 핫스팟 최소 1개",
+      "prodMax": "화보당 핫스팟 최대 9개 (3x3 격자 범위 제한)",
+      "adminValidation": "화보 개수는 2장 미만이거나 8장 초과 시 저장이 반려되며, 개별 화보당 삽입 가능한 상품 핫스팟 앵커(comboProdCnt)는 3x3 격자 제약에 의해 최소 1개 ~ 최대 9개까지만 넥사크로 그리드를 통해 등록 저장이 허용됩니다."
+    }
   }
-};
+}
+;
