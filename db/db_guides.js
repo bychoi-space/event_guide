@@ -1229,23 +1229,29 @@ window.ExhibitionGuides = {
     "cardKey": "COMMENT",
     "name": "댓글",
     "category": "PROMOTION",
-    "sourceFile": "frmPlanCardComment.xfdl (어드민) / CommentBoard.tsx (프론트)",
+    "sourceFile": "frmPlanCardComment.xfdl (어드민) / Comment.tsx (프론트)",
     "moduleCode": "MD3",
     "desc": "사용자들의 실시간 댓글 작성 및 소통 참여가 이루어지는 대화형 영역입니다.",
-    "layoutDescription": "사용자 프론트 영역에 댓글 입력 에디터 창(최대 200자 한도 기입 지원)과 함께, 고객들이 남긴 최신 댓글들을 페이징 또는 무한 스크롤 형태로 나열하며, 자기가 쓴 댓글에 한해 수정 및 삭제 단색 텍스트 링크 버튼이 노출되는 소통 공간입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 Hex 배경색의 8% 불투명도 배경 톤 위에 작성한 상단/하단 설명 문구 및 타이틀이 노출됩니다. 중앙에는 텍스트 및 대댓글을 입력할 수 있는 댓글 입력창(등록 버튼 포함)이 배치되며, 하단에는 전체 댓글 개수 표시와 정렬 필터(최신순/추천순/내글보기) 및 댓글 리스트가 렌더링됩니다. 대댓글 허용(LWRN_CMNT_PMSN_YN='Y') 시 답글 형태의 대댓글 목록이 활성화되며, 하단 중앙의 '댓글 더보기' 버튼을 통해 추가적인 페이지 목록을 불러옵니다.",
     "backendSettings": [
-      { "field": "댓글 게시판 코드", "id": "BOARD_CD_VAL", "type": "String (필수)", "desc": "기획전과 매핑될 백엔드 공통 댓글 게시판 마스터 코드" },
-      { "field": "익명 작성 허용 여부", "id": "ANONYMOUS_YN", "type": "Boolean (Y/N)", "desc": "N 설정 시 로그인한 실명 인증 회원만 글 작성을 허용" },
-      { "field": "댓글 노출 단위 수", "id": "COMMENT_PAGE_SZ", "type": "Integer (필수)", "desc": "한 번에 보여줄 댓글 갯수 (기본값: 10개, 최대 30개)" },
-      { "field": "금칙어 사전 적용 여부", "id": "SWEAR_FILTER_YN", "type": "Boolean (Y/N)", "desc": "욕설 및 광고 금칙어 필터링 실시간 활성화 여부" }
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 색상 포맷 유효성이 검증되며, 프론트 렌더링 시 지정한 배경색의 8% 수준으로 연하게 딤드 처리되어 배경으로 자동 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "CMNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 상단 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "CMNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "CMNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "대댓글 허용 여부", "id": "LWRN_CMNT_PMSN_YN", "type": "Radio (Y/N, 필수)", "desc": "Y: 대댓글 작성 허용, N: 대댓글 작성 차단. 미지정 시 유효성 검사에서 오류가 발생합니다." },
+      { "field": "대댓글 레벨", "id": "LWRN_CMNT_MAX_LVL_VAL", "type": "Integer (기본값 1)", "desc": "대댓글이 허용될 때의 최대 깊이 레벨 수준을 지정합니다." }
     ],
-    "warnings": "1. 댓글 입력 시 비속어나 허위 광고성 글을 실시간 필터링하기 위해, 백엔드 금칙어 자동 필터 시스템 연동이 필수 활성화되어 있어야 운영상의 리스크를 방지할 수 있습니다.\n2. 본문 작성 Byte 한도는 한글 기준 최대 200자(400byte)입니다.",
+    "warnings": "1. [배경색상 검증] 배경색상 Hex 코드는 '#'을 포함한 7자 또는 8자 Hex Code 포맷 정규식 /^#[0-9A-Fa-f]{6,8}$/ 을 만족해야 하며, 어긋나면 저장이 반려됩니다.\n2. [설명문구 배타성] 상단 설명 문구(CMNT_HEDR_TEXT)와 하단 설명 문구(CMNT_SUB_TEXT)는 어드민 검증에 의해 동시에 입력할 수 없습니다. 하나는 공백이어야 유효성 에러를 피할 수 있습니다.\n3. [대댓글 허용 필수] 대댓글 허용 여부(LWRN_CMNT_PMSN_YN)는 필수 선택 항목이며, 미지정 시 '대댓글 허용여부를 선택해 주세요.' 경고가 작동합니다.\n4. [바이트 및 줄바꿈 제한] 타이틀(CMNT_MAIN_TEXT)은 최대 22byte(한글 11자) 이내여야 하고, 줄바꿈은 최대 2줄까지만 허용됩니다. 2줄 초과 시 경고와 함께 뒤 내용이 잘립니다. 상/하단 설명 문구는 각각 최대 50byte(한글 25자) 이내로만 등록이 승인됩니다.\n5. [댓글 내용 제한] 프론트엔드 댓글 입력창에서 작성 가능한 글 길이는 한글 기준 최대 200자(400byte) 이내로 통제됩니다.",
     "qtyGuidelines": {
       "tabMin": "해당 없음",
       "tabMax": "해당 없음",
-      "prodMin": "최소 10자 이상 글 기입 가이드",
-      "prodMax": "최대 200자 한도",
-      "adminValidation": "댓글 게시판 코드(BOARD_CD_VAL)는 필수값이며, 한 페이지 노출 수(COMMENT_PAGE_SZ)를 5 미만 또는 30 초과로 기입 시 유효성 검증 단에서 10개 기본값으로 강제 재조정됩니다."
+      "prodMin": "해당 없음",
+      "prodMax": "해당 없음",
+      "adminValidation": "어드민 저장 시 대댓글 허용 여부 필수 체크 및 상/하단 설명의 배타적 중복 입력 밸리데이션 검사, 타이틀의 22byte 및 2줄 제한 유효성 체크가 트랜잭션 전에 동작하여 어긋날 경우 경고 메시지와 함께 저장이 원천 차단됩니다."
     }
   },
   "FCFS_CPN_P": {
@@ -1297,30 +1303,43 @@ window.ExhibitionGuides = {
     "cardKey": "GAME_CARD1",
     "name": "게임카드1",
     "category": "PROMOTION",
-    "sourceFile": "frmPlanCardGameTypeA.xfdl (어드민) / casualGameTypeA.tsx (프론트)",
+    "sourceFile": "frmPlanCardGameTypeA.xfdl (어드민) / GameCard1.tsx (프론트)",
     "moduleCode": "MD3",
-    "desc": "고객 참여 활성화를 위해 탑재된 복합 캐주얼 미니 이벤트 카드타입 A형입니다.",
-    "layoutDescription": "사용자 프론트 영역에서 브랜드 감성을 담은 사다리 타기 또는 보물상자 고르기 게임 등의 캐주얼한 비주얼 인터랙티브 게임판을 렌더링하고, 고객이 클릭하여 참여 시 즉시 랜덤 혜택 지급 완료 모달 창을 띄워주는 즉석 당첨용 공간입니다.",
+    "desc": "고객 참여 활성화를 위해 탑재된 룰렛 회전형 즉석 경품 당첨 미니 게임 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 Hex 배경색의 8% 불투명도 배경 톤 위에 작성한 상단/하단 설명 문구 및 타이틀이 노출됩니다. 중앙에는 5칸 또는 8칸으로 구성된 룰렛 회전판과 시작 핀(START PIN) 버튼이 배치되며, 고객이 클릭하여 룰렛을 작동하면 3D 회전 애니메이션 연출 후 당첨 결과 팝업(LfModal)을 노출하여 경품(쿠폰/사은품/꽝)을 즉시 지급 및 안내합니다. 하단부에는 HTML 에디터를 통해 작성한 게임 참여 방법 및 법적 유의사항(EVNT_DSCR)이 표출됩니다.",
     "backendSettings": [
-      { "field": "게임 캠페인 번호", "id": "GAME_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "백엔드 게임 이벤트 시스템에 생성된 고유 캠페인 번호" },
-      { "field": "당첨 혜택 목록", "id": "BENEFIT_LIST_VAL", "type": "String (필수)", "desc": "게임 내 각 결과 영역에 할당될 경품 및 마일리지 정보 안내 텍스트" },
-      { "field": "일일 참여 제한수", "id": "DAILY_PART_LIMIT", "type": "Integer (필수)", "desc": "하루 동안 한 고객 ID가 시도 가능한 최대 참여 횟수 (예: 1회)" },
-      { "field": "비주얼 배경 이미지", "id": "GAME_BG_IMG_PATH", "type": "File (선택)", "desc": "게임판의 백그라운드를 꾸밀 프리미엄 그래픽 배경 파일" }
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 색상 포맷 유효성이 검증되며, 프론트 렌더링 시 지정한 배경색의 8% 수준으로 연하게 딤드 처리되어 배경으로 자동 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "시작 전 유형", "id": "BFR_CNTN_TYPE_VAL", "type": "Radio (I/M, 필수)", "desc": "게임 시작 전 노출할 콘텐츠 유형을 결정합니다. I: 이미지, M: 동영상." },
+      { "field": "시작 전 PC / MO 리소스", "id": "BFR_PC_IMG_PATH_NM / BFR_MOBI_IMG_PATH_NM", "type": "File / String", "desc": "시작 전 유형이 이미지('I')일 때는 이미지 파일을 업로드하고, 동영상('M')일 때는 동영상 URL 주소를 입력합니다." },
+      { "field": "시작 후 유형", "id": "AFTR_CNTN_TYPE_VAL", "type": "Radio (I/M, 필수)", "desc": "게임 참여 후 노출할 콘텐츠 유형을 결정합니다. I: 이미지, M: 동영상." },
+      { "field": "시작 후 PC / MO 리소스", "id": "AFTR_PC_IMG_PATH_NM / AFTR_MOBI_IMG_PATH_NM", "type": "File / String", "desc": "시작 후 유형이 이미지('I')일 때는 이미지 파일을 업로드하고, 동영상('M')일 때는 동영상 URL 주소를 입력합니다." },
+      { "field": "게임 참여 제한수", "id": "APPC_LMTT_CNT", "type": "Integer (필수)", "desc": "고객 ID당 최대 참여 가능한 횟수를 지정합니다." },
+      { "field": "룰렛 타입 설정", "id": "radioRouletType", "type": "Radio (5/8, 필수)", "desc": "5: 5칸형 룰렛 회전판 구성, 8: 8칸형 룰렛 회전판 구성. 선택에 따라 혜택 목록 개수 입력 칸이 동적으로 활성화됩니다." },
+      { "field": "혜택 개수", "id": "editBenefitCount", "type": "Integer (필수)", "desc": "룰렛 타입에 맞게 5개 또는 8개의 혜택 조각 수를 지정합니다." },
+      { "field": "유의사항 본문", "id": "EVNT_DSCR", "type": "RichText (HTML)", "desc": "게임판 하단에 표출될 게임 규칙, 당첨 안내 및 법적 유의사항 내용입니다." },
+      { "field": "혜택 상세 설정", "id": "dsBenefitDtl / dsEventMngn", "type": "Dataset Binding", "desc": "각 룰렛 조각별 혜택 유형(C: 쿠폰, F: 사은품, X: 꽝), 당첨확률(%), 쿠폰 ID 매핑(최대 5개), 혜택 한정 인원, 당첨/실패 이미지 등을 1:1로 매핑 설정합니다." }
     ],
-    "warnings": "1. 즉석 경품 당첨이 연계되므로, 경품 예산 소진 속도 조절을 위한 확률 설정 테이블이 백엔드 단에 정밀하게 선행 셋업되어 있어야 함을 유의해야 합니다.\n2. 일일 참여 횟수 제한 로직을 철저히 검증해 매크로 오남용을 예방하세요.",
+    "warnings": "1. [배경색상 검증] 배경색상은 '#'을 포함한 Hex Code 양식(예: #FFFFFF)으로 입력해야 하며 정규식 /^#[0-9A-Fa-f]{6,8}$/ 을 벗어나면 저장이 반려됩니다.\n2. [설명문구 배타성] 상단 설명 문구(EVNT_HEDR_TEXT)와 하단 설명 문구(EVNT_SUB_TEXT)는 동시에 입력할 수 없으며 하나는 비어있어야 합니다.\n3. [당첨확률 100% 검증 규칙] 설정된 모든 혜택 영역(1~5회차 또는 1~8회차)의 개별 당첨 확률(editProbability) 합계는 **반드시 정확히 100%**여야 하며, 100%를 초과하거나 미달하면 '당첨확률 합계 100% 맞춰주세요.' 메시지와 함께 서버 저장이 전면 차단됩니다.\n4. [시작 전/후 리소스 필수] 게임 시작 전 및 시작 후의 이미지 또는 동영상 URL 정보가 누락될 경우 '게임시작 전/후 이미지를 등록해주세요.' 혹은 '동영상URL을 등록해주세요.' Validation 오류로 저장이 거부됩니다.\n5. [혜택별 결합 규칙]:\n   - 쿠폰(C): 연결된 쿠폰이 최소 1개 이상 필수이고 이미지 표현 시 쿠폰 이미지 필수.\n   - 사은품(F): 사은품 이미지 필수 및 사은품 명칭 필수, 선착순 체크 시 선착순 인원 필수.\n   - 꽝(X): 당첨 실패 시 안내할 실패 이미지가 반드시 업로드되어야 합니다.\n6. [시작 후 수정 불가] 기획전 상태가 시작(`START`)인 경우에는 혜택 조각 개수 조절 및 개별 혜택 데이터 변경이 안전을 위해 비활성화 및 차단됩니다.",
     "imageGuidelines": {
-      "pcSize": "가로 1000px × 세로 600px 권장",
-      "moSize": "가로 750px × 세로 500px 권장",
-      "allowTypes": "PNG, JPG, JPEG",
-      "maxSize": "200KB 이하",
-      "adminValidation": "배경 이미지 등록 시 200KB 용량 제한 검증 규칙이 작용하며 초과 시 업로드가 반려됩니다. 투명 레이어가 필요한 게임 요소 칩 이미지들은 PNG 포맷 저장이 필수적입니다."
+      "pcSize": "480px × 가변 높이 (룰렛판 및 혜택 이미지 1:1 PNG 권장)",
+      "moSize": "480px × 가변 높이 (1:1 비율 권장)",
+      "allowTypes": "PNG, JPG, JPEG, GIF",
+      "maxSize": "파일당 최대 200KB 이하",
+      "adminValidation": "넥사크로 UI 이미지 등록 시 200KB를 초과할 경우 용량 한도 초과 오류와 함께 업로드가 취소되며, 투명도가 가미된 룰렛판 및 실패 이미지는 PNG 포맷으로 디자인할 것을 권장합니다."
     },
     "qtyGuidelines": {
       "tabMin": "해당 없음",
       "tabMax": "해당 없음",
-      "prodMin": "캠페인 번호 1개 필수",
-      "prodMax": "최대 1회 제한 권장 (일일)",
-      "adminValidation": "게임 캠페인 번호(GAME_CAMPAIGN_NO) 누락 또는 포맷 오류 시 어드민 검증에 의해 저장이 즉시 반려 처리됩니다."
+      "prodMin": "룰렛 타입(5 또는 8)에 맞추어 최소 5개 또는 8개의 혜택 행 세팅 필수",
+      "prodMax": "최대 8개 혜택 영역(조각) 설정 제한",
+      "adminValidation": "룰렛 타입이 5일 때는 5개의 혜택만 등록되어야 하고, 8일 때는 8개의 혜택이 정상 매핑되어야 합니다. 또한, 각 쿠폰 혜롯 슬롯마다 최대 5개까지의 쿠폰 ID가 다중 바인딩 가능(maxBenefitCnt: '5')합니다."
     }
   },
   "GAME_CARD2": {
