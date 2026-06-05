@@ -1,11 +1,11 @@
-﻿// LFmall NEW Exhibition Template Guide Master Database (db/db_guides.js)
+﻿// LFmall NEW Exhibition Template Guides Master Database (db/db_guides.js)
 // Enables 100% fail-proof execution on file:/// local protocols bypassing CORS blocks.
 
 window.ExhibitionGuides = {
   "TAB_CONTAINER": {
     "cardKey": "TAB_CONTAINER",
     "name": "탭 컨테이너",
-    "category": "NAV",
+    "category": "PROD",
     "sourceFile": "frmPlanTempTabContainer.xfdl",
     "moduleCode": "MD13",
     "desc": "다수의 상품 카테고리나 하위 템플릿들을 탭 형태로 조립하여 전시 상태를 유기적으로 전환해주는 복합 연동 컴포넌트입니다.",
@@ -164,20 +164,6 @@ window.ExhibitionGuides = {
       "prodMax": "최대 10개 상품까지 등록 제한",
       "adminValidation": "플래시 세일은 단시간 강렬한 판매 집중을 유도하기 위해 **최소 1개에서 최대 10개** 범위 내에서만 상품 등록을 허용하고 있으며, 10개를 초과해 상품을 배치하거나 상품이 전혀 없을 경우 어드민단에서 저장 처리를 반려합니다."
     }
-  },
-  "FCFS_CPN": {
-    "cardKey": "FCFS_CPN",
-    "name": "선착순 쿠폰",
-    "category": "PROMOTION",
-    "sourceFile": "frmPlanCardFCFSCoupon.xfdl",
-    "moduleCode": "MD3",
-    "desc": "고객이 특정 시간에 선착순으로 직접 클릭하여 획득하는 마케팅 특화용 쿠폰 기능입니다.",
-    "layoutDescription": "남은 쿠폰 수량 상태바와 다운로드 버튼이 연동되어 활성/비활성화 상태를 실시간 시각화합니다.",
-    "backendSettings": [
-      { "field": "캠페인 번호", "id": "CAMPAIGN_NO", "type": "Integer (필수)", "desc": "다운로드 작동 시 정수 처리를 위해 이벤트 캠페인 번호 및 한도 수량을 백엔드와 사전 매핑합니다." }
-    ],
-    "codeSnippet": "// frmPlanCardFCFSCoupon.xfdl\nthis.btnDownload_onclick = function(obj:nexacro.Button, e:nexacro.ClickEventInfo) {\n    this.gfnTransaction(\"downloadCoupon\", \"/promotion/coupon/download\", inData, outData);\n};",
-    "warnings": "중복 클릭 및 불법 자동 매크로를 대비하여 다중 트랜잭션을 제한하고 한도 수량 소진 시 다운로드 클릭이 즉각 클라이언트 단에서도 차단될 수 있도록 에러 트랜잭션을 꼼꼼히 잡아야 합니다."
   },
   "NAVI": {
     "cardKey": "NAVI",
@@ -887,6 +873,512 @@ window.ExhibitionGuides = {
       "prodMin": "혜택당 10자리 쿠폰 마스터 ID 필수 연계",
       "prodMax": "해당 없음",
       "adminValidation": "선착순 쿠폰 개수는 최소 1개에서 최대 5개까지 세팅 가능하며, 개별 혜택 카드마다 실존하는 10자리 정상 쿠폰 고유 코드가 연결되어 있지 않으면 저장 검증 단계에서 반려 처리됩니다."
+    }
+  },
+  "BADGE": {
+    "cardKey": "BADGE",
+    "name": "행사뱃지",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardBadge.xfdl (어드민) / PromoBadge.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "기획전 고유 행사 아이콘이나 특별 혜택 뱃지들을 전시하는 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역에서 행사 전용 비주얼 뱃지(예: L+Day 등)를 타이틀 영역 근처 혹은 기획전 전용 배너 영역에 겹쳐서 또는 나란히 노출하여, 기획전 혜택을 강조하고 시각적인 소구 효과를 제공합니다.",
+    "backendSettings": [
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 여부" },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 여부" },
+      { "field": "뱃지 유형", "id": "BADGE_TYPE_VAL", "type": "Combo (LPLUS / BRND / EVNT)", "desc": "LPLUS: L+Day 뱃지, BRND: 브랜드 뱃지, EVNT: 일반 이벤트 뱃지" },
+      { "field": "뱃지 명칭", "id": "BADGE_NM", "type": "String (20자 한도)", "desc": "뱃지 표기 텍스트" },
+      { "field": "연동 이미지", "id": "PC_IMG_PATH_NM / MOBI_IMG_PATH_NM", "type": "Files (선택)", "desc": "뱃지용 커스텀 이미지 파일" }
+    ],
+    "warnings": "1. 행사뱃지는 기획전 성격에 따라 L+Day 또는 특정 행사 규격을 준수하여 등록해야 합니다. 이미지 업로드 시 배경 투명(PNG) 포맷 처리가 필수적입니다.\n2. 모바일 화면에서 뱃지가 깨지거나 텍스트가 줄바꿈되어 잘리지 않도록 글자 수를 한글 10자 이내로 제어해 주세요.",
+    "imageGuidelines": {
+      "pcSize": "가로 120px × 세로 120px 권장 (1:1 비율 PNG)",
+      "moSize": "가로 80px × 세로 80px 권장 (1:1 비율 PNG)",
+      "allowTypes": "PNG, JPG, JPEG",
+      "maxSize": "50KB 이하",
+      "adminValidation": "넥사크로 어드민 업로드 시 투명 배경(PNG) 형태가 아닌 경우, 배경 흰색이 그대로 노출되어 레이아웃이 어색해질 수 있으므로 디자이너 제작 표준 가이드를 반드시 확인하고 등록해야 합니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 1개",
+      "tabMax": "최대 3개",
+      "prodMin": "최소 1자 이상",
+      "prodMax": "최대 20자",
+      "adminValidation": "뱃지는 한 화면 구좌 내 최대 3개까지 구성하여 저장이 가능하며, 초과 시 저장 유효성 검증 단에서 반려 얼럿이 작동합니다."
+    }
+  },
+  "PAYBACK": {
+    "cardKey": "PAYBACK",
+    "name": "페이백",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardPayBack.xfdl (어드민) / Payback.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "구매 완료 시 결제 금액의 일정 비율 또는 일정 금액을 적립금으로 페이백해주는 특화 프로모션 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 페이백 행사 안내 이미지와 함께 FckEditor로 입력된 상세 안내문구(evntDscr)가 노출됩니다. 로그인한 사용자에 대해 실시간 누적 주문 금액이 표시되며, 진행바 표시 여부(prgsLineYn)를 활성화하면 결제 완료 금액과 구간별 페이백 도달도가 진행바(Progress Bar) 상에 시각적으로 가시화됩니다. 구간 도달 시에는 말풍선(Speech Bubble) 애니메이션과 함께 페이백 혜택(정액 마일리지 M 또는 정율 %)이 강조 노출되고, 하단에는 다음 구간 페이백을 받기 위한 잔여 구매금액이 실시간으로 동적 출력됩니다(예: 'N원 더 구매 시 M 페이백 가능'). 신청 전/완료 상태 및 행사 대상 여부에 따라 버튼 텍스트가 분기되며 중복 클릭 방지 처리 및 백엔드 API 연동이 수행됩니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 어드민의 editBtnText 인풋에 값을 지정하며, 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 유효성이 검증됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "PC 이미지", "id": "PC_IMG_PATH_NM", "type": "File (1240px 권장)", "desc": "PC 사용자 화면에 전시될 표준 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "모바일 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (670px 권장)", "desc": "모바일 사용자 화면에 전시될 표준 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "결제금액 텍스트", "id": "EVNT_NTOR_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "나의 주문 금액 영역 좌측에 표시되는 사용자 개인 맞춤형 레이블 텍스트입니다. (예: '나의 주문 금액')" },
+      { "field": "페이백 유형", "id": "PGSS_LINE_TYPE_VAL", "type": "Combo (S/P)", "desc": "S: 단일 지급 (1단계만 지정 가능), P: 단계별 지급 (2~5단계만 지정 가능)." },
+      { "field": "진행바 표시여부", "id": "PRGS_LINE_YN", "type": "Combo (Y/N)", "desc": "구매금액 진행바(Progress Bar) 노출 여부를 제어합니다." },
+      { "field": "페이백 형태", "id": "PYBC_TYPE_VAL", "type": "Combo (R/A)", "desc": "R: 정율 (%, 최대 99% 제한), A: 정액 (원, 마일리지 지급)으로 페이백 지급 형식을 선택합니다." },
+      { "field": "버튼명", "id": "BTN_TEXT_VAL", "type": "String (30byte 한도)", "desc": "신청 전 또는 신청 가능 상태일 때 노출되는 버튼 텍스트입니다." },
+      { "field": "완료버튼명", "id": "BTN_CMPE_TEXT_VAL", "type": "String (30byte 한도)", "desc": "페이백 참여 완료 또는 마감 상태일 때 노출되는 버튼 텍스트입니다." },
+      { "field": "페이백 설명 문구", "id": "EVNT_DSCR", "type": "RichText (HTML)", "desc": "에디터를 통해 작성하는 페이백 유의사항 및 상세 안내 가이드 본문입니다." },
+      { "field": "하단 안내 문구", "id": "EXCU_TEXT_VAL", "type": "String (60byte 한도)", "desc": "로그인 후 누적 구매 금액이 0원일 때 하단에 표시되는 기본 안내 메시지입니다." },
+      { "field": "상품 조건", "id": "CNDT_FIST_VAL / CNDT_SCND_VAL", "type": "Combo & Input", "desc": "A: 전체상품대상, L: 전관행사대상 (전관행사 ID 입력 필수), B: 뱃지상품대상 (이벤트번호 입력 필수), M: 수기상품대상 (어드민 저장 완료 후 상품 등록 팝업 활성화)." },
+      { "field": "페이백 조건 설정", "id": "dsCond", "type": "Dataset Binding", "desc": "설정한 단계(1~5단계)별로 구매금액 조건(STDR_VAL) 및 페이백 금액(PYBC_AMT) 혹은 비율(PYBC_RTO)을 매핑하여 바인딩합니다." }
+    ],
+    "warnings": "1. [배경색상 검증] 배경색상은 '#'을 반드시 기재한 7자 또는 8자 Hex Code 형태(예: #FFFFFF)여야 하며, 정규식을 벗어나면 저장이 반려됩니다.\n2. [설명문구 상호 배타성] 상단 설명 문구와 하단 설명 문구는 어드민 검증에 의해 동시에 입력할 수 없습니다. 하나는 공백이어야 유효성 에러를 피할 수 있습니다.\n3. [텍스트 바이트 한도] 타이틀 및 결제금액 텍스트는 최대 22byte 이내, 버튼명 및 완료버튼명은 최대 30byte 이내, 하단 안내 문구는 최대 60byte 이내여야 합니다. 타이틀 줄바꿈은 2줄까지만 허용됩니다.\n4. [지급 유형 및 단계 검증] 단일 지급일 경우 1단계만, 단계별 지급일 경우 2~5단계만 조건 적용이 허용됩니다. 어긋날 시 유효성 메시지와 함께 저장이 반려됩니다.\n5. [조건값 검증] 설정한 조건 단계마다 구매금액 조건과 페이백 금액/비율이 반드시 모두 채워져야 하며, 구매금액에 0원은 입력할 수 없습니다.\n6. [상품조건 필수값] 전관행사대상일 때는 전관행사 ID가, 뱃지상품대상일 때는 이벤트 번호가 비어 있을 시 저장이 불가능합니다. 수기상품대상의 경우 카드가 먼저 저장되어 있어야 상품 등록 팝업을 열 수 있으므로 사전 '전체상품대상' 저장이 필수적입니다.\n7. [이미지 제한] 개별 업로드 이미지 용량이 200KB를 초과할 시 파일 정보 체크 단계에서 에러가 발생하며 업로드가 취소됩니다.",
+    "qtyGuidelines": {
+      "tabMin": "단일 지급은 1단계 필수 구성, 단계별 지급은 최소 2단계 구성 필요",
+      "tabMax": "최대 5단계까지 조건 설정 제공",
+      "prodMin": "구매금액 조건 최소 1원 이상 지정 (0원 지정 불가)",
+      "prodMax": "정율 페이백 시 비율 최대 99% 제한",
+      "adminValidation": "어드민 저장 시 단일 지급은 1단계만, 단계별 지급은 2~5단계만 지정 가능하도록 강제하며, 각 단계별로 구매 금액 조건과 페이백 비율(정율) 또는 페이백 금액(정액)이 모두 채워져 있어야 유효성 검사를 통과합니다. 비율 설정 시 2자리 한도(최대 99%)로 제한되며, 업로드하는 이미지 용량이 200KB를 초과하면 업로드가 즉시 반려됩니다."
+    }
+  },
+  "ENTCODE": {
+    "cardKey": "ENTCODE",
+    "name": "입장코드",
+    "category": "NAV",
+    "sourceFile": "frmPlanCardAccessCode.xfdl (어드민) / EntryCode.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "프라이빗 기획전 진입을 위해 전용 입장 암호코드를 넣어야 하는 차단 영역입니다.",
+    "layoutDescription": "사용자 프론트 영역 전체를 딤드 블러 처리하거나 차단 팝업 형태로 렌더링하며, 중앙에 입장코드 입력창과 확인 버튼을 배치하여 올바른 비밀코드를 입력한 경우에만 하위 컨텐츠를 공개하도록 제어합니다.",
+    "backendSettings": [
+      { "field": "입장 암호코드", "id": "ACCESS_CODE_VAL", "type": "String (필수)", "desc": "입장에 필요한 전용 영문/숫자 비밀코드 (4~12자리)" },
+      { "field": "비밀기획전 여부", "id": "PRIVATE_YN", "type": "Boolean (Y/N)", "desc": "Y 설정 시 페이지 최초 로드 시 입장코드 입력을 강제합니다." },
+      { "field": "실패 안내 메시지", "id": "ERR_MSG_TEXT", "type": "String (선택)", "desc": "잘못된 코드 입력 시 하단에 노출할 경고 안내 문구" }
+    ],
+    "warnings": "1. 입장코드는 대소문자를 구분하므로 기획전 홍보물 제작 시 대소문자를 명확히 구분하여 고객에게 고지해야 합니다.\n2. 보안을 위해 최소 4글자 이상의 복잡한 문자열로 코드를 세팅할 것을 강하게 가이드 권장합니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 4글자",
+      "prodMax": "최대 12글자",
+      "adminValidation": "입장 암호코드는 공백을 포함할 수 없으며, 4자 미만이거나 12자를 초과하는 경우 넥사크로 유효성 검사에서 저장 반려됩니다."
+    }
+  },
+  "APPLY": {
+    "cardKey": "APPLY",
+    "name": "응모하기",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardEnter.xfdl (어드민) / EventApply.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "럭키 드로우나 사은 행사 등에 실시간 원클릭으로 응모 및 접수하는 버튼 영역입니다.",
+    "layoutDescription": "사용자 프론트 영역에서 이벤트 타이틀, 응모 대상 및 기간 설명과 함께 실시간 원클릭 '응모하기' 버튼을 노출합니다. 중복 참여 제한 옵션에 따라 로그인한 사용자가 이미 응모한 경우 '응모 완료'로 동적 변경됩니다.",
+    "backendSettings": [
+      { "field": "이벤트 일련번호", "id": "EVENT_NO", "type": "Integer (필수)", "desc": "연동할 백엔드 프로모션 이벤트 고유 번호" },
+      { "field": "응모 기회 구분", "id": "APPLY_CHANCE_DIV", "type": "Combo (ONCE / DAILY / UNLIMIT)", "desc": "ONCE: 기간 내 1회만 응모, DAILY: 매일 1회 응모, UNLIMIT: 무제한 응모" },
+      { "field": "마케팅 동의 필수 여부", "id": "MKT_AGREE_REQ_YN", "type": "Boolean (Y/N)", "desc": "Y 설정 시 마케팅 수신동의 팝업 체크 후 응모 처리" },
+      { "field": "버튼 텍스트", "id": "BTN_TEXT_VAL", "type": "String (20자 한도)", "desc": "응모 버튼에 노출될 액션 문구 (기본값: 응모하기)" }
+    ],
+    "warnings": "1. 연동된 백엔드 이벤트 번호가 종료되었거나 실존하지 않는 경우, 응모 시 에러 얼럿이 발생하므로 백엔드 이벤트 생성을 반드시 선행해야 합니다.\n2. 로그인 체크가 필수이므로 비로그인 사용자는 로그인 페이지로 자동 이동됩니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 1자 (버튼명)",
+      "prodMax": "최대 20자 (버튼명)",
+      "adminValidation": "연동할 이벤트 번호(EVENT_NO)는 필수 숫자 타입으로 입력되어야 하며, 유효하지 않은 포맷인 경우 어드민 단에서 저장이 반려됩니다."
+    }
+  },
+  "EMP_PROD": {
+    "cardKey": "EMP_PROD",
+    "name": "강조상품",
+    "category": "PROD",
+    "sourceFile": "frmPlanCardFeaturedProduct.xfdl (어드민) / FeaturedProduct.tsx (프론트)",
+    "moduleCode": "MD6",
+    "desc": "일반 리스트 중에서 메인으로 가장 많이 소구할 단독 강조형 딜 레이아웃입니다.",
+    "layoutDescription": "사용자 프론트 영역에서 일반적인 3열/4열 격자 레이아웃을 탈피하여, 단 하나의 메인 추천 상품을 전면에 와이드하게(가로 100% 비주얼 배너급 크기로) 노출하고 상품명, 혜택, 상세 소개 글을 우측 또는 하단에 시원하게 배치하는 프리미엄 강조 구좌입니다.",
+    "backendSettings": [
+      { "field": "상품 코드", "id": "PRODUCT_CD", "type": "String (필수)", "desc": "강조 노출할 13자리 상품 고유 식별 번호" },
+      { "field": "추천 강조 문구", "id": "FEAT_COMMENT_VAL", "type": "String (60자 한도, 필수)", "desc": "상품 하단에 추가 노출할 감성적인 추천 소구 텍스트" },
+      { "field": "비주얼 배경색", "id": "FEAT_BG_COLOR_VAL", "type": "Color Hex (선택)", "desc": "강조 구좌의 뒷배경을 채울 브랜드 HSL 계열 컬러값" },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 여부" }
+    ],
+    "warnings": "1. 단독으로 상품을 극대화 소구하므로, 고화질의 정비율 상품 비주얼 컷이 확보되어 있어야 고급스러운 브랜드 감성을 유지할 수 있습니다.\n2. 추천 강조 문구는 한글 30자(60byte)를 초과해 등록할 경우 모바일 뷰에서 개행 오버플로우가 생기므로 글자 수 제약에 특별히 주의해야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 800px × 세로 800px 권장 (1:1 정비율 비주얼 컷)",
+      "moSize": "가로 600px × 세로 600px 권장 (1:1 정비율 비주얼 컷)",
+      "allowTypes": "JPG, JPEG, PNG, GIF",
+      "maxSize": "200KB 이하",
+      "adminValidation": "강조상품의 대표 썸네일은 200KB를 초과할 수 없으며, 어드민 업로드 시 용량 체크 필터에 의해 초과분은 업로드가 원천 차단됩니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 1개 상품 매핑",
+      "tabMax": "최대 1개 상품만 구성 가능 (단독 강조 구좌)",
+      "prodMin": "최소 1자 (추천 문구)",
+      "prodMax": "최대 60byte (한글 30자)",
+      "adminValidation": "어드민 저장 시 단 1개의 상품 코드만 입력해야 하며, 2개 이상의 코드를 기재하거나 공백인 경우 저장 유효성 오류 메시지와 함께 저장이 자동으로 반려됩니다."
+    }
+  },
+  "SHARE": {
+    "cardKey": "SHARE",
+    "name": "공유하기",
+    "category": "NAV",
+    "sourceFile": "frmPlanCardShare.xfdl (어드민) / ShareModule.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "SNS나 카카오톡 링크 전송 버튼들을 정렬 노출하는 공유 모듈입니다.",
+    "layoutDescription": "사용자 프론트 영역에 카카오톡, 라인, 페이스북, 트위터, URL 복사 등의 공유 아이콘 링크 버튼 세트들을 둥근 그리드 묶음 형태로 가로 정렬 렌더링하여 고객 바이럴 공유 활동을 유도합니다.",
+    "backendSettings": [
+      { "field": "카카오 공유 메시지", "id": "KAKAO_MSG_VAL", "type": "String (필수)", "desc": "카카오톡 공유 시 카드 썸네일 아래 노출될 대표 텍스트 문구" },
+      { "field": "공유용 대표 이미지", "id": "SHARE_IMG_PATH", "type": "File (선택)", "desc": "공유 시 노출될 썸네일 이미지 파일 (미지정 시 기획전 탑배너 이미지로 대체)" },
+      { "field": "채널 노출 옵션", "id": "SHARE_CHANNELS_VAL", "type": "Checkboxes (KAKAO, FB, URL)", "desc": "화면에 노출할 공유 채널 목록을 개별 선택 매핑" }
+    ],
+    "warnings": "1. 카카오톡 공유가 정상 작동하려면 카카오 API 개발자 키 연동 환경이 구성되어 있어야 합니다. 로컬 테스트 시에는 URL 복사 위주로 검수해 주세요.\n2. 공유 메시지는 공유처 썸네일 미리보기 크기 제약에 따라 너무 길지 않게 50자 내외로 입력해 주세요.",
+    "qtyGuidelines": {
+      "tabMin": "최소 1개 채널 선택",
+      "tabMax": "최대 5개 채널 선택",
+      "prodMin": "최소 10자 (공유 메시지)",
+      "prodMax": "최대 100자 (공유 메시지)",
+      "adminValidation": "공유 채널 목록이 하나도 선택되어 있지 않거나, 카카오 공유 메시지가 비어 있는 경우 어드민 저장 검증단에서 반려 처리가 수행됩니다."
+    }
+  },
+  "BUY_KING": {
+    "cardKey": "BUY_KING",
+    "name": "구매왕",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardTopBuyer.xfdl (어드민) / TopBuyerLeaderboard.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "기획전 기간 동안 실시간 최고 구매액 결제 순위(1~10위) 리더보드와 함께 증정 사은품 정보를 전시하여 구매를 유도하는 마케팅 특화 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 Hex 배경색의 8% 불투명도 톤이 배경으로 깔린 세련된 보드가 노출됩니다. 상단 설명 문구와 2줄 이내의 메인 타이틀이 배치되며, 좌측 또는 상단에는 지정된 사은품 이미지(PC/MO 공통 1:1 정비율), 사은품명, 브랜드 및 상당 가치 텍스트가 박스 형태로 매력적으로 렌더링됩니다. 우측 또는 하단에는 마스킹된 고객명(예: 김*우)과 총 누적 구매 금액이 포함된 실시간 랭킹 리더보드 테이블이 구매 현황 표시 여부(PRHS_PNCN_SIGN_YN)에 따라 동적으로 로딩됩니다. 최하단에는 당첨자 발표 여부(PRWN_ANNO_DD_SIGN_YN)에 따라 지정된 당첨자 발표일이 깔끔하게 표시됩니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 색상 포맷 유효성이 검증되며, 프론트 렌더링 시 지정한 배경색의 8% 수준으로 연하게 톤업하여 배경으로 자동 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "PC 사은품 이미지", "id": "PC_IMG_PATH_NM", "type": "File (640x640px 권장)", "desc": "사은품 카드 좌측에 표출될 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "모바일 사은품 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (640x640px 권장)", "desc": "모바일 사은품 카드 상단에 표출될 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "사은품 브랜드", "id": "PRSN_BRAND_NM", "type": "String (30byte 한도)", "desc": "사은품 증정 대상 브랜드명입니다. (예: 'HAZZYS LADIES')" },
+      { "field": "사은품명", "id": "PRSN_NM", "type": "String (50byte 한도)", "desc": "사은품 증정 상품명입니다. (예: '서머 린넨 숄더백')" },
+      { "field": "사은품가격(가치)", "id": "PRSN_PRC_TEXT", "type": "String (30byte 한도)", "desc": "사은품의 가치 설명 텍스트입니다. (예: '15만원 상당' 또는 '99,000원 상당')" },
+      { "field": "구매 현황 표시여부", "id": "PRHS_PNCN_SIGN_YN", "type": "Radio (Y/N)", "desc": "실시간 랭킹 리더보드 테이블의 노출 여부를 제어합니다." },
+      { "field": "당첨자 발표 표시여부", "id": "PRWN_ANNO_DD_SIGN_YN", "type": "Radio (Y/N)", "desc": "당첨자 발표 일시 노출 여부를 제어합니다." },
+      { "field": "당첨자 발표일", "id": "PRWN_ANNO_DD", "type": "DateTime (YYYYMMDD hhmmss)", "desc": "당첨자를 공식 발표할 년월일 및 시간입니다. (예: '20260630 180000'). Y 표시 상태에서만 활성화됩니다." },
+      { "field": "상품 조건", "id": "comboProdCondition", "type": "Combo (A/L/B/M)", "desc": "A: 전체상품대상, L: 전관행사대상 (전관행사 ID 필수), B: 뱃지상품대상 (이벤트번호 필수), M: 수기상품대상 (어드민 저장 완료 후 상품 등록 팝업 활성화)." },
+      { "field": "전관행사 ID / 이벤트번호", "id": "editProdConditionSubVal", "type": "String / Integer", "desc": "상품 조건이 전관행사('L')일 때는 전관행사 ID를 콤마(,) 구분자로, 뱃지상품('B')일 때는 단일 이벤트 번호 숫자를 매핑합니다." }
+    ],
+    "warnings": "1. [배경색상 검증] 배경색상은 '#'을 포함한 Hex Code 형태(7~8자)여야 하며 정규식 /^#[0-9A-Fa-f]{6,8}$/ 을 만족하지 않을 시 저장이 반려됩니다. 프론트 렌더링 시에는 이 색상의 8% 농도로 연하게 배경색이 적용됩니다.\n2. [설명문구 배타성] 상단 설명 문구와 하단 설명 문구는 동시에 기입할 수 없으며, 유효성 검사에서 둘 다 값이 채워져 있으면 에러 얼럿이 노출됩니다.\n3. [당첨일시 검증] 당첨자 발표일 표시여부를 'Y'로 할 경우, 발표일(Calendar)과 시간(Edit)이 둘 다 필수로 입력되어야 하며, 시간 포맷은 24시간 형식의 6자리 숫자(hhmmss)여야 합니다. 이를 위반하면 저장 시 유효성 에러가 발생합니다.\n4. [상품조건 필수값 및 수기 제한] 전관행사대상 시 전관행사 ID, 뱃지상품대상 시 이벤트 번호가 반드시 입력되어야 합니다. 수기상품의 경우 카드가 데이터베이스에 최소 1회 저장되어 고유 이벤트 번호(EVNT_NO)를 획득하기 전에는 상품 등록 팝업을 열 수 없으므로 신규 작성 시에는 '전체상품대상' 등으로 선저장 후 수정 모드에서 등록해야 합니다.\n5. [이미지 용량 제한] 업로드하는 PC 및 모바일 사은품 이미지 파일 크기는 각각 최대 200KB를 넘을 수 없으며, 초과 시 업로드가 즉시 에러 얼럿과 함께 취소됩니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 1자 (텍스트 입력 항목)",
+      "prodMax": "브랜드명 30byte, 사은품명 50byte, 사은품가격 30byte 제한",
+      "adminValidation": "사은품 텍스트 규격(브랜드 최대 30byte, 사은품명 최대 50byte, 사은품가격 최대 30byte) 및 타이틀 규격(최대 22byte), 설명문구(각 최대 50byte) 바이트 한도가 입력 단에서 실시간(oninput, onkeyup)으로 감시 및 자동 잘림 처리됩니다. 사은품 이미지는 200KB 이하의 가로세로 640x640px 1:1 이미지를 필수 업로드해야 저장이 승인됩니다."
+    }
+  },
+  "RANDOM_NO": {
+    "cardKey": "RANDOM_NO",
+    "name": "난수입력",
+    "category": "NAV",
+    "sourceFile": "frmPlanCardRandomNumber.xfdl (어드민) / CouponSerialInput.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "배포된 전용 시리얼 쿠폰이나 1회용 프로모션 난수코드를 검증/입력하는 곳입니다.",
+    "layoutDescription": "사용자 프론트 영역에 시리얼 난수 번호 입력 인풋 박스와 '쿠폰 등록' 버튼을 단정하게 정렬 노출합니다. 사용자가 난수 입력 후 등록 시 실시간 검증을 거쳐 혜택 지급 완료 알럿을 출력합니다.",
+    "backendSettings": [
+      { "field": "난수 캠페인 코드", "id": "SERIAL_CAMPAIGN_CD", "type": "String (필수)", "desc": "프로모션 쿠폰 시스템에 연결된 시리얼 난수 캠페인 그룹 식별 번호" },
+      { "field": "쿠폰 자동 발급 여부", "id": "AUTO_ISSUE_YN", "type": "Boolean (Y/N)", "desc": "난수 일치 시 즉시 쿠폰을 사용자 계정에 지급할지 여부" },
+      { "field": "인풋 가이드 텍스트", "id": "INPUT_PLACEHOLDER", "type": "String (30자 한도)", "desc": "입력창 내부에 연하게 표시할 가이드 안내 문구" }
+    ],
+    "warnings": "1. 발급할 난수 번호 대역의 생성 및 마스터 쿠폰 사전 등록이 반드시 완료되어 있어야 오류가 발생하지 않습니다.\n2. 중복 입력 시도나 불법 입력 매크로 방지를 위해 클릭 트랜잭션 차단 및 Rate Limit 스로틀링 처리가 프론트/백엔드 모두에 필수 적용되어야 합니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "난수 캠페인 코드 1개 필수",
+      "prodMax": "해당 없음",
+      "adminValidation": "난수 캠페인 코드(SERIAL_CAMPAIGN_CD)는 반드시 입력해야 하며 비어 있는 경우 저장 유효성 검사 단계에서 에러와 함께 반려됩니다."
+    }
+  },
+  "SALE_CODE": {
+    "cardKey": "SALE_CODE",
+    "name": "할인코드",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardDiscountCode.xfdl (어드민) / DiscountCodeBlock.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "제휴 할인코드 복사 및 입력, 대상 회원 등급 필터링 및 팝업 안내를 복합 지원하며 하단 제휴 스토어 바로가기 버튼을 연계하는 기획전 제휴 전용 프로모션 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 Hex 배경색의 8% 불투명도 배경 톤을 가진 보드가 노출됩니다. 상단 설명 문구와 2줄 이내의 메인 타이틀이 배치되고, 할인코드 개수(1~4개)에 맞춘 쿠폰 카드가 그리드(PC 2열, 모바일 1열) 레이아웃으로 동적 렌더링됩니다. 개별 쿠폰은 지정된 배경 이미지 및 로고 이미지(PC/MO 규격), 그리고 복사 대상 난수코드 텍스트 박스, 쿠폰 사용이 제한되는 대상 회원 등급 뱃지가 가시성 있게 표출됩니다. 난수 복사 시 지정된 팝업 안내 텍스트가 안내 얼럿 형태로 동작합니다. 최하단에는 바로가기 버튼 설정(BTN_ACTN_TYPE_VAL='Y')이 적용되었을 경우 제휴 스토어로 연결(현재창/새창, ETAG 랜딩)해 주는 가로 100% 라운드 버튼이 함께 출력됩니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 색상 포맷 유효성이 검증되며, 프론트 렌더링 시 지정한 배경색의 8% 수준으로 연하게 톤업하여 배경으로 자동 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "할인코드 개수", "id": "editCodeNum", "type": "Integer (1~4)", "desc": "화면에 구성할 개별 할인코드 쿠폰의 개수입니다. 1~4 범위 내에서만 조작이 가능하며, 적용 시 개수만큼 설정 폼 구역(divCode1~4)이 활성화됩니다." },
+      { "field": "난수 코드", "id": "RNNO_VAL", "type": "String (20byte 한도, 필수)", "desc": "쿠폰 카드로 노출되며 사용자가 복사/적용하여 쓸 실제 할인코드 문자열입니다." },
+      { "field": "대상 회원", "id": "dsCond / CNDT_TYPE_VAL / STDR_VAL", "type": "Checkbox (다중선택, 필수)", "desc": "할인코드 적용 대상을 제한합니다. CNDT_TYPE_VAL='LFM' 기준으로 SP(S_Platinum), PT(Platinum), GD(Gold), SV(Silver), BK(Black), PP(Purple), RD(Red) 등급 코드를 체크한 수만큼 매핑 바인딩합니다. '전체' 체크 시 일괄 체크/해제가 지원됩니다." },
+      { "field": "쿠폰 PC 이미지", "id": "PC_IMG_PATH_NM", "type": "File (480x222px 권장, 필수)", "desc": "쿠폰 카드의 배경이 될 PC 이미지 파일입니다. (최대 200KB 이하, 자사 쿠폰 규격인 600x276px도 사용 가능)" },
+      { "field": "쿠폰 모바일 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (480x222px 권장, 필수)", "desc": "쿠폰 카드의 배경이 될 모바일 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "로고 PC 이미지", "id": "PC_LOGO_IMG_PATH_NM", "type": "File (295x24px 권장)", "desc": "쿠폰 카드 상단 브랜드 로고 영역에 표시될 PC 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "로고 모바일 이미지", "id": "MOBI_LOGO_IMG_PATH_NM", "type": "File (295x24px 권장)", "desc": "쿠폰 카드 상단 브랜드 로고 영역에 표시될 모바일 이미지 파일입니다. (최대 200KB 이하)" },
+      { "field": "팝업 텍스트", "id": "EVNT_NTOR_MAIN_TEXT", "type": "String (30byte 한도)", "desc": "코드 복사 또는 적용 액션 시 브라우저 얼럿 안내창에 노출할 메시지입니다." },
+      { "field": "버튼 사용여부", "id": "BTN_ACTN_TYPE_VAL", "type": "Radio (Y/N)", "desc": "하단 공통 바로가기 버튼의 노출 여부를 설정합니다. N일 시 하위 버튼 설정 항목은 disabled 및 null로 초기화됩니다." },
+      { "field": "버튼 링크 타겟", "id": "LINK_TRGE_VAL", "type": "Combo (S/N)", "desc": "S: 현재창 (_self), N: 새창 (_blank)으로 이동 타겟을 정의합니다." },
+      { "field": "버튼 링크 URL", "id": "LINK_URL_VAL", "type": "String", "desc": "버튼 클릭 시 연결될 PC용 바로가기 웹페이지 주소입니다. (필수)" },
+      { "field": "ETAG 여부", "id": "LINK_DIV_VAL", "type": "Combo (Y/N)", "desc": "바로가기 이동 시 eTAG 랜딩 추적 방식을 활성화할지 여부입니다. Y 선택 필수." },
+      { "field": "버튼 명칭", "id": "BTN_TEXT_VAL", "type": "String (필수)", "desc": "바로가기 버튼 상에 표시될 텍스트 명칭입니다." }
+    ],
+    "warnings": "1. [배경색상 검증] 배경색상은 '#'을 포함한 Hex Code 형태(7~8자)여야 하며 정규식 /^#[0-9A-Fa-f]{6,8}$/ 을 만족하지 않을 시 저장이 반려됩니다. 프론트 렌더링 시에는 이 색상의 8% 농도로 연하게 배경색이 적용됩니다.\n2. [설명문구 배타성] 상단 설명 문구와 하단 설명 문구는 동시에 기입할 수 없으며, 유효성 검사에서 둘 다 값이 채워져 있으면 에러 얼럿이 노출됩니다.\n3. [할인코드 구좌 필수 기입] 적용한 개수(1~4개)만큼 생성되는 모든 코드 영역에서 '난수 코드(RNNO_VAL)', '대상 회원 등급(최소 1개 이상)', 'PC/MO 쿠폰 이미지(필수)'가 입력되지 않으면 저장 유효성 검사 단계에서 반려 에러가 발생합니다.\n4. [하단 버튼 검증] 버튼 사용여부를 'Y'로 활성화한 경우, 링크 타겟, 링크 URL, ETAG 여부, 버튼 명칭이 전부 비어 있지 않고 모두 적법한 데이터 포맷으로 채워져야 저장이 완결됩니다.\n5. [이미지 용량 제한] 업로드하는 쿠폰 이미지 및 브랜드 로고 이미지 파일 크기는 각각 최대 200KB를 넘을 수 없으며, 초과 시 업로드가 즉시 에러 얼럿과 함께 취소됩니다.",
+    "qtyGuidelines": {
+      "tabMin": "최소 1개 할인코드 구좌 구성 필요",
+      "tabMax": "최대 4개 할인코드 구좌까지 추가 지원",
+      "prodMin": "개별 할인코드 난수 최대 20byte, 팝업 텍스트 최대 30byte 제한",
+      "prodMax": "대상 회원 등급은 최대 7개 등급 중 중복 및 다중 매핑 가능",
+      "adminValidation": "할인코드 문자열 바이트 한도(20byte) 및 팝업 안내 텍스트 바이트 한도(30byte)는 입력 단에서 실시간(oninput, onkeyup)으로 감시되어 초과 기입 시 자동 컷오프 처리됩니다. 쿠폰 이미지(권장 480x222px)와 브랜드 로고 이미지(권장 295x24px)는 파일 당 200KB 이하 규격에 맞추어 필수 업로드해야 저장이 승인됩니다."
+    }
+  },
+  "CNDT_BNFT": {
+    "cardKey": "CNDT_BNFT",
+    "name": "조건혜택",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardBenefitC.xfdl (어드민) / ConditionalBenefit.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "특정 회원 등급, 누적 결제금액, 구매 횟수 등 정교하게 개인화된 응모 조건에 따라 1~10회차별 미션을 달성하면 쿠폰, 사은품, 마일리지 등의 혜택을 다운로드할 수 있는 응모/미션형 특화 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 Hex 배경색의 8% 불투명도 배경 톤 위에 RichText로 작성한 이벤트 설명 및 이벤트 이미지(PC/MO)가 노출됩니다. 응모 조건 유형(단수/복수)에 따라 각 회차별 조건(구매금액/구매횟수) 달성도가 지정된 프로그레스바 색상(Hex) 및 버튼 색상(블랙/화이트)으로 시각화되어 렌더링됩니다. 고객의 미션 진행 상태에 따라 달성 완료 회차는 완료 상태 버튼명(BTN_CMPE_TEXT_VAL), 진행 중 회차는 신청용 버튼명(BTN_TEXT_VAL)과 함께 프로그레스바 게이지바가 차오르고, 미개봉 회차는 Lock(자물쇠) 스타일로 블라인드 렌더링됩니다. 선착순 사용(radioEntryYN='Y') 시 '선착순 노출문구'와 회차별 한정 수량 실시간 게이지가 가시화됩니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 색상 포맷 유효성이 검증되며, 프론트 렌더링 시 지정한 배경색의 8% 수준으로 연하게 톤업하여 배경으로 자동 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "이벤트 설명", "id": "WebBrowser01", "type": "RichText (HTML)", "desc": "에디터를 통해 작성하는 이벤트 및 혜택 참여 상세 안내 본문입니다." },
+      { "field": "이벤트 이미지 (PC / MO)", "id": "PC_IMG_PATH_NM / MOBI_IMG_PATH_NM", "type": "File (640x640px 권장)", "desc": "이벤트 대표 이미지입니다. PC/모바일 개별 업로드하며 파일 당 최대 200KB 이하만 허용됩니다." },
+      { "field": "버튼명 / 완료 버튼명", "id": "BTN_TEXT_VAL / BTN_CMPE_TEXT_VAL", "type": "String (각 30byte 한도, 필수)", "desc": "미신청 및 달성 전 활성 상태 버튼 텍스트와, 참여 완료 또는 마감 상태일 때 노출되는 버튼 텍스트입니다." },
+      { "field": "버튼 색상", "id": "BTN_CLR_VAL", "type": "Radio (BK/WH, 필수)", "desc": "버튼 배경 색상 테마를 결정합니다. BK: 블랙, WH: 화이트." },
+      { "field": "프로그레스바 색상", "id": "PRGS_LINE_CLR_VAL", "type": "String (최대 7자, 필수)", "desc": "미션 달성도를 표시할 진행 게이지바의 Hex 색상 코드입니다. (예: #000000)" },
+      { "field": "응모 조건 구분", "id": "radioConditionType", "type": "Radio (S/P, 필수)", "desc": "S: 단수 조건 (1개의 조건만 설정), P: 복수 조건 (2개의 개별 조건을 설정하여 다중 만족 체크)." },
+      { "field": "조건1/조건2 타이틀", "id": "editConditionTilte1 / editConditionTilte2", "type": "String (각 30byte 한도)", "desc": "복수 조건('P') 설정 시 활성화되는 개별 조건의 대표 레이블 명칭입니다. (예: '첫 구매 조건', 'VIP 등급 조건')" },
+      { "field": "응모 회차 수", "id": "editEntryRound", "type": "Integer (1~10, 필수)", "desc": "혜택을 지급받을 수 있는 총 응모 회차 수입니다. 적용 시 회차 개수만큼 혜택 설정 구역(divDay1~10)이 아래에 활성화됩니다." },
+      { "field": "지급 방식", "id": "radioPayoutType", "type": "Radio (I/A, 필수)", "desc": "I: 즉시 지급 (쿠폰/EGM만 가능), A: 수기 지급 (마일리지만 가능)." },
+      { "field": "응모 방식", "id": "radioDuplicateType", "type": "Radio (N/Y, 필수)", "desc": "N: 기간 내 전체 1회만 응모 가능, Y: 회차별 중복 응모 가능." },
+      { "field": "구매내역 팝업", "id": "radioPopupYN", "type": "Radio (Y/N, 필수)", "desc": "고객 화면상에 구매 실적 내역 확인 팝업을 활성화할지 여부입니다." },
+      { "field": "선착순 조건", "id": "radioEntryYN", "type": "Radio (Y/N, 필수)", "desc": "Y: 선착순 선착 기준 적용, N: 미적용. Y일 시 선착순 노출문구 및 회차별 혜택 인원이 필수가 됩니다." },
+      { "field": "선착순 노출문구", "id": "editEntryTitle", "type": "String", "desc": "선착순 사용('Y') 시 표출될 공지 메시지입니다. (예: '선착순 마감 주의')" },
+      { "field": "회차별 혜택 인원", "id": "PRSN_QTY", "type": "Integer", "desc": "선착순 사용('Y') 시 각 회차별로 혜택을 수령할 수 있는 최대 선착순 정원입니다. (0명 지정 불가)" },
+      { "field": "회차별 혜택 기간", "id": "calStartDate / editStartTime / calEndDate / editEndTime", "type": "DateTime (필수)", "desc": "각 회차별 응모 및 참여 시작/종료 일시입니다. 기획전 전체 기간 내에 존재해야 합니다." },
+      { "field": "회차별 상세 조건", "id": "editCond1 / editCond2", "type": "Integer", "desc": "각 회차의 미션 달성 기준입니다. checkCond1(구매금액) 및 checkCond2(구매횟수) 중 1개 이상을 선택하여 숫자(0 불가)를 지정해야 합니다." },
+      { "field": "혜택 유형", "id": "comboBenefitType", "type": "Combo (C/G/M, 필수)", "desc": "C: 쿠폰 (즉시 지급만 가능), G: 사은품 (즉시/수기 모두 가능), M: 마일리지 (수기 지급만 가능, 1회차만 단독 사용 가능)." }
+    ],
+    "warnings": "1. [배경 및 프로그레스바 색상 검증] 배경색상 및 프로그레스바 색상은 '#'을 포함한 7자 또는 8자 Hex Code 포맷 정규식 /^#[0-9A-Fa-f]{6,8}$/ 을 만족해야 하며, 어긋나면 저장이 반려됩니다.\n2. [설명문구 배타성] 상단 설명 문구와 하단 설명 문구는 어드민 검증에 의해 동시에 입력할 수 없습니다. 하나는 공백이어야 유효성 에러를 피할 수 있습니다.\n3. [지급방식-혜택유형 결합 제약] 즉시 지급('I')일 때는 마일리지('M')를 혜택으로 지정할 수 없고, 수기 지급('A')일 때는 쿠폰('C')을 지정할 수 없습니다. 위반 시 저장 전 밸리데이션 검사에서 에러 메시지와 함께 저장이 반려됩니다.\n4. [마일리지 제약 조건] 마일리지('M')는 응모 회차 수(editEntryRound)가 1인 경우에만 혜택 유형으로 지정할 수 있습니다. 2회차 이상인데 마일리지를 선택하면 저장이 불가능합니다. 또한, 여러 회차를 구성할 경우 모든 회차의 혜택 유형은 동일해야 합니다.\n5. [복수 조건 및 타이틀] 응모 조건을 복수('P')로 지정할 경우, 조건 1과 조건 2의 타이틀이 각각 채워져 있어야 하고 조건 2의 대상상품 및 혜택 상세 조건2가 필수적으로 입력 및 매핑되어야 합니다.\n6. [회차별 기간 검증] 각 회차의 시작/종료 일시는 기획전 마스터 기간 내에 위치해야 하며, 회차별 기간이 서로 중복되거나 앞 회차의 종료일시보다 뒷 회차의 시작일시가 앞설 경우 기간 중복 반려 에러가 작동합니다.\n7. [선착순 및 조건값 검증] 선착순 사용('Y') 시 선착순 노출문구가 누락되거나, 개별 회차의 혜택 인원이 0명 이하일 때, 또는 회차별 혜택 상세 조건의 금액/횟수 수치가 0일 때 저장 유효성 검사 단계에서 에러가 발생합니다.\n8. [이미지 제한] 업로드하는 이벤트 이미지 용량이 200KB를 초과할 시 파일 정보 체크 단계에서 에러가 발생하며 업로드가 거부됩니다.",
+    "qtyGuidelines": {
+      "tabMin": "최소 1회차 이상 구성 필요",
+      "tabMax": "최대 10회차까지 응모 회차 조건 설정 제공",
+      "prodMin": "구매금액 조건 1원 이상, 구매횟수 조건 1회 이상 필수 설정 (0 지정 불가)",
+      "prodMax": "타이틀 최대 22byte, 설명문구 최대 50byte, 버튼명 30byte, 조건 타이틀 30byte 한도",
+      "adminValidation": "어드민 저장 시 응모 방식에 따른 혜택 유형별(쿠폰/마일리지) 호환성 유효성 체크, 회차별 기간 중복 연산 검증, 상세 조건값의 0 제한 검증이 서버 저장 트랜잭션 전 단계에서 엄격히 통제되며, 개별 파일 용량이 200KB를 초과하는 경우 파일 찾기 완료 즉시 파일 사이즈 유효성 팝업과 함께 인풋이 초기화됩니다."
+    }
+  },
+  "RANGE": {
+    "cardKey": "RANGE",
+    "name": "레인지",
+    "category": "PROD",
+    "sourceFile": "frmPlanCardRange.xfdl (어드민) / RangeCard.tsx, RangeContent.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "가격대/할인율/사이즈별 필터 칩과 1단/2단 분류 탭을 지원하는 지능형 상품 레인지 필터링 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC/모바일 기획전 상세페이지)에서는 다단 Depth를 지원하는 분류 탭 메뉴바가 노출됩니다. 사용자는 1단 및 2단 탭을 통해 카테고리/브랜드를 탐색할 수 있으며, 탭별로 지정된 배경색상 및 텍스트 문구가 반영됩니다. 하단에는 할인율/가격대/사이즈 기준의 필터 칩(Chip)들이 나열되어 사용자가 선택한 범위 내의 상품 목록만을 최대 50개(viewCount)까지 동적으로 필터링하여 화면에 즉시 노출합니다. 또한, 모바일 화면에서는 SW3_1(3x1 Swiper), SW3_2(3x2 그리드 Swiper), SW2_1, SW2_2, SW1_2, SW1_3 등의 복합 Swiper 레이아웃이 적용되고, PC 화면에서는 SW4_1(4x1), SW4_2(4x2) Swiper 레이아웃으로 유연하게 반응형 렌더링 전환됩니다. 뒤로가기 시 이전 탐색 상태를 복구하기 위해 세션 스토리지(rangePrevTabInfo, rangePrevOption, rangePrevSlide, eventTemplateV3ScrollPosition)에 탭 정보, 선택된 옵션 필터 및 슬라이드 스크롤 위치를 캐싱하여 자연스러운 UX를 유지합니다.",
+    "backendSettings": [
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6}$/ 패턴으로 색상 포맷 유효성이 엄격히 검증됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "1단 탭 구성", "id": "FIST_TAB_USE_YN", "type": "Boolean (Y/N)", "desc": "1단 탭의 사용여부를 결정합니다." },
+      { "field": "1단 탭 분류코드", "id": "FIST_TAB_CLFC_CD", "type": "Combo (BR/BS/CL/CM/CS)", "desc": "BR: 브랜드(대표), BS: 브랜드(서브), CL: 카테고리(대), CM: 카테고리(중), CS: 카테고리(소) 중 탭의 분류 기준을 선택합니다. 2단 탭 분류코드와 중복 선택이 불가합니다." },
+      { "field": "1단 탭 랜덤", "id": "RNDM_SORT_YN", "type": "Boolean (Y/N)", "desc": "1단 탭 메뉴의 노출 순서를 랜덤하게 셔플할지 여부를 결정합니다." },
+      { "field": "2단 탭 구성", "id": "SCND_TAB_USE_YN", "type": "Boolean (Y/N)", "desc": "2단 탭(다단 구조)의 사용여부를 결정합니다. 1단 탭 미사용 시에는 사용으로 설정할 수 없습니다." },
+      { "field": "2단 탭 분류코드", "id": "SCND_TAB_CLFC_CD", "type": "Combo (BR/BS/CL/CM/CS)", "desc": "2단 탭 메뉴의 분류 기준을 선택합니다. 1단 탭 분류코드와 중복 선택이 불가합니다." },
+      { "field": "2단 탭 랜덤", "id": "SCND_TAB_RNDM_SORT_YN", "type": "Boolean (Y/N)", "desc": "2단 탭 메뉴의 노출 순서를 랜덤하게 셔플할지 여부를 결정합니다." },
+      { "field": "버튼 사용", "id": "BTN_LCTI_VAL", "type": "Boolean (Y/N)", "desc": "탭 내 우측 영역 바로가기 버튼의 노출 여부를 제어합니다." },
+      { "field": "상품 정렬 순서", "id": "PROD_DISP_TYPE_VAL", "type": "Combo (A/R/S/V/C/M)", "desc": "A: 등록순, R: 추천순, S: 할인순, V: 조회순, C: 리뷰순, M: 랜덤정렬순 중 기획전 상품 정렬 기준을 결정합니다." },
+      { "field": "옵션 구성", "id": "RNG_OPTN_TYPE_VAL", "type": "Radio (SR/PR/SZ)", "desc": "SR: 할인율, PR: 가격대, SZ: 사이즈 중 상품 필터링을 제공할 핵심 옵션 기준을 지정합니다." },
+      { "field": "전체탭 사용", "id": "ALL_TAB_USE_YN", "type": "Boolean (Y/N)", "desc": "필터 옵션을 미선택한 기본 상태의 '전체' 보기 탭을 노출할지 여부를 결정합니다. 기본값 Y." },
+      { "field": "상품 표현 (MO)", "id": "PROD_EPSR_TYPE_VAL", "type": "Radio (SW3_2/SW3_1/SW2_2/SW2_1/SW1_2/SW1_3)", "desc": "모바일에서 노출될 Swiper 그리드 레이아웃 형식을 설정합니다." },
+      { "field": "상품 표현 (PC)", "id": "PC_PROD_EPSR_TYPE_VAL", "type": "Radio (SW4_1/SW4_2)", "desc": "PC에서 노출될 Swiper 그리드 레이아웃 형식을 설정합니다." },
+      { "field": "옵션 설정", "id": "dsOptionData", "type": "Dataset Binding", "desc": "할인율/가격대 옵션 선택 시, 지정한 개수(최소 2개 ~ 최대 10개)에 따라 OPTN_STRT_VAL(시작값), OPTN_END_VAL(종료값), OPTN_NM(옵션명)을 바인딩합니다. 사이즈 옵션 시에는 비활성화됩니다." }
+    ],
+    "warnings": "1. [배경색상 제한] 배경색상은 '#'을 포함한 정교한 Hex Code 양식(예: #FFFFFF)으로 입력해야 하며, 정규식을 벗어나거나 포맷이 불일치할 시 저장이 반려됩니다.\n2. [텍스트 상호 배타성] 상단 설명 문구와 하단 설명 문구는 어드민 시스템 설계 제약 상 동시에 입력할 수 없습니다. 하나가 입력되면 다른 하나는 비어있어야 Validation 에러가 발생하지 않습니다.\n3. [타이틀 제한] 타이틀(EVNT_MAIN_TEXT)은 최대 22byte(한글 약 11자) 이내로 입력해야 하며, 줄바꿈(\\n)은 2줄까지만 허용됩니다. 초과 시 오류 메시지와 함께 저장이 거부됩니다.\n4. [탭 코드 중복 불가] 1단 탭 분류코드와 2단 탭 분류코드에 서로 동일한 값을 매핑할 수 없습니다. 콤보 박스 선택 시 이미 매핑된 분류는 필터링되어 중복 선택이 원천 방지됩니다.\n5. [옵션 구간 규칙] 할인율/가격대 옵션 설정 시 각 구간의 시작값은 종료값보다 작아야 하며, (i-1)번째 옵션의 종료값이 i번째 옵션의 시작값 이상으로 겹쳐서 기입될 경우 중복 에러로 반려됩니다.\n6. [탭 상태 변경 후 분류 필수] 1단/2단 탭 사용여부가 변경될 경우 화면 레이아웃과 데이터 불일치를 막기 위해, 반드시 어드민에서 '엑셀 업로드' 혹은 '자동 분류'를 새로 수행하여 탭 매핑 상태를 동기화한 뒤에만 저장이 승인됩니다.\n7. [용량 제한] 업로드하는 상품 정보와 탭 정보는 서버 전체 트랜잭션 용량 한도 내에서 안전하게 관리되어야 합니다.",
+    "qtyGuidelines": {
+      "tabMin": "1단 탭 미사용 시 1개 (전체), 사용 시 최소 2개 이상의 분류 탭 구성 필요",
+      "tabMax": "1단 탭 최대 15개, 2단 탭 최대 8개까지 추가 및 롤링 가능",
+      "prodMin": "각 분류 탭별 최소 4개 이상의 유효 상품 매핑 필수",
+      "prodMax": "각 분류 탭별 최대 48개 상품 등록 한도 (필터 적용 시 최대 50개까지 노출)",
+      "adminValidation": "어드민(NBOS) 저장 시 각 분류별 매핑된 상품 개수가 4개 미만이거나 48개를 초과할 경우, 데이터 정합성 Validation 오류 메시지와 함께 저장이 강제 반려됩니다. 옵션 구간은 최소 2개에서 최대 10개까지 설정 가능하며, 상품 자동 분류 실행 시에는 브랜드/카테고리 정보를 기준으로 서버단에서 자동 분류 탭 매핑이 연산 처리됩니다. 엑셀 업로드 시 파일의 1열에는 반드시 13자리의 상품코드만 존재해야 합니다."
+    }
+  },
+  "COMMENT": {
+    "cardKey": "COMMENT",
+    "name": "댓글",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardComment.xfdl (어드민) / CommentBoard.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "사용자들의 실시간 댓글 작성 및 소통 참여가 이루어지는 대화형 영역입니다.",
+    "layoutDescription": "사용자 프론트 영역에 댓글 입력 에디터 창(최대 200자 한도 기입 지원)과 함께, 고객들이 남긴 최신 댓글들을 페이징 또는 무한 스크롤 형태로 나열하며, 자기가 쓴 댓글에 한해 수정 및 삭제 단색 텍스트 링크 버튼이 노출되는 소통 공간입니다.",
+    "backendSettings": [
+      { "field": "댓글 게시판 코드", "id": "BOARD_CD_VAL", "type": "String (필수)", "desc": "기획전과 매핑될 백엔드 공통 댓글 게시판 마스터 코드" },
+      { "field": "익명 작성 허용 여부", "id": "ANONYMOUS_YN", "type": "Boolean (Y/N)", "desc": "N 설정 시 로그인한 실명 인증 회원만 글 작성을 허용" },
+      { "field": "댓글 노출 단위 수", "id": "COMMENT_PAGE_SZ", "type": "Integer (필수)", "desc": "한 번에 보여줄 댓글 갯수 (기본값: 10개, 최대 30개)" },
+      { "field": "금칙어 사전 적용 여부", "id": "SWEAR_FILTER_YN", "type": "Boolean (Y/N)", "desc": "욕설 및 광고 금칙어 필터링 실시간 활성화 여부" }
+    ],
+    "warnings": "1. 댓글 입력 시 비속어나 허위 광고성 글을 실시간 필터링하기 위해, 백엔드 금칙어 자동 필터 시스템 연동이 필수 활성화되어 있어야 운영상의 리스크를 방지할 수 있습니다.\n2. 본문 작성 Byte 한도는 한글 기준 최대 200자(400byte)입니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 10자 이상 글 기입 가이드",
+      "prodMax": "최대 200자 한도",
+      "adminValidation": "댓글 게시판 코드(BOARD_CD_VAL)는 필수값이며, 한 페이지 노출 수(COMMENT_PAGE_SZ)를 5 미만 또는 30 초과로 기입 시 유효성 검증 단에서 10개 기본값으로 강제 재조정됩니다."
+    }
+  },
+  "FCFS_CPN_P": {
+    "cardKey": "FCFS_CPN_P",
+    "name": "선착순쿠폰상품",
+    "category": "PROD",
+    "sourceFile": "frmPlanCardFCFSCouponFrod.xfdl (어드민) / CouponProductList.tsx (프론트)",
+    "moduleCode": "MD6",
+    "desc": "선착순 혜택 대상 상품 목록을 바인딩하여 혜택 뱃지와 함께 노출합니다.",
+    "layoutDescription": "사용자 프론트 영역에서 선착순 다운로드 쿠폰의 대상이 되는 특정 상품 목록을 Swiper 롤링 슬라이더 또는 2열/3열 그리드 형태로 매핑 노출하며, 개별 상품의 이미지 좌상단에 '선착순쿠폰' 전용 컬러풀 뱃지를 오버레이 렌더링하는 전용 기획 코너 구좌입니다.",
+    "backendSettings": [
+      { "field": "매핑 쿠폰 고유 ID", "id": "COUPON_ID_VAL", "type": "String (10자리 숫자, 필수)", "desc": "상품들과 연동될 선착순 쿠폰 식별 번호" },
+      { "field": "대상 상품 목록", "id": "TARGET_PRODUCT_CD_LIST", "type": "String (필수)", "desc": "쉼표로 구분된 13자리 상품 코드들" },
+      { "field": "뱃지 테마 색상", "id": "BADGE_THEME_CLR", "type": "Combo (CORAL / TEAL / BLACK)", "desc": "상품 위에 띄울 뱃지의 백그라운드 색상 선택" },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 여부" }
+    ],
+    "warnings": "1. 등록된 상품들은 반드시 매핑된 쿠폰 ID의 사용 조건 및 대상 상품 기준과 완벽하게 일치해야 합니다. 불일치 시 고객 주문 시 쿠폰 미적용 불만이 발생합니다.\n2. 대상 상품은 그리드 미관을 위해 최소 2개 이상 등록해 주세요.",
+    "qtyGuidelines": {
+      "tabMin": "최소 2개 상품 연동",
+      "tabMax": "최대 20개 상품 한도",
+      "prodMin": "쿠폰 ID 10자리 필수",
+      "prodMax": "해당 없음",
+      "adminValidation": "연동 쿠폰 ID가 누락되었거나 상품 목록이 비어 있는 경우, 혹은 10자리 쿠폰 ID가 숫자가 아닐 시 어드민 저장 Validation 단계에서 저장이 차단됩니다."
+    }
+  },
+  "OPT_CONTAINER": {
+    "cardKey": "OPT_CONTAINER",
+    "name": "옵션컨테이너",
+    "category": "NAV",
+    "sourceFile": "frmPlanCardOptionContainer.xfdl (어드민) / ProductOptionSelector.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "상품의 여러 컬러, 사이즈 등 핵심 옵션 셀렉터 구조를 직접 노출해주는 영역입니다.",
+    "layoutDescription": "사용자 프론트 영역의 상품 상세 목록 하단 또는 레이어 팝업 형태로 컬러 칩, 사이즈 버튼 칩들을 미려한 그리드 버튼 배열 형태로 노출하여, 사용자가 장바구니나 상세페이지 이동 없이도 기획전 목록 상에서 핵심 옵션을 즉시 파악 및 선택할 수 있게 돕는 기능 영역입니다.",
+    "backendSettings": [
+      { "field": "연동 대상 상품 코드", "id": "TARGET_PRODUCT_CD", "type": "String (13자리, 필수)", "desc": "옵션 정보를 추출해 바인딩할 대표 상품 코드" },
+      { "field": "옵션 표현 방식", "id": "OPTION_DISP_DIV", "type": "Radio (CHIP / LIST)", "desc": "CHIP: 컬러/사이즈를 동그란 칩 형태로 정렬 배열, LIST: 일반 셀렉트박스 목록형 나열" },
+      { "field": "품절 옵션 노출 구분", "id": "SOLDOUT_SHOW_YN", "type": "Boolean (Y/N)", "desc": "품절된 옵션 칩을 사선 취소선과 함께 흐리게 노출할지 여부" }
+    ],
+    "warnings": "1. 해당 상품 마스터 정보에 옵션 정보(컬러, 사이즈 등)가 등록되어 있지 않은 단품인 경우 옵션 컨테이너 자체가 화면에 노출되지 않습니다.\n2. 복잡한 다중 조합형 옵션보다는 1단계 또는 최대 2단계(예: 블랙-95)의 간결한 옵션형 상품에 적용하는 것을 강력히 가이드합니다.",
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "상품코드 13자리 필수",
+      "prodMax": "해당 없음",
+      "adminValidation": "13자리 정규식에 부합하는 유효한 상품 코드가 기재되지 않았거나 공백으로 제출될 시, 어드민 저장 검증단에서 반려 처리가 수행됩니다."
+    }
+  },
+  "GAME_CARD1": {
+    "cardKey": "GAME_CARD1",
+    "name": "게임카드1",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardGameTypeA.xfdl (어드민) / casualGameTypeA.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "고객 참여 활성화를 위해 탑재된 복합 캐주얼 미니 이벤트 카드타입 A형입니다.",
+    "layoutDescription": "사용자 프론트 영역에서 브랜드 감성을 담은 사다리 타기 또는 보물상자 고르기 게임 등의 캐주얼한 비주얼 인터랙티브 게임판을 렌더링하고, 고객이 클릭하여 참여 시 즉시 랜덤 혜택 지급 완료 모달 창을 띄워주는 즉석 당첨용 공간입니다.",
+    "backendSettings": [
+      { "field": "게임 캠페인 번호", "id": "GAME_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "백엔드 게임 이벤트 시스템에 생성된 고유 캠페인 번호" },
+      { "field": "당첨 혜택 목록", "id": "BENEFIT_LIST_VAL", "type": "String (필수)", "desc": "게임 내 각 결과 영역에 할당될 경품 및 마일리지 정보 안내 텍스트" },
+      { "field": "일일 참여 제한수", "id": "DAILY_PART_LIMIT", "type": "Integer (필수)", "desc": "하루 동안 한 고객 ID가 시도 가능한 최대 참여 횟수 (예: 1회)" },
+      { "field": "비주얼 배경 이미지", "id": "GAME_BG_IMG_PATH", "type": "File (선택)", "desc": "게임판의 백그라운드를 꾸밀 프리미엄 그래픽 배경 파일" }
+    ],
+    "warnings": "1. 즉석 경품 당첨이 연계되므로, 경품 예산 소진 속도 조절을 위한 확률 설정 테이블이 백엔드 단에 정밀하게 선행 셋업되어 있어야 함을 유의해야 합니다.\n2. 일일 참여 횟수 제한 로직을 철저히 검증해 매크로 오남용을 예방하세요.",
+    "imageGuidelines": {
+      "pcSize": "가로 1000px × 세로 600px 권장",
+      "moSize": "가로 750px × 세로 500px 권장",
+      "allowTypes": "PNG, JPG, JPEG",
+      "maxSize": "200KB 이하",
+      "adminValidation": "배경 이미지 등록 시 200KB 용량 제한 검증 규칙이 작용하며 초과 시 업로드가 반려됩니다. 투명 레이어가 필요한 게임 요소 칩 이미지들은 PNG 포맷 저장이 필수적입니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "캠페인 번호 1개 필수",
+      "prodMax": "최대 1회 제한 권장 (일일)",
+      "adminValidation": "게임 캠페인 번호(GAME_CAMPAIGN_NO) 누락 또는 포맷 오류 시 어드민 검증에 의해 저장이 즉시 반려 처리됩니다."
+    }
+  },
+  "GAME_CARD2": {
+    "cardKey": "GAME_CARD2",
+    "name": "게임카드2",
+    "category": "PROMOTION",
+    "sourceFile": "frmPlanCardGameTypeB.xfdl (어드민) / casualGameTypeB.tsx (프론트)",
+    "moduleCode": "MD3",
+    "desc": "마케팅 재미 요소를 고도화한 플랩 또는 뒤집기 형태의 미니 게임 카드타입 B형입니다.",
+    "layoutDescription": "사용자 프론트 영역에 여러 장의 뒤집을 수 있는 카드(Flapping Cards, 예: 3장 또는 6장)가 미려한 HSL 색상 테마 카드로 배치됩니다. 고객이 한 장의 카드를 클릭해 뒤집으면 카드 뒷면이 플랩 애니메이션 효과와 함께 회전하며 당첨 결과를 즉석에서 확인시켜 줍니다.",
+    "backendSettings": [
+      { "field": "게임 캠페인 번호", "id": "GAME_CAMPAIGN_NO", "type": "Integer (필수)", "desc": "백엔드 게임 이벤트 시스템에 생성된 고유 캠페인 번호 (Type B용)" },
+      { "field": "카드 수량 세팅", "id": "CARD_FLAP_COUNT", "type": "Integer (3 또는 6, 필수)", "desc": "화면에 배치할 뒤집기 카드의 총 개수" },
+      { "field": "카드 이미지 프리셋", "id": "CARD_FRONT_IMG_PATH / CARD_BACK_IMG_PATH", "type": "Files (선택)", "desc": "카드 앞면과 뒷면의 전용 그래픽 커스텀 이미지 세트" }
+    ],
+    "warnings": "1. 플랩 애니메이션이 CSS 3D transform을 이용하므로, 구형 브라우저에서도 부드럽고 깜빡임 없는 전환 효과가 유지되도록 모바일 퍼포먼스를 사전 조율해야 합니다.\n2. 동일 혜택 중복 방지를 위한 API 트랜잭션 락 처리가 필수적입니다.",
+    "imageGuidelines": {
+      "pcSize": "개별 카드당 가로 200px × 세로 280px 권장 (카드 비율 유지)",
+      "moSize": "개별 카드당 가로 150px × 세로 210px 권장",
+      "allowTypes": "PNG, JPG, JPEG",
+      "maxSize": "100KB 이하 (개별 카드 이미지)",
+      "adminValidation": "카드 앞/뒷면 이미지는 개별 100KB 이내 크기로 제한을 통제하며, 용량 초과 업로드 시 넥사크로 폼 스크립트에 의해 자동 차단 처리됩니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "최소 3장 구성",
+      "tabMax": "최대 6장 구성 제한",
+      "prodMin": "캠페인 번호 1개 필수",
+      "prodMax": "해당 없음",
+      "adminValidation": "카드 수량(CARD_FLAP_COUNT)은 오직 3 또는 6 중에서만 라디오버튼으로 선택 가능하며, 유효하지 않은 값이 들어간 경우 6장 기본값으로 강제 리셋 저장됩니다."
+    }
+  },
+  "REVIEW_GUIDE": {
+    "cardKey": "REVIEW_GUIDE",
+    "name": "리뷰 작성",
+    "category": "NAV",
+    "sourceFile": "frmPlanCardReviewGuide.xfdl (어드민) / ReviewWriteGuide.tsx (프론트)",
+    "moduleCode": "MD13",
+    "desc": "구매자들에게 적극적인 평점 및 리뷰 작성을 유도하고 보상 혜택을 알려주는 위젯입니다.",
+    "layoutDescription": "사용자 프론트 영역에 '리뷰 쓰고 마일리지 받자!' 등 리뷰 혜택 배너 그래픽과 함께, 고객 본인의 최근 구매 확정 상품 목록 및 '리뷰 쓰기' 바로가기 링크 버튼을 동적으로 매핑 노출하여 즉각적인 참여를 유도하는 위젯입니다.",
+    "backendSettings": [
+      { "field": "리뷰 혜택 텍스트", "id": "REVIEW_BENEFIT_VAL", "type": "String (필수)", "desc": "리뷰 작성 시 최대 지급 혜택 안내 문구 (예: '포토리뷰 작성 시 최대 1,000원 적립')" },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 여부" },
+      { "field": "가이드 이미지", "id": "GUIDE_IMG_PATH", "type": "File (선택)", "desc": "리뷰 혜택을 시각적으로 강조 소구할 전용 배너 이미지" }
+    ],
+    "warnings": "1. 고객의 실제 최근 구매 확정 상품 목록을 마이페이지 API에서 비동기로 실시간 조회해 오기 때문에, 구매 이력이 없는 유저에게는 구매 유도 혹은 최근 베스트 상품 리뷰를 대신 띄워주는 Fallback UI가 구현되어 있어야 합니다.\n2. 마일리지가 실시간 적립되는 혜택 문구가 정확히 매칭되도록 텍스트를 기입해야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 1240px × 세로 120px 권장 (띠배너 형태)",
+      "moSize": "가로 750px × 세로 180px 권장 (띠배너 형태)",
+      "allowTypes": "JPG, JPEG, PNG, GIF",
+      "maxSize": "100KB 이하",
+      "adminValidation": "가이드 이미지 파일 업로드 시 100KB 크기 제한 기준을 1바이트라도 초과하면 넥사크로 어드민 폼 검증단에서 에러를 유발하며 로드를 취소합니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "최소 5자 이상 혜택 텍스트",
+      "prodMax": "최대 100자 한도",
+      "adminValidation": "리뷰 혜택 안내 텍스트(REVIEW_BENEFIT_VAL)는 필수 입력 사항이며, 비어 있는 채 저장하려 할 경우 유효성 검사 단에서 반려 처리됩니다."
     }
   }
 }

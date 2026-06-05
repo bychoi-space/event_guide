@@ -124,7 +124,7 @@ window.ExhibitionCardsList = [
   },
   {
     "cardKey": "TAB_CONTAINER",
-    "category": "NAV",
+    "category": "PROD",
     "name": "탭 컨테이너",
     "desc": "구조적인 다단 Depth(1단/2단/Leaf) 구성방식을 지원하는 복합 탭 내비게이션 영역입니다.",
     "sourceFile": "frmPlanTempTabContainer.xfdl",
