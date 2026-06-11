@@ -340,7 +340,7 @@ footer a:hover {
   width: 100%;
   background: var(--canvas-white);
   border: 1px solid #c8c8cc;
-  border-radius: var(--radius-md);
+  border-radius: 0px;
   box-shadow: var(--shadow-md);
   overflow: hidden;
   display: flex;
@@ -403,7 +403,7 @@ footer a:hover {
   width: 100%;
   max-width: 360px;
   border: 1px solid #c8c8cc;
-  border-radius: var(--radius-md);
+  border-radius: 0px;
   background: #fafaf9;
   box-shadow: var(--shadow-md);
   overflow: hidden;

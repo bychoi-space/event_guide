@@ -1,4 +1,4 @@
-﻿// LFmall NEW Exhibition Template Guides Master Database (db/db_guides.js)
+// LFmall NEW Exhibition Template Guides Master Database (db/db_guides.js)
 // Enables 100% fail-proof execution on file:/// local protocols bypassing CORS blocks.
 
 window.ExhibitionGuides = {
@@ -1024,22 +1024,41 @@ window.ExhibitionGuides = {
     "cardKey": "SHARE",
     "name": "공유하기",
     "category": "NAV",
-    "sourceFile": "frmPlanCardShare.xfdl (어드민) / ShareModule.tsx (프론트)",
-    "moduleCode": "MD13",
-    "desc": "SNS나 카카오톡 링크 전송 버튼들을 정렬 노출하는 공유 모듈입니다.",
-    "layoutDescription": "사용자 프론트 영역에 카카오톡, 라인, 페이스북, 트위터, URL 복사 등의 공유 아이콘 링크 버튼 세트들을 둥근 그리드 묶음 형태로 가로 정렬 렌더링하여 고객 바이럴 공유 활동을 유도합니다.",
+    "sourceFile": "frmPlanCardShare.xfdl (어드민) / SnsShare.tsx (프론트)",
+    "moduleCode": "SHARE",
+    "desc": "기획전 전용 SNS 공유(카카오톡) 및 URL 복사 버튼 구좌를 배치하여 바이럴 효과를 극대화하는 컴포넌트입니다.",
+    "layoutDescription": "사용자 화면(PC/MO)에서는 배경색상 및 여백 옵션이 적용된 컨테이너 내부에 타이틀과 설명 문구가 노출되며, 하단에는 카카오톡 공유 및 URL 복사하기 버튼이 가로 배치됩니다. 카카오톡 공유는 카카오톡 피드 메시지를 전송하고, URL 복사하기는 기획전 고유 URL(제휴 코드 파라미터가 연동된 주소)을 클립보드에 복사합니다. 로그인 여부 검증 및 ETag 로그 전송이 연동되어 작동합니다.",
     "backendSettings": [
-      { "field": "카카오 공유 메시지", "id": "KAKAO_MSG_VAL", "type": "String (필수)", "desc": "카카오톡 공유 시 카드 썸네일 아래 노출될 대표 텍스트 문구" },
-      { "field": "공유용 대표 이미지", "id": "SHARE_IMG_PATH", "type": "File (선택)", "desc": "공유 시 노출될 썸네일 이미지 파일 (미지정 시 기획전 탑배너 이미지로 대체)" },
-      { "field": "채널 노출 옵션", "id": "SHARE_CHANNELS_VAL", "type": "Checkboxes (KAKAO, FB, URL)", "desc": "화면에 노출할 공유 채널 목록을 개별 선택 매핑" }
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (Hex Color)", "desc": "기획전 카드의 배경색상 Hex Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 유효성 패턴 체크가 실행됩니다. 프론트엔드 렌더링 시 입력한 색상의 8% 투명도로 연하게 배경색이 적용됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "SHRG_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 영역 윗부분에 표시되는 설명 텍스트 문구입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "SHRG_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "중앙에 크게 배치되는 메인 헤드라인 텍스트입니다. 줄바꿈(\\n) 기준 최대 2줄까지만 입력 가능합니다." },
+      { "field": "하단 설명 문구", "id": "SHRG_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 보조 설명 텍스트입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "카카오톡 공유", "id": "USE_YN (KK)", "type": "Radio (Y/N)", "desc": "카카오톡 공유 기능 버튼의 노출 및 작동 활성화 여부를 선택합니다." },
+      { "field": "URL 복사", "id": "USE_YN (URL)", "type": "Radio (Y/N)", "desc": "URL 복사 기능 버튼의 노출 및 작동 활성화 여부를 선택합니다." },
+      { "field": "공유 이미지 구분", "id": "SHRG_IMG_TYPE_VAL", "type": "Radio (E/C)", "desc": "E: 기획전 배너 자동 대체 / C: 수기 이미지 개별 등록" },
+      { "field": "모바일 공유 이미지", "id": "MOBI_IMG_PATH_NM", "type": "File (최대 200KB)", "desc": "공유 이미지 구분이 'C(이미지 등록)'로 선택된 경우 노출할 썸네일 이미지 파일입니다. (PC 이미지 권장 000px / 모바일 이미지 권장 000px, 200KB 제한)" },
+      { "field": "AF코드 사용", "id": "AFLN_CD", "type": "Combo", "desc": "공유 링크 내 제휴 코드 주입 종류를 지정합니다. (미사용 / SH002 주문적재 / SH003 방문적재)" },
+      { "field": "연관카드번호", "id": "RLTS_CARD_MSTR_NO", "type": "String (숫자)", "desc": "AF코드를 사용(SH002, SH003)할 때 필수 매핑되는 기획전 내 마스터 카드 번호(MSTR_NO)입니다. 연관 코드가 없을 시 연관카드번호가 비활성화됩니다." }
     ],
-    "warnings": "1. 카카오톡 공유가 정상 작동하려면 카카오 API 개발자 키 연동 환경이 구성되어 있어야 합니다. 로컬 테스트 시에는 URL 복사 위주로 검수해 주세요.\n2. 공유 메시지는 공유처 썸네일 미리보기 크기 제약에 따라 너무 길지 않게 50자 내외로 입력해 주세요.",
+    "codeSnippet": "// SnsShare.tsx - 제휴코드 조회 후 공유 처리 핵심 코드\nconst { refetch } = useFetchExhbShrgAfCodeGET({\n  exhbNo: Number(exhbNo),\n  evntNo: Number(evntNo),\n  handleSuccess: (data) => {\n    const afCode = data.body ?? \"\";\n    let shareUrl = window.location.href;\n\n    if (!!afCode) {\n      if (searchParams.get(\"af\")) {\n        const url = new URL(shareUrl);\n        const paramsToDelete = [\"af\", \"sc\", \"sp\"];\n        paramsToDelete.forEach((param) => url.searchParams.delete(param));\n        shareUrl = url.toString();\n      }\n      shareUrl += shareUrl.indexOf(\"?\") > 0 ? \"&\" : \"?\";\n      shareUrl += `af=${afCode}&sc=${loginInfo.customerId}&sp=${exhbNo}`;\n    }\n    afterCheckAfCode(shareUrl);\n  }\n});\n\nfunction afterCheckAfCode(shareUrl: string) {\n  if (shareType === \"URL\") {\n    copyClipboard({\n      value: shareUrl,\n      onSuccess: () =>\n        LFAlert.alert(\"클립보드에 복사되었습니다.\").then(() => {\n          handleEventMutation(shareType);\n        }),\n    });\n  } else if (shareType === \"KAKAO\") {\n    sns.KakaoTalk({\n      installTalk: true,\n      objectType: \"feed\",\n      content: {\n        title: `[LF mall]\\n${planNm}`,\n        imageWidth: 300,\n        imageHeight: 300,\n        imageUrl: `${IMAGE_ROOT_PATH}/${thumbImg}`,\n        link: { mobileWebUrl: shareUrl, webUrl: shareUrl }\n      },\n      buttons: [\n        { title: \"웹으로 보기\", link: { mobileWebUrl: shareUrl, webUrl: shareUrl } },\n        { title: \"앱으로 보기\", link: { androidExecParams: \"url=\" + encodeUrl_android, iosExecParams: \"url=\" + encodeUrl_ios } }\n      ]\n    });\n    handleEventMutation(shareType);\n  }\n}",
+    "warnings": "1. [설명문구 배타성] 상단 설명 문구(SHRG_HEDR_TEXT)와 하단 설명 문구(SHRG_SUB_TEXT)는 어드민 시스템 제약 상 절대 동시에 입력하여 저장할 수 없습니다. 둘 다 값이 있을 경우 유효성 에러와 함께 저장이 반려됩니다.\n2. [채널 선택 제한] 카카오톡 공유와 URL 복사 라디오 버튼이 둘 다 'N(사용안함)'으로 세팅될 수 없으며, 저장을 위해선 최소 1개 이상 사용하도록 유효성이 검사됩니다.\n3. [이미지 등록 필수성] 공유 이미지 구분을 'C(이미지 등록)'로 선택했음에도 모바일 공유 이미지(MOBI_IMG_PATH_NM)가 업로드되어 있지 않으면 에러가 노출됩니다.\n4. [비로그인 차단 및 이동] 프론트 화면에서 로그인하지 않은 세션의 사용자가 버튼을 클릭하면 '로그인 후 참여해주세요.' 얼럿이 작동하고 로그인 화면으로 자동 이동합니다.\n5. [제휴 파라미터 조립 규칙] 로그인 상태인 경우, 제휴코드 조회 API를 통해 획득한 afCode를 반영하여 'https://.../planning.shtml?af={afCode}&sc={customerId}&sp={exhbNo}' 주소 파라미터를 조립합니다. 만약 기존 주소에 이미 af, sc, sp가 존재하면 해당 파라미터들을 지우고 덮어씁니다.\n6. [이벤트 로그 및 참여 이력] 공유 동작이 완료되면 ETag 이벤트 로그('5_카카오톡' 또는 '4_URL복사')를 발생시키고, 기획전 공유 참여 이력 API를 호출해 참가 이력을 갱신합니다.",
+    "imageGuidelines": {
+      "pcSize": "제한 없음 (기본 이미지 썸네일 사용)",
+      "moSize": "기본 이미지 사이즈 000px × (제한없음) (정비율 1:1 권장)",
+      "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
+      "maxSize": "파일당 최대 200KB 이하",
+      "adminValidation": "공유 이미지를 수기 등록할 때, 모바일 이미지 파일 용량이 200KB를 초과할 경우 넥사크로 UI 및 서버의 파일 용량 체크 로직에 의해 즉시 차단 및 파일 초기화가 이뤄집니다."
+    },
     "qtyGuidelines": {
-      "tabMin": "최소 1개 채널 선택",
-      "tabMax": "최대 5개 채널 선택",
-      "prodMin": "최소 10자 (공유 메시지)",
-      "prodMax": "최대 100자 (공유 메시지)",
-      "adminValidation": "공유 채널 목록이 하나도 선택되어 있지 않거나, 카카오 공유 메시지가 비어 있는 경우 어드민 저장 검증단에서 반려 처리가 수행됩니다."
+      "tabMin": "최소 1개 채널 선택 필수",
+      "tabMax": "최대 2개 채널 선택 가능 (카카오톡, URL)",
+      "prodMin": "해당 없음",
+      "prodMax": "해당 없음",
+      "adminValidation": "어드민 저장 시 카카오톡과 URL 복사 채널이 둘 다 미사용 처리되어 있는 경우 저장이 차단됩니다. 또한, AF코드 선택 콤보가 '미사용'이 아닐 경우에만 연관카드번호(RLTS_CARD_MSTR_NO) 입력 필드가 비활성화 상태에서 활성화 상태로 전환됩니다."
     }
   },
   "BUY_KING": {
@@ -1083,22 +1102,36 @@ window.ExhibitionGuides = {
     "cardKey": "RANDOM_NO",
     "name": "난수입력",
     "category": "NAV",
-    "sourceFile": "frmPlanCardRandomNumber.xfdl (어드민) / CouponSerialInput.tsx (프론트)",
+    "sourceFile": "frmPlanCardRandomNumber.xfdl (어드민) / RandomNo.tsx (프론트)",
     "moduleCode": "MD13",
-    "desc": "배포된 전용 시리얼 쿠폰이나 1회용 프로모션 난수코드를 검증/입력하는 곳입니다.",
-    "layoutDescription": "사용자 프론트 영역에 시리얼 난수 번호 입력 인풋 박스와 '쿠폰 등록' 버튼을 단정하게 정렬 노출합니다. 사용자가 난수 입력 후 등록 시 실시간 검증을 거쳐 혜택 지급 완료 알럿을 출력합니다.",
+    "desc": "배포된 전용 시리얼 쿠폰이나 1회용 프로모션 난수코드를 사용자 화면에서 입력하여 실시간 검증을 거쳐 매핑된 쿠폰 혜택을 즉시 발급받을 수 있는 시리얼/난수 프로모션 연동 컴포넌트입니다.",
+    "layoutDescription": "Hex 배경색상 위에 상단 설명 문구, 메인 타이틀(최대 2줄)이 렌더링되며, 설정에 따라 사용자가 시리얼 번호를 입력할 수 있는 직각 인풋 박스와 인증/혜택 지급 완료를 처리하는 가로형 버튼이 정밀 정렬되어 표출됩니다. 난수 사용 여부가 미사용(N)일 때는 인풋 박스가 숨겨지고 혜택 받기 버튼만 원드랍 형태로 나타납니다.",
     "backendSettings": [
-      { "field": "난수 캠페인 코드", "id": "SERIAL_CAMPAIGN_CD", "type": "String (필수)", "desc": "프로모션 쿠폰 시스템에 연결된 시리얼 난수 캠페인 그룹 식별 번호" },
-      { "field": "쿠폰 자동 발급 여부", "id": "AUTO_ISSUE_YN", "type": "Boolean (Y/N)", "desc": "난수 일치 시 즉시 쿠폰을 사용자 계정에 지급할지 여부" },
-      { "field": "인풋 가이드 텍스트", "id": "INPUT_PLACEHOLDER", "type": "String (30자 한도)", "desc": "입력창 내부에 연하게 표시할 가이드 안내 문구" }
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 입력 시 프론트 렌더링 시 지정한 배경색의 8% 수준으로 연하게 톤업하여 배경으로 자동 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 한글 약 25자 내외의 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈(\\n)은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 한글 약 25자 내외의 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "난수 사용여부", "id": "RNNO_USE_YN", "type": "Radio (Y/N, 필수)", "desc": "난수 입력 박스 노출 여부입니다. Y 설정 시 인풋 박스가 렌더링되며, N 설정 시 버튼만 노출됩니다." },
+      { "field": "프롬프트", "id": "EXCU_TEXT_VAL", "type": "String (30byte 한도, 필수)", "desc": "사용자가 난수 코드를 입력하는 인풋 박스의 placeholder 문구입니다." },
+      { "field": "버튼 색상", "id": "BTN_CLR_VAL", "type": "Radio (BK/WH, 필수)", "desc": "인증/등록 버튼의 색상을 설정합니다. BK: 블랙, WH: 화이트." },
+      { "field": "버튼 텍스트", "id": "BTN_TEXT_VAL", "type": "String (24byte 한도, 필수)", "desc": "인증/등록 버튼에 노출될 텍스트입니다." },
+      { "field": "난수 구좌 마스터 설정", "id": "dsRound", "type": "DataSet", "desc": "난수 입력 구좌별 고유 순번(NTOR_SEQ), 프로모션 ID(PRMN_ID), 판매예약 번호(SASN_OFF_SNO) 및 혜택여부(BENEFIT_YN)를 매핑합니다. (난수 개수 설정에 따라 1~6행 유동적 생성)" },
+      { "field": "연결 제휴 난수 코드", "id": "dsRandomSave", "type": "DataSet", "desc": "각 구좌별로 사용자가 입력하여 적용 및 매핑될 제휴 난수 마스터 번호(RNNO_MSTR_NO, 구좌당 최대 5개)를 저장합니다." },
+      { "field": "난수 발급 대상 회원", "id": "dsCondition", "type": "DataSet", "desc": "각 구좌별 난수 발급 대상을 설정합니다. 기존회원(E)/신규회원(N)/윈백회원(W) 다중 체크 조합 및 VIP 승급 여부(AFLN_MBR_GRD_PMOT_YN, Y/N)를 지정합니다." },
+      { "field": "연결 쿠폰 혜택", "id": "dsBenfitCoupon", "type": "DataSet", "desc": "각 구좌별 조건 달성 시 실시간 지급할 마스터 쿠폰 ID(CPN_ID_VAL, 구좌당 최대 5개)를 지정하여 매핑합니다." }
     ],
-    "warnings": "1. 발급할 난수 번호 대역의 생성 및 마스터 쿠폰 사전 등록이 반드시 완료되어 있어야 오류가 발생하지 않습니다.\n2. 중복 입력 시도나 불법 입력 매크로 방지를 위해 클릭 트랜잭션 차단 및 Rate Limit 스로틀링 처리가 프론트/백엔드 모두에 필수 적용되어야 합니다.",
+    "codeSnippet": "// RandomNo.tsx 프론트엔드 연동 핵심 로직\nconst checkRnnoNo = () => {\n  if (isPreview) return;\n\n  if (!loginInfo.isLoginSuccess) {\n    LFAlert.alert(\"로그인이 필요한 서비스입니다.\").then(() => {\n      navigate(ROUTE_PATH.LOGIN, {\n        state: { from: { pathname: location.pathname + location.search } },\n      });\n      return;\n    });\n  } else if (eventInfo?.body?.rnnoUseYn === \"Y\" && !rnnoNo) {\n    LFAlert.alert(\"코드를 입력해주세요.\");\n    return;\n  }\n\n  isLoading.current = true;\n\n  exbhRnnoNoJoin.mutate({\n    evntNo: Number(template?.exhbCardNo),\n    exhbNo: Number(template.exhbNo),\n    rnnoNo: String(rnnoNo)?.trim(),\n    rnnoUseYn: String(eventInfo?.body?.rnnoUseYn),\n    siteCd: \"03\",\n  });\n};",
+    "warnings": "1. [배경색상 검증] 배경색상은 '#'을 포함한 Hex Code 형태(7~8자)여야 하며 정규식 만족 필수입니다. 공란이 아닐 경우 프론트에서는 설정된 색상의 8% 투명도로 연하게 배경 톤을 연출합니다.\n2. [설명문구 배타성] 상단 설명 문구(EVNT_HEDR_TEXT)와 하단 설명 문구(EVNT_SUB_TEXT)는 배타적 속성으로, 두 영역 모두에 값이 채워져 있으면 어드민에서 저장 시 에러가 노출되고 반려됩니다.\n3. [난수 사용 여부 및 프롬프트 필수] 난수 사용여부(RNNO_USE_YN)와 프롬프트(EXCU_TEXT_VAL) 항목은 어드민 저장 시 상시 필수값으로 체크되어 비어 있는 경우 에러가 발생합니다.\n4. [발급 대상 필수 및 VIP 조건] 등록하는 각 구좌별로 최소 1개 이상의 발급 대상 회원 구분(기존/신규/윈백)이 체크되어야 합니다. VIP 승급 혜택 활성화 시 사전 협의된 제휴 기획전이 아닌 경우 사용을 지양해 주십시오.\n5. [발급 대상 합산 유효성 검사 (★매우 중요)] 어드민 저장 시, 난수 사용(Y) 상태인 경우 연결한 난수 코드별로, 난수 미사용(N) 상태인 경우 전체 구좌 대상으로 회원 구분 컬럼값 합산 시 기존회원(E), 신규회원(N), 윈백회원(W)이 모두 최소 1회 이상 다중 조합 매핑되어 커버되어야 저장이 정상 완결됩니다. 이를 누락할 시 '난수코드와 발급대상을 확인해주세요' 등의 에러가 발생합니다.",
     "qtyGuidelines": {
-      "tabMin": "해당 없음",
-      "tabMax": "해당 없음",
-      "prodMin": "난수 캠페인 코드 1개 필수",
-      "prodMax": "해당 없음",
-      "adminValidation": "난수 캠페인 코드(SERIAL_CAMPAIGN_CD)는 반드시 입력해야 하며 비어 있는 경우 저장 유효성 검사 단계에서 에러와 함께 반려됩니다."
+      "tabMin": "최소 1개 난수 구좌 설정 필요",
+      "tabMax": "최대 6개 난수 구좌까지 추가 지원",
+      "prodMin": "구좌당 연결 난수/쿠폰 각각 최대 5개 매핑 가능",
+      "prodMax": "프롬프트 최대 30byte, 버튼 텍스트 최대 24byte 제한",
+      "adminValidation": "난수 구좌의 개수는 어드민 Plus/Minus 버튼을 통해 1~6 범위 내로 제어됩니다. 텍스트 바이트 한도 (설명 문구 각 50byte, 타이틀 22byte, 프롬프트 30byte, 버튼명 24byte)는 입력 시 실시간으로 계산되어 한도 초과 시 자동 컷오프 처리됩니다."
     }
   },
   "SALE_CODE": {
@@ -1281,22 +1314,45 @@ window.ExhibitionGuides = {
     "cardKey": "OPT_CONTAINER",
     "name": "옵션컨테이너",
     "category": "NAV",
-    "sourceFile": "frmPlanCardOptionContainer.xfdl (어드민) / ProductOptionSelector.tsx (프론트)",
+    "sourceFile": "frmPlanCardOptionContainer.xfdl (어드민) / OptContainer.tsx (프론트)",
     "moduleCode": "MD13",
-    "desc": "상품의 여러 컬러, 사이즈 등 핵심 옵션 셀렉터 구조를 직접 노출해주는 영역입니다.",
-    "layoutDescription": "사용자 프론트 영역의 상품 상세 목록 하단 또는 레이어 팝업 형태로 컬러 칩, 사이즈 버튼 칩들을 미려한 그리드 버튼 배열 형태로 노출하여, 사용자가 장바구니나 상세페이지 이동 없이도 기획전 목록 상에서 핵심 옵션을 즉시 파악 및 선택할 수 있게 돕는 기능 영역입니다.",
+    "desc": "지정된 상품 목록 내에서 1단/2단 분류 탭을 통해 카테고리를 제공하고, 할인율, 가격대, 사이즈 등의 필터 옵션 칩을 통해 사용자가 원하는 조건의 상품들만 목록에서 실시간 필터링하여 감상할 수 있는 다기능 탭-옵션 필터 결합형 상품 전시 컴포넌트입니다.",
+    "layoutDescription": "사용자 프론트 영역(모바일 기획전 상세)에서 상하단 여백 및 배경색 설정에 반응하며, 상단/하단 설명 문구와 최대 2줄의 타이틀이 배치됩니다. 그 아래 1단 및 2단 탭 구조 of 분류 탭 메뉴바가 노출되어 카테고리나 브랜드 분류를 탐색할 수 있고, 할인율/가격대/사이즈 기준의 필터 칩들이 노출되어 필터링을 제공합니다. 필터링된 상품들은 모바일 Swiper 그리드 레이아웃(SW3_2, SW3_1, SW2_2, SW2_1, SW1_2, SW1_3) 또는 PC Swiper 그리드 레이아웃(SW4_1, SW4_2) 형태로 유연하게 반응형 렌더링 전환되어 전시됩니다. 뒤로가기 시 이전 탐색 상태를 복구할 수 있도록 세션 스토리지(con, tab, depth1NtorNo, depth2NtorNo, prevOption, optionIdx)에 탭 정보, 선택된 옵션 필터 및 스크롤 위치를 캐싱합니다.",
     "backendSettings": [
-      { "field": "연동 대상 상품 코드", "id": "TARGET_PRODUCT_CD", "type": "String (13자리, 필수)", "desc": "옵션 정보를 추출해 바인딩할 대표 상품 코드" },
-      { "field": "옵션 표현 방식", "id": "OPTION_DISP_DIV", "type": "Radio (CHIP / LIST)", "desc": "CHIP: 컬러/사이즈를 동그란 칩 형태로 정렬 배열, LIST: 일반 셀렉트박스 목록형 나열" },
-      { "field": "품절 옵션 노출 구분", "id": "SOLDOUT_SHOW_YN", "type": "Boolean (Y/N)", "desc": "품절된 옵션 칩을 사선 취소선과 함께 흐리게 노출할지 여부" }
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "String (최대 7자)", "desc": "Hex Color Code 입력 (예: #757575). 정규식 /^#[0-9A-Fa-f]{6,8}$/ 패턴으로 유효성이 검증되며, 프론트 렌더링 시 연하게 자동 딤드 처리되어 배경으로 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "컴포넌트 헤더 영역에 노출되는 설명입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "컴포넌트 메인 타이틀입니다. 한글 약 11자 이내로 입력 가능하며, 줄바꿈은 최대 2줄까지만 등록할 수 있습니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "메인 타이틀 아래 노출되는 보조 설명입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "탭 형태", "id": "TAB_TYPE_VAL", "type": "Radio (1/2)", "desc": "1: 1단 탭, 2: 2단 탭으로 탭 단수를 결정합니다. 탭형태 수정 시 기존에 입력한 탭 세팅이 강제 초기화되므로 유의하십시오." },
+      { "field": "1단 탭 랜덤", "id": "RNDM_SORT_YN", "type": "Boolean (Y/N)", "desc": "1단 탭 메뉴의 노출 순서를 랜덤하게 셔플할지 여부를 결정합니다." },
+      { "field": "2단 탭 랜덤", "id": "SCND_TAB_RNDM_SORT_YN", "type": "Boolean (Y/N)", "desc": "2단 탭(다단 구조)의 노출 순서를 랜덤하게 셔플할지 여부를 결정합니다. 1단 탭일 때에는 비활성화됩니다." },
+      { "field": "상품 정렬 순서", "id": "PROD_SORT_TYPE_VAL", "type": "Combo (A/R/S/V/C/M)", "desc": "A: 등록순, R: 추천순, S: 할인순, V: 조회순, C: 리뷰순, M: 랜덤정렬순 중 기획전 내 상품 정렬 기준을 결정합니다." },
+      { "field": "옵션 구성", "id": "RNG_OPTN_TYPE_VAL", "type": "Radio (SR/PR/SZ)", "desc": "SR: 할인율, PR: 가격대, SZ: 사이즈 중 상품 필터링을 제공할 핵심 옵션 기준을 지정합니다. 사이즈 선택 시 개별 폼 입력은 비활성화됩니다." },
+      { "field": "전체탭 사용", "id": "ALL_TAB_USE_YN", "type": "Boolean (Y/N)", "desc": "필터 옵션을 미선택한 기본 상태의 '전체' 보기 탭을 노출할지 여부를 결정합니다. 기본값 Y." },
+      { "field": "상품 표현 (MO)", "id": "PROD_EPSR_TYPE_VAL", "type": "Radio (SW3_2/SW3_1/SW2_2/SW2_1/SW1_2/SW1_3)", "desc": "모바일에서 노출될 Swiper 그리드 레이아웃 형식을 설정합니다." },
+      { "field": "상품 표현 (PC)", "id": "PC_PROD_EPSR_TYPE_VAL", "type": "Radio (SW4_1/SW4_2)", "desc": "PC에서 노출될 Swiper 그리드 레이아웃 형식을 설정합니다." },
+      { "field": "옵션 설정", "id": "dsOptionData", "type": "Dataset Binding", "desc": "할인율/가격대 옵션 선택 시, 지정한 개수(최소 2개 ~ 최대 20개)에 따라 OPTN_STRT_VAL(시작값), OPTN_END_VAL(종료값), OPTN_NM(옵션명)을 바인딩합니다." },
+      { "field": "1단/2단 탭 및 상품 관리", "id": "dsEventNtorMngTop / dsEventNtorMngLeaf", "type": "Dataset Binding", "desc": "설정된 탭 구조에 맞춰 개별 탭 명칭 및 해당 탭에 노출할 13자리 상품 코드 목록을 관리하여 맵핑합니다." }
     ],
-    "warnings": "1. 해당 상품 마스터 정보에 옵션 정보(컬러, 사이즈 등)가 등록되어 있지 않은 단품인 경우 옵션 컨테이너 자체가 화면에 노출되지 않습니다.\n2. 복잡한 다중 조합형 옵션보다는 1단계 또는 최대 2단계(예: 블랙-95)의 간결한 옵션형 상품에 적용하는 것을 강력히 가이드합니다.",
+    "codeSnippet": "// OptContainer.tsx - Front-end React 옵션 필터링 및 Swiper 데이터 바인딩 로직 일부\nconst swiperSlideList = useMemo(() => {\n  let productList = data?.pages[0].eventDealProductList ?? [];\n  let filterList: ExhbEventDealProductDTO[] = [];\n  const optionType = tabInfo.optnType; // SR(할인율), PR(가격대), SZ(사이즈)\n\n  if (selectOption) {\n    if (optionType === \"PR\") {\n      filterList = productList.filter(item => \n        Number(item.dcPrice) >= Number(selectOption.optnStrtVal) &&\n        Number(item.dcPrice) <= Number(selectOption.optnEndVal)\n      );\n    } else if (optionType === \"SR\") {\n      filterList = productList.filter(item => \n        Number(item.dcRate) >= Number(selectOption.optnStrtVal) &&\n        Number(item.dcRate) <= Number(selectOption.optnEndVal)\n      );\n    }\n  } else {\n    filterList = productList;\n  }\n  \n  if (tabInfo.prodSortType === \"M\") {\n    shuffleArray(filterList);\n  }\n  \n  return filterList.map((product, idx) => (\n    <SwiperSlide key={idx}>\n      <OptContItem props={product} template={template} ... />\n    </SwiperSlide>\n  ));\n}, [data, selectOption, tabInfo]);",
+    "warnings": "1. [배경색상 검증] 배경색상은 '#'을 포함한 7자 또는 8자 Hex Code 형태(예: #FFFFFF)여야 하며, 정규식을 벗어나거나 포맷이 불일치할 시 저장이 반려됩니다.\n2. [설명문구 배타성] 상단 설명 문구와 하단 설명 문구는 어드민 검증에 의해 동시에 입력할 수 없습니다. 하나는 공백이어야 유효성 에러를 피할 수 있습니다.\n3. [타이틀 및 글자 수 한도] 타이틀은 최대 22byte 이내, 상/하단 설명 문구는 각각 최대 50byte 이내여야 합니다. 타이틀 줄바꿈은 2줄까지만 허용됩니다.\n4. [옵션 구간 규칙] 할인율/가격대 옵션 설정 시 각 구간의 시작값은 종료값보다 작아야 하며, (i-1)번째 옵션의 종료값이 i번째 옵션의 시작값 이상으로 겹쳐서 기입될 경우 중복 에러로 반려됩니다.\n5. [상품 등록 제한] 개별 탭마다 전시할 상품 개수가 최소 4개 미만이거나 40개를 초과할 시 저장 전 유효성 검사 단계에서 에러 발생해 저장이 반려됩니다.\n6. [탭 수정 초기화 경고] 탭 형태를 수정하여 적용할 경우, 기존에 입력해 둔 탭 명칭 및 상품 바인딩 데이터셋이 강제 리셋되므로 사전에 신중히 확인한 뒤 적용하여야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "해당 없음 (이미지 업로드가 존재하지 않음)",
+      "moSize": "해당 없음",
+      "allowTypes": "해당 없음",
+      "maxSize": "해당 없음",
+      "adminValidation": "옵션컨테이너는 이미지 등록 기능이 없으며, 연동된 상품 정보의 대표 이미지를 프론트엔드에서 자동 참조하여 출력합니다."
+    },
     "qtyGuidelines": {
-      "tabMin": "해당 없음",
-      "tabMax": "해당 없음",
-      "prodMin": "상품코드 13자리 필수",
-      "prodMax": "해당 없음",
-      "adminValidation": "13자리 정규식에 부합하는 유효한 상품 코드가 기재되지 않았거나 공백으로 제출될 시, 어드민 저장 검증단에서 반려 처리가 수행됩니다."
+      "tabMin": "1단 탭 미사용 시 1개, 사용 시 최소 2개 이상의 분류 탭 구성 필요",
+      "tabMax": "최대 8개 탭 구성 지원",
+      "prodMin": "각 분류 탭별 최소 4개 이상의 상품 매핑 필수",
+      "prodMax": "각 분류 탭별 최대 40개 상품 등록 한도 (옵션 설정은 최소 2개 ~ 최대 20개)",
+      "adminValidation": "어드민 저장 시 탭별 상품 개수(4~40개) 유효성 체크, 옵션 설정 개수(2~20개) 체크 및 각 구간 범위 겹침 검증, 그리고 각 탭 명칭 필수 입력 검증이 저장 트랜잭션 전 단계에서 엄격히 통제됩니다. 사이즈 옵션 선택 시에는 옵션 개수 설정이 비활성화됩니다."
     }
   },
   "GAME_CARD1": {
