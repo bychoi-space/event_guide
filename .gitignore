@@ -10,3 +10,10 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# 임시 작업 파일 (절대 커밋 금지)
+temp_*
+
+# JSON 원본 중복 파일 (db/*.js 파일이 마스터)
+guides_db.json
+wireframes.json
