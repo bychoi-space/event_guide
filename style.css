@@ -327,6 +327,10 @@ footer a:hover {
   align-items: start;
 }
 
+.preview-console > div {
+  min-width: 0;
+}
+
 @media (max-width: 1200px) {
   .preview-console {
     grid-template-columns: 1fr;
@@ -394,6 +398,7 @@ footer a:hover {
   flex-grow: 1;
   min-height: 380px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* ================================================================
