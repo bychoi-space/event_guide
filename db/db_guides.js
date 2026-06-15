@@ -120,18 +120,18 @@ window.ExhibitionGuides = {
     "codeSnippet": "// frmPlanCardTimeDeal.xfdl.js - 타임특가 등록 시 전시 시작일시-종료일시 정밀 선후 관계 검증 스크립트\nthis.fnTimeDealPeriodValidator = function() {\n    var startDt = this.dsTimeDealInfo.getColumn(0, \"SDT\") + this.dsTimeDealInfo.getColumn(0, \"STM\");\n    var endDt = this.dsTimeDealInfo.getColumn(0, \"EDT\") + this.dsTimeDealInfo.getColumn(0, \"ETM\");\n    \n    // 시작 시간이 종료 시간보다 미래이거나 동일할 때 저장을 반려하는 정밀 안전 장치\n    if (startDt >= endDt) {\n        this.gfnMessage(\"타임특가 시작 시간은 종료 시간보다 미래이거나 같을 수 없습니다. 정확한 전시 기간을 입력해주세요.\", \"A\");\n        return false;\n    }\n    return true;\n};",
     "warnings": "1. [시간 유효성 엄격] 타임특가의 시작 일시(SDT+STM)는 반드시 종료 일시(EDT+ETM)보다 정밀히 이전 시점이어야 하며, 1초라도 어긋날 시 넥사크로 어드민 폼 검증 단에서 에러 경고와 함께 저장이 반려됩니다.\n2. [서버 기준 시간 동기화] 클라이언트-서버 간 시간차로 인해 종료 타이머 오차가 유발되는 사고를 사전에 차단하기 위해, 브라우저 로컬 PC 시스템 시계를 절대 직접 참조하지 않고 넥사크로 공통 백엔드 API 서버의 UTC 기준 라이브 서버 타임을 호출하여 카운트다운을 표시하도록 코딩되어야 합니다.\n3. [종료 시 자동 미노출] 설정된 전시 종료 시간이 도달하면 화면에서 컴포넌트 전체가 자동으로 보이지 않도록 동적 렌더링 스위치가 제어됩니다.",
     "imageGuidelines": {
-      "pcSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
-      "moSize": "가로 500px × 세로 500px 권장 (1:1 비율 정비율)",
-      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
-      "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "타임특가 대표 상품 이미지는 넥사크로 UI 파일업로드 핸들러에서 **200KB를 1바이트라도 초과 시 업로드를 즉시 반려**하고 에러를 호출합니다. 업로드 전 사전에 이미지를 리사이징하는 것이 필수입니다."
+      "pcSize": "해당 없음",
+      "moSize": "해당 없음",
+      "allowTypes": "해당 없음",
+      "maxSize": "해당 없음",
+      "adminValidation": "타임특가 카드는 별도의 이미지 업로드 기능을 제공하지 않으며, 등록한 상품 코드를 기반으로 실물 상품 이미지 데이터를 시스템에서 자동으로 연계하여 노출합니다."
     },
     "qtyGuidelines": {
-      "tabMin": "해당 없음",
-      "tabMax": "해당 없음",
-      "prodMin": "최소 1개 등록 필수",
-      "prodMax": "최대 4개 (가로형 2열 슬라이더 지원 한도)",
-      "adminValidation": "타임특가의 시각 완성도와 쾌적한 템플릿 로딩을 위해 **최소 1개 이상, 최대 4개 이하의 상품만 매핑**해야 합니다. 어드민(NBOS) 저장 시 매핑된 상품 개수가 없거나, 4개를 초과 등록 시 저장 유효성 검증을 통과하지 못해 기획전 발행이 즉각 반려됩니다. 또한 메인 타이틀은 최대 40byte(한글 기준 20자, 영문 40자) 이내 기입을 원칙으로 삼고 있습니다."
+      "tabMin": "최소 2개",
+      "tabMax": "최대 16개",
+      "prodMin": "최소 4개",
+      "prodMax": "최대 60개",
+      "adminValidation": "어드민(NBOS) 저장 시 각 탭별로 매핑된 상품 개수가 최소 4개 미만이거나 최대 60개를 초과할 경우 Validation 오류 메시지와 함께 저장이 자동으로 반려됩니다. 탭은 최소 2개에서 최대 16개까지 생성 가능합니다."
     }
   },
   "FLASH_SALE": {
