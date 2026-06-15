@@ -12,10 +12,19 @@ window.ExhibitionGuides = {
     "layoutDescription": "사용자 프론트 영역(PC/Mobile 기획전 상세페이지)에서는 다단 Depth를 지원하는 탭 메뉴바로 노출됩니다. 사용자가 탭 클릭 시 페이지 전체 새로고침 없이 비동기 방식으로 내부 컨텐츠(강조상품 리스트, 배너 등)를 즉시 교체하여 최적의 쇼핑 탐색 흐름을 만들어 냅니다.",
     "backendSettings": [
       { "field": "탭 분류 구분", "id": "PLAN_CATE_CD", "type": "CODE (선택)", "desc": "1단 탭, 2단 탭(다단 구조) 및 Leaf 단계의 탭 구성을 선별 지정합니다." },
-      { "field": "연동 폼 주소", "id": "FORM_URL", "type": "String (필수)", "desc": "내부 템플릿 폼의 로드 주소(예: PopupDtl::frmPlanTempTabContainerLeafDepth.xfdl)를 기입합니다." }
+      { "field": "연동 폼 주소", "id": "FORM_URL", "type": "String (필수)", "desc": "내부 템플릿 폼의 로드 주소(예: PopupDtl::frmPlanTempTabContainerLeafDepth.xfdl)를 기입합니다." },
+      { "field": "탭 PC 이미지", "id": "PC_IMG_PATH_NM_BNR", "type": "File (1240px 권장)", "desc": "탭 상세 내용 헤더에 노출되는 PC 배너/배경 이미지 파일입니다. (최대 500KB 제한)" },
+      { "field": "탭 모바일 이미지", "id": "MOBI_IMG_PATH_NM_BNR", "type": "File (750px 권장)", "desc": "탭 상세 내용 헤더에 노출되는 모바일 배너/배경 이미지 파일입니다. (최대 500KB 제한)" }
     ],
     "codeSnippet": "// PopupDtl::frmPlanTempTabContainerTopDepth.xfdl (내부 2단 템플릿 로직 일부)\nthis.frmPlanTempTabContainerTopDepth_onload = function(obj:nexacro.Form, e:nexacro.LoadEventInfo) {\n    trace(\"== frmPlanTempTabContainerTopDepth_onload start ==\");\n    partsDiv.set_url(\"PopupDtl::frmPlanTempTabContainerLeafDepth.xfdl\");\n};",
-    "warnings": "NEW 템플릿에 추가 가능한 카드는 최대 20장입니다. 탭 컨테이너 하위에 들어가는 내부 데이터 역시 전체 카드 수 제한에 걸려 있는지 꼼꼼하게 유의해야 하며, 탭 단계가 2단계 이상 늘어날 시 화면 로딩 부하가 생길 수 있으므로 상품 데이터 수를 탭당 50개 이하로 제한할 것을 권장합니다.",
+    "warnings": "NEW 템플릿에 추가 가능한 카드는 최대 20장입니다. 탭 컨테이너 하위에 들어가는 내부 데이터 역시 전체 카드 수 제한에 걸려 있는지 꼼꼼하게 유의해야 하며, 탭 단계가 2단계 이상 늘어날 시 화면 로딩 부하가 생길 수 있으므로 상품 데이터 수를 탭당 50개 이하로 제한할 것을 권장합니다. 또한, 탭 배경 및 배너 이미지 업로드 시 파일 용량 제한은 기존 200KB에서 500KB 이하로 상향 조정되었으므로, 초과 시 업로드가 반려되는 점에 유의해야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "1240px × (세로 높이 제한 없음)",
+      "moSize": "750px × (세로 높이 제한 없음)",
+      "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
+      "maxSize": "파일당 최대 500KB 이하",
+      "adminValidation": "넥사크로 어드민에서 탭 이미지 업로드 시 파일별 500KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다."
+    },
     "qtyGuidelines": {
       "tabMin": "최소 2개",
       "tabMax": "최대 15개 (대분류) / 8개 (소분류)",
@@ -49,8 +58,8 @@ window.ExhibitionGuides = {
       "pcSize": "1240px × (세로 높이 제한 없음) *텍스트가 없는 통이미지 타입은 가로 1920px (와이드형) 권장",
       "moSize": "750px × (세로 높이 제한 없음) *스퀘어형(OP01/OP02) 활성화 시 1:1 비율 (1080x1080) 권장 (모바일 최대 높이 414px 고정)",
       "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-      "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 200KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. (서버 전체 제한은 10MB이나 UI 단에서 200KB로 2차 검증 차단)"
+      "maxSize": "파일당 최대 500KB 이하",
+      "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 500KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. (서버 전체 제한은 10MB이나 UI 단에서 500KB로 2차 검증 차단)"
     }
   },
   "BANNER": {
@@ -81,13 +90,13 @@ window.ExhibitionGuides = {
       { "field": "eTAG 랜딩 여부", "id": "LINK_DIV_VAL", "type": "Combo (필수)", "desc": "배너 링크 클릭 이벤트를 로깅 및 추적하기 위한 필수 태깅 분류 코드입니다." }
     ],
     "codeSnippet": "// Banner.tsx - Front-end React 일반 배너 렌더링 일부\nexport default function Banner({ template }) {\n  const { data: bannerData } = useFetchPlanBannerGET({ param: { moduleType: template?.moduleType } });\n  return (\n    <>\n      {bannerData?.body?.planModuleBannerInfoDTOList?.map((item) => (\n        <Link key={item.bannerNumber} to=\"\" className={styles.banner} onClick={(e) => handleClick(e)}>\n          <img src={`${IMAGE_ROOT_PATH}/${item.mobileImagePath}`} alt=\"배너\" />\n        </Link>\n      ))}\n    </>\n  );\n}",
-    "warnings": "1. [텍스트 상호 배타 규칙] 상단 설명 문구와 하단 설명 문구는 어드민 시스템 제약 상 **절대 동시에 입력하여 저장할 수 없습니다.** 입력 시 하나의 영역을 비워두어야 Validation 에러가 발생하지 않습니다.\n2. [용량 초과 차단 주의] 일반 배너는 슬라이드 배너 제작을 지원하여 최대 5장의 이미지를 올릴 수 있으나, **개별 이미지 용량이 200KB를 1바이트라도 초과하는 경우** 어드민 내 넥사크로 2차 검증 스크립트단에서 업로드가 원천 차단됩니다. 등록 전 이미지 최적화(용량 압축)가 필수입니다.\n3. [eTAG 필수 규정] 각 이미지 슬라이드마다 랜딩 링크를 활성화하는 경우, **eTAG 랜딩 구분 코드 설정** 누락 시 저장이 불가하니 사전 정의된 프로모션/브랜드/상품 코드를 정확히 매핑하여야 합니다.",
+    "warnings": "1. [텍스트 상호 배타 규칙] 상단 설명 문구와 하단 설명 문구는 어드민 시스템 제약 상 **절대 동시에 입력하여 저장할 수 없습니다.** 입력 시 하나의 영역을 비워두어야 Validation 에러가 발생하지 않습니다.\n2. [용량 초과 차단 주의] 일반 배너는 슬라이드 배너 제작을 지원하여 최대 5장의 이미지를 올릴 수 있으나, **개별 이미지 용량이 500KB를 1바이트라도 초과하는 경우** 어드민 내 넥사크로 2차 검증 스크립트단에서 업로드가 원천 차단됩니다. 등록 전 이미지 최적화(용량 압축)가 필수입니다.\n3. [eTAG 필수 규정] 각 이미지 슬라이드마다 랜딩 링크를 활성화하는 경우, **eTAG 랜딩 구분 코드 설정** 누락 시 저장이 불가하니 사전 정의된 프로모션/브랜드/상품 코드를 정확히 매핑하여야 합니다.",
     "imageGuidelines": {
       "pcSize": "기본형: 1240px × (세로 높이 제한 없음) / 와이드형: 1920px × (세로 높이 제한 없음)",
       "moSize": "가로 750px × (세로 높이 제한 없음) (모바일 상단 여백 60px 기본 설정)",
       "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
-      "maxSize": "파일당 최대 200KB 이하 (최대 5장 등록하여 슬라이드 배너 제작 가능)",
-      "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 200KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. 복수 등록 시 프론트에서 자동으로 Swiper 캐러셀(슬라이드) 회전 롤링 배너로 구현되며, 배너 링크 등록 시 eTAG 정보 입력이 필수입니다."
+      "maxSize": "파일당 최대 500KB 이하 (최대 5장 등록하여 슬라이드 배너 제작 가능)",
+      "adminValidation": "넥사크로 어드민에서 업로드 시 파일별 500KB 초과인 경우 경고 메시지와 함께 업로드가 차단 및 초기화됩니다. 복수 등록 시 프론트에서 자동으로 Swiper 캐러셀(슬라이드) 회전 롤링 배너로 구현되며, 배너 링크 등록 시 eTAG 정보 입력이 필수입니다."
     }
   },
   "T_DEAL": {
@@ -151,11 +160,11 @@ window.ExhibitionGuides = {
     "codeSnippet": "// FlashSale.tsx - React Swiper 슬라이더 및 타이머 렌더링 로직\nexport default function FlashSale({ template, onRender }) {\n  const { data } = useFetchExhbFlashSaleGET({ evntNo: Number(template.exhbCardNo), siteCd: \"03\" });\n  const titleOptions = {\n    title: data?.body?.evntMainText?.split(\"\\n\"),\n    disc: data?.body?.evntHedrText?.split(\"\\n\") ?? data?.body?.evntSubText?.split(\"\\n\") ?? [],\n    subTitlePosition: data?.body?.evntHedrText ? \"top\" : data?.body?.evntSubText ? \"bottom\" : \"\"\n  };\n  return (\n    <div className={styles.flashSale} style={{ backgroundColor: data?.body?.bkgdClr }}>\n      <PlanTitle options={titleOptions} />\n      {data?.body?.tmUseYn === \"Y\" && <Timer props={data?.body?.tmInfos || {}} textUnderTime=\"Y\" />}\n      <Swiper slidesPerView={1.113} spaceBetween={8}>\n        {data?.body?.exhbEvntProds?.map((item, idx) => (\n          <SwiperSlide key={idx}>\n            <FlashSaleItem props={item} prodIdx={idx + 1} />\n          </SwiperSlide>\n        ))}\n      </Swiper>\n    </div>\n  );\n}",
     "warnings": "1. [색상코드 포맷 체크] 배경색상 입력 칸(editBtnText)에 컬러코드를 입력하는 경우, 반드시 `#RRGGBB` 형태의 정규식 패턴(`/^#[0-9A-Fa-f]{6,8}$/`) 형식을 온전히 만족해야 합니다. 만족하지 못할 시 어드민 저장 검증단에서 오류를 발생시킵니다.\n2. [설명문구 배타 등록] 상단 설명 문구와 하단 설명 문구를 동시에 입력하여 저장을 시도할 경우, '상단 설명 문구, 하단 설명 문구 중 하나만 입력하세요.' 메시지와 함께 저장이 반려됩니다.\n3. [기간 범위 한계 설정] 설정하려는 타이머 진행기간(시작~종료)은 반드시 상위 카드기간(부모의 SDT+STM ~ EDT+ETM)의 날짜/시간 영역 내에 온전히 존재해야 하며, 범위를 단 1초라도 이탈하거나 시작일시가 종료일시보다 클 경우 오류 알럿을 띄워 저장을 거부합니다.",
     "imageGuidelines": {
-      "pcSize": "가로 600px × 세로 600px 권장 (1:1 정비율 상품 컷)",
-      "moSize": "가로 600px × 세로 600px 권장 (1:1 정비율 상품 컷)",
-      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
-      "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "상품 썸네일 이미지는 200KB 용량 제한 조건에 걸쳐 있어 초과 시 넥사크로 UI에서 즉시 등록이 반려됩니다. 플래시 세일의 특성상 빠른 로딩을 위해 이미지 최적화가 필수적입니다."
+      "pcSize": "해당 없음",
+      "moSize": "해당 없음",
+      "allowTypes": "해당 없음",
+      "maxSize": "해당 없음",
+      "adminValidation": "플래시 세일 카드는 별도의 이미지 업로드 기능을 제공하지 않으며, 등록한 상품 코드를 기반으로 실물 상품 이미지 데이터를 시스템에서 자동으로 연계하여 노출합니다."
     },
     "qtyGuidelines": {
       "tabMin": "해당 없음",
@@ -469,18 +478,18 @@ window.ExhibitionGuides = {
     "codeSnippet": "// frmPlanCardHotDeal.xfdl.js - 핫딜 등록 시 전시 기간 정밀 시간 유효성 검사 스크립트\nthis.fnHotDealPeriodValidator = function() {\n    var startDt = this.dsHotDealInfo.getColumn(0, \"STRT_DT\");\n    var endDt = this.dsHotDealInfo.getColumn(0, \"END_DT\");\n    \n    // 시작 시간이 종료 시간보다 미래이거나 동일할 때 저장을 반려하는 정밀 안전 장치\n    if (startDt >= endDt) {\n        this.gfnMessage(\"핫딜 시작 시간은 종료 시간보다 미래이거나 같을 수 없습니다. 정확한 전시 기간을 입력해주세요.\", \"A\");\n        return false;\n    }\n    return true;\n};",
     "warnings": "1. [시간 유효성 엄격] 핫딜의 전시 시작 시간은 반드시 종료 시간보다 정밀히 이전이어야 하며, 위반 시 넥사크로 어드민 폼 검증 스크립트단에서 저장이 반려됩니다.\n2. [서버 기준 시간 동기화] 클라이언트-서버 간 시간차로 인해 종료 타이머 오차가 유발되는 사고를 사전에 차단하기 위해, 브라우저 로컬 PC 시스템 시계를 절대 직접 참조하지 않고 넥사크로 공통 백엔드 API 서버의 UTC 기준 라이브 서버 타임을 호출하여 카운트다운을 표시하도록 코딩되어야 합니다.\n3. [품절 및 종료 딤 처리] 준비된 한정 수량 소진 완료 시 즉각적으로 'SOLD OUT' 텍스트와 함께 검은색 반투명 딤드(Opacity 60%) 레이어가 상품 이미지를 뒤덮어야 하며, 핫딜 기간 종료 시 화면에서 컴포넌트가 자동으로 보이지 않도록 동적 렌더링 스위치가 제어됩니다.",
     "imageGuidelines": {
-      "pcSize": "가로 600px × 세로 600px 권장 (1:1 비율 정비율)",
-      "moSize": "가로 600px × 세로 600px 권장 (1:1 비율 정비율)",
-      "allowTypes": "JPG, JPEG, PNG, GIF, BMP",
-      "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "핫딜 대표 고화질 썸네일 이미지는 넥사크로 UI 파일업로드 핸들러에서 **200KB를 1바이트라도 초과 시 업로드를 즉시 반려**하고 에러를 호출합니다. 업로드 전 사전에 이미지를 리사이징하는 것이 필수입니다."
+      "pcSize": "해당 없음",
+      "moSize": "해당 없음",
+      "allowTypes": "해당 없음",
+      "maxSize": "해당 없음",
+      "adminValidation": "핫딜 카드는 별도의 이미지 업로드 기능을 제공하지 않으며, 등록한 상품 코드를 기반으로 실물 상품 이미지 데이터를 시스템에서 자동으로 연계하여 노출합니다."
     },
     "qtyGuidelines": {
-      "tabMin": "해당 없음",
-      "tabMax": "해당 없음",
-      "prodMin": "최소 1개 등록 필수",
-      "prodMax": "최대 1개 (단일 명품 특가 구좌 원칙)",
-      "adminValidation": "핫딜의 극대화된 시각 집중도와 완성도를 위해 **반드시 정확히 1개의 상품만 매핑**해야 합니다. 어드민(NBOS) 저장 시 매핑된 상품 개수가 없거나, 2개 이상을 과도하게 초과 등록 시 저장 유효성 검증을 통과하지 못해 기획전 발행이 즉각 반려됩니다. 또한 핫딜 타이틀 및 설명 문구는 최대 30byte(한글 기준 15자, 영문 30자) 이내 기입을 원칙으로 삼고 있습니다."
+      "tabMin": "최소 2개",
+      "tabMax": "최대 8개",
+      "prodMin": "최소 4개",
+      "prodMax": "최대 60개",
+      "adminValidation": "어드민(NBOS) 저장 시 각 탭별로 매핑된 상품 개수가 최소 4개 미만이거나 최대 60개를 초과할 경우 Validation 오류 메시지와 함께 저장이 자동으로 반려됩니다. 탭은 최소 2개에서 최대 8개까지 생성 가능합니다."
     }
   },
   "REVIEW": {
@@ -1439,6 +1448,42 @@ window.ExhibitionGuides = {
       "prodMin": "최소 3개 이상의 카드 옵션 행 및 혜택 매핑 구성 권장",
       "prodMax": "최대 10개 카드 옵션 및 10개 혜택 설정 제한",
       "adminValidation": "카드 옵션 개수(editOptionCount)와 혜택 개수(editBenefitCount)는 스피너를 통해 최소 1개에서 최대 10개까지 설정 가능하며, 각각 매핑된 개수만큼의 옵션 명칭/이미지 및 혜택 데이터가 입력되지 않을 경우 저장 유효성 검사 단계에서 에러 알림과 함께 저장이 차단됩니다."
+    }
+  },
+  "TEXT": {
+    "cardKey": "TEXT",
+    "name": "텍스트",
+    "category": "BANNER",
+    "sourceFile": "frmPlanCardText.xfdl (어드민) / Intro.tsx (프론트)",
+    "moduleCode": "MD2",
+    "desc": "자유롭고 감각적인 대/소단 타이틀과 설명 문구를 배치할 수 있는 공용 텍스트 영역입니다. 이미지 업로드 기능 없이 순수 텍스트와 레이아웃 조작을 지원합니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상하단 여백 및 배경 색상 지정에 따라 텍스트가 정렬되어 렌더링됩니다. PC는 기본 중앙 정렬이며, 모바일은 좌측 정렬 레이아웃이 적용됩니다. 컴포넌트는 상단 설명 문구, 메인 타이틀, 하단 설명 문구, 본문 내용, 진행기간 순으로 수직 배열하여 브랜드의 아이덴티티와 가치를 감각적으로 전달합니다.",
+    "backendSettings": [
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진(Margin) 사용 여부를 결정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩(Padding) 사용 여부를 결정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진(Margin) 사용 여부를 결정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩(Padding) 사용 여부를 결정합니다." },
+      { "field": "상단 설명 문구", "id": "TEXT_HDR_TITL", "type": "String (50자 한도)", "desc": "타이틀 최상단에 작게 배치되는 강조형 보조 문구입니다." },
+      { "field": "타이틀", "id": "TEXT_TITL", "type": "String (30자 한도)", "desc": "텍스트 카드의 메인 헤드라인 제목입니다." },
+      { "field": "하단 설명 문구", "id": "TEXT_SUB_TITL", "type": "String (50자 한도)", "desc": "타이틀 바로 하단에 배치되는 서브 설명 텍스트입니다." },
+      { "field": "내용", "id": "TEXT_CONTENTS_VAL", "type": "String (120자 한도, 필수)", "desc": "기획전 상세 내용 문구 본문입니다." },
+      { "field": "진행기간", "id": "PGSS_PERD_TEXT", "type": "String (선택)", "desc": "진행하는 이벤트 기간 또는 날짜 표시 텍스트입니다." }
+    ],
+    "codeSnippet": "// Intro.tsx - Front-end React 텍스트(Intro) 컴포넌트 핵심 분석 소스\nexport const Intro = ({ template }) => {\n  const { data } = useFetchPlanIntroModuleGET({ param: { moduleType: template?.moduleType } });\n  if (data?.body?.exhibitionYn === \"N\") return <></>;\n  return (\n    <div className={styles.intro}>\n      {data?.body?.content?.split(\"\\n\").map((title, idx) =>\n        title === \"\" ? <br key={idx} /> : <p key={idx}>{title}</p>\n      )}\n      <p className={styles.date}>{data?.body?.moduleTitle}</p>\n    </div>\n  );\n};",
+    "warnings": "1. [이미지 미지원] 텍스트 카드는 이미지를 직접 업로드하거나 배경 이미지로 사용할 수 있는 기능이 아예 존재하지 않습니다. 따라서 오직 단색 배경(White 등)과 텍스트 레이아웃으로만 가이드를 기획해야 합니다.\n2. [정렬 차이 주의] PC 버전은 text-align: center(중앙 정렬) 스펙이 강제 적용되나, 모바일 버전은 text-align: left(좌측 정렬)이 기본 탑재되므로 듀얼 레이아웃 설계 시 시각적 정렬 차이를 감안해야 합니다.\n3. [글자 제한 규격] 타이틀 최대 30자, 상단/하단 설명 문구 각 최대 50자, 본문 내용은 최대 120자 제한이 넥사크로 UI 및 DB 단에서 강력히 규제되므로, 텍스트 입력 시 바이트 한계를 준수해야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "해당 없음 (이미지 업로드 미지원)",
+      "moSize": "해당 없음 (이미지 업로드 미지원)",
+      "allowTypes": "해당 없음",
+      "maxSize": "해당 없음",
+      "adminValidation": "텍스트 카드는 이미지를 업로드할 수 있는 데이터 구조나 파일 핸들러가 구성되어 있지 않습니다. 순수 텍스트 필드로만 데이터를 저장하고 조회합니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "해당 없음",
+      "prodMin": "해당 없음",
+      "prodMax": "해당 없음",
+      "adminValidation": "상품 매핑 기능이 없는 순수 텍스트 카드입니다. 어드민(NBOS) 저장 시 내용(TEXT_CONTENTS_VAL)은 필수 입력 사항이며 빈 값으로 저장할 경우 반려됩니다."
     }
   },
   "REVIEW_GUIDE": {

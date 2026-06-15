@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -1053,6 +1053,20 @@
         // 경고 텍스트에서 줄바꿈(\\n)을 <br>로 변환
         const warningsHtml = (data.warnings || '').replace(/\\n/g, '<br>').replace(/\n/g, '<br>');
 
+        // 이미지 업로드 가이드 미노출 조건 체크 (모든 항목이 해당 없음인 경우 미노출)
+        const showImageGuide = data.imageGuidelines && 
+          !(data.imageGuidelines.pcSize && data.imageGuidelines.pcSize.includes("해당 없음") && 
+            data.imageGuidelines.moSize && data.imageGuidelines.moSize.includes("해당 없음") &&
+            data.imageGuidelines.allowTypes && data.imageGuidelines.allowTypes.includes("해당 없음") &&
+            data.imageGuidelines.maxSize && data.imageGuidelines.maxSize.includes("해당 없음"));
+
+        // 수량 제한 가이드 미노출 조건 체크 (모든 항목이 해당 없음인 경우 미노출)
+        const showQtyGuide = data.qtyGuidelines && 
+          !(data.qtyGuidelines.tabMin && data.qtyGuidelines.tabMin.includes("해당 없음") && 
+            data.qtyGuidelines.tabMax && data.qtyGuidelines.tabMax.includes("해당 없음") && 
+            data.qtyGuidelines.prodMin && data.qtyGuidelines.prodMin.includes("해당 없음") && 
+            data.qtyGuidelines.prodMax && data.qtyGuidelines.prodMax.includes("해당 없음"));
+
         document.getElementById('guideContent').innerHTML = `
           <!-- 1. 상단: 타이틀 영역 -->
           <div class="guide-title-area">
@@ -1066,7 +1080,7 @@
           </div>
 
           <!-- 이미지 업로드 가이드 -->
-          ${data.imageGuidelines ? `
+          ${showImageGuide ? `
           <div class="guide-card-accordion type-image" id="imgGuide">
             <div class="guide-card-trigger" onclick="toggleGuideCard('imgGuide')">
               <div class="guide-card-icon">📷</div>
@@ -1109,7 +1123,7 @@
           ` : ''}
 
           <!-- 수량 및 개수 제한 가이드 -->
-          ${data.qtyGuidelines ? `
+          ${showQtyGuide ? `
           <div class="guide-card-accordion type-qty" id="qtyGuide">
             <div class="guide-card-trigger" onclick="toggleGuideCard('qtyGuide')">
               <div class="guide-card-icon">📊</div>

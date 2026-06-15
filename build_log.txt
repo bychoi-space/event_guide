@@ -1,72 +1,10 @@
-﻿[2026-06-12 14:44:00] DecoderHelper started.
-[2026-06-12 14:44:00] Reading JSON file...
-[2026-06-12 14:44:00] Read JSON file successfully. Length: 208134
-[2026-06-12 14:44:00] Updating BANNER...
-[2026-06-12 14:44:00]   UpdateKey started for BANNER
-[2026-06-12 14:44:00]     startBrace found at 24190
-[2026-06-12 14:44:00]     endBrace found at 26331
-[2026-06-12 14:44:00]   UpdateKey finished for BANNER
-[2026-06-12 14:44:00] Updating FCFS_CPN...
-[2026-06-12 14:44:00]   UpdateKey started for FCFS_CPN
-[2026-06-12 14:44:00]     startBrace found at 19827
-[2026-06-12 14:44:00]     endBrace found at 24171
-[2026-06-12 14:44:00]   UpdateKey finished for FCFS_CPN
-[2026-06-12 14:44:00] Updating SHARE...
-[2026-06-12 14:44:00]   UpdateKey started for SHARE
-[2026-06-12 14:44:00]     startBrace found at 113055
-[2026-06-12 14:44:00]     endBrace found at 116562
-[2026-06-12 14:44:00]   UpdateKey finished for SHARE
-[2026-06-12 14:44:00] Updating COUNT...
-[2026-06-12 14:44:00]   UpdateKey started for COUNT
-[2026-06-12 14:44:00]     startBrace found at 27033
-[2026-06-12 14:44:00]     endBrace found at 30992
-[2026-06-12 14:44:00]   UpdateKey finished for COUNT
-[2026-06-12 14:44:00] Updating NAVI...
-[2026-06-12 14:44:00]   UpdateKey started for NAVI
-[2026-06-12 14:44:00]     startBrace found at 47132
-[2026-06-12 14:44:00]     endBrace found at 48318
-[2026-06-12 14:44:00]   UpdateKey finished for NAVI
-[2026-06-12 14:44:00] Updating ENTCODE...
-[2026-06-12 14:44:00]   UpdateKey started for ENTCODE
-[2026-06-12 14:44:00]     startBrace found at 109670
-[2026-06-12 14:44:00]     endBrace found at 111520
-[2026-06-12 14:44:00]   UpdateKey finished for ENTCODE
-[2026-06-12 14:44:00] Updating APPLY...
-[2026-06-12 14:44:00]   UpdateKey started for APPLY
-[2026-06-12 14:44:00]     startBrace found at 111538
-[2026-06-12 14:44:00]     endBrace found at 113037
-[2026-06-12 14:44:00]   UpdateKey finished for APPLY
-[2026-06-12 14:44:00] Updating COMMENT...
-[2026-06-12 14:44:00]   UpdateKey started for COMMENT
-[2026-06-12 14:44:00]     startBrace found at 152583
-[2026-06-12 14:44:00]     endBrace found at 154741
-[2026-06-12 14:44:00]   UpdateKey finished for COMMENT
-[2026-06-12 14:44:00] Updating FCFS_CPN_P...
-[2026-06-12 14:44:00]   UpdateKey started for FCFS_CPN_P
-[2026-06-12 14:44:00]     startBrace found at 154764
-[2026-06-12 14:44:00]     endBrace found at 157182
-[2026-06-12 14:44:00]   UpdateKey finished for FCFS_CPN_P
-[2026-06-12 14:44:00] Updating OPT_CONTAINER...
-[2026-06-12 14:44:00]   UpdateKey started for OPT_CONTAINER
-[2026-06-12 14:44:00]     startBrace found at 157208
-[2026-06-12 14:44:00]     endBrace found at 165043
-[2026-06-12 14:44:00]   UpdateKey finished for OPT_CONTAINER
-[2026-06-12 14:44:00] Updating TILE_BANNER...
-[2026-06-12 14:44:00]   UpdateKey started for TILE_BANNER
-[2026-06-12 14:44:00]     startBrace found at 53624
-[2026-06-12 14:44:00]     endBrace found at 59442
-[2026-06-12 14:44:00]   UpdateKey finished for TILE_BANNER
-[2026-06-12 14:44:00] Updating BANNER_BLOCK...
-[2026-06-12 14:44:00]   UpdateKey started for BANNER_BLOCK
-[2026-06-12 14:44:00]     startBrace found at 116587
-[2026-06-12 14:44:00]     endBrace found at 119954
-[2026-06-12 14:44:00]   UpdateKey finished for BANNER_BLOCK
-[2026-06-12 14:44:00] Updating PICTORIAL...
-[2026-06-12 14:44:00]   UpdateKey started for PICTORIAL
-[2026-06-12 14:44:00]     startBrace found at 187193
-[2026-06-12 14:44:00]     endBrace found at 193841
-[2026-06-12 14:44:00]   UpdateKey finished for PICTORIAL
-[2026-06-12 14:44:00] Replacing MORE PRODUCTS...
-[2026-06-12 14:44:00] Writing wireframes.json...
-[2026-06-12 14:44:00] Writing db_wireframes.js...
-[2026-06-12 14:44:00] Successfully synced files as clean UTF-8 with BOM using C#!
+﻿[2026-06-15 13:45:23] DecoderHelper started.
+[2026-06-15 13:45:23] Reading JSON file...
+[2026-06-15 13:45:23] EXCEPTION: System.IO.FileNotFoundException: 'c:\event_guide\wireframes.json' 파일을 찾을 수 없습니다.
+파일 이름: 'c:\event_guide\wireframes.json'
+   위치: System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   위치: System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   위치: System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   위치: System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
+   위치: System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)
+   위치: DecoderHelper.Main()
