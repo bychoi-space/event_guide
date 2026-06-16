@@ -204,30 +204,40 @@ window.ExhibitionGuides = {
     "sourceFile": "frmPlanCardBenefitB.xfdl (어드민) / BuyBenefit.tsx (프론트)",
     "moduleCode": "MD3",
     "desc": "기획전 구매 금액대별 할인쿠폰 다운로드, 사은품 증정, 무료 선물포장 혜택, 추가 마일리지 적립 등 총 5가지 슬롯으로 다양한 고객 리워드를 구성하는 복합 프로모션 카드입니다.",
-    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 최대 5개의 혜택 섹션을 질서정연하게 수직 배열합니다. 개별 혜택은 유형에 따라 쿠폰 Swiper 슬라이드 회전, 선물포장 단계별 안내 이미지 Swiper, 단색/라운드 액션 버튼(쿠폰 다운로드, URL 이동, 적립 안내 팝업) 등으로 구성되어 최상의 혜택 가시성을 사용자에게 선사합니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 최대 5개의 혜택 섹션을 질서정연하게 배열합니다. 개별 혜택은 유형에 따라 쿠폰 자동표현/이미지표현, 선물포장 단계별 안내 롤링, 사은품/웰컴팩 안내 배너 및 전용 버튼(액션 유형: CPN/FCF 다운로드, NOT 적립팝업, GFT/WEL/PRE 이동)으로 구성됩니다. PC에서는 인접한 쿠폰 혜택들이 2단 그리드로 자동 병렬 정렬되며, 선물포장(PRE) 영역 또한 비주얼과 이용 스텝 가이드가 좌우 분할 배치됩니다. 모바일에서는 모든 요소가 1열의 세로 카드 레이아웃으로 미려하게 단일 정렬되어 렌더링됩니다.",
     "backendSettings": [
-      { "field": "혜택 분류 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (CPN/PRC/FCF/NOT/GFT/PRE/WEL/XXX)", "desc": "혜택을 부여할 유형(할인쿠폰, 쿠폰표현, 선착순쿠폰, 추가적립, 사은품, 선물하기, 웰컴쿠폰팩, 사용안함)을 매핑합니다." },
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "배경색을 Hex 코드형태(예: #757575)로 입력합니다. 해당 값은 프론트에서 8% 투명도로 연하게 표현됩니다." },
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진(margin) 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩(padding) 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진(margin) 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩(padding) 적용 여부를 설정합니다." },
+      { "field": "상단 설명 문구", "id": "BNFT_HEDR_TEXT_VAL", "type": "String (100byte 한도)", "desc": "타이틀 상단에 노출할 보조 문구입니다. 하단 설명 문구와 중복 등록이 불가합니다." },
+      { "field": "타이틀", "id": "BNFT_TITL", "type": "String (22byte 한도)", "desc": "메인 타이틀 제목입니다. 한글 기준 11자 제한이 적용되며, 줄바꿈(\\n)으로 최대 2줄까지 등록 가능합니다." },
+      { "field": "하단 설명 문구", "id": "BNFT_DSCR", "type": "String (100byte 한도)", "desc": "타이틀 하단에 노출할 설명 문구입니다. 상단 설명 문구와 중복 등록이 불가합니다." },
+      { "field": "혜택 분류 구분", "id": "BNFT_TYPE_VAL", "type": "Combo (CPN/PRC/FCF/NOT/GFT/PRE/WEL/XXX)", "desc": "혜택을 부여할 유형(CPN: 할인쿠폰, PRC: 쿠폰표현, FCF: 선착순쿠폰, NOT: 추가적립, GFT: 사은품, PRE: 선물포장, WEL: 웰컴쿠폰팩, XXX: 사용안함)을 매핑합니다." },
       { "field": "쿠폰 표현 방식", "id": "CPN_DISP_TYPE_VAL", "type": "Radio (A/I)", "desc": "A: 자동표현 (DB에 매핑된 쿠폰 정보를 기반으로 템플릿화) / I: 이미지 표현 (PC/MO용 제작 이미지를 직접 업로드하여 노출) 중 선택합니다." },
-      { "field": "버튼 액션 유형", "id": "BTN_ACTN_TYPE_VAL", "type": "Combo (B/P/M)", "desc": "B: 쿠폰 다운로드 (로그인 및 API 연동) / P: 적립안내 팝업 노출 / M: URL 이동(랜딩 처리)을 설정합니다." },
+      { "field": "버튼 형태", "id": "BTN_STYL_VAL", "type": "Radio (XX/OS/SS)", "desc": "XX: 사용안함, OS: 화이트(아웃라인 고스트), SS: 블랙(단색 채우기) 중 노출할 버튼 스타일을 설정합니다." },
+      { "field": "버튼 명칭", "id": "BTN_TEXT_VAL", "type": "String (40byte 한도)", "desc": "버튼의 텍스트명입니다. 한글 약 20자 제한이 적용됩니다." },
+      { "field": "버튼 액션 유형", "id": "BTN_ACTN_TYPE_VAL", "type": "Combo (B/P/M)", "desc": "B: 쿠폰 다운로드, P: 적립안내 팝업 노출, M: URL 이동(랜딩 처리)을 설정합니다." },
       { "field": "추가 적립율", "id": "editAccVal", "type": "Integer (NOT 전용)", "desc": "추가적립(NOT) 유형 시 기획전 대상 상품에 적용할 보조 적립율 수치입니다." },
       { "field": "사은품 수량", "id": "editApplyCnt", "type": "Integer (GFT 전용)", "desc": "사은품 지급 선착순 대상 인원수 및 재고 한도를 설정합니다." },
       { "field": "웰컴 기획전 번호", "id": "editExhbNo", "type": "Integer (WEL 전용)", "desc": "웰컴쿠폰팩과 매핑되어 버튼 클릭 시 이동할 고유 기획전 번호입니다." }
     ],
-    "codeSnippet": "// BuyBenefit.tsx - Front-end React 쿠폰 다운로드 및 유형 분기 처리 일부\nconst handleBenefitClick = (e, benefit, order) => {\n  if (benefit.btnActnType === \"B\" && (benefit.bnftType === \"CPN\" || benefit.bnftType === \"FCF\")) {\n    if (isPreview) return;\n    if (!loginInfo.isLoginSuccess) {\n      LFAlert.alert(\"로그인 후 다운로드 가능합니다.\");\n    } else {\n      benefitMultiDown.mutate({ exhbNo: Number(exhbNo), bnftNo: Number(benefit.bnftNo), cardType });\n    }\n  }\n};",
-    "warnings": "1. [사은품/선물하기 이미지 필수] 사은품(GFT) 및 선물하기(PRE) 유형 세팅 시, 어드민 상에서 PC 및 MO 이미지가 모두 필수적으로 등록되어 있어야 Validation을 통과하여 저장이 가능합니다.\n2. [용량 규격 주의] 이미지 표현(I)을 적용하는 쿠폰 및 사은품/선물하기 이미지는 200KB 용량 제한 검증 규칙이 적용되어, 초과하는 경우 넥사크로 UI 단에서 업로드가 원천 차단됩니다.\n3. [쿠폰표현 PRC 성격] 쿠폰표현(PRC) 유형은 단순 시각적 안내가 목적이므로 버튼 액션(`BTN_ACTN_TYPE_VAL`)을 '사용안함(XX)'으로 지정하며 버튼이 렌더링되지 않습니다.",
+    "codeSnippet": "// BuyBenefit.tsx - PC 2단 쿠폰 정렬 및 선물하기 분기 렌더링 일부\nconst CouponImg = ({ cardType, benefit, order }) => {\n  return (\n    <section className={styles.wrapBenefit}>\n      {/* 1:1 이미지 표현 및 자동표현 Swiper */}\n    </section>\n  );\n};\n\n// 혜택 리스트 순회 중 CPN/PRC/FCF/NOT 인접 항목 2단 flex 렌더링\nreturn (\n  <section className={styles.wrapFlex} key={`bnft_${idx}`}>\n    <CouponImg benefit={benefitList[idx - 1]} order={idx} />\n    <CouponImg benefit={benefit} order={idx + 1} />\n  </section>\n);",
+    "warnings": "1. [어드민 필수/유효성 16대 검증]\n   - **chkVal=0**: 혜택 상세 항목 최소 1개 이상 필수 등록.\n   - **chkVal=2**: 서브 타이틀 필수 입력.\n   - **chkVal=3**: 혜택 쿠폰 연결 필수 (CPN/PRC/FCF).\n   - **chkVal=4**: 추가적립(NOT) 시 추가 적립율(editAccVal) 입력 필수.\n   - **chkVal=5**: 사은품(GFT) 이미지 등록 필수.\n   - **chkVal=6**: 선물포장(PRE) 이미지 등록 필수.\n   - **chkVal=7/8**: 버튼 액션이 URL이동(M)일 경우 URL 주소 및 eTAG 랜딩코드 선택 필수.\n   - **chkVal=9**: 버튼 형태(rdoBtnType)가 사용안함(XX)이 아닐 때 버튼 명칭 필수.\n   - **chkVal=10**: 복수 쿠폰 설정 시 쿠폰받기 버튼 필수.\n   - **chkVal=11**: 쿠폰 이미지 표현(I) 사용 시 쿠폰받기 버튼 필수.\n   - **chkVal=12**: 쿠폰 자동표현(A) 시 단일 쿠폰에 버튼 사용 차단 (버튼 사용 시 저장 거부).\n   - **chkVal=13**: 혜택은 1번부터 빈자리 없이 순서대로 채워야 저장 가능.\n   - **chkVal=16**: 이미지 표현(I) 시 쿠폰 이미지 필수 등록.\n2. [텍스트 배타 등록 규칙] 상단 설명 문구와 하단 설명 문구는 동시에 채울 수 없으며, 중복 기재 시 어드민 저장이 반려됩니다.",
     "imageGuidelines": {
-      "pcSize": "1240px × (세로 높이 제한 없음)",
-      "moSize": "750px × (세로 높이 제한 없음) *스퀘어(1:1) 비율 권장",
+      "pcSize": "가로 1240px × 세로 높이 제한 없음 (쿠폰 이미지 표현 및 사은품 PC 배너)",
+      "moSize": "가로 750px × 세로 높이 제한 없음 (1:1 비율 권장)",
       "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
       "maxSize": "파일당 최대 200KB 이하",
-      "adminValidation": "사은품(GFT) 및 선물하기(PRE)는 PC/MO 이미지가 누락된 경우 저장 시 유효성 경고와 함께 저장이 거부됩니다. 쿠폰 이미지 표현(I) 시에도 PC/MO 이미지가 동시 필요하며, 파일별 200KB 용량 초과 업로드 시 넥사크로 스크립트에 의해 자동 차단 처리됩니다."
+      "adminValidation": "사은품(GFT) 및 선물포장(PRE) 등록 시 PC/MO 규격 파일 사이즈가 200KB를 1바이트라도 초과하면 넥사크로 UI 업로드가 강제 반려됩니다."
     },
     "qtyGuidelines": {
-      "tabMin": "최소 1개",
-      "tabMax": "최대 5개 (총 5개의 혜택 레이아웃 제공)",
-      "prodMin": "최소 1개",
-      "prodMax": "최대 150개 (개별 혜택 섹션에 연동 가능한 최대 쿠폰 수)",
-      "adminValidation": "구매혜택 카드는 한 화면 구좌 내에 최대 5개의 혜택 섹션(1st ~ 5th)을 구성해 저장이 가능합니다. 개별 혜택마다 최대 150개의 쿠폰 코드를 멀티 셀렉션하여 등록할 수 있는 어드민 팝업 제약(maxBenefitCnt: '150')이 존재합니다. 서브타이틀 50byte(한글 25자), 버튼명 40byte(한글 20자), 하단설명 100byte(한글 50자)를 초과하여 저장하려 할 경우 Byte Limit 초과 경고와 함께 저장이 원천 반려됩니다."
+      "tabMin": "최소 1개 이상의 혜택 등록 필수",
+      "tabMax": "최대 5개 (1st ~ 5th 혜택 슬롯 제한)",
+      "prodMin": "최소 1개 쿠폰/사은품 매핑",
+      "prodMax": "혜택당 최대 150개 쿠폰 등록 제한 (maxBenefitCnt)",
+      "adminValidation": "어드민 저장 시 활성화된 혜택 슬롯 개수는 최소 1개에서 최대 5개 범위 내여야 하며, 개별 혜택당 연결할 수 있는 쿠폰 코드는 최대 150개로 제한됩니다. 서브타이틀 50byte, 버튼명 40byte, 하단설명 100byte 한계 초과 시 저장이 불가합니다."
     }
   },
   "M_BENEFIT": {
@@ -1536,6 +1546,46 @@ window.ExhibitionGuides = {
       "prodMin": "해당 없음 (로그인 사용자의 최근 구매 확정 내역을 API 서버로부터 비동기로 자동 연동하여 호출)",
       "prodMax": "해당 없음",
       "adminValidation": "수동으로 상품을 등록 및 관리하지 않기 때문에 상품 수량 등록 제한이 존재하지 않습니다. 최근 구매 확정 이력을 비동기적으로 조회하여 노출하는 동적 바인딩 컴포넌트입니다."
+    }
+  },
+  "FCFS_CPN_P": {
+    "cardKey": "FCFS_CPN_P",
+    "name": "선착순쿠폰상품",
+    "category": "PROD",
+    "sourceFile": "frmPlanCardFCFSCouponFrod.xfdl (어드민) / CouponProduct.tsx (프론트)",
+    "moduleCode": "MD6",
+    "desc": "선착순 쿠폰 혜택 대상 상품 목록을 탭 및 듀얼 레이아웃 구조로 렌더링하고, 실시간 쿠폰 남은 수량 상태에 맞춰 마감/마감임박 비주얼 뱃지를 노출하는 특화형 상품 카드입니다.",
+    "layoutDescription": "사용자 프론트 영역(PC 및 모바일 화면)에서 상하단 여백 및 배경 색상이 지정에 따라 가변 렌더링됩니다. PC 미리보기는 4열 와이드 그리드(SW4_1, SW4_2, LS4) 구조로 시원하게 배치되며, Mobile 미리보기는 Swiper 슬라이더(3x2, 3x1 등) 또는 2열 리스트(LS2) 구조로 렌더링됩니다. 각 상품 썸네일에는 쿠폰의 실시간 잔여량에 따른 배지 및 딤드 오버레이가 작동합니다.",
+    "backendSettings": [
+      { "field": "여백 상단외부", "id": "CARD_THTP_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 외부 마진(margin) 적용 여부를 설정합니다." },
+      { "field": "여백 상단내부", "id": "CARD_THTP_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "상단 내부 패딩(padding) 적용 여부를 설정합니다. 기본값 Y." },
+      { "field": "여백 하단외부", "id": "CARD_BTM_EXTR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 외부 마진(margin) 적용 여부를 설정합니다." },
+      { "field": "여백 하단내부", "id": "CARD_BTM_INNR_MRGI_USE_YN", "type": "Boolean (Y/N)", "desc": "하단 내부 패딩(padding) 적용 여부를 설정합니다." },
+      { "field": "배경색상", "id": "BKGD_CLR_VAL", "type": "Color Hex (선택)", "desc": "배경색을 Hex 코드형태(예: #757575)로 입력합니다. 해당 값은 프론트에서 8% 투명도로 연하게 표현됩니다." },
+      { "field": "상단 설명 문구", "id": "EVNT_HEDR_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 위에 배치할 상단 설명 문구입니다. 하단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "타이틀", "id": "EVNT_MAIN_TEXT", "type": "String (22byte 한도)", "desc": "메인 타이틀 제목입니다. 한글 기준 11자 내외 작성이 권장되며, 줄바꿈(\\n)으로 최대 2줄까지 등록 가능합니다." },
+      { "field": "하단 설명 문구", "id": "EVNT_SUB_TEXT", "type": "String (50byte 한도)", "desc": "타이틀 아래에 노출될 하단 설명 문구입니다. 상단 설명 문구와 동시에 입력할 수 없습니다." },
+      { "field": "특가 마감 문구", "id": "SPPR_CLSN_PHRS_VAL", "type": "String (20byte 한도, 필수)", "desc": "쿠폰 수량이 전체 소진(0개 이하)되었을 때 썸네일 오버레이에 노출할 문구입니다. (예: 쿠폰소진 / 지원마감)" },
+      { "field": "상품 정렬 순서", "id": "PROD_SORT_TYPE_VAL", "type": "Combo (A/M)", "desc": "상품 노출 정렬 순서(A: 등록순, M: 랜덤정렬)를 지정합니다." },
+      { "field": "탭 형태", "id": "TAB_TYPE_VAL", "type": "Radio (0/1/2)", "desc": "0: 사용안함, 1: 1단 탭, 2: 2단 탭 사용 여부 및 형태를 결정합니다." },
+      { "field": "상품 표현 (MO)", "id": "PROD_EPSR_TYPE_VAL", "type": "Radio (SW3_2/SW3_1/SW2_2/SW2_1/SW1_2/SW1_3/LS2)", "desc": "모바일(MO) 사용자 화면에서의 상품 격자 배치 및 슬라이드 형태를 지정합니다." },
+      { "field": "상품 표현 (PC)", "id": "PC_PROD_EPSR_TYPE_VAL", "type": "Radio (SW4_1/SW4_2/LS4)", "desc": "PC 사용자 화면에서의 상품 격자 배치 및 슬라이드 형태를 지정합니다." }
+    ],
+    "codeSnippet": "// CouponProductItem.tsx - 잔여수량(cpnRemainQty) 상태별 렌더링 분기\n<Link\n  to={\"\"}\n  className={`${styles.productItem} ${Number(props?.cpnRemainQty) <= 0 && styles.dimmed}`}\n  onClick={(e) => handleOnClickProduct(e, props?.prodCd || \"\")}\n>\n  <div className={`${styles.prdThumb} ${Number(props?.cpnRemainQty) <= 0 && styles.dimmed}`}>\n    <img src={`${IMAGE_WEB_HOST_URL_PRODUCT_PREFIX}/${props?.imgPath}`} alt=\"상품이미지\" />\n    {Number(props?.cpnRemainQty) <= 0 && <span className={styles.soldout}>{spprClsnPhrs}</span>}\n    {Number(props?.cpnRemainQty) > 0 && Number(props?.cpnRemainQty) < 10 && (\n      <button className={styles.deadline_badge} type=\"button\">\n        <span>마감임박</span>\n      </button>\n    )}\n  </div>\n  <div className={`${styles.prdInfo} ${Number(props?.cpnRemainQty) <= 0 && styles.dimmed}`}>\n    <p className={styles.brand}>{props?.brandEngNm}</p>\n    <p className={styles.name}>{props?.prodNm}</p>\n    {/* 남은수량 배지 */}\n    <button className={`${styles.deal_badge} ${Number(props?.cpnRemainQty) <= 0 ? styles.zero : Number(props?.cpnRemainQty) < 10 ? styles.red : styles.black}`} type=\"button\">\n      <span className={styles.deal_badge__label}>남은수량</span>\n      <span className={styles.deal_badge__right}>{props?.cpnRemainQty}</span>\n    </button>\n  </div>\n</Link>",
+    "warnings": "1. [설명문구 상호 배타성] 상단 설명 문구와 하단 설명 문구는 동시에 입력할 수 없으며, 동시에 값이 존재할 경우 어드민 검증에 의해 저장이 반려됩니다.\n2. [특가 마감 문구 필수] 특가 마감 문구(SPPR_CLSN_PHRS_VAL)는 필수 입력 필드이며, 입력하지 않는 경우 어드민에서 경고창과 함께 저장이 차단됩니다.\n3. [배경색상 정규식] 배경색상 필드는 '#'을 포함한 유효한 Hex 코드 형식이어야 합니다.",
+    "imageGuidelines": {
+      "pcSize": "가로 1240px × 세로 높이 제한 없음 (탭 배너 이미지 사용 시)",
+      "moSize": "가로 750px × 세로 높이 제한 없음 (탭 배너 이미지 사용 시)",
+      "allowTypes": "JPG, JPEG, GIF, PNG, BMP",
+      "maxSize": "파일당 최대 200KB 이하",
+      "adminValidation": "넥사크로 어드민에서 탭별 PC/MO 배너 이미지 업로드 시 파일당 200KB를 초과할 경우 업로드가 반려 및 초기화됩니다."
+    },
+    "qtyGuidelines": {
+      "tabMin": "해당 없음",
+      "tabMax": "1단 탭 최대 15개, 2단 탭 최대 8개까지 설정 가능",
+      "prodMin": "최소 4개 상품 필수 등록",
+      "prodMax": "최대 48개 (스와이프형) / 120개 (리스트형)",
+      "adminValidation": "각 탭 및 구좌별 등록된 상품 개수가 최소 4개 미만이거나 최대 등록 가능 개수(스와이프 48개, 리스트 120개)를 초과할 경우, 어드민 저장 검증 스크립트단에서 에러 알럿과 함께 저장이 반려됩니다."
     }
   }
 }
