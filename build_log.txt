@@ -1,10 +1,52 @@
-﻿[2026-06-15 13:45:23] DecoderHelper started.
-[2026-06-15 13:45:23] Reading JSON file...
-[2026-06-15 13:45:23] EXCEPTION: System.IO.FileNotFoundException: 'c:\event_guide\wireframes.json' 파일을 찾을 수 없습니다.
-파일 이름: 'c:\event_guide\wireframes.json'
-   위치: System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   위치: System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   위치: System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   위치: System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)
-   위치: System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)
-   위치: DecoderHelper.Main()
+﻿[2026-06-19 16:22:26] DecoderHelper started.
+[2026-06-19 16:22:26] Reading JSON file...
+[2026-06-19 16:22:26] Read JSON file successfully. Length: 223506
+[2026-06-19 16:22:26] Updating BANNER...
+[2026-06-19 16:22:26]   UpdateKey started for BANNER
+[2026-06-19 16:22:26]     startBrace found at 13089
+[2026-06-19 16:22:26]     endBrace found at 15230
+[2026-06-19 16:22:26]   UpdateKey finished for BANNER
+[2026-06-19 16:22:26] Updating FCFS_CPN...
+[2026-06-19 16:22:26]   UpdateKey started for FCFS_CPN
+[2026-06-19 16:22:26]     startBrace found at 58613
+[2026-06-19 16:22:26]     endBrace found at 62957
+[2026-06-19 16:22:26]   UpdateKey finished for FCFS_CPN
+[2026-06-19 16:22:26] Updating COUNT...
+[2026-06-19 16:22:26]   UpdateKey started for COUNT
+[2026-06-19 16:22:26]     startBrace found at 45774
+[2026-06-19 16:22:26]     endBrace found at 47751
+[2026-06-19 16:22:26]   UpdateKey finished for COUNT
+[2026-06-19 16:22:26] Updating NAVI...
+[2026-06-19 16:22:26]   UpdateKey started for NAVI
+[2026-06-19 16:22:26]     startBrace found at 120648
+[2026-06-19 16:22:26]     endBrace found at 121834
+[2026-06-19 16:22:26]   UpdateKey finished for NAVI
+[2026-06-19 16:22:26] Updating ENTCODE...
+[2026-06-19 16:22:26]   UpdateKey started for ENTCODE
+[2026-06-19 16:22:26]     startBrace found at 56746
+[2026-06-19 16:22:26]     endBrace found at 58596
+[2026-06-19 16:22:26]   UpdateKey finished for ENTCODE
+[2026-06-19 16:22:26] Updating APPLY...
+[2026-06-19 16:22:26]   UpdateKey started for APPLY
+[2026-06-19 16:22:26]     startBrace found at 13
+[2026-06-19 16:22:26]     endBrace found at 1512
+[2026-06-19 16:22:26]   UpdateKey finished for APPLY
+[2026-06-19 16:22:26] Updating COMMENT...
+[2026-06-19 16:22:26]   UpdateKey started for COMMENT
+[2026-06-19 16:22:26]     startBrace found at 43602
+[2026-06-19 16:22:26]     endBrace found at 45760
+[2026-06-19 16:22:26]   UpdateKey finished for COMMENT
+[2026-06-19 16:22:26] Updating FCFS_CPN_P...
+[2026-06-19 16:22:26]   UpdateKey started for FCFS_CPN_P
+[2026-06-19 16:22:26]     startBrace found at 62976
+[2026-06-19 16:22:26]     endBrace found at 65394
+[2026-06-19 16:22:26]   UpdateKey finished for FCFS_CPN_P
+[2026-06-19 16:22:26] Updating OPT_CONTAINER...
+[2026-06-19 16:22:26]   UpdateKey started for OPT_CONTAINER
+[2026-06-19 16:22:26]     startBrace found at 121856
+[2026-06-19 16:22:26]     endBrace found at 129691
+[2026-06-19 16:22:26]   UpdateKey finished for OPT_CONTAINER
+[2026-06-19 16:22:26] Replacing MORE PRODUCTS...
+[2026-06-19 16:22:26] Writing wireframes.json...
+[2026-06-19 16:22:26] Writing db_wireframes.js...
+[2026-06-19 16:22:26] Successfully synced files as clean UTF-8 with BOM using C#!

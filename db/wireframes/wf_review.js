@@ -6,5 +6,373 @@ window.ExhibitionWireframes = window.ExhibitionWireframes || {};
 window.ExhibitionWireframes["REVIEW"] = {
   "moduleCode": "MD7",
   "name": "상품리뷰 (REVIEW)",
-  "wireframeHtml": "<div class='lfmall-review-wf' style='border: 1px solid var(--hairline); background: var(--canvas-white); overflow: hidden; font-family: \"Malgun Gothic\", \"Apple SD Gothic Neo\", sans-serif; box-shadow: 0 12px 30px rgba(0,0,0,0.02); padding: 30px 16px;'><style>.lfmall-review-wf { background: var(--canvas-white); color: var(--near-black); }.lfmall-review-wf .hdr-title { font-size: 32px; font-weight: 800; text-align: center; margin: 0 0 10px 0; letter-spacing: -1px; }.lfmall-review-wf .hdr-sub { font-size: 13px; color: var(--slate); text-align: center; margin: 0 0 32px 0; line-height: 1.4; }.lfmall-review-wf .review-container { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; padding-bottom: 8px; }.lfmall-review-wf .review-container::-webkit-scrollbar { display: none; }.desktop-mockup .lfmall-review-wf .review-card { width: calc((100% - 32px) / 3); flex-shrink: 0; }.phone-mockup .lfmall-review-wf .review-card { width: 100%; flex-shrink: 0; }.lfmall-review-wf .review-card { background: #ffffff; border: 1px solid #e0e0e0; display: flex; flex-direction: column; overflow: hidden; }.lfmall-review-wf .card-header { height: 48px; display: flex; align-items: center; padding: 0 16px; font-size: 12px; font-weight: bold; color: #000000; border-bottom: 1px solid #f5f5f5; text-transform: uppercase; letter-spacing: 0.5px; }.lfmall-review-wf .card-img-box { width: 100%; position: relative; padding-bottom: 120%; height: 0; background: #f0f0f0; overflow: hidden; }.lfmall-review-wf .card-img-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }.lfmall-review-wf .card-actions { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px 8px 16px; }.lfmall-review-wf .actions-left { display: flex; gap: 12px; align-items: center; }.lfmall-review-wf .icon-svg { width: 20px; height: 20px; cursor: pointer; display: block; }.lfmall-review-wf .icon-red { color: #ff3b30; fill: #ff3b30; }.lfmall-review-wf .icon-outline { color: #000000; fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }.lfmall-review-wf .card-content { padding: 0 16px 16px 16px; flex-grow: 1; display: flex; flex-direction: column; }.lfmall-review-wf .review-title { font-size: 14px; font-weight: bold; color: #000000; margin: 0 0 6px 0; }.lfmall-review-wf .review-desc { font-size: 12px; color: #555555; line-height: 1.5; margin: 0 0 10px 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; height: 72px; white-space: normal; }.lfmall-review-wf .rating-stars { font-size: 14px; color: #ffb700; margin-bottom: 6px; letter-spacing: -1px; }.lfmall-review-wf .user-info { font-size: 11px; color: #999999; margin-top: auto; }.lfmall-review-wf .dots-row { display: none; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; font-family: monospace; font-size: 12px; color: #ccc; }.phone-mockup .lfmall-review-wf .dots-row { display: flex; }</style><div class='hdr-title'>Review(HEADLINE)</div><div class='hdr-sub'>스태프들의 생생한 실착 후기로 만나는 신상</div><div class='review-container'><!-- Card 1 --><div class='review-card'><div class='card-header'>HAZZYS</div><div class='card-img-box'><img src='https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=400&q=80' onerror='this.onerror=null;this.src=\"data:image/svg+xml;utf8,<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" width=\\\"300\\\" height=\\\"360\\\" viewBox=\\\"0 0 300 360\\\"><rect width=\\\"300\\\" height=\\\"360\\\" fill=\\\"%23f0f0f0\\\"/></svg>\"' alt=''></div><div class='card-actions'><div class='actions-left'><svg class='icon-svg icon-red' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'></circle><path d='M8 12h8'></path></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'></path></svg></div><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'></path></svg></div><div class='card-content'><div class='review-title'>REVIEW TITLE</div><p class='review-desc'>아울렛에서 대기타다 득템했네요! 평소 입는 사이즈보다 살짝 낙낙하게 오버핏으로 나왔는데 걸치기 편하고 너무 화사하고 예뻐요. 데일리 아이템으로 강추합니다.</p><div class='rating-stars'>★★★★☆</div><div class='user-info'>id**** · 175cm · 55kg</div></div></div><!-- Card 2 --><div class='review-card'><div class='card-header'>DAKS</div><div class='card-img-box'><img src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80' onerror='this.onerror=null;this.src=\"data:image/svg+xml;utf8,<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" width=\\\"300\\\" height=\\\"360\\\" viewBox=\\\"0 0 300 360\\\"><rect width=\\\"300\\\" height=\\\"360\\\" fill=\\\"%23f0f0f0\\\"/></svg>\"' alt=''></div><div class='card-actions'><div class='actions-left'><svg class='icon-svg icon-red' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'></circle><path d='M8 12h8'></path></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'></path></svg></div><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'></path></svg></div><div class='card-content'><div class='review-title'>REVIEW TITLE</div><p class='review-desc'>질감과 실루엣이 정말 우아하네요. 한여름 빼고 봄, 가을, 초겨울까지 가볍고 무드있게 연출하기 딱 좋아요. 닥스만의 고급스러운 체크 안감이 예술입니다.</p><div class='rating-stars'>★★★★☆</div><div class='user-info'>id**** · 175cm · 55kg</div></div></div><!-- Card 3 --><div class='review-card'><div class='card-header'>ATHE VANESSABRUNO</div><div class='card-img-box'><img src='https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=400&q=80' onerror='this.onerror=null;this.src=\"data:image/svg+xml;utf8,<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" width=\\\"300\\\" height=\\\"360\\\" viewBox=\\\"0 0 300 360\\\"><rect width=\\\"300\\\" height=\\\"360\\\" fill=\\\"%23f0f0f0\\\"/></svg>\"' alt=''></div><div class='card-actions'><div class='actions-left'><svg class='icon-svg icon-red' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'></circle><path d='M8 12h8'></path></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'></path></svg></div><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'></path></svg></div><div class='card-content'><div class='review-title'>REVIEW TITLE</div><p class='review-desc'>데이트나 하객 룩으로 입기에 정말 손색없어요! 패턴이나 자수가 전혀 부담스럽지 않고, 입자마자 얼굴 톤이 화사하게 사는 걸 경험했네요. 대만족 구매 후기입니다.</p><div class='rating-stars'>★★★★☆</div><div class='user-info'>id**** · 175cm · 55kg</div></div></div><!-- Card 4 --><div class='review-card'><div class='card-header'>MAESTRO</div><div class='card-img-box'><img src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=400&q=80' onerror='this.onerror=null;this.src=\"data:image/svg+xml;utf8,<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" width=\\\"300\\\" height=\\\"360\\\" viewBox=\\\"0 0 300 360\\\"><rect width=\\\"300\\\" height=\\\"360\\\" fill=\\\"%23f0f0f0\\\"/></svg>\"' alt=''></div><div class='card-actions'><div class='actions-left'><svg class='icon-svg icon-red' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10'></circle><path d='M8 12h8'></path></svg><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z'></path></svg></div><svg class='icon-svg icon-outline' viewBox='0 0 24 24'><path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'></path></svg></div><div class='card-content'><div class='review-title'>REVIEW TITLE</div><p class='review-desc'>클래식한 정장 위에 가볍게 툭 걸치기 좋은 원단과 핏입니다. 바느질 마감 상태도 훌륭하고 착용감이 매우 가벼워 매일 입고 출근하고 싶을 정도입니다.</p><div class='rating-stars'>★★★★☆</div><div class='user-info'>id**** · 175cm · 55kg</div></div></div></div><div class='dots-row'><span>|</span> <span style='color:#000;'>●</span> <span>|</span> <span>|</span> <span>|</span></div></div>"
+  "wireframeHtml": `<div class="lfmall-review-wf">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+    
+    .lfmall-review-wf {
+      background-color: #ffffff;
+      padding: 40px 16px;
+      font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+      color: #000000;
+      width: 100%;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    .lfmall-review-wf * {
+      box-sizing: border-box;
+    }
+    
+    /* Header Area */
+    .lfmall-review-wf .review-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .lfmall-review-wf .review-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .lfmall-review-wf .review-header p {
+      font-size: 13px;
+      color: #666666;
+      margin: 0;
+      font-weight: 400;
+    }
+    
+    /* Grid Container */
+    .lfmall-review-wf .reviews-container {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none; /* Firefox */
+      padding-bottom: 24px;
+    }
+    .lfmall-review-wf .reviews-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+    
+    /* Card Styles */
+    .lfmall-review-wf .review-card {
+      flex: 0 0 280px;
+      border: 1px solid #000000;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .lfmall-review-wf .card-brand-header {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 12px 14px;
+      border-bottom: 1.5px solid #000000;
+      letter-spacing: 0.05em;
+    }
+    
+    .lfmall-review-wf .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1.15;
+      background-color: #f2f2f2;
+      overflow: hidden;
+      border-bottom: 1px solid #000000;
+    }
+    
+    .lfmall-review-wf .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .lfmall-review-wf .review-card:hover .card-img {
+      transform: scale(1.03);
+    }
+    
+    /* Action Bar */
+    .lfmall-review-wf .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px 8px 14px;
+    }
+    
+    .lfmall-review-wf .action-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .lfmall-review-wf .action-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000000;
+      transition: transform 0.15s ease;
+    }
+    .lfmall-review-wf .action-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Text Info */
+    .lfmall-review-wf .card-info {
+      padding: 0 14px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .lfmall-review-wf .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    
+    .lfmall-review-wf .card-text {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #333333;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .lfmall-review-wf .card-rating {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #000000;
+      display: flex;
+      align-items: center;
+    }
+    .lfmall-review-wf .card-rating .star-gray {
+      color: #cccccc;
+    }
+    
+    .lfmall-review-wf .card-meta {
+      font-size: 11px;
+      color: #888888;
+      margin: 0;
+      font-weight: 400;
+    }
+    
+    /* Scroll Indicator */
+    .lfmall-review-wf .scroll-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .lfmall-review-wf .scroll-indicator-bar {
+      width: 40px;
+      height: 1.5px;
+      background-color: #000000;
+    }
+    .lfmall-review-wf .scroll-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #cccccc;
+    }
+    .lfmall-review-wf .scroll-dot.active {
+      background-color: #000000;
+    }
+    
+    /* Layout Adaptations */
+    /* Mobile specific style override inside phone mockup */
+    .phone-mockup .lfmall-review-wf {
+      padding: 24px 12px;
+    }
+    .phone-mockup .lfmall-review-wf .reviews-container {
+      flex-wrap: nowrap;
+      gap: 12px;
+    }
+    .phone-mockup .lfmall-review-wf .review-card {
+      flex: 0 0 250px;
+    }
+    .phone-mockup .lfmall-review-wf .card-img-wrap {
+      aspect-ratio: 1 / 1.15;
+    }
+    
+    /* Desktop specific style override inside browser content */
+    .browser-content .lfmall-review-wf {
+      padding: 32px 16px;
+    }
+    .browser-content .lfmall-review-wf .reviews-container {
+      flex-wrap: nowrap;
+      gap: 12px;
+      justify-content: flex-start;
+    }
+    .browser-content .lfmall-review-wf .review-card {
+      flex: 0 0 calc((100% - 24px) / 3);
+      min-width: 0;
+    }
+    
+  </style>
+  
+  <!-- Title section -->
+  <div class="review-header">
+    <h2>Review(HEADLINE)</h2>
+    <p>스태프들의 생생한 실착 후기로 만나는 신상</p>
+  </div>
+  
+  <!-- Review Cards -->
+  <div class="reviews-container">
+    
+    <!-- Card 1 -->
+    <div class="review-card">
+      <div class="card-brand-header">BRAND NAME</div>
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=500&q=80" alt="Fashion wear" />
+      </div>
+      <div class="card-actions">
+        <div class="action-left">
+          <!-- Heart filled -->
+          <button class="action-btn" aria-label="Like">
+            <svg width="20" height="18" viewBox="0 0 24 22" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </button>
+          <!-- Comment outline -->
+          <button class="action-btn" aria-label="Comment">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </button>
+          <!-- Share paper plane -->
+          <button class="action-btn" aria-label="Share">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Bookmark outline -->
+        <button class="action-btn" aria-label="Save">
+          <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card-info">
+        <h3 class="card-title">REVIEW TITLE</h3>
+        <p class="card-text">TEXT BOX 가나다라마바사아자차카타파하 TEXT BOX 가나다라마바사아자차카타파하TEXT BOX 가나다라마바사아자차카타파하TEXT BOX 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하...</p>
+        <div class="card-rating">
+          ★<span>★</span><span>★</span><span>★</span><span class="star-gray">★</span>
+        </div>
+        <p class="card-meta">id**** &middot; 175cm &middot; 55kg</p>
+      </div>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="review-card">
+      <div class="card-brand-header">BRAND NAME</div>
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=80" alt="Shopping outfit" />
+      </div>
+      <div class="card-actions">
+        <div class="action-left">
+          <!-- Heart filled -->
+          <button class="action-btn" aria-label="Like">
+            <svg width="20" height="18" viewBox="0 0 24 22" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </button>
+          <!-- Comment outline -->
+          <button class="action-btn" aria-label="Comment">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </button>
+          <!-- Share paper plane -->
+          <button class="action-btn" aria-label="Share">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Bookmark outline -->
+        <button class="action-btn" aria-label="Save">
+          <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card-info">
+        <h3 class="card-title">REVIEW TITLE</h3>
+        <p class="card-text">TEXT BOX 가나다라마바사아자차카타파하 TEXT BOX 가나다라마바사아자차카타파하TEXT BOX 가나다라마바사아자차카타파하TEXT BOX 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하...</p>
+        <div class="card-rating">
+          ★<span>★</span><span>★</span><span>★</span><span class="star-gray">★</span>
+        </div>
+        <p class="card-meta">id**** &middot; 175cm &middot; 55kg</p>
+      </div>
+    </div>
+    
+    <!-- Card 3 -->
+    <div class="review-card">
+      <div class="card-brand-header">BRAND NAME</div>
+      <div class="card-img-wrap">
+        <img class="card-img" src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=500&q=80" alt="Stylized dress" />
+      </div>
+      <div class="card-actions">
+        <div class="action-left">
+          <!-- Heart filled -->
+          <button class="action-btn" aria-label="Like">
+            <svg width="20" height="18" viewBox="0 0 24 22" fill="#ff0000" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </button>
+          <!-- Comment outline -->
+          <button class="action-btn" aria-label="Comment">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </button>
+          <!-- Share paper plane -->
+          <button class="action-btn" aria-label="Share">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <!-- Bookmark outline -->
+        <button class="action-btn" aria-label="Save">
+          <svg width="18" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card-info">
+        <h3 class="card-title">REVIEW TITLE</h3>
+        <p class="card-text">TEXT BOX 가나다라마바사아자차카타파하 TEXT BOX 가나다라마바사아자차카타파하TEXT BOX 가나다라마바사아자차카타파하TEXT BOX 가나다라마바사아자차카타파하 가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하...</p>
+        <div class="card-rating">
+          ★<span>★</span><span>★</span><span>★</span><span class="star-gray">★</span>
+        </div>
+        <p class="card-meta">id**** &middot; 175cm &middot; 55kg</p>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Slider Indicators -->
+  <div class="scroll-indicator">
+    <div class="scroll-indicator-bar"></div>
+    <div class="scroll-dot active"></div>
+    <div class="scroll-dot"></div>
+    <div class="scroll-dot"></div>
+    <div class="scroll-indicator-bar"></div>
+  </div>
+  
+</div>`
 };

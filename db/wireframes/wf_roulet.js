@@ -1,10 +1,99 @@
-﻿// LFmall Exhibition Wireframe: ROULET
-// Auto-generated from db_wireframes.js split.
-// Do NOT edit the header. Edit wireframeHtml only.
+// LFmall Exhibition Wireframe: ROULET
+// Rebuilt from scratch to resolve layout breaks and structural tag mismatches.
 
 window.ExhibitionWireframes = window.ExhibitionWireframes || {};
 window.ExhibitionWireframes["ROULET"] = {
-                    "moduleCode":  "MD9",
-                    "name":  "룰렛 (ROULET)",
-                    "wireframeHtml":  "<div class='lfmall-roulette-wf'><style>.lfmall-roulette-wf { border: 1px solid var(--hairline); background: #ffffff; overflow: hidden; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; padding: 50px 20px; box-sizing: border-box; width: 100%; }.lfmall-roulette-wf * { box-sizing: border-box; }.desktop-mockup .lfmall-roulette-wf .roulette-pc { display: block; }.desktop-mockup .lfmall-roulette-wf .roulette-mo { display: none; }.phone-mockup .lfmall-roulette-wf .roulette-pc { display: none; }.phone-mockup .lfmall-roulette-wf .roulette-mo { display: block; }.lfmall-roulette-wf .title-sec { text-align: center; margin-bottom: 30px; }.lfmall-roulette-wf .title-main { font-size: 38px; font-weight: 800; color: #111111; letter-spacing: -1px; margin: 0 0 16px 0; line-height: 1.3; }.lfmall-roulette-wf .title-sub { font-size: 14px; color: #888888; font-weight: 400; letter-spacing: -0.5px; margin: 0; }.lfmall-roulette-wf .timer-sec { display: flex; justify-content: center; align-items: center; gap: 24px; margin: 30px auto; }.lfmall-roulette-wf .timer-box { display: flex; flex-direction: column; align-items: center; position: relative; }.lfmall-roulette-wf .timer-num { font-size: 44px; font-weight: 800; color: #111111; line-height: 1; letter-spacing: -0.5px; }.lfmall-roulette-wf .timer-label { font-size: 9px; font-weight: 700; color: #888888; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }.lfmall-roulette-wf .timer-divider { font-size: 32px; font-weight: 300; color: #dddddd; align-self: flex-start; margin-top: 4px; }.lfmall-roulette-wf .chance-badge-container { display: flex; justify-content: center; width: 100%; margin-bottom: 35px; }.lfmall-roulette-wf .chance-badge { display: inline-flex; align-items: center; background: #000000; color: #ffffff; font-size: 13px; font-weight: 700; padding: 10px 24px; border-radius: 30px; letter-spacing: -0.3px; margin: 0 auto; }.lfmall-roulette-wf .chance-badge span { color: #fff61b; margin: 0 4px; font-weight: 800; }.lfmall-roulette-wf .roulette-wrapper { position: relative; display: flex; align-items: center; justify-content: center; margin: 0 auto; }.lfmall-roulette-wf .pin { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 26px solid #000000; z-index: 5; }.lfmall-roulette-wf .wheel-outer { border-radius: 50%; background: #ffffff; border: 12px solid #000000; box-shadow: 0 10px 30px rgba(0,0,0,0.06); position: relative; overflow: hidden; }.lfmall-roulette-wf .sector { position: absolute; top: 0; left: 50%; width: 50%; height: 50%; transform-origin: 0% 100%; overflow: hidden; border-left: 1px solid #e0e0e0; }.lfmall-roulette-wf .sector:nth-child(1) { transform: rotate(0deg) skewY(-18deg); background: #ffffff; }.lfmall-roulette-wf .sector:nth-child(2) { transform: rotate(72deg) skewY(-18deg); background: #fafafa; }.lfmall-roulette-wf .sector:nth-child(3) { transform: rotate(144deg) skewY(-18deg); background: #ffffff; }.lfmall-roulette-wf .sector:nth-child(4) { transform: rotate(216deg) skewY(-18deg); background: #fafafa; }.lfmall-roulette-wf .sector:nth-child(5) { transform: rotate(288deg) skewY(-18deg); background: #ffffff; }.lfmall-roulette-wf .sector-content-flat { position: absolute; text-align: center; font-size: 11px; font-weight: 700; color: #888888; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 3; pointer-events: none; }.lfmall-roulette-wf .sector-content-flat strong { display: block; font-size: 18px; font-weight: 800; color: #111111; margin-top: 3px; }.lfmall-roulette-wf .btn-spin-start { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: #000000; border: 4px solid #dddddd; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 13px; font-weight: 800; color: #ffffff; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; letter-spacing: 0.5px; }.lfmall-roulette-wf .btn-spin-start:hover { transform: translate(-50%, -50%) scale(1.05); }.lfmall-roulette-wf .btn-spin-start::after { content: '↻'; font-size: 12px; margin-top: 14px; position: absolute; color: #888888; }.lfmall-roulette-wf .desc-text { font-size: 14px; color: #333333; line-height: 1.6; margin: 40px auto 30px; text-align: center; font-weight: 500; max-width: 600px; word-break: keep-all; }.lfmall-roulette-wf .sns-share-sec { display: flex; justify-content: center; gap: 10px; margin-top: 30px; width: 100%; }.lfmall-roulette-wf .sns-btn { display: flex; align-items: center; justify-content: center; height: 52px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; border-radius: 0px; }.lfmall-roulette-wf .sns-btn.kakao { background: #ffe600; color: #000000; }.lfmall-roulette-wf .sns-btn.url { background: #000000; color: #ffffff; }.lfmall-roulette-wf .sns-btn:hover { opacity: 0.9; }.desktop-mockup .lfmall-roulette-wf { max-width: 1240px; margin: 0 auto; }.desktop-mockup .lfmall-roulette-wf .wheel-outer { width: 440px; height: 440px; }.desktop-mockup .lfmall-roulette-wf .btn-spin-start { width: 100px; height: 100px; font-size: 15px; }.desktop-mockup .lfmall-roulette-wf .sns-share-sec { max-width: 650px; margin: 30px auto 0; }.desktop-mockup .lfmall-roulette-wf .sns-btn { flex: 1; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat { width: 110px; height: 70px; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat strong { font-size: 22px; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat.pos-0 { top: 60px; left: 165px; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat.pos-1 { top: 150px; left: 295px; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat.pos-2 { top: 295px; left: 240px; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat.pos-3 { top: 295px; left: 90px; }.desktop-mockup .lfmall-roulette-wf .sector-content-flat.pos-4 { top: 150px; left: 35px; }.phone-mockup .lfmall-roulette-wf { padding: 40px 10px; }.phone-mockup .lfmall-roulette-wf .timer-sec { gap: 10px; }.phone-mockup .lfmall-roulette-wf .timer-num { font-size: 32px; }.phone-mockup .lfmall-roulette-wf .timer-divider { font-size: 24px; }.phone-mockup .lfmall-roulette-wf .wheel-outer { width: 320px; height: 320px; }.phone-mockup .lfmall-roulette-wf .btn-spin-start { width: 80px; height: 80px; font-size: 13px; }.phone-mockup .lfmall-roulette-wf .sns-share-sec { flex-direction: column; }.phone-mockup .lfmall-roulette-wf .sns-btn { width: 100%; }.phone-mockup .lfmall-roulette-wf .sector-content-flat { width: 80px; height: 50px; }.phone-mockup .lfmall-roulette-wf .sector-content-flat strong { font-size: 16px; }.phone-mockup .lfmall-roulette-wf .sector-content-flat.pos-0 { top: 45px; left: 120px; }.phone-mockup .lfmall-roulette-wf .sector-content-flat.pos-1 { top: 110px; left: 215px; }.phone-mockup .lfmall-roulette-wf .sector-content-flat.pos-2 { top: 215px; left: 175px; }.phone-mockup .lfmall-roulette-wf .sector-content-flat.pos-3 { top: 215px; left: 65px; }.phone-mockup .lfmall-roulette-wf .sector-content-flat.pos-4 { top: 110px; left: 25px; }</style><div class='roulette-pc'><div class='title-sec'><h3 class='title-main'>룰렛 이벤트!</h3><p class='title-sub'>하루 한 번 행운의 룰렛을 돌려<br>LFmall이 준비한 많은 혜택을 만나보세요!</p></div><div class='timer-sec'><div class='timer-box'><span class='timer-num'>01</span><span class='timer-label'>DAYS</span></div><span class='timer-divider'>:</span><div class='timer-box'><span class='timer-num'>17</span><span class='timer-label'>HOURS</span></div><span class='timer-divider'>:</span><div class='timer-box'><span class='timer-num'>19</span><span class='timer-label'>MINS</span></div><span class='timer-divider'>:</span><div class='timer-box'><span class='timer-num'>09</span><span class='timer-label'>SECS</span></div></div><div class='roulette-container'><div class='chance-badge-container'><div class='chance-badge'>룰렛 응모권<span>3</span>개</div></div><div class='roulette-wrapper'><div class='pin'></div><button class='btn-spin-start' onclick='alert(\"행운의 룰렛 이벤트에 참여해주셔서 감사합니다!\");'>START</button><div class='wheel-outer'><div class='sector'></div><div class='sector'></div><div class='sector'></div><div class='sector'></div><div class='sector'></div></div><div class='sector-content-flat pos-0'>PLUS COUPON<strong>5%</strong></div><div class='sector-content-flat pos-1'>PLUS COUPON<strong>7%</strong></div><div class='sector-content-flat pos-2'>COUPON<strong>15%</strong></div><div class='sector-content-flat pos-3'>COUPON<strong>13%</strong></div><div class='sector-content-flat pos-4'>COUPON<strong>11%</strong></div></div></div><p class='desc-text'>룰렛카드(Description) 서비스디자인실 요청에 따라<br>디스크립션 영역만 2줄처리</p><div class='sns-share-sec'><a href='#' class='sns-btn kakao' onclick='alert(\"카카오톡으로 보내기 공유가 실행됩니다.\"); return false;'>💬 카카오톡으로 보내기</a><a href='#' class='sns-btn url' onclick='alert(\"URL 복사하기 링크가 복사되었습니다.\"); return false;'>URL 복사하기</a></div></div></div><div class='roulette-mo'><div class='title-sec'><h3 class='title-main'>룰렛 이벤트!</h3><p class='title-sub'>하루 한 번 행운의 룰렛을 돌려<br>LFmall이 준비한 많은 혜택을 만나보세요!</p></div><div class='timer-sec'><div class='timer-box'><span class='timer-num'>02</span></div><span class='timer-divider'>:</span><div class='timer-box'><span class='timer-num'>23</span></div><span class='timer-divider'>:</span><div class='timer-box'><span class='timer-num'>59</span></div><span class='timer-divider'>:</span><div class='timer-box'><span class='timer-num'>41</span></div></div><div class='roulette-container'><div class='chance-badge-container'><div class='chance-badge'>룰렛 응모권<span>33</span>개</div></div><div class='roulette-wrapper'><div class='pin'></div><button class='btn-spin-start' onclick='alert(\"행운의 룰렛 이벤트에 참여해주셔서 감사합니다!\");'>START</button><div class='wheel-outer'><div class='sector'></div><div class='sector'></div><div class='sector'></div><div class='sector'></div><div class='sector'></div></div><div class='sector-content-flat pos-0'>DESCRIPTION<strong>99,999M</strong></div><div class='sector-content-flat pos-1'>DESCRIPTION<strong>99,999M</strong></div><div class='sector-content-flat pos-2'>DESCRIPTION<strong>99,999M</strong></div><div class='sector-content-flat pos-3'>DESCRIPTION<strong>99,999M</strong></div><div class='sector-content-flat pos-4'>DESCRIPTION<strong>99,999M</strong></div></div></div><p class='desc-text'>룰렛카드 (Description) 서비스디자인실 요청에 따라<br>디스크립션 영역만 2줄처리가 가능할까요?</p><div class='sns-share-sec'><a href='#' class='sns-btn kakao' onclick='alert(\"카카오톡으로 보내기 공유가 실행됩니다.\"); return false;'>💬 카카오톡으로 보내기</a><a href='#' class='sns-btn url' onclick='alert(\"URL 복사하기 링크가 복사되었습니다.\"); return false;'>URL 복사하기</a></div></div></div></div>"
+  "moduleCode": "MD9",
+  "name": "룰렛 (ROULET)",
+  "wireframeHtml": `<div class="lfmall-roulette-wf">
+    <!-- 1. PC Version Preview -->
+    <div class="roulette-pc">
+      <div class="title-sec">
+        <h3 class="title-main">룰렛 이벤트!</h3>
+        <p class="title-sub">하루 한 번 행운의 룰렛을 돌려<br>LFmall이 준비한 많은 혜택을 만나보세요!</p>
+      </div>
+      <div class="timer-sec">
+        <div class="timer-box"><span class="timer-num">01</span><span class="timer-label">DAYS</span></div>
+        <span class="timer-divider">:</span>
+        <div class="timer-box"><span class="timer-num">17</span><span class="timer-label">HOURS</span></div>
+        <span class="timer-divider">:</span>
+        <div class="timer-box"><span class="timer-num">19</span><span class="timer-label">MINS</span></div>
+        <span class="timer-divider">:</span>
+        <div class="timer-box"><span class="timer-num">09</span><span class="timer-label">SECS</span></div>
+      </div>
+      <div class="roulette-container">
+        <div class="chance-badge-container">
+          <div class="chance-badge">룰렛 응모권<span>3</span>개</div>
+        </div>
+        <div class="roulette-wrapper">
+          <div class="pin"></div>
+          <button class="btn-spin-start" onclick="alert('행운의 룰렛 이벤트에 참여해주셔서 감사합니다!');">START</button>
+          <div class="wheel-outer">
+            <div class="wheel-lines">
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+            </div>
+          </div>
+          <div class="sector-content-flat pos-0">PLUS COUPON<strong>5%</strong></div>
+          <div class="sector-content-flat pos-1">PLUS COUPON<strong>7%</strong></div>
+          <div class="sector-content-flat pos-2">COUPON<strong>15%</strong></div>
+          <div class="sector-content-flat pos-3">COUPON<strong>13%</strong></div>
+          <div class="sector-content-flat pos-4">COUPON<strong>11%</strong></div>
+        </div>
+      </div>
+      <p class="desc-text">룰렛카드(Description) 서비스디자인실 요청에 따라<br>디스크립션 영역만 2줄처리</p>
+      <div class="sns-share-sec">
+        <a href="#" class="sns-btn kakao" onclick="alert('카카오톡으로 보내기 공유가 실행됩니다.'); return false;">💬 카카오톡으로 보내기</a>
+        <a href="#" class="sns-btn url" onclick="alert('URL 복사하기 링크가 복사되었습니다.'); return false;">URL 복사하기</a>
+      </div>
+    </div>
+
+    <!-- 2. Mobile Version Preview -->
+    <div class="roulette-mo">
+      <div class="title-sec">
+        <h3 class="title-main">룰렛 이벤트!</h3>
+        <p class="title-sub">하루 한 번 행운의 룰렛을 돌려<br>LFmall이 준비한 많은 혜택을 만나보세요!</p>
+      </div>
+      <div class="timer-sec">
+        <div class="timer-box"><span class="timer-num">02</span></div>
+        <span class="timer-divider">:</span>
+        <div class="timer-box"><span class="timer-num">23</span></div>
+        <span class="timer-divider">:</span>
+        <div class="timer-box"><span class="timer-num">59</span></div>
+        <span class="timer-divider">:</span>
+        <div class="timer-box"><span class="timer-num">41</span></div>
+      </div>
+      <div class="roulette-container">
+        <div class="chance-badge-container">
+          <div class="chance-badge">룰렛 응모권<span>3</span>개</div>
+        </div>
+        <div class="roulette-wrapper">
+          <div class="pin"></div>
+          <button class="btn-spin-start" onclick="alert('행운의 룰렛 이벤트에 참여해주셔서 감사합니다!');">START</button>
+          <div class="wheel-outer">
+            <div class="wheel-lines">
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+              <div class="wheel-line"></div>
+            </div>
+          </div>
+          <div class="sector-content-flat pos-0">PLUS COUPON<strong>5%</strong></div>
+          <div class="sector-content-flat pos-1">PLUS COUPON<strong>7%</strong></div>
+          <div class="sector-content-flat pos-2">COUPON<strong>15%</strong></div>
+          <div class="sector-content-flat pos-3">COUPON<strong>13%</strong></div>
+          <div class="sector-content-flat pos-4">COUPON<strong>11%</strong></div>
+        </div>
+      </div>
+      <p class="desc-text">룰렛카드 (Description) 서비스디자인실 요청에 따라<br>디스크립션 영역만 2줄처리가 가능할까요?</p>
+      <div class="sns-share-sec">
+        <a href="#" class="sns-btn kakao" onclick="alert('카카오톡으로 보내기 공유가 실행됩니다.'); return false;">💬 카카오톡으로 보내기</a>
+        <a href="#" class="sns-btn url" onclick="alert('URL 복사하기 링크가 복사되었습니다.'); return false;">URL 복사하기</a>
+      </div>
+    </div>
+  </div>`
 };
